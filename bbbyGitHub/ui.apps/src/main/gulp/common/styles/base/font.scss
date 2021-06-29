@@ -1,0 +1,43 @@
+/*
+--------------------------------------------------
+    Font Faces
+--------------------------------------------------
+*/
+
+@import url('https://fonts.googleapis.com/css?family=Open+Sans|Rubik');
+
+/* National Test Thin */
+@font-face {
+  font-family: 'tiempos-test-regular';
+  src: url('../fonts/Tiempos HeadlineTest-Regular.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'tiempos-test-bold';
+  src: url('../fonts/Tiempos HeadlineTest-Bold.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'montserrat-light';
+  src: url('../fonts/Montserrat-Light.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'montserrat-regular';
+  src: url('../fonts/Montserrat-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'montserrat-medium';
+  src: url('../fonts/Montserrat-Medium.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}

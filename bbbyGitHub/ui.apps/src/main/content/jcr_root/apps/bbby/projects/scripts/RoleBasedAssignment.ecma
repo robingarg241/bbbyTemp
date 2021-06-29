@@ -1,0 +1,69 @@
+var  role = workItem.getNode().getMetaDataMap().get("argTaskRole", "");
+
+var groupId;
+if (role == "Observer") {
+
+	groupId = "project.group.observer";
+
+} else if (role == "Editor") {
+
+   	groupId = "project.group.editor";
+
+} else if (role == "Digital Asset Manager") {
+
+    groupId = "project.group.digitalassetmanager";
+
+} else if (role == "Designer") {
+
+    groupId = "project.group.designer";
+
+} else if (role == "Project Manager") {
+
+    groupId = "project.group.projectmanager";
+
+} else if (role == "Art Director") {
+
+    groupId = "project.group.artdirector";
+
+} else if (role == "Imager") {
+
+    groupId = "project.group.imager";
+
+} else if (role == "Photo Retoucher") {
+
+    groupId = "project.group.photoretoucher";
+
+} else {
+
+    //if role == "Owner" or something we don't understand assign it to the owner group
+
+    if (role != "Owner") {
+        log.warn("Unknown role [{}] found.  Falling back to project owner role", role);
+    }
+
+    groupId = "project.group.owner";
+
+}
+
+var assignee = workflowData.getMetaDataMap().get(groupId, "");
+if (assignee == null) {
+    if (groupId != "project.group.owner") {
+        //couldn't find group, try assigning to owner
+        log.warn("Unable to find group [{}].  Falling back to project owners group.", groupId);
+        assignee = workflowData.getMetaDataMap().get("project.group.owner", "");
+    }
+
+    if (assignee == null) {
+        //ultimately fall back to the admin user if we still haven't found the group
+        log.warn("Unable to find project owner group.  Falling back to admin user");
+        assignee = "admin";
+    }
+}
+
+log.info("assigning task to role [{}] which maps to assignee [{}] ", role, assignee);
+
+if (groupId && task.getCurrentAssignee() == null) {
+   
+	task.setCurrentAssignee(assignee);
+
+}

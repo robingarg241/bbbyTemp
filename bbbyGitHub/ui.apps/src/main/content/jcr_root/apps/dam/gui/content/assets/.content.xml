@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:granite="http://www.adobe.com/jcr/granite/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    jcr:primaryType="cq:Page">
+    <metadataeditor/>
+    <jcr:content jcr:primaryType="nt:unstructured">
+        <views jcr:primaryType="nt:unstructured">
+            <column jcr:primaryType="nt:unstructured">
+                <datasource jcr:primaryType="nt:unstructured"/>
+            </column>
+        </views>
+        <actions jcr:primaryType="nt:unstructured">
+            <selection jcr:primaryType="nt:unstructured">
+                <delete jcr:primaryType="nt:unstructured">
+                    <granite:rendercondition
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="/apps/bbby-delete-rendercondition"/>
+                </delete>
+            </selection>
+        </actions>
+        <rails jcr:primaryType="nt:unstructured">
+            <timeline jcr:primaryType="nt:unstructured">
+                <granite:data
+                    jcr:primaryType="nt:unstructured"
+                    multipleWorkflowLimit="{Long}30"/>
+            </timeline>
+        </rails>
+    </jcr:content>
+</jcr:root>

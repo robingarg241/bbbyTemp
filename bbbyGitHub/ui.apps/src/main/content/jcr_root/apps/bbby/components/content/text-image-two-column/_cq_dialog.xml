@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0"
+          xmlns:nt="http://www.jcp.org/jcr/nt/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0"
+          xmlns:granite="http://www.adobe.com/jcr/granite/1.0"
+    jcr:primaryType="nt:unstructured"
+    jcr:title="Text Image 2 Column"
+    sling:resourceType="cq/gui/components/authoring/dialog">
+    <content
+        jcr:primaryType="nt:unstructured"
+        sling:resourceType="granite/ui/components/coral/foundation/container">
+        <items jcr:primaryType="nt:unstructured">
+            <tabs
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/coral/foundation/tabs"
+                maximized="{Boolean}true">
+                <items jcr:primaryType="nt:unstructured">
+                    <properties
+                        jcr:primaryType="nt:unstructured"
+                        jcr:title="Properties"
+                        sling:resourceType="granite/ui/components/coral/foundation/container"
+                        margin="{Boolean}true">
+                        <items jcr:primaryType="nt:unstructured">
+                            <columns
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/coral/foundation/fixedcolumns"
+                                margin="{Boolean}true">
+                                <items jcr:primaryType="nt:unstructured">
+                                    <column
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/coral/foundation/container">
+                                        <items jcr:primaryType="nt:unstructured">
+                                            <title
+                                                fieldLabel="Title"
+                                                jcr:primaryType="nt:unstructured"
+                                                name="./title"
+                                                sling:resourceType="granite/ui/components/coral/foundation/form/textfield"/>
+                                            <superTitle
+                                                fieldLabel="Super Title"
+                                                jcr:primaryType="nt:unstructured"
+                                                name="./superTitle"
+                                                sling:resourceType="granite/ui/components/coral/foundation/form/textfield"/>
+                                            <textImage2ColumnRendition
+                                                fieldLabel="Rendition"
+                                                jcr:primaryType="nt:unstructured"
+                                                name="./textImage2ColumnRendition"
+                                                sling:resourceType="granite/ui/components/coral/foundation/form/select">
+                                                <items jcr:primaryType="nt:unstructured">
+                                                    <option0 jcr:primaryType="nt:unstructured" text="Image | Text" value="imageLeft"/>
+                                                    <option1 jcr:primaryType="nt:unstructured" text="Text | Image" value="imageRight"/>
+                                                </items>
+                                            </textImage2ColumnRendition>
+                                        </items>
+                                    </column>
+                                </items>
+                            </columns>
+                        </items>
+                    </properties>
+                    <assetDesktop
+                        jcr:primaryType="nt:unstructured"
+                        jcr:title="Image"
+                        sling:resourceType="granite/ui/components/coral/foundation/container"
+                        margin="{Boolean}true">
+                        <items jcr:primaryType="nt:unstructured">
+                            <columns
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/coral/foundation/fixedcolumns"
+                                margin="{Boolean}true">
+                                <items jcr:primaryType="nt:unstructured">
+                                    <include1
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/coral/foundation/include"
+                                        path="/apps/bbby/components/content/image/cq:dialog/content/items/tabs/items/assetDesktop/items/columns/items/column">
+                                    </include1>
+                                    <include3
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/coral/foundation/include"
+                                        path="/apps/bbby/components/content/image/cq:dialog/content/items/tabs/items/assetDesktop/items/columns/items/altAndTitle">
+                                    </include3>
+                                </items>
+                            </columns>
+                        </items>
+                    </assetDesktop>
+                    <cta
+                        jcr:primaryType="nt:unstructured"
+                        jcr:title="CTA"
+                        sling:resourceType="granite/ui/components/coral/foundation/container"
+                        margin="{Boolean}true">
+                        <items jcr:primaryType="nt:unstructured">
+                            <columns
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/coral/foundation/fixedcolumns"
+                                margin="{Boolean}true">
+                                <items jcr:primaryType="nt:unstructured">
+                                    <include
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/coral/foundation/include"
+                                        path="/apps/bbby/components/content/cta/cq:dialog/content/items/tabs/items/properties/items/columns/items/column">
+                                    </include>
+                                </items>
+                            </columns>
+                        </items>
+                    </cta>
+                    <background
+                        jcr:primaryType="nt:unstructured"
+                        jcr:title="Background"
+                        sling:resourceType="granite/ui/components/coral/foundation/container"
+                        margin="{Boolean}true">
+                        <items jcr:primaryType="nt:unstructured">
+                            <columns
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/coral/foundation/fixedcolumns"
+                                margin="{Boolean}true">
+                                <items jcr:primaryType="nt:unstructured">
+                                    <include
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/coral/foundation/include"
+                                        path="/apps/bbby/components/content/background/cq:dialog/content/items/tabs/items/properties/items/columns/items/column">
+                                    </include>
+                                </items>
+                            </columns>
+                        </items>
+                    </background>
+                </items>
+            </tabs>
+        </items>
+    </content>
+</jcr:root>

@@ -1,0 +1,141 @@
+<!-- <span class="edit-start container" data-sly-test="${wcmmode.edit || wcmmode.preview || wcmmode.design}">&nbsp;${resource.name} <i class="fa fa-long-arrow-down" aria-hidden="true"></i></span> -->
+
+<template data-sly-template.renderPdmMetadata>
+    <section data-sly-use.model="com.bbby.aem.core.models.component.PdmMetadata"
+        class="cmp-pdm-metadata">
+
+        <!--/*
+        Uncomment for debug output
+        <sly data-sly-use.debug="../_debugging/_debugging.html" data-sly-call="${debug.renderDebugging @ model=model}" />
+        */-->
+
+        <div class="cmp-pdm-metadata__content">
+            <div class="owl-carousel owl-theme"
+                 data-sly-list="${model.pdmMetaData}" data-item-count="${model.pdmMetaData.size}">
+                <div class="cmp-pdm-metadata__content--item  item">
+                    <div class="cmp-pdm-metadata__container--first-column">
+                        <div class="cmp-pdm-metadata--property">
+                            <label class="coral-Form-fieldlabel">Primary UPC</label>
+                            <input class="coral-Form-field coral3-Textfield" readonly value="${item.primaryUPC}">
+                        </div>
+                        <div class="cmp-pdm-metadata--property">
+                            <label class="coral-Form-fieldlabel">SKU</label>
+                            <input class="coral-Form-field coral3-Textfield" readonly value="${item.sku}">
+                        </div>
+                        <div class="cmp-pdm-metadata--property">
+                            <label class="coral-Form-fieldlabel">Brand</label>
+                            <input class="coral-Form-field coral3-Textfield" readonly value="${item.brand}">
+                        </div>
+                        <div class="cmp-pdm-metadata--property">
+                            <label class="coral-Form-fieldlabel">Color Code</label>
+                            <input class="coral-Form-field coral3-Textfield" readonly value="${item.colorCode}">
+                        </div>
+                        <div class="cmp-pdm-metadata--property">
+                            <label class="coral-Form-fieldlabel">Color Group Code and Name</label>
+                            <input class="coral-Form-field coral3-Textfield" readonly value="${item.colorGroupCode}">
+                        </div>
+                        <div class="cmp-pdm-metadata--property">
+                            <label class="coral-Form-fieldlabel">Product</label>
+                            <input class="coral-Form-field coral3-Textfield" readonly value="${item.product}">
+                        </div>
+                        <div class="cmp-pdm-metadata--property">
+                            <label class="coral-Form-fieldlabel">Associated Web Product ID</label>
+                            <input class="coral-Form-field coral3-Textfield" readonly
+                                   value="${item.associatedWebProductID}">
+                        </div>
+                        <div class="cmp-pdm-metadata--property">
+                            <label class="coral-Form-fieldlabel">Associated Collection ID</label>
+                            <input class="coral-Form-field coral3-Textfield" readonly
+                                   value="${item.associatedCollectionID}">
+                        </div>
+                    </div>
+                    <div class="cmp-pdm-metadata__container--second-column">
+                        <div class="cmp-pdm-metadata--property">
+                            <label class="coral-Form-fieldlabel">Primary Vendor Number</label>
+                            <input class="coral-Form-field coral3-Textfield" readonly
+                                   value="${item.primaryVendorNumber}">
+                        </div>
+                        <div class="cmp-pdm-metadata--property">
+                            <label class="coral-Form-fieldlabel">Primary Vendor Name</label>
+                            <input class="coral-Form-field coral3-Textfield" readonly value="${item.primaryVendorName}">
+                        </div>
+                        <div class="cmp-pdm-metadata--property">
+                            <label class="coral-Form-fieldlabel">Vendor Direct to Customer(VDC) item</label>
+                            <input class="coral-Form-field coral3-Textfield" readonly
+                                   value="${item.vendorDirectToCustomerItem}">
+                        </div>
+                        <div class="cmp-pdm-metadata--property">
+                            <label class="coral-Form-fieldlabel">Priority Flag</label>
+                            <input class="coral-Form-field coral3-Textfield" readonly
+                                   value="${item.priorityFlag}">
+                        </div>
+                        <div class="cmp-pdm-metadata--property">
+                            <label class="coral-Form-fieldlabel">BBBY Web Disabled</label>
+                            <input class="coral-Form-field coral3-Textfield" readonly
+                                   value="${item.bbbyWebDisabled}">
+                        </div>
+                        <div class="cmp-pdm-metadata--property">
+                            <label class="coral-Form-fieldlabel">Baby Web Disabled</label>
+                            <input class="coral-Form-field coral3-Textfield" readonly
+                                   value="${item.babyWebDisabled}">
+                        </div>
+                        <div class="cmp-pdm-metadata--property">
+                            <label class="coral-Form-fieldlabel">PDM Batch ID</label>
+                            <input class="coral-Form-field coral3-Textfield" readonly
+                                   value="${item.pdmBatchID}">
+                        </div>
+                        <div class="cmp-pdm-metadata--property">
+                            <label class="coral-Form-fieldlabel">Pullback to Merchant</label>
+                            <input class="coral-Form-field coral3-Textfield" readonly
+                                   value="${item.pullbackToMerchant}">
+                        </div>
+                    </div>
+                    <div class="cmp-pdm-metadata__container--third-column">
+                        <div class="cmp-pdm-metadata--property">
+                            <label class="coral-Form-fieldlabel">CA Web Disabled</label>
+                            <input class="coral-Form-field coral3-Textfield" readonly
+                                   value="${item.caWebDisabled}">
+                        </div>
+                        <div class="cmp-pdm-metadata--property">
+                            <label class="coral-Form-fieldlabel">BBBY Web Offered Flag</label>
+                            <input class="coral-Form-field coral3-Textfield" readonly
+                                   value="${item.bbbyWebOfferedFlag}">
+                        </div>
+                        <div class="cmp-pdm-metadata--property">
+                            <label class="coral-Form-fieldlabel">Baby Web Offered Flag</label>
+                            <input class="coral-Form-field coral3-Textfield" readonly
+                                   value="${item.babyWebOfferedFlag}">
+                        </div>
+                        <div class="cmp-pdm-metadata--property">
+                            <label class="coral-Form-fieldlabel">CA Web Offered Flag</label>
+                            <input class="coral-Form-field coral3-Textfield" readonly
+                                   value="${item.caWebOfferedFlag}">
+                        </div>
+                        <div class="cmp-pdm-metadata--property">
+                            <label class="coral-Form-fieldlabel">Web Product Rollup Type</label>
+                            <input class="coral-Form-field coral3-Textfield" readonly
+                                   value="${item.webProductRollUpType}">
+                        </div>
+                        <div class="cmp-pdm-metadata--property">
+                            <label class="coral-Form-fieldlabel">Master Product Description</label>
+                            <input class="coral-Form-field coral3-Textfield" readonly
+                                   value="${item.masterProductDescription}">
+                        </div>
+                        <div class="cmp-pdm-metadata--property">
+                            <label class="coral-Form-fieldlabel">Fast Track Flag – Photo</label>
+                            <input class="coral-Form-field coral3-Textfield" readonly
+                                   value="${item.fastTrackFlag}">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pdm-metadata-pagination"></div>
+        </div>
+
+    </section>
+
+    <sly data-sly-use.common="core/wcm/components/commons/v1/templates.html"
+        data-sly-call="${common.placeholder @ isEmpty=!model.dummyValue, emptyTextAppend=resource.name}"></sly>
+</template>
+
+<sly data-sly-call="${renderPdmMetadata @ model=model}" />

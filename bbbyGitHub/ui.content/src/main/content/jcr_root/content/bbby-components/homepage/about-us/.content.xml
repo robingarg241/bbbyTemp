@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:mix="http://www.jcp.org/jcr/mix/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    jcr:primaryType="cq:Page">
+    <jcr:content
+        cq:contextHubPath="/etc/cloudsettings/default/contexthub"
+        cq:contextHubSegmentsPath="/etc/segmentation/contexthub"
+        cq:lastModified="{Date}2018-07-02T11:21:59.601-07:00"
+        cq:lastModifiedBy="admin"
+        cq:tags="[]"
+        cq:template="/apps/bbby/templates/page-content"
+        jcr:isCheckedOut="{Boolean}true"
+        jcr:lastModified="{Date}2017-01-12T15:46:55.492-08:00"
+        jcr:lastModifiedBy="admin"
+        jcr:mixinTypes="[mix:versionable]"
+        jcr:primaryType="cq:PageContent"
+        jcr:title="About Us"
+        jcr:uuid="80494086-9580-4ddb-a21c-66d7e1607ef5"
+        sling:resourceType="bbby/components/structure/page"
+        analytics.pageId="homepage:social:1pG06xvq"
+        robotsOptions="default">
+        <par
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="wcm/foundation/components/parsys">
+            <breadcrumbs
+                jcr:created="{Date}2016-10-04T10:40:38.052-07:00"
+                jcr:createdBy="admin"
+                jcr:lastModified="{Date}2016-10-04T10:56:59.835-07:00"
+                jcr:lastModifiedBy="admin"
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="bbby/components/content/breadcrumbs"
+                backgroundBottomSpacing="_empty_"
+                backgroundColor="light-grey-bg"
+                backgroundTopSpacing="vert-pad-top-md"
+                breadcrumbsTextColor="dark-text"
+                listType="dynamic"/>
+            <text_jumbo
+                jcr:created="{Date}2016-10-04T10:39:03.675-07:00"
+                jcr:createdBy="admin"
+                jcr:lastModified="{Date}2016-10-04T10:57:05.309-07:00"
+                jcr:lastModifiedBy="admin"
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="bbby/components/content/text-jumbo"
+                backgroundBottomSpacing="vert-pad-bottom-md"
+                backgroundColor="light-grey-bg"
+                backgroundHorizontalSpacing="_empty_"
+                backgroundTopSpacing="_empty_"
+                textJumboAlignment="left"
+                textJumboTitleSize="h1"
+                title="About Us"/>
+            <column_control_310492187
+                jcr:created="{Date}2018-07-02T11:21:15.532-07:00"
+                jcr:createdBy="admin"
+                jcr:lastModified="{Date}2018-07-02T11:21:15.532-07:00"
+                jcr:lastModifiedBy="admin"
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="bbby/components/content/column-control">
+                <columns jcr:primaryType="nt:unstructured">
+                    <text_jumbo
+                        jcr:created="{Date}2016-10-04T10:44:07.689-07:00"
+                        jcr:createdBy="admin"
+                        jcr:lastModified="{Date}2016-10-04T10:45:14.441-07:00"
+                        jcr:lastModifiedBy="admin"
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="bbby/components/content/text-jumbo"
+                        backgroundBottomSpacing="_empty_"
+                        backgroundColor="_empty_"
+                        backgroundHorizontalSpacing="_empty_"
+                        backgroundTopSpacing="_empty_"
+                        text="&lt;p>Curabitur rhoncus massa sit amet orci iaculis ornare sed at nisl. Donec eget nulla turpis. Ut condimentum nisi nisl, ut eleifend ipsum malesuada eget. Suspendisse faucibus pretium odio ac facilisis. Praesent pharetra, elit at iaculis imperdiet, mi sem tristique mauris, sed luctus tortor metus rhoncus felis. Nulla varius mi id lectus aliquam facilisis.&amp;nbsp;&lt;/p>&#xa;&lt;p>Proin eleifend faucibus turpis. Integer consequat tincidunt neque eget pellentesque. Vestibulum venenatis bibendum dui, varius ullamcorper nisi fringilla a. Etiam rhoncus maximus hendrerit. In elementum, massa at scelerisque molestie, nunc ante mollis lacus, a tempus ipsum nibh id sem. Fusce id urna volutpat lacus blandit ultricies nec ac neque. Cras rutrum nibh nunc, sed eleifend ante laoreet at. Vivamus tempus ex at venenatis luctus. Nulla vel leo velit.&lt;/p>&#xa;&lt;p>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec ultrices ullamcorper libero, eu maximus quam egestas vel. Ut sit amet rutrum elit, sit amet tincidunt tellus. Nulla facilisi. In mattis consectetur justo id blandit. Pellentesque nisl elit, congue id sem euismod, tempus sagittis tellus. Curabitur rhoncus massa sit amet orci iaculis ornare sed at nisl. Donec eget nulla turpis. Ut condimentum nisi nisl, ut eleifend ipsum malesuada eget. Suspendisse faucibus pretium odio ac facilisis. Praesent pharetra, elit at iaculis imperdiet, mi sem tristique mauris, sed luctus tortor metus rhoncus felis. Nulla varius mi id lectus aliquam facilisis. Vivamus egestas lorem sed risus suscipit condimentum. Nulla facilisi. Cras blandit neque porta risus aliquam pellentesque.&lt;/p>&#xa;"
+                        textIsRich="true"
+                        textJumboAlignment="left"
+                        textJumboTitleSize="h3"
+                        title="Our Story"/>
+                    <image
+                        jcr:created="{Date}2018-07-02T11:20:25.378-07:00"
+                        jcr:createdBy="admin"
+                        jcr:lastModified="{Date}2018-07-02T11:21:59.599-07:00"
+                        jcr:lastModifiedBy="admin"
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="bbby/components/content/image"
+                        backgroundColor="bg-transparent"
+                        backgroundHorizontalSpacing="px-0"
+                        backgroundTopSpacing="pt-4"
+                        fileReference="/content/dam/bbby-components/portrait-image.jpg"
+                        renditionMode="landscape"/>
+                </columns>
+            </column_control_310492187>
+        </par>
+        <image
+            jcr:lastModified="{Date}2017-01-12T15:46:55.492-08:00"
+            jcr:lastModifiedBy="admin"
+            jcr:primaryType="nt:unstructured"/>
+    </jcr:content>
+</jcr:root>

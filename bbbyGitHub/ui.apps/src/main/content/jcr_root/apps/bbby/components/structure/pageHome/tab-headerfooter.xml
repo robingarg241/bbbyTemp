@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:granite="http://www.adobe.com/jcr/granite/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    xmlns:rep="internal"
+    cq:showOnCreate="{Boolean}false"
+    jcr:primaryType="nt:unstructured"
+    jcr:title="Header &amp; Footer"
+    sling:resourceType="granite/ui/components/coral/foundation/fixedcolumns">
+    <items jcr:primaryType="nt:unstructured">
+        <column
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="granite/ui/components/foundation/container">
+            <items jcr:primaryType="nt:unstructured">
+                <headerPath
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="granite/ui/components/foundation/form/pathbrowser"
+                    fieldLabel="Header Location"
+                    fieldDescription="The location of the Header component instance to use for this site."
+                    renderReadOnly="true"
+                    rootPath="/content/"
+                    required="{Boolean}false"
+                    cq:showOnCreate="{Boolean}true"
+                    predicate="nosystem"
+                    name="./headerPath"
+                    cq-msm-lockable="./headerPath"/>
+                <footerPath
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="granite/ui/components/foundation/form/pathbrowser"
+                    fieldLabel="Footer Location"
+                    fieldDescription="The location of the Footer component instance to use for this site."
+                    renderReadOnly="true"
+                    rootPath="/content/"
+                    required="{Boolean}false"
+                    cq:showOnCreate="{Boolean}true"
+                    predicate="nosystem"
+                    name="./footerPath"
+                    cq-msm-lockable="./footerPath"/>
+            </items>
+        </column>
+    </items>
+</jcr:root>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:granite="http://www.adobe.com/jcr/granite/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0"
+    jcr:mixinTypes="[granite:PublicArea]"
+    jcr:primaryType="sling:Folder"
+    jcr:title="Asset Collections"
+    cardPath="dam/gui/coral/components/admin/collections/contentrenderer/collectioncard"
+    clientlibs="[dam.gui.actions.coral,dam.gui.components.admin.adhocassetshare.coral,cq.gui.damadmin.lightbox.coral,cq.gui.damadmin.omnisearch.coral]"
+    defaultSearchPath="/content/dam/collections"
+    exclude=""
+    includeInSuggestions="{Boolean}false"
+    listItemPath="dam/gui/coral/components/admin/collections/contentrenderer/collectionrow"
+    listOrder="{Long}14"
+    nodeType="nt:unstructured"
+    searchRailPath="dam/content/collection/searchpanel"
+    simpleCardPath=""/>

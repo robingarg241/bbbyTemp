@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0"
+          xmlns:nt="http://www.jcp.org/jcr/nt/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0"
+          xmlns:granite="http://www.adobe.com/jcr/granite/1.0"
+    jcr:primaryType="nt:unstructured"
+    jcr:title="Search"
+    sling:resourceType="cq/gui/components/authoring/dialog">
+    <content
+        jcr:primaryType="nt:unstructured"
+        sling:resourceType="granite/ui/components/coral/foundation/container">
+        <items jcr:primaryType="nt:unstructured">
+            <tabs
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/coral/foundation/tabs"
+                maximized="{Boolean}true">
+                <items jcr:primaryType="nt:unstructured">
+                    <properties
+                        jcr:primaryType="nt:unstructured"
+                        jcr:title="Properties"
+                        sling:resourceType="granite/ui/components/coral/foundation/container"
+                        margin="{Boolean}true">
+                        <items jcr:primaryType="nt:unstructured">
+                            <columns
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/coral/foundation/fixedcolumns"
+                                margin="{Boolean}true">
+                                <items jcr:primaryType="nt:unstructured">
+                                    <column
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/coral/foundation/container">
+                                        <items jcr:primaryType="nt:unstructured">
+                                            <searchIn
+                                                fieldLabel="Search In"
+                                                jcr:primaryType="nt:unstructured"
+                                                name="./searchIn"
+                                                rootPath="/content"
+                                                sling:resourceType="granite/ui/components/coral/foundation/form/pathbrowser"/>
+                                            <rangeText
+                                                fieldDescription="Result summary text with placeholder values: {0} = start cound, {1} = end cound, {2} = total matches, {3} = query."
+                                                fieldLabel="Search Results Text"
+                                                jcr:primaryType="nt:unstructured"
+                                                name="./rangeText"
+                                                sling:resourceType="granite/ui/components/coral/foundation/form/textfield"/>
+                                            <noResultsText
+                                                fieldDescription="Displays the text when no results are returned. {0} is the search keyword(s)."
+                                                fieldLabel="No Results Text"
+                                                jcr:primaryType="nt:unstructured"
+                                                name="./noResultsText"
+                                                sling:resourceType="granite/ui/components/coral/foundation/form/textfield"/>
+                                            <removeFilterText
+                                                fieldDescription="Remove"
+                                                fieldLabel="Remove Filter Text"
+                                                jcr:primaryType="nt:unstructured"
+                                                name="./removeFilterText"
+                                                sling:resourceType="granite/ui/components/coral/foundation/form/textfield"/>
+                                            <errorText
+                                                fieldDescription="Message shown to users when search encounters an error. Example: 'An error occurred, please try again later.'"
+                                                fieldLabel="Error Text"
+                                                jcr:primaryType="nt:unstructured"
+                                                name="./errorText"
+                                                sling:resourceType="granite/ui/components/coral/foundation/form/textfield"/>
+                                            <searchTags
+                                                fieldDescription="List of tags that can be shown in the filter pane (when applicable)."
+                                                fieldLabel="Filterable Tags"
+                                                jcr:primaryType="nt:unstructured"
+                                                name="./searchTags"
+                                                sling:resourceType="cq/gui/components/common/tagspicker"/>
+                                            <rollUpTags
+                                                fieldDescription="This means that tag counts will be aggregated into the 'Filterable Tag' value buckets. However, this mode can result in inflated counts if pages are tagged with multiple values in the same tag category."
+                                                fieldLabel="Roll Up Tags"
+                                                jcr:primaryType="nt:unstructured"
+                                                name="./rollUpTags"
+                                                sling:resourceType="granite/ui/components/coral/foundation/form/checkbox"
+                                                text="Roll Up Tags"
+                                                value="true"/>
+                                        </items>
+                                    </column>
+                                </items>
+                            </columns>
+                        </items>
+                    </properties>
+                    <background
+                        jcr:primaryType="nt:unstructured"
+                        jcr:title="Background"
+                        sling:resourceType="granite/ui/components/coral/foundation/container"
+                        margin="{Boolean}true">
+                        <items jcr:primaryType="nt:unstructured">
+                            <columns
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/coral/foundation/fixedcolumns"
+                                margin="{Boolean}true">
+                                <items jcr:primaryType="nt:unstructured">
+                                    <include
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/coral/foundation/include"
+                                        path="/apps/bbby/components/content/background/cq:dialog/content/items/tabs/items/properties/items/columns/items/column">
+                                    </include>
+                                </items>
+                            </columns>
+                        </items>
+                    </background>
+                </items>
+            </tabs>
+        </items>
+    </content>
+</jcr:root>

@@ -1,0 +1,57 @@
+<FindBugsFilter>
+
+    <!-- Reason: Component models have fields used purely for @DialogField annotations, where value is not used at
+        runtime. -->
+    <Match>
+        <Class name="~com.bbby.aem.core.models.component.*"/>
+        <Bug pattern="URF_UNREAD_FIELD,URF_UNREAD_PUBLIC_OR_PROTECTED_FIELD"/>
+    </Match>
+    <!-- Reason: Component models use the postConstruct() method for field initialization. However, findbugs only
+        recognizes constructor calls, resulting in false positives. -->
+    <Match>
+        <Class name="~com.bbby.aem.core.models.component.*"/>
+        <Bug pattern="UWF_FIELD_NOT_INITIALIZED_IN_CONSTRUCTOR"/>
+    </Match>
+    <!-- Reason: This is a questionable rule that is susceptible to false positives. Two classes in two completely
+        different packages should be allowed to have the same method. Example: getURL() vs getUrl() -->
+    <Match>
+        <Bug pattern="NM_CONFUSING"/>
+    </Match>
+    <!-- Reason: Using default locale for toUpper/LowerCase() is fine in 99.99% of cases. -->
+    <Match>
+        <Bug pattern="DM_CONVERT_CASE"/>
+    </Match>
+    <!-- Reason: Has a high chance of hitting false-positive. -->
+    <Match>
+        <Bug pattern="URF_UNREAD_PUBLIC_OR_PROTECTED_FIELD"/>
+    </Match>
+    <!-- Reason: Has a high chance of hitting false-positive. -->
+    <Match>
+        <Bug pattern="UUF_UNUSED_PUBLIC_OR_PROTECTED_FIELD"/>
+    </Match>
+    <!-- Reason: We often wrap core components which are already generically named. -->
+    <Match>
+        <Bug pattern="NM_SAME_SIMPLE_NAME_AS_INTERFACE"/>
+    </Match>
+
+    <!--
+        SERVLET RULES
+    -->
+
+    <!-- Reason: The requirements that servlets be serializable is a legacy Java feature that AEM does not use.
+        There is no need to enforce serializable requirements. -->
+    <Match>
+        <Class name="~com.bbby.aem.core.servlets.*"/>
+        <Bug pattern="SE_BAD_FIELD,SE_NO_SERIALVERSIONID"/>
+    </Match>
+    <!-- Reason: OSGi wires up fields in activate methods. This means even though the field is effectively 'final' it
+        cannot be declared as such. -->
+    <Match>
+        <Bug pattern="MSF_MUTABLE_SERVLET_FIELD"/>
+    </Match>
+    <!-- Reason: OSGi services are injected into fields. This means we need to have instance fields on servlets. -->
+    <Match>
+        <Bug pattern="MTIA_SUSPECT_SERVLET_INSTANCE_FIELD"/>
+    </Match>
+
+</FindBugsFilter>

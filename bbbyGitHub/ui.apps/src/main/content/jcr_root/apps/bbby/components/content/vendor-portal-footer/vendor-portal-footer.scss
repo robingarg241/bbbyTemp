@@ -1,0 +1,50 @@
+/**
+ *  Main css for Vendor Portal Footer
+ */
+
+.component-vendor-portal-footer {
+    width: 100%;
+    padding: 25px 30px;
+    background: white;
+    z-index: 30;
+    hr {
+        width: 90%;
+        border: 1px solid #e3e3e5;
+    }
+    .footer-landing-links {
+        list-style: none;
+
+        margin: 0;
+        padding: 0;
+
+        font-family: $font-sans-serif-medium;
+    	font-size: 20px;
+
+        li {
+            display: inline-block;
+            vertical-align: middle;
+
+            margin-left: 30px;
+
+            &:first-child {
+                margin-left: 0;
+            }
+            img {
+                height: 120px;
+                margin-left: 70px;
+            }
+        }
+
+        a {
+            color: #007bff;
+            text-decoration: none;
+            background-color: transparent;
+           
+    		
+            &:hover {
+                text-decoration: none;
+            }
+        }
+    }
+
+}

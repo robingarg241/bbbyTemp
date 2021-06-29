@@ -1,0 +1,16 @@
+<span class="edit-start container" data-sly-test="${wcmmode.edit || wcmmode.preview || wcmmode.design}">&nbsp;${resource.name} <i class="fa fa-arrow-circle-down" aria-hidden="true"></i></span>
+
+<!--/*
+    Main HTL template for the Column Control component.
+    model: The java model containing all fields necessary for rendering.
+*/-->
+<template data-sly-template.renderColumnControl>
+    <section class="cmp-column-control" data-sly-use.model="com.bbby.aem.core.models.component.ColumnControl">
+        <div class="row ${model.verticalAlign}" data-sly-resource="${'columns' @ resourceType='bbby/components/content/column-control/column-parsys'}"></div>
+    </section>
+</template>
+
+<sly data-sly-use.background="bbby/components/content/background/background.html"
+    data-sly-call="${background.renderBackground @ contentTemplate=renderColumnControl}" />
+
+<span class="edit-start container" data-sly-test="${wcmmode.edit || wcmmode.preview || wcmmode.design}">&nbsp;${resource.name} <i class="fa fa-arrow-circle-up" aria-hidden="true"></i></span>

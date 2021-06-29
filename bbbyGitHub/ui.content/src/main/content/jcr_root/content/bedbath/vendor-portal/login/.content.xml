@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:mix="http://www.jcp.org/jcr/mix/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0" xmlns:rep="internal"
+    jcr:mixinTypes="[rep:AccessControllable]"
+    jcr:primaryType="cq:Page">
+    <jcr:content
+        cq:allowedTemplates="[/conf/bbby/settings/wcm/templates/content-page,/conf/bbby/settings/wcm/templates/fragment-page,/conf/bbby/settings/wcm/templates/home-page]"
+        cq:lastModified="{Date}2019-07-04T00:09:49.710Z"
+        cq:lastModifiedBy="admin"
+        cq:lastReplicated="{Date}2019-08-20T01:19:17.064-04:00"
+        cq:lastReplicatedBy="admin"
+        cq:lastReplicationAction="Activate"
+        cq:template="/apps/bbby/templates/page-home"
+        jcr:isCheckedOut="{Boolean}true"
+        jcr:mixinTypes="[mix:versionable]"
+        jcr:primaryType="cq:PageContent"
+        jcr:title="Login"
+        jcr:uuid="cc2b185e-fa4d-418d-9711-79eb1d2c6922"
+        sling:resourceType="bbby/components/structure/pageHome"
+        uploadType="single">
+        <par
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="wcm/foundation/components/parsys">
+            <vendor_portal_login
+                jcr:created="{Date}2019-07-02T18:16:27.346Z"
+                jcr:createdBy="admin"
+                jcr:lastModified="{Date}2019-07-04T00:09:49.710Z"
+                jcr:lastModifiedBy="admin"
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="bbby/components/content/vendor-portal-login"
+                redirectPath="/content/bedbath/vendor-portal"/>
+        </par>
+    </jcr:content>
+    <rep:policy/>
+</jcr:root>

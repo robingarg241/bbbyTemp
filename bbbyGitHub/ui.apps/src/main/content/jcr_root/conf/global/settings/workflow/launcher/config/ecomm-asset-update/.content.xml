@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0"
+    jcr:primaryType="cq:WorkflowLauncher"
+    condition=""
+    conditions="[jcr:content/jcr:mimeType!=video/.*]"
+    description="Ecomm Asset - Modification"
+    disabledFeatures="[]"
+    enabled="{Boolean}true"
+    eventType="{Long}16"
+    excludeList="event-user-data:changedByWorkflowProcess"
+    features="[]"
+    glob="/content/dam/bbby/asset_transitions_folder/e-comm(/((?!/subassets).)*/)renditions/original"
+    nodetype="nt:file"
+    runModes="author"
+    workflow="/var/workflow/models/bbby-scene7-update-asset"/>

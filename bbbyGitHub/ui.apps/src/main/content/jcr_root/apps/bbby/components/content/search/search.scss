@@ -1,0 +1,24 @@
+/**
+ *  Main css for search
+ */
+
+.cmp-search {
+
+}
+
+.cmp-search__list {
+    list-style: none;
+    padding: 0;
+}
+
+.cmp-search__list-item {
+    display: inline-block;
+}
+
+.cmp-search__list-item + .cmp-search__list-item {
+    margin-left: spacer(2);
+}
+
+.cmp-search__facets {
+    padding-bottom: spacer(4);
+}

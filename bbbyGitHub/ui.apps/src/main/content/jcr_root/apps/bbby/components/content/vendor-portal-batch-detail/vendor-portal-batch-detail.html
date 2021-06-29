@@ -1,0 +1,69 @@
+<span class="edit-start container" data-sly-test="${wcmmode.edit || wcmmode.preview || wcmmode.design}">&nbsp;${resource.name} <i class="fa fa-long-arrow-down" aria-hidden="true"></i></span>
+
+<!--/*
+    Main HTL template for the vendor-portal-batch-detail component.
+    model: The java model containing all fields necessary for rendering.
+*/-->
+<template data-sly-template.renderVendorPortalBatchDetail="${ @ model }">
+    <section class="component-vendor-portal-batch-detail" id="vpUploadDetails">
+
+        <!--/*
+        Uncomment for debug output
+        <sly data-sly-use.debug="../_debugging/_debugging.html" data-sly-call="${debug.renderDebugging @ model=model}" />
+        */-->
+
+        <div id="batchSpinner"></div>
+
+        <div id="batchContainer">
+            <h5 class="batches">
+                <a href="#" onclick="window.history.back()">Batches</a> <i class="fa fa-chevron-right"></i>
+                <span id="batchID"></span>
+            </h5>
+            <div class="batch-details">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="detail">
+                            <span class="detail-title">Adobe Unique ID:</span> <span id="adobeUUID"></span>
+                        </div>
+
+                        <div class="detail">
+                            <span class="detail-title">Requested By:</span> <span id="requestedBy"></span>
+                        </div>
+
+                        <div class="detail">
+                            <span class="detail-title">Total Number of Files:</span> <span id="totalNoOfFiles"></span>
+                        </div>
+                        
+                        <div class="detail">
+                            <span class="detail-title">Number of Accepted Files:</span> <span id="noOfFiles"></span>
+                        </div>
+                    </div>
+                     <div class="col-md-6">
+                        <div class="detail">
+                            <span class="detail-title">Number of Rejected Files:</span> <span id="noOfRejectedFiles"></span>
+                        </div>
+                        
+                        <div class="detail">
+                            <span class="detail-title">Rejected Files:</span> <span id="rejectedFiles"></span>
+                        </div>
+                        
+                        <div class="detail">
+                            <span class="detail-title">Number of Failed to Upload Files:</span> <span id="noOfFailedFiles"></span>
+                        </div>
+                        
+                        <div class="detail">
+                            <span class="detail-title">Failed to Upload Files:</span> <span id="failedToUploadFiles"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <table id="uploadBatchDetails"></table>
+        </div>
+
+        <div id="batchError"></div>
+        <div id='redirectUrl' data-redirecturl="${properties['redirectPath']}.html"></div>
+    </section>
+</template>
+
+<sly data-sly-use.model="com.bbby.aem.core.models.component.VendorPortalBatchDetail" data-sly-call="${renderVendorPortalBatchDetail @ model=model}" />

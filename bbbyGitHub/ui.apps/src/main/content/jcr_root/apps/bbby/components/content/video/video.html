@@ -1,0 +1,46 @@
+<span class="edit-start container" data-sly-test="${wcmmode.edit || wcmmode.preview || wcmmode.design}">&nbsp;${resource.name} <i class="fa fa-long-arrow-down" aria-hidden="true"></i></span>
+
+<!--/*
+    Contains the core video player markup.
+    Other components should use this when video player is required.
+*/-->
+<template data-sly-template.renderVideoPlayer="${ @ provider, videoId, autoplay, includeVimeoScript }">
+    <script data-sly-test="${includeVimeoScript}" src="https://player.vimeo.com/api/player.js"></script>
+    <section class="cmp-video embed-responsive ${properties.aspectRatio}"
+        data-video-id="${videoId}"
+        data-provider="${provider}"
+        data-autoplay="${autoplay}">
+
+        <!--/*
+            Overlay is here for two reasons:
+                1. In order to support dragging video carousel slides with the mouse
+                2. Provides starting point if custom thumbnail support needs to be added in the future.
+        */-->
+        <div class="cmp-video__overlay">
+            <!--/* White PNG */-->
+            <img class="cmp-video__overlay-image"
+                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAQAAADa613fAAAAaUlEQVR42u3PQREAAAgDINc/9Izg34MGpJ0XIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiJyWYprx532021aAAAAAElFTkSuQmCC"></img>
+        </div>
+
+        <div class="cmp-video__player"></div>
+    </section>
+</template>
+
+<!--/* VIDEO PLAYER */-->
+<template data-sly-template.renderVideo>
+    <div data-sly-use.model="com.bbby.aem.core.models.component.Video">
+        <sly data-sly-call="${renderVideoPlayer @
+        provider=model.videoProvider,
+        videoId=model.videoId,
+        autoplay=model.autoplay,
+        includeVimeoScript=model.includeVimeoScript}" />
+    </div>
+
+    <!--/* Placeholder */-->
+    <sly data-sly-use.common="core/wcm/components/commons/v1/templates.html"
+         data-sly-call="${common.placeholder @ isEmpty=!model.videoId, emptyTextAppend=resource.name}"></sly>
+</template>
+
+<sly
+    data-sly-use.background="bbby/components/content/background/background.html"
+    data-sly-call="${background.renderBackground @ contentTemplate=renderVideo}" />

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:mix="http://www.jcp.org/jcr/mix/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0" xmlns:rep="internal"
+    jcr:mixinTypes="[rep:AccessControllable]"
+    jcr:primaryType="cq:Page">
+    <rep:policy/>
+    <jcr:content
+        cq:allowedTemplates="[/conf/bbby/settings/wcm/templates/fragment-page,/conf/bbby/settings/wcm/templates/content-page]"
+        cq:designPath="/etc/designs/bbby"
+        cq:lastModified="{Date}2019-09-03T15:21:26.000-04:00"
+        cq:lastModifiedBy="admin"
+        cq:lastReplicated="{Date}2019-09-05T16:05:04.425-04:00"
+        cq:lastReplicatedBy="cameron.dietz@bedbath.com"
+        cq:lastReplicationAction="Activate"
+        cq:template="/conf/bbby/settings/wcm/templates/home-page"
+        jcr:isCheckedOut="{Boolean}true"
+        jcr:mixinTypes="[mix:versionable]"
+        jcr:primaryType="cq:PageContent"
+        jcr:title="Vendor Portal"
+        jcr:uuid="75e3d539-b1d4-471a-af04-80276b6b72a7"
+        sling:resourceType="bbby/components/structure/pageHome"
+        headerPath="/content/bedbath/vendor-portal/fragments/header/jcr:content/root/vendor_portal_header"
+        robotsOptions="default"
+        uploadType="single">
+        <root
+            jcr:lastModified="{Date}2019-07-01T22:57:05.949Z"
+            jcr:lastModifiedBy="jburke"
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="wcm/foundation/components/responsivegrid">
+            <text_jumbo
+                jcr:created="{Date}2019-06-20T06:21:16.661Z"
+                jcr:createdBy="admin"
+                jcr:lastModified="{Date}2019-08-14T13:21:46.848-04:00"
+                jcr:lastModifiedBy="admin"
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="bbby/components/content/text-jumbo"
+                backgroundColor="bg-white"
+                backgroundHorizontalSpacing="_none_"
+                text="&lt;h5>Upload assets and edit their metadata manually or add&lt;/h5>&#xa;&lt;h5>metadata to a batch via our easy excel metadata template&lt;/h5>&#xa;&lt;h5>&amp;nbsp;&lt;/h5>&#xa;"
+                textIsRich="true"
+                textJumboAlignment="center"
+                textJumboTitleSize="h2"
+                title="Excel Metadata Asset Uploader"/>
+            <image
+                jcr:created="{Date}2019-06-27T12:54:41.553Z"
+                jcr:createdBy="admin"
+                jcr:lastModified="{Date}2019-07-18T23:47:04.026Z"
+                jcr:lastModifiedBy="admin"
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="bbby/components/content/image"
+                backgroundColor="bbb-grey"
+                backgroundHorizontalSpacing="_none_"
+                fileReference="/content/dam/bedbath/vendor-portal/images.PNG"
+                renditionMode="landscape"/>
+            <column_control
+                jcr:created="{Date}2019-06-20T06:21:56.870Z"
+                jcr:createdBy="admin"
+                jcr:lastModified="{Date}2019-07-01T18:36:48.769Z"
+                jcr:lastModifiedBy="jburke"
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="bbby/components/content/column-control"
+                backgroundColor="bbb-grey"
+                backgroundHorizontalSpacing="_none_"
+                columnLayout="50"
+                verticalAlign="align-items-start">
+                <columns
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="bbby/components/content/column-control/column-parsys">
+                    <text_image_two_colum
+                        jcr:created="{Date}2019-06-20T06:22:36.151Z"
+                        jcr:createdBy="admin"
+                        jcr:lastModified="{Date}2019-09-03T15:20:58.191-04:00"
+                        jcr:lastModifiedBy="admin"
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="bbby/components/content/text-image-two-column"
+                        backgroundColor="bg-transparent"
+                        backgroundHorizontalSpacing="_none_"
+                        fileReference="/content/dam/bedbath/vendor-portal/01_SingleAsset.jpg"
+                        textImage2ColumnRendition="imageRight"
+                        textIsRich="true"
+                        title="Single Metadata Asset Uploader">
+                        <cta jcr:primaryType="nt:unstructured">
+                            <item0
+                                jcr:primaryType="nt:unstructured"
+                                link="/content/bedbath/vendor-portal/upload-single"
+                                title="Get Started"/>
+                        </cta>
+                    </text_image_two_colum>
+                    <text_image_two_colum_1873132983
+                        jcr:created="{Date}2019-06-20T06:22:36.151Z"
+                        jcr:createdBy="admin"
+                        jcr:lastModified="{Date}2019-09-03T15:21:25.992-04:00"
+                        jcr:lastModifiedBy="admin"
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="bbby/components/content/text-image-two-column"
+                        backgroundColor="bg-transparent"
+                        backgroundHorizontalSpacing="_none_"
+                        fileReference="/content/dam/bedbath/vendor-portal/01_MultiAsset.jpg"
+                        textImage2ColumnRendition="imageRight"
+                        textIsRich="true"
+                        title="Multi Asset Uploader">
+                        <cta jcr:primaryType="nt:unstructured">
+                            <item0
+                                jcr:primaryType="nt:unstructured"
+                                link="/content/bedbath/vendor-portal/upload-batch"
+                                title="Get Started"/>
+                        </cta>
+                    </text_image_two_colum_1873132983>
+                </columns>
+            </column_control>
+        </root>
+    </jcr:content>
+    <fragments/>
+    <upload-single/>
+    <upload-batch/>
+    <history/>
+    <login/>
+    <help/>
+    <reference/>
+</jcr:root>

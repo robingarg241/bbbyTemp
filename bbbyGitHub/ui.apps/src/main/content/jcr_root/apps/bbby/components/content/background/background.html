@@ -1,0 +1,33 @@
+<span class="edit-start container" data-sly-test="${wcmmode.edit || wcmmode.preview || wcmmode.design}">&nbsp;${resource.name} <i class="fa fa-arrow-circle-down" aria-hidden="true"></i></span>
+
+<!--/*
+    Renders the background markup.
+    contentModel: the model that will be based to the contentTemplate
+    contentTemplate: the template containing the content which will be wrapped by the background markup.
+*/-->
+<template data-sly-template.renderBackground="${ @ contentModel, contentTemplate }">
+
+    <div data-sly-use.model="com.bbby.aem.core.models.component.Background"
+        class="cmp-background ${model.backgroundColor} ${model.backgroundTopSpacing} ${model.backgroundBottomSpacing} ${model.visibilityClasses}">
+
+        <div data-sly-unwrap="${!model.backgroundContainerEnabled}" class="container">
+            <div data-sly-unwrap="${!model.backgroundHorizontalSpacing}" class="${model.backgroundHorizontalSpacing}">
+
+                <!--/*
+                    Renders the content of the background component. This will either be the result of invoking the contentTemplate (with supplied model)
+                    or an empty parsys if no contentTemplate is provided.
+                */-->
+                <sly data-sly-test.hasContent="${contentTemplate}" data-sly-call="${contentTemplate @ model=contentModel}" />
+                <sly data-sly-test="${!hasContent}">
+                    <div data-sly-resource="${'content' @ resourceType='wcm/foundation/components/parsys'}"></div>
+                </sly>
+
+            </div>
+        </div>
+
+    </div>
+</template>
+
+<sly data-sly-call="${renderBackground}" />
+
+<span class="edit-start container" data-sly-test="${wcmmode.edit || wcmmode.preview || wcmmode.design}">&nbsp;${resource.name} <i class="fa fa-arrow-circle-up" aria-hidden="true"></i></span>

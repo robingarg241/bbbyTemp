@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:granite="http://www.adobe.com/jcr/granite/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    jcr:primaryType="nt:unstructured">
+    <list
+        granite:rel="cq-damadmin-admin-childpages"
+        jcr:primaryType="nt:unstructured"
+        jcr:title="List View"
+        sling:resourceType="granite/ui/components/coral/foundation/table"
+        icon="viewList"
+        layoutId="list"
+        limit="{Long}40"
+        metaResourceType="dam/gui/coral/components/admin/contentrenderer/metaResource"
+        modeGroup="cq-damadmin-admin-childpages"
+        path="${requestPathInfo.suffix}"
+        rowReorderAction="/bin/wcmcommand?cmd=movePage&amp;srcPath={item}&amp;destPath={item}&amp;before={before}&amp;_charset_=utf-8&amp;"
+        selectionMode="row"
+        size="${empty requestPathInfo.selectors[1] ? &quot;40&quot; : requestPathInfo.selectors[1]}"
+        sortMode="remote"
+        src="/mnt/overlay/dam/gui/content/assets/jcr:content/views/list{.offset,limit}.html{+id}{?sortName,sortDir}"
+        stateId="shell.collectionpage">
+        <columns jcr:primaryType="nt:unstructured">
+            <select
+                jcr:primaryType="nt:unstructured"
+                select="{Boolean}true"/>
+            <name
+                jcr:primaryType="nt:unstructured"
+                jcr:title="Name"
+                sortable="{Boolean}true"/>
+            <title
+                jcr:primaryType="nt:unstructured"
+                jcr:title="Title"
+                sortable="{Boolean}true"/>
+            <description
+                jcr:primaryType="nt:unstructured"
+                jcr:title="Description"
+                sortable="{Boolean}true"/>
+            <type
+                jcr:primaryType="nt:unstructured"
+                jcr:title="Type"
+                sortable="{Boolean}true"/>
+            <created
+                jcr:primaryType="nt:unstructured"
+                jcr:title="Created"
+                sortable="{Boolean}true"/>
+            <createdby
+                jcr:primaryType="nt:unstructured"
+                jcr:title="Created By"
+                sortable="{Boolean}true"/>
+            <role
+                jcr:primaryType="nt:unstructured"
+                jcr:title="Role"
+                sortable="{Boolean}true"/>
+        </columns>
+    </list>
+</jcr:root>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0"
+    jcr:primaryType="cq:WorkflowLauncher"
+    condition=""
+    conditions="[../operationalmetadata/pdmWebOfferedFlags==true,../operationalmetadata/hasPdmAssociatedId==true]"
+    description="sorting for upcmetadata nodes, this is to trap asset metadata being modified by PDM"
+    disabledFeatures="[]"
+    enabled="{Boolean}true"
+    eventType="{Long}16"
+    excludeList=""
+    features="[]"
+    glob="/content/dam/bbby/asset_transitions_folder(?!/e-comm)(/.*)/jcr:content/upcmetadata"
+    nodetype="nt:unstructured"
+    runModes="author"
+    workflow="/var/workflow/models/bbby-sorting-hat"/>

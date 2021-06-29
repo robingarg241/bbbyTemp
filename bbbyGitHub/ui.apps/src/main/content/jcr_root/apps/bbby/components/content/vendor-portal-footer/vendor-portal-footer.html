@@ -1,0 +1,29 @@
+<span class="edit-start container" data-sly-test.edit="${wcmmode.edit || wcmmode.preview || wcmmode.design}">&nbsp;${resource.name} <i
+    class="fa fa-long-arrow-down" aria-hidden="true"></i></span>
+
+<!--/*
+    Main HTL template for the vendor-portal-footer component.
+    model: The java model containing all fields necessary for rendering.
+*/-->
+<template data-sly-template.renderVendorPortalFooter="${ @ model }">
+    <section class="component-vendor-portal-footer dynamic-width ${!(wcmmode.edit || wcmmode.preview || wcmmode.design) ? 'footer_pub' : ''}">
+        <hr>
+        <ul class="footer-landing-links">
+            <li>
+                <a href="${model.homePath}">
+                    <img src="${model.logoPath}"/>
+                </a>
+            </li>
+            <li>
+                <a id="refDoc" href="${model.fileFormat}">File Format </a>
+            </li>
+        </ul>
+
+    </section>
+
+    <sly data-sly-use.common="core/wcm/components/commons/v1/templates.html"
+         data-sly-call="${common.placeholder @ isEmpty=!textModel.text && !ctaModel.ctaList && !model.fileReference && !model.title && !model.superTitle, emptyTextAppend=resource.name}"></sly>
+</template>
+
+<sly data-sly-use.model="com.bbby.aem.core.models.component.VendorPortalFooter"
+     data-sly-call="${renderVendorPortalFooter @ model=model}"/>

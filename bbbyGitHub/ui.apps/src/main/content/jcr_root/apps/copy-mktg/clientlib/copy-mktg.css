@@ -1,0 +1,41 @@
+.eaem-copy-mktg-form{
+    margin: 10px 40px 0px 40px;
+    height: 87%;
+}
+
+.eaem-copy-mktg-col1{
+    width: 30%;
+    margin-top: 10px;
+    overflow-y: auto;
+}
+
+.eaem-copy-mktg-col2{
+    height: 65%;
+    padding: 1rem;
+    overflow: hidden;
+    width: 65%;
+    margin-top: 30px;
+    margin-left: 50px;
+    text-align: center;
+    background: white;
+}
+
+.eaem-copy-mktg-apply{
+    margin-top: 20px;
+    margin-left: 88%;
+}
+
+.eaem-copy-mktg-apply-modal {
+    width: 50%;
+    margin-left: -50%;
+    height: 30%;
+    margin-top: -50%;
+    box-sizing: content-box;
+    z-index: 10100;
+}
+
+.eaem-copy-mktg-apply-modal > iframe {
+    width: 100%;
+    height: 100%;
+    border: 1px solid #888;
+}

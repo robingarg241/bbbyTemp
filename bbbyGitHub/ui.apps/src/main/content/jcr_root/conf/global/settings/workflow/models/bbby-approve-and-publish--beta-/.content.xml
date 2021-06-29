@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    jcr:primaryType="cq:Page">
+    <jcr:content
+        cq:designPath="/libs/settings/wcm/designs/default"
+        cq:lastModified="{Date}2020-10-20T13:17:43.737+05:30"
+        cq:lastModifiedBy="admin"
+        cq:template="/libs/cq/workflow/templates/model"
+        jcr:primaryType="cq:PageContent"
+        jcr:title="*BBBY Approve and Publish(BETA)"
+        sling:resourceType="cq/workflow/components/pages/model">
+        <flow
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="foundation/components/parsys">
+            <process_1805278175
+                jcr:created="{Date}2020-10-14T14:34:55.316+05:30"
+                jcr:createdBy="admin"
+                jcr:lastModified="{Date}2020-10-14T20:18:20.413+05:30"
+                jcr:lastModifiedBy="admin"
+                jcr:primaryType="nt:unstructured"
+                jcr:title="Validate Asset"
+                sling:resourceType="cq/workflow/components/model/process">
+                <metaData
+                    jcr:primaryType="nt:unstructured"
+                    PROCESS="com.bbby.aem.core.workflow.publish.ValidateAsset"
+                    PROCESS_AUTO_ADVANCE="true"/>
+            </process_1805278175>
+            <or_43490647
+                jcr:created="{Date}2020-10-14T14:35:46.358+05:30"
+                jcr:createdBy="admin"
+                jcr:lastModified="{Date}2020-10-14T14:37:46.926+05:30"
+                jcr:lastModifiedBy="admin"
+                jcr:primaryType="nt:unstructured"
+                jcr:title="Check Existence"
+                sling:resourceType="cq/workflow/components/model/or"
+                branches="2"
+                orSplit="true"
+                script1="function check(){&#xd;&#xa;&#x9;log.info(&quot;executing check existence branch 1 script now...&quot; + workflowData.getMetaDataMap().get(&quot;isExist&quot;));&#xd;&#xa;&#x9;if (workflowData.getMetaDataMap().get(&quot;isExist&quot;) == &quot;true&quot;) {&#xd;&#xa;        return true;&#xd;&#xa;    }&#xd;&#xa;    return false; &#xd;&#xa;}"
+                script2="function check(){&#xd;&#xa;   log.info(&quot;executing check existence branch 2 script now...&quot;);&#xd;&#xa;   return true;&#xd;&#xa;}">
+                <_x0031_
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="cq/flow/components/parsys">
+                    <or
+                        jcr:created="{Date}2020-10-14T13:05:43.472+05:30"
+                        jcr:createdBy="admin"
+                        jcr:lastModified="{Date}2020-10-14T23:22:44.733+05:30"
+                        jcr:lastModifiedBy="admin"
+                        jcr:primaryType="nt:unstructured"
+                        jcr:title="Check References"
+                        sling:resourceType="cq/workflow/components/model/or"
+                        branches="2"
+                        orSplit="true"
+                        script1="function check(){&#xd;&#xa;&#x9;log.info(&quot;executing check reference branch 1 script now...&quot; + workflowData.getMetaDataMap().get(&quot;checkReferenceStep&quot;));&#xd;&#xa;&#x9;if (workflowData.getMetaDataMap().get(&quot;checkReferenceStep&quot;) == &quot;false&quot;) {&#xd;&#xa;        return true;&#xd;&#xa;    }&#xd;&#xa;    return false; &#xd;&#xa;}"
+                        script2="function check(){&#xd;&#xa;&#x9;log.info(&quot;executing check reference branch 2 script now...&quot; + workflowData.getMetaDataMap().get(&quot;checkReferenceStep&quot;));&#xd;&#xa;&#x9;if (workflowData.getMetaDataMap().get(&quot;checkReferenceStep&quot;) == &quot;true&quot;) {&#xd;&#xa;        return true;&#xd;&#xa;    }&#xd;&#xa;    return false; &#xd;&#xa;}">
+                        <_x0031_
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="cq/flow/components/parsys">
+                            <process_1715651661
+                                jcr:created="{Date}2020-10-14T14:10:34.144+05:30"
+                                jcr:createdBy="admin"
+                                jcr:lastModified="{Date}2020-10-20T13:17:43.723+05:30"
+                                jcr:lastModifiedBy="admin"
+                                jcr:primaryType="nt:unstructured"
+                                jcr:title="Set Operational Attribute"
+                                sling:resourceType="cq/workflow/components/model/process">
+                                <metaData
+                                    jcr:primaryType="nt:unstructured"
+                                    PROCESS="com.bbby.aem.core.workflow.publish.SetOperationalAttrubutes"
+                                    PROCESS_AUTO_ADVANCE="true"/>
+                            </process_1715651661>
+                        </_x0031_>
+                        <_x0032_
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="cq/flow/components/parsys">
+                            <process
+                                jcr:created="{Date}2020-10-14T20:10:51.375+05:30"
+                                jcr:createdBy="admin"
+                                jcr:lastModified="{Date}2020-10-14T20:29:49.593+05:30"
+                                jcr:lastModifiedBy="admin"
+                                jcr:primaryType="nt:unstructured"
+                                jcr:title="Create Folder"
+                                sling:resourceType="cq/workflow/components/model/process">
+                                <metaData
+                                    jcr:primaryType="nt:unstructured"
+                                    PROCESS="com.bbby.aem.core.workflow.publish.CreateFolderForImage"
+                                    PROCESS_AUTO_ADVANCE="true"/>
+                            </process>
+                            <process_937860832_co
+                                jcr:created="{Date}2020-10-14T20:12:23.423+05:30"
+                                jcr:createdBy="admin"
+                                jcr:lastModified="{Date}2020-10-14T20:30:54.138+05:30"
+                                jcr:lastModifiedBy="admin"
+                                jcr:primaryType="nt:unstructured"
+                                jcr:title="Move Asset"
+                                sling:resourceType="cq/workflow/components/model/process">
+                                <metaData
+                                    jcr:primaryType="nt:unstructured"
+                                    PROCESS="com.bbby.aem.core.workflow.publish.MoveImage"
+                                    PROCESS_AUTO_ADVANCE="true"/>
+                            </process_937860832_co>
+                            <or
+                                jcr:created="{Date}2020-10-17T11:07:08.227+05:30"
+                                jcr:createdBy="admin"
+                                jcr:lastModified="{Date}2020-10-17T11:10:33.962+05:30"
+                                jcr:lastModifiedBy="admin"
+                                jcr:primaryType="nt:unstructured"
+                                jcr:title="Validate Imageset for Movement"
+                                sling:resourceType="cq/workflow/components/model/or"
+                                branches="2"
+                                orSplit="true"
+                                script1="function check(){&#xd;&#xa;&#x9;log.info(&quot;executing check imagesetOrImage branch 1 script now...&quot; + workflowData.getMetaDataMap().get(&quot;isImageset&quot;));&#xd;&#xa;&#x9;if (workflowData.getMetaDataMap().get(&quot;isImageset&quot;) == &quot;false&quot;) {&#xd;&#xa;        return true;&#xd;&#xa;    }&#xd;&#xa;    return false;&#xd;&#xa;}"
+                                script2="function check(){&#xd;&#xa;&#x9;log.info(&quot;executing check imagesetOrImage branch 1 script now...&quot; + workflowData.getMetaDataMap().get(&quot;isImageset&quot;));&#xd;&#xa;&#x9;if (workflowData.getMetaDataMap().get(&quot;isImageset&quot;) == &quot;true&quot;) {&#xd;&#xa;        return true;&#xd;&#xa;    }&#xd;&#xa;    return false;&#xd;&#xa;}">
+                                <_x0031_
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="cq/flow/components/parsys">
+                                    <process_2098894715_c
+                                        jcr:created="{Date}2020-10-14T20:31:15.554+05:30"
+                                        jcr:createdBy="admin"
+                                        jcr:lastModified="{Date}2020-10-14T20:31:47.017+05:30"
+                                        jcr:lastModifiedBy="admin"
+                                        jcr:primaryType="nt:unstructured"
+                                        jcr:title="Publish Asset"
+                                        sling:resourceType="cq/workflow/components/model/process">
+                                        <metaData
+                                            jcr:primaryType="nt:unstructured"
+                                            PROCESS="com.bbby.aem.core.workflow.publish.PublishAssetorImageset"
+                                            PROCESS_AUTO_ADVANCE="true"/>
+                                    </process_2098894715_c>
+                                </_x0031_>
+                                <_x0032_
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="cq/flow/components/parsys">
+                                    <process_609523787
+                                        jcr:created="{Date}2020-10-17T11:05:54.560+05:30"
+                                        jcr:createdBy="admin"
+                                        jcr:lastModified="{Date}2020-10-17T11:06:31.997+05:30"
+                                        jcr:lastModifiedBy="admin"
+                                        jcr:primaryType="nt:unstructured"
+                                        jcr:title="Validate Imageset"
+                                        sling:resourceType="cq/workflow/components/model/process">
+                                        <metaData
+                                            jcr:primaryType="nt:unstructured"
+                                            PROCESS="com.bbby.aem.core.workflow.publish.ValidateImageSet"
+                                            PROCESS_AUTO_ADVANCE="true"/>
+                                    </process_609523787>
+                                    <goto
+                                        jcr:created="{Date}2020-10-19T08:50:00.442+05:30"
+                                        jcr:createdBy="admin"
+                                        jcr:description="If imageset is inValid, retry the Validate Imagset step."
+                                        jcr:lastModified="{Date}2020-10-19T11:37:37.206+05:30"
+                                        jcr:lastModifiedBy="admin"
+                                        jcr:primaryType="nt:unstructured"
+                                        jcr:title="InValid Imageset"
+                                        sling:resourceType="cq/workflow/components/model/goto">
+                                        <metaData
+                                            jcr:primaryType="nt:unstructured"
+                                            PROCESS="com.adobe.granite.workflow.core.process.GotoProcess"
+                                            PROCESS_AUTO_ADVANCE="false"
+                                            script="function check(){&#xd;&#xa;&#x9;log.info(&quot;executing check isImagesetValid script now...&quot; + workflowData.getMetaDataMap().get(&quot;isImagesetValid&quot;));&#xd;&#xa;&#x9;workflowData.getMetaDataMap().put(&quot;assetList&quot;,workflowData.getMetaDataMap().get(&quot;assetList&quot;));   workflowData.getMetaDataMap().put(&quot;pathList&quot;,workflowData.getMetaDataMap().get(&quot;pathList&quot;));&#x9;&#xd;&#xa;&#x9;if (workflowData.getMetaDataMap().get(&quot;isImagesetValid&quot;) == &quot;false&quot;) {&#xd;&#xa;        return true;&#xd;&#xa;    }&#xd;&#xa;    return false; &#xd;&#xa;}"
+                                            TARGET_NODE_PATH="/conf/global/settings/workflow/models/bbby-approve-and-publish--beta-/jcr:content/flow/or_43490647/1/or/2/or/2/process_609523787"/>
+                                    </goto>
+                                    <process_1568773435
+                                        jcr:created="{Date}2020-10-17T09:45:33.106+05:30"
+                                        jcr:createdBy="admin"
+                                        jcr:lastModified="{Date}2020-10-17T09:46:27.518+05:30"
+                                        jcr:lastModifiedBy="admin"
+                                        jcr:primaryType="nt:unstructured"
+                                        jcr:title="Move Imageset"
+                                        sling:resourceType="cq/workflow/components/model/process">
+                                        <metaData
+                                            jcr:primaryType="nt:unstructured"
+                                            PROCESS="com.bbby.aem.core.workflow.publish.MoveImageSet"
+                                            PROCESS_AUTO_ADVANCE="true"/>
+                                    </process_1568773435>
+                                    <process_2098894715_c
+                                        jcr:created="{Date}2020-10-14T20:31:15.554+05:30"
+                                        jcr:createdBy="admin"
+                                        jcr:lastModified="{Date}2020-10-14T20:31:47.017+05:30"
+                                        jcr:lastModifiedBy="admin"
+                                        jcr:primaryType="nt:unstructured"
+                                        jcr:title="Publish Asset"
+                                        sling:resourceType="cq/workflow/components/model/process">
+                                        <metaData
+                                            jcr:primaryType="nt:unstructured"
+                                            PROCESS="com.bbby.aem.core.workflow.publish.PublishAssetorImageset"
+                                            PROCESS_AUTO_ADVANCE="true"/>
+                                    </process_2098894715_c>
+                                </_x0032_>
+                            </or>
+                            <process_1656321589
+                                jcr:created="{Date}2020-10-19T11:41:07.878+05:30"
+                                jcr:createdBy="admin"
+                                jcr:lastModified="{Date}2020-10-19T12:03:16.457+05:30"
+                                jcr:lastModifiedBy="admin"
+                                jcr:primaryType="nt:unstructured"
+                                jcr:title="Call To PDM"
+                                sling:resourceType="cq/workflow/components/model/process">
+                                <metaData
+                                    jcr:primaryType="nt:unstructured"
+									PROCESS="com.bbby.aem.core.workflow.publish.CallToPDMPublish"
+                                    PROCESS_AUTO_ADVANCE="true"/>
+                            </process_1656321589>
+                        </_x0032_>
+                    </or>
+                </_x0031_>
+                <_x0032_
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="cq/flow/components/parsys">
+                    <noopprocess
+                        jcr:created="{Date}2020-10-14T14:09:41.691+05:30"
+                        jcr:createdBy="admin"
+                        jcr:description="A no operation process"
+                        jcr:lastModified="{Date}2020-10-14T14:09:41.691+05:30"
+                        jcr:lastModifiedBy="admin"
+                        jcr:primaryType="nt:unstructured"
+                        jcr:title="No Operation"
+                        sling:resourceType="cq/workflow/components/workflow/noopprocess">
+                        <metaData
+                            jcr:primaryType="nt:unstructured"
+                            PROCESS="/libs/workflow/scripts/noop.ecma"
+                            PROCESS_AUTO_ADVANCE="true"/>
+                    </noopprocess>
+                </_x0032_>
+            </or_43490647>
+        </flow>
+    </jcr:content>
+</jcr:root>

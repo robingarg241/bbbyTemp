@@ -1,0 +1,15 @@
+/*
+--------------------------------------------------
+    Buttons
+--------------------------------------------------
+*/
+
+.btn {
+    
+    // button-size($padding-y, $padding-x, $font-size, $line-height, $border-radius)
+    @include button-size(10px, 25px, 16px, $line-height-base, $border-radius);
+    
+    &.btn-link {
+        @include button-size(10px, 0px, 16px, $line-height-base, $border-radius);
+    }
+}

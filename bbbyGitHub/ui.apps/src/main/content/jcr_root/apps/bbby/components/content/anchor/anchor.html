@@ -1,0 +1,25 @@
+<span class="edit-start container" data-sly-test="${wcmmode.edit || wcmmode.preview || wcmmode.design}">&nbsp;${resource.name} | #${properties.anchorId} <i class="fa fa-arrow-circle-down" aria-hidden="true"></i></span>
+
+<template data-sly-template.renderAnchor="${ @ model, contentTemplate }">
+    <div data-sly-unwrap="${!model.anchorId && !wcmmode.edit}" id="${model.anchorId}" class="${model.anchorClass}" data-anchor-name="${model.anchorName @ context='attribute'}">
+
+        <div data-sly-unwrap="${!model.anchorId && !wcmmode.edit}"
+            data-sly-test.hasContent="${contentTemplate}"
+            data-sly-call="${contentTemplate @ model=model}">
+        </div>
+        <div data-sly-unwrap="${!model.anchorId && !wcmmode.edit}"
+            data-sly-test="${!hasContent}"
+            data-sly-resource="${'anchor-content' @ resourceType='wcm/foundation/components/parsys'}">
+        </div>
+
+    </div>
+
+    <!--/* Placeholder */-->
+    <sly data-sly-use.common="core/wcm/components/commons/v1/templates.html"
+         data-sly-call="${common.placeholder @ isEmpty=!model.anchorId, emptyTextAppend=resource.name}"></sly>
+
+</template>
+
+<sly data-sly-use.model="com.bbby.aem.core.models.component.Anchor" data-sly-call="${renderAnchor @ model=model}" />
+
+<span class="edit-start container" data-sly-test="${wcmmode.edit || wcmmode.preview || wcmmode.design}">&nbsp;${resource.name} | #${properties.anchorId} <i class="fa fa-arrow-circle-up" aria-hidden="true"></i></span>

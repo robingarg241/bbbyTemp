@@ -1,0 +1,46 @@
+/*
+--------------------------------------------------
+    Background Component
+--------------------------------------------------
+*/
+
+.cmp-background {
+
+    /* Show hidden colums in author edit mode, but mark with red background */
+    body.edit & {
+        @include media-breakpoint-only(xs) {
+            &.d-only-none {
+                display: block !important;
+                background: rgba(red, .25) !important;
+            }
+        }
+
+        @include media-breakpoint-only(sm) {
+            &.d-sm-only-none {
+                display: block !important;
+                background: rgba(red, .25) !important;
+            }
+        }
+
+        @include media-breakpoint-only(md) {
+            &.d-md-only-none {
+                display: block !important;
+                background: rgba(red, .25) !important;
+            }
+        }
+
+        @include media-breakpoint-only(lg) {
+            &.d-lg-only-none {
+                display: block !important;
+                background: rgba(red, .25) !important;
+            }
+        }
+
+        @include media-breakpoint-only(xl) {
+            &.d-xl-only-none {
+                display: block !important;
+                background: rgba(red, .25) !important;
+            }
+        }
+    }
+}

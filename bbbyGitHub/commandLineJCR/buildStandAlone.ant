@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="create_run_jar" name="Create Runnable Jar for Project pageInventory with Jar-in-Jar Loader">
+    <!--this file was created by Eclipse Runnable JAR Export Wizard-->
+    <!--ANT 1.7 is required                                        -->
+    <target name="create_run_jar">
+        <jar destfile="/Users/adamtrissel/Workspaces/MyEclipse 2015/pageInventory/target/pageInventory.jar">
+            <manifest>
+                <attribute name="Main-Class" value="org.eclipse.jdt.internal.jarinjarloader.JarRsrcLoader"/>
+                <attribute name="Rsrc-Main-Class" value="com.hero.servicenow.pageInventory.CreateInserStatements"/>
+                <attribute name="Class-Path" value="."/>
+                <attribute name="Rsrc-Class-Path" value="./ commons-io-1.3.2.jar log4j-1.2.17.jar slf4j-api-1.7.6.jar slf4j-simple-1.7.7.jar logback-core-1.1.2.jar commons-lang-2.6.jar commons-lang3-3.3.2.jar guice-3.0.jar javax.inject-1.jar aopalliance-1.0.jar guice-assistedinject-3.0.jar gson-2.2.4.jar jtidy-4aug2000r7-dev.jar jsoup-1.7.3.jar super-csv-2.2.0.jar json-20140107.jar reflections-0.9.9-RC1.jar guava-11.0.2.jar jsr305-1.3.9.jar javassist-3.16.1-GA.jar dom4j-1.6.1.jar xml-apis-1.0.b2.jar junit-4.11.jar hamcrest-core-1.3.jar jackrabbit-webdav-2.8.0.jar commons-httpclient-3.1.jar commons-codec-1.2.jar jcl-over-slf4j-1.7.4.jar jackrabbit-jcr-commons-2.8.0.jar jackrabbit-spi-commons-2.8.0.jar commons-collections-3.2.1.jar jackrabbit-spi-2.8.0.jar jackrabbit-jcr2spi-2.8.0.jar jackrabbit-spi2jcr-2.8.0.jar jackrabbit-spi2dav-2.8.0.jar jackrabbit-jcr2dav-2.8.0.jar jcr-2.0.jar cq-commons-5.7.4.jar commons-cli-1.2.jar jedis-2.4.2.jar commons-pool2-2.0.jar org.apache.sling.commons.json-2.0.8.jar args4j-2.0.16.jar jersey-client-1.18.3.jar jersey-core-1.18.3.jar"/>
+            </manifest>
+            <zipfileset src="jar-in-jar-loader.zip"/>
+            <fileset dir="/Users/adamtrissel/Workspaces/MyEclipse 2015/pageInventory/target/classes"/>
+            <zipfileset dir="/Users/adamtrissel/.m2/repository/org/apache/commons/commons-io/1.3.2" includes="commons-io-1.3.2.jar"/>
+            <zipfileset dir="/Users/adamtrissel/.m2/repository/log4j/log4j/1.2.17" includes="log4j-1.2.17.jar"/>
+            <zipfileset dir="/Users/adamtrissel/.m2/repository/org/slf4j/slf4j-api/1.7.6" includes="slf4j-api-1.7.6.jar"/>
+            <zipfileset dir="/Users/adamtrissel/.m2/repository/org/slf4j/slf4j-simple/1.7.7" includes="slf4j-simple-1.7.7.jar"/>
+            <zipfileset dir="/Users/adamtrissel/.m2/repository/ch/qos/logback/logback-core/1.1.2" includes="logback-core-1.1.2.jar"/>
+            <zipfileset dir="/Users/adamtrissel/.m2/repository/commons-lang/commons-lang/2.6" includes="commons-lang-2.6.jar"/>
+            <zipfileset dir="/Users/adamtrissel/.m2/repository/org/apache/commons/commons-lang3/3.3.2" includes="commons-lang3-3.3.2.jar"/>
+            <zipfileset dir="/Users/adamtrissel/.m2/repository/com/google/inject/guice/3.0" includes="guice-3.0.jar"/>
+            <zipfileset dir="/Users/adamtrissel/.m2/repository/javax/inject/javax.inject/1" includes="javax.inject-1.jar"/>
+            <zipfileset dir="/Users/adamtrissel/.m2/repository/aopalliance/aopalliance/1.0" includes="aopalliance-1.0.jar"/>
+            <zipfileset dir="/Users/adamtrissel/.m2/repository/com/google/inject/extensions/guice-assistedinject/3.0" includes="guice-assistedinject-3.0.jar"/>
+            <zipfileset dir="/Users/adamtrissel/.m2/repository/com/google/code/gson/gson/2.2.4" includes="gson-2.2.4.jar"/>
+            <zipfileset dir="/Users/adamtrissel/.m2/repository/jtidy/jtidy/4aug2000r7-dev" includes="jtidy-4aug2000r7-dev.jar"/>
+            <zipfileset dir="/Users/adamtrissel/.m2/repository/org/jsoup/jsoup/1.7.3" includes="jsoup-1.7.3.jar"/>
+            <zipfileset dir="/Users/adamtrissel/.m2/repository/net/sf/supercsv/super-csv/2.2.0" includes="super-csv-2.2.0.jar"/>
+            <zipfileset dir="/Users/adamtrissel/.m2/repository/org/json/json/20140107" includes="json-20140107.jar"/>
+            <zipfileset dir="/Users/adamtrissel/.m2/repository/org/reflections/reflections/0.9.9-RC1" includes="reflections-0.9.9-RC1.jar"/>
+            <zipfileset dir="/Users/adamtrissel/.m2/repository/com/google/guava/guava/11.0.2" includes="guava-11.0.2.jar"/>
+            <zipfileset dir="/Users/adamtrissel/.m2/repository/com/google/code/findbugs/jsr305/1.3.9" includes="jsr305-1.3.9.jar"/>
+            <zipfileset dir="/Users/adamtrissel/.m2/repository/org/javassist/javassist/3.16.1-GA" includes="javassist-3.16.1-GA.jar"/>
+            <zipfileset dir="/Users/adamtrissel/.m2/repository/dom4j/dom4j/1.6.1" includes="dom4j-1.6.1.jar"/>
+            <zipfileset dir="/Users/adamtrissel/.m2/repository/xml-apis/xml-apis/1.0.b2" includes="xml-apis-1.0.b2.jar"/>
+            <zipfileset dir="/Users/adamtrissel/.m2/repository/junit/junit/4.11" includes="junit-4.11.jar"/>
+            <zipfileset dir="/Users/adamtrissel/.m2/repository/org/hamcrest/hamcrest-core/1.3" includes="hamcrest-core-1.3.jar"/>
+            <zipfileset dir="/Users/adamtrissel/.m2/repository/org/apache/jackrabbit/jackrabbit-webdav/2.8.0" includes="jackrabbit-webdav-2.8.0.jar"/>
+            <zipfileset dir="/Users/adamtrissel/.m2/repository/commons-httpclient/commons-httpclient/3.1" includes="commons-httpclient-3.1.jar"/>
+            <zipfileset dir="/Users/adamtrissel/.m2/repository/commons-codec/commons-codec/1.2" includes="commons-codec-1.2.jar"/>
+            <zipfileset dir="/Users/adamtrissel/.m2/repository/org/slf4j/jcl-over-slf4j/1.7.4" includes="jcl-over-slf4j-1.7.4.jar"/>
+            <zipfileset dir="/Users/adamtrissel/.m2/repository/org/apache/jackrabbit/jackrabbit-jcr-commons/2.8.0" includes="jackrabbit-jcr-commons-2.8.0.jar"/>
+            <zipfileset dir="/Users/adamtrissel/.m2/repository/org/apache/jackrabbit/jackrabbit-spi-commons/2.8.0" includes="jackrabbit-spi-commons-2.8.0.jar"/>
+            <zipfileset dir="/Users/adamtrissel/.m2/repository/commons-collections/commons-collections/3.2.1" includes="commons-collections-3.2.1.jar"/>
+            <zipfileset dir="/Users/adamtrissel/.m2/repository/org/apache/jackrabbit/jackrabbit-spi/2.8.0" includes="jackrabbit-spi-2.8.0.jar"/>
+            <zipfileset dir="/Users/adamtrissel/.m2/repository/org/apache/jackrabbit/jackrabbit-jcr2spi/2.8.0" includes="jackrabbit-jcr2spi-2.8.0.jar"/>
+            <zipfileset dir="/Users/adamtrissel/.m2/repository/org/apache/jackrabbit/jackrabbit-spi2jcr/2.8.0" includes="jackrabbit-spi2jcr-2.8.0.jar"/>
+            <zipfileset dir="/Users/adamtrissel/.m2/repository/org/apache/jackrabbit/jackrabbit-spi2dav/2.8.0" includes="jackrabbit-spi2dav-2.8.0.jar"/>
+            <zipfileset dir="/Users/adamtrissel/.m2/repository/org/apache/jackrabbit/jackrabbit-jcr2dav/2.8.0" includes="jackrabbit-jcr2dav-2.8.0.jar"/>
+            <zipfileset dir="/Users/adamtrissel/.m2/repository/javax/jcr/jcr/2.0" includes="jcr-2.0.jar"/>
+            <zipfileset dir="/Users/adamtrissel/.m2/repository/com/day/cq/cq-commons/5.7.4" includes="cq-commons-5.7.4.jar"/>
+            <zipfileset dir="/Users/adamtrissel/.m2/repository/commons-cli/commons-cli/1.2" includes="commons-cli-1.2.jar"/>
+            <zipfileset dir="/Users/adamtrissel/.m2/repository/redis/clients/jedis/2.4.2" includes="jedis-2.4.2.jar"/>
+            <zipfileset dir="/Users/adamtrissel/.m2/repository/org/apache/commons/commons-pool2/2.0" includes="commons-pool2-2.0.jar"/>
+            <zipfileset dir="/Users/adamtrissel/.m2/repository/org/apache/sling/org.apache.sling.commons.json/2.0.8" includes="org.apache.sling.commons.json-2.0.8.jar"/>
+            <zipfileset dir="/Users/adamtrissel/.m2/repository/args4j/args4j/2.0.16" includes="args4j-2.0.16.jar"/>
+            <zipfileset dir="/Users/adamtrissel/.m2/repository/com/sun/jersey/jersey-client/1.18.3" includes="jersey-client-1.18.3.jar"/>
+            <zipfileset dir="/Users/adamtrissel/.m2/repository/com/sun/jersey/jersey-core/1.18.3" includes="jersey-core-1.18.3.jar"/>
+        </jar>
+    </target>
+</project>

@@ -1,0 +1,372 @@
+/**
+ *  Main css for Vendor Portal Batch Detail
+ */
+
+.component-vendor-portal-batch-detail {
+    width: 100%;
+    padding: 36px 40px;
+
+    font-family: 'brandon', sans-serif;
+
+    .intro-text {
+        // font-family: BrandonGrotesque-Regular;
+        font-size: 26px;
+        color: #000000;
+        letter-spacing: 0;
+    }
+
+    a {
+        color: #8d8d8d;
+    }
+
+    #batchSpinner {
+        height: 250px;
+    }
+
+    #batchContainer,
+    #batchError {
+        display: none;
+    }
+
+    #batchError {
+        padding: 50px;
+
+        color: #ff0000;
+        text-align: center;
+    }
+
+    .batches {
+        font-family: $font-sans-serif-medium;
+        margin: 25px 0;
+        .fa {
+            font-size: 12px;
+        }
+        a {
+            color: $blue;
+        }
+        #batchID {
+            color: $black;
+        }
+    }
+    .batch-details {
+        color: $black;
+        margin-bottom: 25px;
+        .detail {
+            margin-bottom: 20px;
+            .detail-title {
+                font-family: $font-sans-serif-medium;
+            }
+        }
+    }
+
+    table,
+    table.dataTable-table {
+        width: 100%;
+        margin: 0 auto;
+
+        th {
+            font-size: 18px;
+            &:first-of-type {
+                padding-left: 0;
+            }
+
+            a {
+                color: $black;
+                font-family: $font-sans-serif-medium;
+                font-weight: $headings-font-weight;
+                display: inline;
+                &::before,
+                &::after {
+                    border: 0;
+                    opacity: 1;
+                    position: static;
+                }
+            }
+
+            &.asc {
+                &::after {
+                    background-image: url('/etc/designs/bbby/images/sort-arrow_up.png');
+                    background-repeat: no-repeat;
+                    background-size: cover;
+                    content: '';
+                    display: inline-block;
+                    height: 12px;
+                    margin-left: 5px;
+                    margin-top: -2px;
+                    vertical-align: middle;
+                    width: 10px;
+                }
+            }
+            &.desc {
+                &::after {
+                    background-image: url('/etc/designs/bbby/images/sort-arrow_down.png');
+                    background-repeat: no-repeat;
+                    background-size: cover;
+                    content: '';
+                    display: inline-block;
+                    height: 12px;
+                    margin-left: 5px;
+                    margin-top: -2px;
+                    vertical-align: middle;
+                    width: 10px;
+                }
+            }
+        }
+
+        tr {
+            &:nth-child(odd) {
+                background-color: $color-table-odd;
+            }
+
+            &:nth-child(even) {
+                background-color: $white;
+            }
+
+            td {
+                font-family: $font-sans-serif-regular;
+                font-size: 14px;
+                padding: 5px 15px;
+                vertical-align: middle;
+                &:first-of-type {
+                    padding-left: 0;
+                }
+
+                &.type {
+                    width: 10%;
+
+                    span {
+                        display: block;
+                        width: 29px;
+                        height: 38px;
+                        // margin: 0 10px;
+                        background-position: center center;
+                        background-repeat: no-repeat;
+                        background-size: 75%;
+
+                        &.type-jpg {
+                            background-image: url('/etc/designs/bbby/images/symbols-icon-jpg.png');
+                            @media only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi) {
+                                background-image: url('/etc/designs/bbby/images/symbols-icon-jpg@2x.png');
+                            }
+                        }
+                        &.type-png {
+                            background-image: url('/etc/designs/bbby/images/symbols-icon-png.png');
+                            @media only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi) {
+                                background-image: url('/etc/designs/bbby/images/symbols-icon-png@2x.png');
+                            }
+                        }
+                        &.type-tif {
+                            background-image: url('/etc/designs/bbby/images/symbols-icon-tiff.png');
+                            @media only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi) {
+                                background-image: url('/etc/designs/bbby/images/symbols-icon-tiff@2x.png');
+                            }
+                        }
+                        &.type-ai {
+                            background-image: url('/etc/designs/bbby/images/symbols-icon-ai.png');
+                            @media only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi) {
+                                background-image: url('/etc/designs/bbby/images/symbols-icon-ai@2x.png');
+                            }
+                        }
+                        &.type-eps {
+                            background-image: url('/etc/designs/bbby/images/symbols-icon-eps.png');
+                            @media only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi) {
+                                background-image: url('/etc/designs/bbby/images/symbols-icon-eps@2x.png');
+                            }
+                        }
+                        &.type-psd {
+                            background-image: url('/etc/designs/bbby/images/symbols-icon-psd.png');
+                            @media only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi) {
+                                background-image: url('/etc/designs/bbby/images/symbols-icon-psd@2x.png');
+                            }
+                        }
+                        &.type-pdf {
+                            background-image: url('/etc/designs/bbby/images/PDF.png');
+                            @media only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi) {
+                                background-image: url('/etc/designs/bbby/images/PDF@2x.png');
+                            }
+                        }
+                        &.type-movie {
+                            background-image: url('/etc/designs/bbby/images/symbols-icon-movie.png');
+                            @media only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi) {
+                                background-image: url('/etc/designs/bbby/images/symbols-icon-movie@2x.png');
+                            }
+                        }
+                        &.type-svg {
+                            background-image: url('/etc/designs/bbby/images/SVG_red.png');
+                            @media only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi) {
+                                background-image: url('/etc/designs/bbby/images/SVG_red.png');
+                            }
+                        }
+                        &.type-bmp {
+                            background-image: url('/etc/designs/bbby/images/BMP_red.png');
+                            @media only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi) {
+                                background-image: url('/etc/designs/bbby/images/BMP_red.png');
+                            }
+                        }
+                        &.type-other {
+                            background-image: url('/etc/designs/bbby/images/symbols-icon-info_red.png');
+                        }
+                    }
+                }
+                &.name {
+                    width: 45%;
+                }
+                &.dimensions {
+                    width: 15%;
+                    .fa {
+                        font-size: 8px;
+                        display: inline-block;
+                        border-radius: 40px;
+                        box-shadow: 0px 0px 2px #000;
+                        padding: 2px 5px;
+                        margin-left: 5px;
+                        position: relative;
+                        bottom: 3px;
+                    }
+                }
+                &.size {
+                    width: 10%;
+                }
+            }
+            &.dimensions-full-use {
+                td.dimensions {
+                    color: #1bb04b;
+                }
+            }
+            &.dimensions-limited-use {
+                td.dimensions {
+                    color: #f6b32e;
+                }
+            }
+            &.dimensions-no-use {
+                background-color: #ffeeef;
+
+                td.type {
+                    .type-jpg {
+                        background-image: url('/etc/designs/bbby/images/symbols-icon-jpg_red.png');
+                        @media only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi) {
+                            background-image: url('/etc/designs/bbby/images/symbols-icon-jpg_red@2x.png');
+                        }
+                    }
+                    .type-png {
+                        background-image: url('/etc/designs/bbby/images/symbols-icon-png_red.png');
+                        @media only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi) {
+                            background-image: url('/etc/designs/bbby/images/symbols-icon-png_red@2x.png');
+                        }
+                    }
+                    .type-tif {
+                        background-image: url('/etc/designs/bbby/images/symbols-icon-tiff_red.png');
+                        @media only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi) {
+                            background-image: url('/etc/designs/bbby/images/symbols-icon-tiff_red@2x.png');
+                        }
+                    }
+                    .type-ai {
+                        background-image: url('/etc/designs/bbby/images/symbols-icon-ai_red.png');
+                        @media only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi) {
+                            background-image: url('/etc/designs/bbby/images/symbols-icon-ai_red@2x.png');
+                        }
+                    }
+                    .type-eps {
+                        background-image: url('/etc/designs/bbby/images/symbols-icon-eps_red.png');
+                        @media only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi) {
+                            background-image: url('/etc/designs/bbby/images/symbols-icon-eps_red@2x.png');
+                        }
+                    }
+                    .type-psd {
+                        background-image: url('/etc/designs/bbby/images/symbols-icon-psd_red.png');
+                        @media only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi) {
+                            background-image: url('/etc/designs/bbby/images/symbols-icon-psd_red@2x.png');
+                        }
+                    }
+                    .type-psd {
+                        background-image: url('/etc/designs/bbby/images/PDF_red.png');
+                        @media only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi) {
+                            background-image: url('/etc/designs/bbby/images/PDF_red@2x.png');
+                        }
+                    }
+                    .type-movie {
+                        background-image: url('/etc/designs/bbby/images/symbols-icon-movie_red.png');
+                        @media only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi) {
+                            background-image: url('/etc/designs/bbby/images/symbols-icon-movie_red@2x.png');
+                        }
+                    }
+                    .type-svg {
+                        background-image: url('/etc/designs/bbby/images/SVG_red.png');
+                        @media only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi) {
+                            background-image: url('/etc/designs/bbby/images/SVG_red.png');
+                        }
+                    }
+                    .type-bmp {
+                        background-image: url('/etc/designs/bbby/images/BMP_red.png');
+                        @media only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi) {
+                            background-image: url('/etc/designs/bbby/images/BMP_red.png');
+                        }
+                    }
+                    .type-other {
+                        background-image: url('/etc/designs/bbby/images/symbols-icon-info_red.png');
+                    }
+                }
+
+                td.dimensions {
+                    color: #ca001a;
+                }
+            }
+            &.body {
+                // font-family: BrandonText-Regular;
+                font-size: 14px;
+                color: #000000;
+                letter-spacing: 0;
+                border-top: 1px solid #ccc;
+                .fa {
+                    color: #4E599D;
+                    font-size: 16px;
+                }
+                td {
+                    padding: 15px;
+                    .green {
+                        color: #1DB955;
+                    }
+                    .yellow {
+                        color: #F7BC33;
+                    }
+                }
+            }
+        }
+    }
+
+    .table-header {
+        // font-family: BrandonText-Medium;
+        font-size: 15px;
+        color: #767474;
+        letter-spacing: 0;
+        a {
+            color: #767474;
+            &.sort-up {
+                &:after {
+                    content: "\f062";
+                    font-size: 12px;
+                    font-family: FontAwesome;
+                    margin-left: 5px;
+                }
+            }
+            &.sort-down {
+                &:after {
+                    content: "\f063";
+                    font-size: 12px;
+                    font-family: FontAwesome;
+                    margin-left: 5px;
+                }
+            }
+        }
+    }
+
+    .dataTable-bottom {
+        margin-top: 20px;
+        position: relative;
+        text-align: center;
+        .dataTable-pagination {
+            display: inline-block;
+            float: none;
+        }
+    }
+}

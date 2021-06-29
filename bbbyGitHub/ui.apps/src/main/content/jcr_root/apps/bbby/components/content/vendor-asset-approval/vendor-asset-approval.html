@@ -1,0 +1,163 @@
+<span class="edit-start container" data-sly-test="${wcmmode.edit || wcmmode.preview || wcmmode.design}">&nbsp;${resource.name} <i
+    class="fa fa-long-arrow-down" aria-hidden="true"></i></span>
+
+
+<template data-sly-template.renderVendorAssetApproval="${ @ model }">
+
+    <section class="component-vendor-asset-approval" ng-app="vendor-asset-approval"
+             ng-controller="vendor-asset-approval-ctrl" ng-init="init()">
+
+        <div class="container">
+            <sly data-sly-test="${!wcmmode.edit && !wcmmode.preview && !wcmmode.design}">
+                <div class="row" ng-if="isLoading()">
+                    <div class="loading">
+                        <div class="spinner"><img src="/etc/designs/nordstrom/images/dribbble-spinner-800x600.gif">Loading...
+                        </div>
+                    </div>
+                </div>
+            </sly>
+
+            <div class="row" ng-show="isSelecting()">
+
+                <div class="col-md-8">
+                    <div class="asset-display row">
+                        <img class="left-arrow" src="/etc/designs/nordstrom/images/left-arrow.png" ng-click="prev()">
+
+                        <div ng-repeat=" img in imgList">
+                            <div ng-if="doRenderImage($index)">
+                                <img ng-class="getDisplayImageStyle($index)" ng-src="{{img.imagePath}}">
+                            </div>
+                        </div>
+
+                        <img class="right-arrow" src="/etc/designs/nordstrom/images/right-arrow.png" ng-click="next()">
+
+                    </div>
+
+                    <div class="control-buttons row">
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                            <div class="button-group-left">
+                                <!--<a ng-click="selectAll()"> Select All</a>-->
+                                <!--<a ng-click="unselectAll()"> Unselect All</a>-->
+                                <div class="round-checkbox">
+                                    <div class="checkbox checkbox-circle">
+                                        <input type="checkbox" id="select-all" ng-model="selectAllVal" ng-change="toggleSelectAll()">
+                                        <label for="select-all"></label>Select All
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                            <div class="critique-buttons">
+                                <button class="dislike-button" ng-click="pass()"> not on buy</button>
+                                <button class="like-button" ng-click="like()"> on buy</button>
+
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+
+                            <div class="navigation-buttons">
+                                <button class="reset-button" ng-click="reset()"> clear rating</button>
+
+                                <!--<a ng-click="clearAllRatings()"> Clear All Ratings</a>-->
+                                <!--<button ng-click="prev()"><p> < </p></button>-->
+                                <!--<button ng-click="next()"><p> > </p></button>-->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="carousel row">
+                        <div class="col-md-1 col-sm-1 col-xs-1">
+                            <img class="left-scroll" src="/etc/designs/nordstrom/images/black-arrow-left.svg"
+                                 ng-click="scrollCarousel(false)"
+                                 ng-dblclick="scrollToStart()">
+                        </div>
+                        <div class="col-md-10 col-sm-10 col-xs-10">
+
+                            <div class="asset-queue row" id="asset-queue">
+                        <span ng-repeat=" img in imgList">
+                            <div ng-attr-id="{{'asset-' + $index}}"
+                                 ng-class="getThumbnailCaseStyle($index)"
+                                 ng-click="selectImage($index)">
+                                <div ng-if="img.showThumbNail">
+
+                                    <div class="round-checkbox">
+                                        <div class="checkbox checkbox-circle">
+                                            <input type="checkbox" ng-model="img.thumbnailCheckbox"
+                                                   ng-attr-id="{{'checkbox-' + $index}}">
+                                             <label ng-attr-for="{{'checkbox-' + $index}}"></label>
+                                        </div>
+                                    </div>
+
+                                    <img ng-class="getDislikeStyle($index)" src="/etc/designs/nordstrom/images/x_mark.png">
+
+                                    <img ng-class="getThumbnailImageStyle($index)" ng-src="{{img.imagePath}}">
+                                    <!--<img class="asset-thumbnail" bn-lazy-src="{{img.imagePath}}">-->
+
+                                    <img ng-class="getLikeStyle($index)" src="/etc/designs/nordstrom/images/check_mark.png">
+                                </div>
+                            </div>
+                        </span>
+                        </div>
+                        </div>
+                        <div class="col-md-1 col-sm-1 col-xs-1">
+                            <img class="right-scroll" src="/etc/designs/nordstrom/images/black-arrow-right.svg"
+                                 ng-click="scrollCarousel(true)"
+                                 ng-dblclick="scrollToEnd()">
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="project-properties col-md-4">
+                    <h3> {{projectName}} </h3>
+                    <table>
+                        <tr>
+                            <th>Asset Name:</th>
+                            <td>{{imgList[i].name}}</td>
+                        </tr>
+                        <tr>
+                            <th>Brand Name:</th>
+                            <td>{{brandName}}</td>
+                        </tr>
+                        <tr>
+                            <th>Campaign Name:</th>
+                            <td>{{campaignName}}</td>
+                        </tr>
+                        <tr>
+                            <th>Contract Number:</th>
+                            <td>{{contactNumber}}</td>
+                        </tr>
+                        <tr>
+                            <th>Description:</th>
+                            <td>{{description}}</td>
+                        </tr>
+                        <tr>
+                            <th>End date:</th>
+                            <td>{{endDate}}</td>
+                        </tr>
+                    </table>
+
+                    <div class="division-line"></div>
+
+                    <button class="complete-button" ng-click="complete()"> complete</button>
+                </div>
+            </div>
+
+            <div class="row" ng-if="isComplete()">
+                <div class="complete">
+                    <img src="/etc/designs/nordstrom/images/check_mark.png">
+                    <p>The decisions have been submitted, thank you!</p>
+                </div>
+            </div>
+
+
+        </div>
+    </section>
+</template>
+
+<sly data-sly-use.model="com.bbby.aem.core.models.component.VendorAssetApproval"
+     data-sly-call="${renderVendorAssetApproval @ model=model}"/>
+
+
+

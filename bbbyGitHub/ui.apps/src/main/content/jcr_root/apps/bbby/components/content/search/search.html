@@ -1,0 +1,125 @@
+<span class="edit-start container" data-sly-test="${wcmmode.edit || wcmmode.preview || wcmmode.design}">&nbsp;${resource.name} <i class="fa fa-long-arrow-down" aria-hidden="true"></i></span>
+
+<template data-sly-template.renderNoSearch="${ @ model }">
+</template>
+
+<template data-sly-template.renderEmptyResults="${ @ model }">
+    <p data-sly-test="${model.resultSize < 1 && model.spellcheck}">
+        ${model.spellcheckText} <a href="${model.spellcheckUrl}"><b>${model.spellcheck}</b></a>
+    </p>
+    <span data-sly-test="${model.resultSize < 1}" class="cmp-search__no-results">${model.noResultsText @ format=[model.query]}</span>
+</template>
+
+<template data-sly-template.renderTrends="${ @ model }">
+    <sly data-sly-test="${model.trendQueries}">
+        <p>${model.searchTrendsText}</p>
+        <div class="cmp-search__trends" data-sly-list="${model.trendQueries}">
+            <a href="${item}">${model.trends.queries[itemList.index].query}</a>
+        </div>
+    </sly>
+</template>
+
+<template data-sly-template.renderLanguages="${ @ model }">
+    <!--/* not implemented */-->
+</template>
+
+<template data-sly-template.renderTags="${ @ model }">
+    <div class="cmp-search__sidebar" data-sly-test="${model.tagKeys}">
+        <sly data-sly-list.tagKey="${model.tagKeys}">
+            <h4>${tagKey}</h4>
+            <ul data-sly-list="${model.tags[tagKey]}">
+                <li data-sly-test="${item.selected}">${item.localizedTagTitle} (${item.count}) - <a title="filter results" href="${item.queryUrl}">${model.removeFilterText}</a></li>
+                <li data-sly-test="${!item.selected}"><a title="filter results" href="${item.queryUrl}">${item.localizedTagTitle} (${item.count})</a></li>
+            </ul>
+        </sly>
+
+    </div>
+</template>
+
+<template data-sly-template.renderMimeTypes="${ @ model }">
+    <!--/* not implemented */-->
+</template>
+
+<template data-sly-template.renderLastModified="${ @ model }">
+    <!--/* not implemented */-->
+</template>
+
+<template data-sly-template.renderRelatedSearches="${ @ model }">
+    <sly data-sly-test="${!model.relatedQueries.empty}">
+        <br/><br/>
+        ${model.relatedSearchesText}
+        <a data-sly-repeat="${model.relatedQueries}" style="margin-right:10px;" href="${item}">${model.search.relatedQueries[itemList.index]}</a>
+    </sly>
+</template>
+
+<template data-sly-template.renderResults="${ @ model }">
+    <sly data-sly-test="${model.resultSize > 0}" data-sly-list="${model.result.hits}">
+        <article class="cmp-search__result-item">
+            <h4>
+                <a href="${item.URL}">${item.title @ context='html'}</a>
+            </h4>
+            <p>${item.excerpt @ context='html'}</p>
+        </article>
+    </sly>
+</template>
+
+<template data-sly-template.renderPagination="${ @ model }">
+    <div data-sly-test="${model.resultSize > 0}" class="row">
+        <div class="col-sm-6">
+            <span class="cmp-search__nr">${model.rangeText @ format=[model.resultStartCount, model.resultEndCount, model.result.totalMatches, model.query], context='html'}</span>
+        </div>
+        <div class="col-sm-6 text-right">
+            <ul class="cmp-search__list" data-sly-test="${model.showPagination}">
+                <!--/* PREVIOUS */-->
+                <li data-sly-test="${model.result.previousPage}" class="cmp-search__list-item">
+                    <a href="${model.result.previousPage.URL @ context='html'}" class="fa fa-caret-left cmp-search__prev-page"></a>
+                </li>
+                <!--/* PAGES */-->
+                <li class="cmp-search__list-item">
+                    <ul class="cmp-search__list" data-sly-list="${model.result.resultPages}">
+                        <li data-sly-test="${item.currentPage}" class="cmp-search__list-item">${itemList.count}</li>
+                        <li data-sly-test="${!item.currentPage}" class="cmp-search__list-item"><a href="${item.URL @ context='html'}">${itemList.count}</a></li>
+                    </ul>
+                </li>
+                <!--/* NEXT */-->
+                <li data-sly-test="${model.result.nextPage}" class="cmp-search__list-item">
+                    <a href="${model.result.nextPage.URL @ context='html'}" class="fa fa-caret-right cmp-search__next-page"></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</template>
+
+<template data-sly-template.renderBody="${ @ model }">
+    <div class="container">
+        <div class="row">
+            <div class="cmp-search__facets col-sm-4">
+                <sly data-sly-call="${renderTags @ model=model}"/>
+            </div>
+            <div class="cmp-search__results col-sm-8">
+                <sly data-sly-call="${renderResults @ model=model}"/>
+                <sly data-sly-call="${renderEmptyResults @ model=model}"/>
+            </div>
+        </div>
+    </div>
+</template>
+
+<template data-sly-template.renderSearch="${ @ model }">
+
+    <section data-sly-use.model="com.bbby.aem.core.models.component.Search"
+        data-sly-test.showSearch="${!model.searchDenied}" class="cmp-search">
+        <sly data-sly-call="${renderPagination @ model=model}"/>
+        <sly data-sly-call="${renderBody @ model=model}"/>
+        <sly data-sly-call="${renderPagination @ model=model}"/>
+    </section>
+
+    <p data-sly-test="${!showSearch}">${model.errorText}</p>
+
+    <!--/* Placeholder */-->
+    <sly data-sly-use.common="core/wcm/components/commons/v1/templates.html"
+         data-sly-call="${common.placeholder @ isEmpty=!model.searchIn, emptyTextAppend=resource.name}"></sly>
+
+</template>
+
+<sly data-sly-use.background="bbby/components/content/background/background.html"
+    data-sly-call="${background.renderBackground @ contentTemplate=renderSearch}"/>

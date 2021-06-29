@@ -1,0 +1,19 @@
+<!--/*
+
+  Stripped down version of AEM parsys component
+
+*/-->
+<sly data-sly-use.parsysComponent="parsys.js"
+    data-sly-use.columnControlParsys="com.bbby.aem.core.models.component.ColumnControlParsys"
+    data-sly-list.paragraph="${parsysComponent.renderInfo}">
+    <!--/* edit mode: new section component drop zone */-->
+    <div
+        data-sly-test="${paragraph.resourceType && paragraph.cssClasses}"
+        class="${paragraph.cssClasses} ${columnControlParsys.columnControl.columns[paragraphList.index].classes}"
+        data-sly-resource="${paragraph.resourcePath @ resourceType=paragraph.resourceType, decorationTagName=''}"></div>
+    <!--/* non-edit mode */-->
+    <div
+        data-sly-test="${paragraph.resourceType && !paragraph.cssClasses}"
+        class="${paragraph.cssClasses} ${columnControlParsys.columnControl.columns[paragraphList.index].classes}"
+        data-sly-resource="${paragraph.resourcePath @ resourceType=paragraph.resourceType}"></div>
+</sly>

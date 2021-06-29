@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0" jcr:primaryType="cq:EditConfig">
+    <cq:inplaceEditing jcr:primaryType="cq:InplaceEditingConfig" active="{Boolean}true" editorType="text">
+        <config jcr:primaryType="nt:unstructured">
+            <rtePlugins jcr:primaryType="nt:unstructured">
+                <edit defaultPasteMode="wordhtml" features="[cut,copy,paste-default,paste-plaintext,paste-wordhtml]" jcr:primaryType="nt:unstructured"/>
+                <misctools features="[specialchars,sourceedit]" jcr:primaryType="nt:unstructured"/>
+                <paraformat features="*" jcr:primaryType="nt:unstructured">
+                    <formats jcr:primaryType="cq:WidgetCollection">
+                        <format0 description="Paragraph" jcr:primaryType="nt:unstructured" tag="p"/>
+                        <format1 description="Heading 1" jcr:primaryType="nt:unstructured" tag="h1"/>
+                        <format1 description="Heading 2" jcr:primaryType="nt:unstructured" tag="h2"/>
+                        <format1 description="Heading 3" jcr:primaryType="nt:unstructured" tag="h3"/>
+                        <format2 description="Heading 4" jcr:primaryType="nt:unstructured" tag="h4"/>
+                        <format3 description="Heading 5" jcr:primaryType="nt:unstructured" tag="h5"/>
+                        <format4 description="Heading 6" jcr:primaryType="nt:unstructured" tag="h6"/>
+                        <format5 description="\[None]" jcr:primaryType="nt:unstructured" tag="simple"/>
+                    </formats>
+                </paraformat>
+                <styles features="*" jcr:primaryType="nt:unstructured">
+                    <styles jcr:primaryType="cq:WidgetCollection">
+                        <style0 cssName="text-muted" jcr:primaryType="nt:unstructured" text="Text Muted"/>
+                    </styles>
+                </styles>
+            </rtePlugins>
+        </config>
+    </cq:inplaceEditing>
+</jcr:root>

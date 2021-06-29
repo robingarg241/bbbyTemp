@@ -1,0 +1,16 @@
+/**
+ *  Main css for breadcrumb
+ */
+
+.component-breadcrumbs {
+    background-color: transparent;
+    padding-left: 0;
+    padding-right: 0;
+
+    &.dark-text a {
+        color: $dark;
+    }
+    &.white-text a {
+        color: $white;
+    }
+}

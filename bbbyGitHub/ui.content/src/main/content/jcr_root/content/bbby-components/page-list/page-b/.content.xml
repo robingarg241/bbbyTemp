@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0"
+    jcr:primaryType="cq:Page">
+    <jcr:content
+        cq:lastModified="{Date}2016-10-11T17:02:04.024-07:00"
+        cq:lastModifiedBy="admin"
+        cq:template="/apps/bbby/templates/page-content"
+        jcr:primaryType="cq:PageContent"
+        jcr:title="Page B"
+        sling:resourceType="bbby/components/structure/page"
+        analytics.pageId="page-list:page-b:a1MC3HjE"/>
+</jcr:root>

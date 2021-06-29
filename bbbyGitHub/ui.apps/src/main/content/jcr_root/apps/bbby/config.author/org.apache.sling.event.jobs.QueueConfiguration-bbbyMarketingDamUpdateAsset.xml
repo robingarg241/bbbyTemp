@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0"
+    jcr:primaryType="sling:OsgiConfig"
+    queue.maxparallel="{Double}0.25"
+    queue.name="Granite Transient Workflow Queue for bbby Marketing Asset"
+    queue.priority="MIN"
+    queue.retries="{Long}1"
+	queue.preferRunOnCreationInstance="{Boolean}true"
+    queue.retrydelay="{Long}2000"
+    queue.topics="[com/adobe/granite/workflow/transient/job/var/workflow/models/dam/bbby-marketing-update-asset]"
+    queue.type="UNORDERED"
+	queue.keepJobs="{Boolean}false"
+    service.ranking="{Long}1"/>

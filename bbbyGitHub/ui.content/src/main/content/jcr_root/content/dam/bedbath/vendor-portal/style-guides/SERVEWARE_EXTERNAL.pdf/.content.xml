@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:bbby="http://www.bbby.com" xmlns:dam="http://www.day.com/dam/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:mix="http://www.jcp.org/jcr/mix/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    jcr:mixinTypes="[mix:referenceable]"
+    jcr:primaryType="dam:Asset"
+    jcr:uuid="8c03c931-3169-4c16-89c4-527cbfbe759e">
+    <jcr:content
+        dam:assetState="unProcessed"
+        dam:relativePath="bedbath/vendor-portal/style-guides/SERVEWARE_EXTERNAL.pdf"
+        jcr:primaryType="dam:AssetContent">
+        <metadata
+            bbby:assetUpdate="no"
+            bbby:reasonForAssetUpdate="not set"
+            bbby:rejectionReason="not-set"
+            jcr:mixinTypes="[cq:Taggable]"
+            jcr:primaryType="nt:unstructured"/>
+        <related jcr:primaryType="nt:unstructured"/>
+    </jcr:content>
+</jcr:root>

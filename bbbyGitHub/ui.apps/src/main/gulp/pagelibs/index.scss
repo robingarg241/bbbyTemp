@@ -1,0 +1,28 @@
+/*
+ *  Root Sass file for this pagelib.
+ */
+
+@import "styles/variables";
+@import "styles/functions";
+@import "styles/base/font";
+
+/* Import Bootstrap 4 framework */
+@import "../third-party/bootstrap/bootstrap";
+
+/* Import Font Awesome */
+@import "../third-party/font-awesome/font-awesome";
+
+@import "styles/reset/classic-ui";
+
+@import "styles/base/buttons";
+@import "styles/base/type";
+@import "styles/base/images";
+@import "styles/base/display";
+
+@import "styles/layout/layout";
+
+/* Owl Carousel */
+@import "owl.carousel/src/scss/owl.carousel";
+
+/* Load all component styles */
+@import "../../content/jcr_root/apps/bbby/components/content/component-index";

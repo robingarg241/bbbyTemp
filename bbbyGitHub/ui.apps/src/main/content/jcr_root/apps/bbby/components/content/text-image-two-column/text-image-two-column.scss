@@ -1,0 +1,27 @@
+/**
+ *  Main css for text-image-two-column
+ */
+
+.cmp-ti2c {
+    .cmp-image__img {
+        padding: spacer(4) 0;
+    }
+}
+
+.container {
+    .column-ti {
+        padding: 0px;
+    }
+    .align-items-center {
+        width: 95%;
+        .titles-column {
+            width: 68%;
+            margin-bottom: 50%;
+            .main-title {
+                font-size: 21px;
+                font-weight: 700;
+                margin-bottom: 50%;
+            }
+        }
+    }
+}

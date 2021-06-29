@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0"
+      jcr:primaryType="sling:OsgiConfig"
+
+    queue.name="Asset\ Metadata\ Update\ Processing\ Queue"
+	queue.priority="NORM"
+	queue.maxparallel="{Long}2"
+	queue.topics="[com/bbby/jobs/pdm-asset-update]"
+	queue.retries="{Long}5"
+	queue.retrydelay="{Long}5000"
+	service.ranking="{Long}0"
+	queue.type="UNORDERED"
+/>

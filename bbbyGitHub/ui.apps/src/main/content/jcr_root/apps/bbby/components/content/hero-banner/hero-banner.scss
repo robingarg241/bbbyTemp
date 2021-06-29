@@ -1,0 +1,43 @@
+/*
+--------------------------------------------------
+    Hero Banner Component
+--------------------------------------------------
+*/
+
+.cmp-hero-banner {
+    min-height: 200px;
+    padding: spacer(5) 0 spacer(5) 0;
+
+    @include media-breakpoint-up(sm) {
+        min-height:300px;
+        padding: 0;
+    }
+
+    @include media-breakpoint-up(md) {
+        min-height:400px;
+    }
+
+    @include media-breakpoint-up(md) {
+        min-height: 600px;
+    }
+}
+
+.cmp-hero-banner__text-overlay{
+    padding-top: spacer(4);
+    padding-bottom: spacer(4);
+    width: 100%;
+    height: 100%;
+    position: relative;
+    bottom: 0;
+    z-index: 1;
+}
+
+.cmp-banner--align-left {
+    @extend .justify-content-start;
+    @extend .text-left;
+}
+
+.cmp-banner--align-center {
+    @extend .justify-content-center;
+    @extend .text-center;
+}

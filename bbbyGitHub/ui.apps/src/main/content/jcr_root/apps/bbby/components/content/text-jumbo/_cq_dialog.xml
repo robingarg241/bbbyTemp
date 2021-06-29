@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:granite="http://www.adobe.com/jcr/granite/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+          jcr:primaryType="nt:unstructured"
+          jcr:title="Text Jumbo"
+          sling:resourceType="cq/gui/components/authoring/dialog"
+          helpPath="https://www.adobe.com/go/aem_cmp_text_v2">
+    <content jcr:primaryType="nt:unstructured">
+        <items jcr:primaryType="nt:unstructured">
+            <tabs jcr:primaryType="nt:unstructured">
+                <items jcr:primaryType="nt:unstructured">
+                    <properties jcr:primaryType="nt:unstructured">
+                        <items jcr:primaryType="nt:unstructured">
+                            <columns jcr:primaryType="nt:unstructured">
+                                <items jcr:primaryType="nt:unstructured">
+                                    <column jcr:primaryType="nt:unstructured">
+                                        <items jcr:primaryType="nt:unstructured">
+                                            <title
+                                                fieldLabel="Title"
+                                                jcr:primaryType="nt:unstructured"
+                                                name="./title"
+                                                sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                                                sling:orderBefore="text"/>
+                                            <textJumboTitleSize
+                                                defaultValue="h2"
+                                                disabled="{Boolean}false"
+                                                fieldDescription="There should only ever be one H1 on a page, at the very top of the page"
+                                                fieldLabel="Title Size"
+                                                jcr:primaryType="nt:unstructured"
+                                                name="./textJumboTitleSize"
+                                                sling:resourceType="granite/ui/components/coral/foundation/form/select"
+                                                sling:orderBefore="text">
+                                                <items jcr:primaryType="nt:unstructured">
+                                                    <option0 jcr:primaryType="nt:unstructured" selected="{Boolean}false" text="Medium" value="h2"/>
+                                                    <option1 jcr:primaryType="nt:unstructured" selected="{Boolean}false" text="Small" value="h3"/>
+                                                    <option2 jcr:primaryType="nt:unstructured" selected="{Boolean}false" text="H1" value="h1"/>
+                                                </items>
+                                            </textJumboTitleSize>
+                                            <textJumboAlignment
+                                                defaultValue="left"
+                                                fieldLabel="Alignment"
+                                                jcr:primaryType="nt:unstructured"
+                                                name="./textJumboAlignment"
+                                                sling:resourceType="granite/ui/components/coral/foundation/form/select"
+                                                sling:orderBefore="text">
+                                                <items jcr:primaryType="nt:unstructured">
+                                                    <option0 jcr:primaryType="nt:unstructured" selected="{Boolean}false" text="Left" value="left"/>
+                                                    <option1 jcr:primaryType="nt:unstructured" selected="{Boolean}false" text="Center" value="center"/>
+                                                </items>
+                                            </textJumboAlignment>
+                                        </items>
+                                    </column>
+                                </items>
+                            </columns>
+                        </items>
+                    </properties>
+                    <cta
+                        jcr:primaryType="nt:unstructured"
+                        jcr:title="CTA"
+                        sling:resourceType="granite/ui/components/coral/foundation/container"
+                        margin="{Boolean}true">
+                        <items jcr:primaryType="nt:unstructured">
+                            <columns
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/coral/foundation/fixedcolumns"
+                                margin="{Boolean}true">
+                                <items jcr:primaryType="nt:unstructured">
+                                    <include
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/coral/foundation/include"
+                                        path="/apps/bbby/components/content/cta/cq:dialog/content/items/tabs/items/properties/items/columns/items/column">
+                                    </include>
+                                </items>
+                            </columns>
+                        </items>
+                    </cta>
+                    <background
+                        jcr:primaryType="nt:unstructured"
+                        jcr:title="Background"
+                        sling:resourceType="granite/ui/components/coral/foundation/container"
+                        margin="{Boolean}true">
+                        <items jcr:primaryType="nt:unstructured">
+                            <columns
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/coral/foundation/fixedcolumns"
+                                margin="{Boolean}true">
+                                <items jcr:primaryType="nt:unstructured">
+                                    <include
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/coral/foundation/include"
+                                        path="/apps/bbby/components/content/background/cq:dialog/content/items/tabs/items/properties/items/columns/items/column">
+                                    </include>
+                                </items>
+                            </columns>
+                        </items>
+                    </background>
+                </items>
+            </tabs>
+        </items>
+    </content>
+</jcr:root>

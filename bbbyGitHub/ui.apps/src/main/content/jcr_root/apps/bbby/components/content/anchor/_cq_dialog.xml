@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0"
+          xmlns:nt="http://www.jcp.org/jcr/nt/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0"
+          xmlns:granite="http://www.adobe.com/jcr/granite/1.0"
+          jcr:primaryType="nt:unstructured"
+          jcr:title="Anchor"
+          sling:resourceType="cq/gui/components/authoring/dialog"
+          fileName="_cq_dialog.xml"
+          helpPath="/editor.html/content/bbby-components/anchor.html"
+          mode="edit">
+    <content
+        jcr:primaryType="nt:unstructured"
+        sling:resourceType="granite/ui/components/coral/foundation/container">
+        <items jcr:primaryType="nt:unstructured">
+            <tabs
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/coral/foundation/tabs"
+                maximized="{Boolean}true">
+                <items jcr:primaryType="nt:unstructured">
+                    <Anchor
+                        jcr:primaryType="nt:unstructured"
+                        jcr:title="Anchor"
+                        sling:resourceType="granite/ui/components/coral/foundation/container"
+                        margin="{Boolean}true">
+                        <items jcr:primaryType="nt:unstructured">
+                            <columns
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/coral/foundation/fixedcolumns"
+                                margin="{Boolean}true">
+                                <items jcr:primaryType="nt:unstructured">
+                                    <column
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/coral/foundation/container">
+                                        <items jcr:primaryType="nt:unstructured">
+                                            <anchorFields
+                                                cq:hideOnEdit="{Boolean}false"
+                                                cq:showOnCreate="{Boolean}true"
+                                                jcr:primaryType="nt:unstructured"
+                                                sling:resourceType="granite/ui/components/coral/foundation/form/fieldset"
+                                                disabled="{Boolean}false"
+                                                renderReadOnly="{Boolean}true"
+                                                required="{Boolean}true">
+                                                <items jcr:primaryType="nt:unstructured">
+                                                    <anchorName
+                                                        jcr:primaryType="nt:unstructured"
+                                                        sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                                                        fieldDescription="Name used for link."
+                                                        fieldLabel="Anchor Name"
+                                                        name="./anchorName"
+                                                        required="{Boolean}false"/>
+                                                    <anchorId
+                                                        jcr:primaryType="nt:unstructured"
+                                                        sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                                                        fieldDescription="ID value used in #URL fragment. Must be a unique value for the page."
+                                                        fieldLabel="Anchor ID"
+                                                        validation="regex"
+                                                        name="./anchorId"
+                                                        required="{Boolean}false">
+                                                        <granite:data
+                                                            jcr:primaryType="nt:unstructured"
+                                                            regex="^([a-zA-Z-_][a-zA-Z0-9-_]*|)$"/>
+                                                    </anchorId>
+                                                </items>
+                                            </anchorFields>
+                                        </items>
+                                    </column>
+                                </items>
+                            </columns>
+                        </items>
+                    </Anchor>
+                </items>
+            </tabs>
+        </items>
+    </content>
+</jcr:root>

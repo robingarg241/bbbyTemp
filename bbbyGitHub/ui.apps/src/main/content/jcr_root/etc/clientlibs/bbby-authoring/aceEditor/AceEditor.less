@@ -1,0 +1,70 @@
+.ace-modal {
+    position: fixed;
+    z-index: 801;
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%;
+    overflow: auto; 
+    background-color: rgba(0,0,0,0.4);
+}
+
+.ace-modal-content {
+    background-color: #fefefe;
+    margin: 60px auto;
+    padding: 5px 20px 20px 20px;
+    border: 1px solid #888;
+    width: 90%;
+    height: 80%;
+    
+    .ace-modal-nav {
+        height: 40px;
+        
+        .ace-modal-component-id {
+            display: inline-block;
+            padding: 10px 0;
+            font: 12px/normal 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;
+        }
+        
+        .ace-modal-msg {
+            float: right;
+            visibility: hidden;
+            display: inline-block;
+            padding: 10px;
+            font-size: 18px;
+            
+            &.active {
+                visibility: visible;
+            }
+        }
+        
+        .ace-btn {
+            float: right;
+            color: #FFF;
+            background-color: gray;
+            text-decoration: none;
+            padding: 5px 10px 7px;
+            margin: 4px 5px;
+            
+            &:hover {
+                background-color: black;
+                text-decoration: none;
+                cursor: pointer;
+            }
+        }
+    }
+    
+    .ace-editor-wrap {
+        position: relative;
+        width: 100%;
+        height: 95%;
+        
+        .ace-editor {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+        }
+    }
+}

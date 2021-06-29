@@ -1,0 +1,59 @@
+/*
+--------------------------------------------------
+    Typography
+--------------------------------------------------
+*/
+
+$font-serif-regular:        'tiempos-test-regular';
+$font-serif-medium:         'tiempos-text-test-medium';
+$font-serif-semibold:       'tiempos-text-test-semibold';
+$font-serif-bold:           'tiempos-test-bold';
+
+$font-sans-serif-medium:    'montserrat-medium';
+$font-sans-serif-light:     'montserrat-light';
+$font-sans-serif-regular:   'montserrat-regular';
+
+body {
+    font-family: $font-sans-serif-regular;
+    text-rendering: auto;
+    font-smooth: auto;
+    font-size: 18px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+.h-xl {
+    font-family: $font-serif-bold;
+    font-size: 54px;
+    letter-spacing: normal;
+    line-height: 1.25em;
+}
+
+h2 {
+    font-family: $font-serif-bold;
+    font-size: 42px;
+    letter-spacing: normal;
+    line-height: 50px;
+}
+
+h3 {
+    font-family: $font-sans-serif-medium;
+    font-size: 35px;
+    font-weight: $headings-font-weight;
+    // margin: 15px 0;
+}
+
+h4 {
+    font-family: $font-sans-serif-medium;
+    font-size: 28px;
+    font-weight: $headings-font-weight;
+}
+
+h5 {
+    font-size: 24px;
+}
+
+h6 {
+    font-size: 18px;
+}

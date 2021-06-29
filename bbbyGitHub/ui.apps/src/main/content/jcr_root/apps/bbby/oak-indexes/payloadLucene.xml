@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:oak="http://jackrabbit.apache.org/oak/ns/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:dam="http://www.day.com/dam/1.0"  xmlns:nt="http://www.jcp.org/jcr/nt/1.0" xmlns:rep="internal"
+    jcr:primaryType="oak:Unstructured"
+    async="async"
+    compatVersion="{Long}2"
+    evaluatePathRestrictions="{Boolean}true"
+    includedPaths="[/var/workflow/packages,/etc/workflow/packages/]"
+    type="lucene">
+    <indexRules jcr:primaryType="nt:unstructured">
+        <cq:Payload jcr:primaryType="nt:unstructured">
+            <properties jcr:primaryType="nt:unstructured">
+                <path
+                        jcr:primaryType="nt:unstructured"
+                        analyzed="{Boolean}true"
+                        isRegexp="{Boolean}true"
+                        name="path"
+                        nodeScopeIndex="{Boolean}true"
+                        notNullCheckEnabled="{Boolean}true"
+                        propertyIndex="{Boolean}false"
+                        useInExcerpt="{Boolean}true"/>
+            </properties>
+        </cq:Payload>
+    </indexRules>
+</jcr:root>

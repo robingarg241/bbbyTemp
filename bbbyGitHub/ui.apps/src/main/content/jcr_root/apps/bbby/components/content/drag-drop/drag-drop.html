@@ -1,0 +1,517 @@
+<span class="edit-start container" data-sly-test="${wcmmode.edit || wcmmode.preview || wcmmode.design}">&nbsp;${resource.name} <i class="fa fa-long-arrow-down" aria-hidden="true"></i></span>
+
+<template data-sly-template.renderDragDrop>
+    
+    <section id="vpUpload" 
+             data-sly-use.model="com.bbby.aem.core.models.component.DragDrop"
+             style=" ${wcmmode.disabled? '' : 'height: 1300px;' @ context='styleString' }">
+             
+        <div class="form-bbb-fields" id="upload">
+            <div class="upload-result upload-progress hidden" id="uploadProgress">
+                <div class="progress-title">Uploading files</div>
+                <div class="progress-bar">
+                    <div class="progress-bar_inner"></div>
+                </div>
+            </div>
+            <div class="upload-result success-bar hidden" id="uploadSuccess"></div>
+
+            <sly data-sly-test.multiType="${pageProperties.uploadType == 'multi'}"/>
+			<sly data-sly-use.assetDropsLimit="com.bbby.aem.core.api.AssetDropsLimit" />
+			
+            <input type="hidden" name="uploadTypeForm" id="uploadTypeForm" value="${pageProperties.uploadType}">
+
+            <div id="single" class="tabcontent" data-sly-test="${!multiType}">
+                <form style="width:100%" enctype="multipart/form-data" method="POST" id="dzFormSingle"
+                      class="aem-GridColumn aem-GridColumn--default--12 aem-GridColumn--offset--default--0 ">
+                    <div class="container">
+                        <div class="row upload-container">
+                            <div class="col-9 col-md-9 offset-md-1 inner-col">
+                                <div class="upload-details">
+                                    <input type="hidden" name="uploadList" id="singleuploadList">
+                                    <input type="hidden" name="vendorAssetDropLimit" id="vendorAssetDropLimit" value = "1">
+                                    <div class="row">
+                                        <h2 class="bbb-title">${model.title}</h2>
+                                    </div>
+                                    <div class="row">
+                                        <h3>Metadata</h3>
+                                    </div>
+                                    <div class="row">
+                                        <input placeholder="Batch ID" name="batch-id" id="singleBatchId" type="text">
+                                        <div class="input-success" id="singleSuccessBatchId"></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-bbb-left">
+                                            <input placeholder="Vendor Email Address" name="email" id="singleEmail" type="email">
+                                            <div class="input-success" id="singleSuccessEmail"></div>
+                                        </div>
+                                        <div class="col-bbb-right">
+                                            <input placeholder="Requested By" name="requested-by" id="singleRequestedBy" type="text">
+                                            <div class="input-success" id="singleSuccessRequestedBy"></div>
+                                        </div>
+                                    </div>
+                                    <div class="row ">
+                                        <div class="col-bbb-left">
+                                            <div class="bbb-radio">
+                                                <label class="radio-label">Asset Update?* </label>
+                                                <label class="radio-inline">
+                                                    <input class="radio-input" type="radio" name="asset-update"
+                                                           id="assetUpdateYes" value="yes">
+                                                    <label class="radio-label">Yes</label>
+                                                    <div class="input-success" id="successAssetUpdateYes"></div>
+                                                </label>
+                                                <label class="radio-inline">
+                                                    <input class="radio-input" type="radio" name="asset-update"
+                                                           id="assetUpdateNo" value="no" checked>
+                                                    <label class="radio-label">No</label>
+                                                    <div class="input-success" id="successAssetUpdateNo"></div>
+                                                </label>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-bbb-right">
+                                            <select id="reasonUpdate">
+                                                <option value="" selected>Reason for Product Asset Update (Select one)</option>
+                                                <option value="Product Change">Product Change</option>
+                                                <option value="Revised asset">Revised asset</option>
+                                                <option value="Updated packaging">Updated packaging</option>
+                                            </select>
+                                            <div class="input-success" id="successreasonUpdate"></div>
+                                        </div>
+                                    </div>
+                                    <div class="row ">
+                                        <div class="col-bbb-left">
+                                            <div class="tags">
+                                                <input placeholder="UPC*" name="upc" id="upc" type="text" class="required single" data-role="tagsinput">
+                                                <div class="input-success" id="successUpc"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-bbb-right">
+                                            <select id="assetType" class="required single">
+                                                <option value="" selected>Product Asset Type (Select one)</option>
+                                                <option value="Product Images">Product Image</option>
+                                                <option value="Assembly Instructions">Assembly Instructions</option>
+                                                <option value="Energy Guides">Energy Guides</option>
+                                                <option value="Parts Lists">Parts Lists</option>
+                                                <option value="Prop 65">Prop 65</option>
+                                                <option value="User Guides and Manuals">User Guides and Manuals</option>
+                                                <option value="Videos">Videos</option>
+                                                <option value="Lighting Facts">Lighting Facts</option>
+                                                <option value="Warranty Information">Warranty Information</option>
+                                                <option value="RDS Logo">RDS Logo</option>
+                                    	        <option value="Forestry Cert FSC">Forestry Cert FSC</option>
+                                                <option value="Forestry Cert SFI">Forestry Cert SFI</option>
+                                                <option value="Forestry Cert Fair Trade">Forestry Cert Fair Trade</option>
+                                                <option value="Cotton Cert BCI">Cotton Cert BCI</option>
+                                                <option value="Cotton Cert Okeo Tex">Cotton Cert Okeo Tex</option>
+                                                <option value="Cotton Cert Abrapa">Cotton Cert Abrapa</option>
+                                                <option value="Cotton Cert BASF">Cotton Cert BASF</option>
+                                                <option value="Cotton Cert e3">Cotton Cert e3</option>
+                                                <option value="Cotton Cert Cleaner Cotton">Cotton Cert Cleaner Cotton</option>
+                                                <option value="Cotton Cert Cotton Made in Africa">Cotton Cert Cotton Made in Africa</option>
+                                                <option value="Cotton Cert Fair Trade">Cotton Cert Fair Trade</option>
+                                                <option value="Cotton Cert Field to Market">Cotton Cert Field to Market</option>
+                                                <option value="Cotton Cert GOTS">Cotton Cert GOTS</option>
+                                                <option value="Cotton Cert ISCC">Cotton Cert ISCC</option>
+                                                <option value="Cotton Cert myBMP">Cotton Cert myBMP</option>
+                                                <option value="Cotton Cert OCS">Cotton Cert OCS</option>
+                                                <option value="Cotton Cert REEL Cotton">Cotton Cert REEL Cotton</option>
+                                                <option value="Cotton Cert US Cotton Trust Protocol">Cotton Cert US Cotton Trust Protocol</option>
+                                            </select>
+                                            <div class="input-success" id="successAssetType"></div>
+                                        </div>
+                                    </div>
+                                    <div class="row ">
+                                        <div class="col-bbb-left">
+                                            <select id="shotType">
+                                                <option value="" selected>Shot Type (Select one)</option>
+                                                <option value="Silhouette">Silhouette</option>
+                                                <option value="Collection">Collection</option>
+                                                <option value="Construction">Construction</option>
+                                                <option value="Dimensions">Dimensions</option>
+                                                <option value="Electronic Display">Electronic Display</option>
+                                                <option value="Environment">Environment</option>
+                                                <option value="Hardware or Installation">Hardware or Installation
+                                                </option>
+                                                <option value="In Use">In Use</option>
+                                                <option value="Logo">Logo</option>
+                                                <option value="Nutritional Information">Nutritional Information</option>
+                                                <option value="Orientation - Back View">Orientation - Back View</option>
+                                                <option value="Orientation - Interior View">Orientation - Interior
+                                                    View
+                                                </option>
+                                                <option value="Orientation - Left Degree Angle">Orientation - Left
+                                                    Degree Angle
+                                                </option>
+                                                <option value="Orientation - Left Side">Orientation - Left Side</option>
+                                                <option value="Orientation - Overhead">Orientation - Overhead</option>
+                                                <option value="Orientation - Right Degree Angle">Orientation - Right
+                                                    Degree Angle
+                                                </option>
+                                                <option value="Orientation - Right Side">Orientation - Right Side
+                                                </option>
+                                                <option value="Orientation - Under Side">Orientation - Under Side
+                                                </option>
+                                                <option value="Power Source">Power Source</option>
+                                                <option value="Product in Packaging">Product in Packaging</option>
+                                                <option value="Scale">Scale</option>
+                                                <option value="Surface Detail">Surface Detail</option>
+                                            </select>
+                                            <div class="input-success" id="successShotType"></div>
+                                        </div>
+                                        <div class="col-bbb-right">
+                                            <input placeholder="Sequence" name="sequence" id="sequence" type="text">
+                                            <div class="input-success" id="successSequence"></div>
+                                        </div>
+                                    </div>
+                                    <div class="mov-files" style="display: none;">
+                                        <div class="row ">
+                                            <div class="col-bbb-left">
+                                                <input placeholder="Additional UPC for Videos" name="additional-upc" id="additionalUpc" type="text">
+                                                <div class="input-success" id="successAdditionalUpc"></div>
+                                            </div>
+                                            <div class="col-bbb-right">
+                                                <div class="bbb-radio">
+                                                    <label class="radio-label">SRT  Provided? </label>
+                                                    <label class="radio-inline">
+                                                        <input class="radio-input" type="radio" name="srt-provided" value="yes" id="srtprovidedYes" checked>
+                                                        <label class="radio-label">Yes</label>
+                                                        <div class="input-success" id="successSrtProvidedYes"></div>
+                                                    </label>
+                                                    <label class="radio-inline">
+                                                        <input class="radio-input" type="radio" name="srt-provided" value="no" id="srt-providedNo">
+                                                        <label class="radio-label">No</label>
+                                                        <div class="input-success" id="successSrtProvidedNo"></div>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row ">
+                                            <div class="col-bbb-left">
+                                                <div class="bbb-radio">
+                                                    <label class="radio-label">BBBY to create SRT</label>
+                                                    <label class="radio-inline">
+                                                        <input class="radio-input" type="radio" name="bbby-srt" value="yes" id="bbbysrtYes">
+                                                        <label class="radio-label">Yes</label>
+                                                        <div class="input-success" id="successBbbysrtYes"></div>
+                                                    </label>
+                                                    <label class="radio-inline">
+                                                        <input class="radio-input" type="radio" name="bbby-srt" value="no" id="bbbysrtYesNo" checked>
+                                                        <label class="radio-label">No</label>
+                                                        <div class="input-success" id="successBbbysrtNo"></div>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div id="multi" class="tabcontent"  data-sly-test="${multiType}" >
+                <form style="width:100%" enctype="multipart/form-data" method="POST" id="dzForm"
+                      class="aem-GridColumn aem-GridColumn--default--12 aem-GridColumn--offset--default--0 ">
+                    <div class="container">
+                        <div class="row upload-container">
+                            <div class="col-9 col-md-9 offset-md-1 inner-col">
+                                <div class="upload-details">
+                                	<input type="hidden" name="vendorAssetDropLimit" id="vendorAssetDropLimit" value = "${assetDropsLimit.assetDropsLimit}">
+                                    <input type="hidden" name="excelVersion" id="excelVersion" value = "${assetDropsLimit.excelVersion}">
+                                    <div class="row">
+                                        <h2 class="bbb-title">${model.title}</h2>
+                                    </div>
+                                    <div class="row">
+                                        <h3>Batch-Level Metadata</h3>
+                                    </div>
+                                    <div class="row">
+                                        <input placeholder="Batch ID" name="batch-id" id="batchId" type="text">
+                                        <div class="input-success" id="successBatchId"></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-bbb-left">
+                                            <input placeholder="Vendor Email Address" name="email" id="email" type="email">
+                                            <div class="input-success" id="successEmail"></div>
+                                        </div>
+                                        <div class="col-bbb-right">
+                                            <input placeholder="Requested By" name="requested-by" id="requestedBy" type="text">
+                                            <div class="input-success" id="successRequestedBy"></div>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" name="uploadList" id="uploadList">
+                                    <div class="row ">
+                                        <input type="file"  name="excel-file" id="excelFile"
+                                               accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+                                        <div class="col-bbb-button">
+                                            <input placeholder="Excel Metadata File" class="file-info required multi"
+                                                   name="metadata-file" id="metadataFile" type="text" >
+                                            <div class="input-success" id="successMetadataFile"></div>
+                                            <div style="font-size: 70%;font-weight: bold;">(Please make sure you download the latest version of the metadata file by clicking on the "Excel Metadata Template" link at the bottom before you begin submitting assets.)</div>
+                                        </div>
+                                        <button class="browse-btn">Upload Metadata File</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="container">
+                <div class="col-10 col-md-10 offset-md-1 inner-col">
+                    <h3>Upload Your Assets</h3>
+                    <span class="dropzone-invalid-count"></span>
+                    <div class="dropzone-container">
+                        <div class="dropzone" id="upload-batch">
+                            <div class="active-items">
+                                <div class="meta-row">
+                                    <div>
+                                        <span class="file-count"></span>
+                                        <div class="dropzone-invalid"></div>
+                                    </div>
+                                    <a href id="dzDialog" hidden>Select Files</a>
+                                </div>
+                                <div class="column-titles">
+                                    <div class="thumbnail" style="-ms-grid-column: 1;">Thumbnail</div>
+                                    <div class="filename" style="-ms-grid-column: 2;">Filename</div>
+                                    <div class="type" style="-ms-grid-column: 3;">File Type</div>
+                                    <div class="dpi" style="-ms-grid-column: 4;">DPI/Aspect-Ratio</div>
+                                    <div class="dimensions" style="-ms-grid-column: 5;">Dimensions</div>
+                                    <div class="color" style="-ms-grid-column: 6;">Color Space</div>
+                                    <div data-sly-test="${multiType}" class="metadata" style="-ms-grid-column: 7;">
+                                        Metadata
+                                    </div>
+                                    <div class="delete" style="-ms-grid-column: 8;">Delete</div>
+                                </div>
+                                <hr>
+                            </div>
+                            <div class="drop-more" id="drop-more-indicator">
+                                <img class="drop-more-icon" src="/etc/designs/bbby/images/plus.png" >Drag and drop files here to upload
+                            </div>
+                        </div>
+                    </div>
+                    <hr class="hr-margin-actions">
+                    <div class="row dz-row-bbb">
+                        <div class="col-12 col-md-12">
+                            <div class="dynamic-width dynamic-width-flex">
+                                <div class="dz-actions-bbb">
+                                    <sly data-sly-list.i="${model.ctaList}">
+										<p>
+                                           <a href="${i.link @ context='uri'}" target="${i.newTab ? '_blank' : ''}" id="ref-doc">${i.title}</a>
+                                        </p>
+        							</sly>
+                                    <p style="-ms-grid-column: 3; -ms-grid-row: 1;"><a href id="cancel-all">Cancel</a></p>
+                                    <button style="-ms-grid-column: 4; -ms-grid-row: 1;" id="validate-all" class="validate-all" data-sly-test="${multiType}">Validate</button>
+                                    <button style="-ms-grid-column: 4; -ms-grid-row: 1; display: none;" id="submit-all" type="submit">Submit Batch</button>
+                                    <button style="-ms-grid-column: 4; -ms-grid-row: 1;" id="submit-single" type="submit" class="submit-ready" data-sly-test="${!multiType}">Submit</button>
+                                    <button style="-ms-grid-column: 4; -ms-grid-row: 1; display: none;" id="close-win" class="btn-bbb close-win">Close Window</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tooltip_templates">
+            <div id="dpLiveDate">
+                <div class="tooltip-container tooltip-datepicker">
+                    <div class="tooltip-container-side" id="dpLiveDateCal"></div>
+                    <div class="tooltip-container-side datepicker-additional">
+                        <ul class="datepicker-links list-unstyled">
+                            <li><a href data-calendar="liveDate">Go to Today</a></li>
+                        </ul>
+                        <button class="datepicker-close" data-calendar="liveDate">Apply</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="dpStartDate">
+                <div class="tooltip-container tooltip-datepicker">
+                    <div class="tooltip-container-side" id="dpStartDateCal"></div>
+                    <div class="tooltip-container-side datepicker-additional">
+                        <ul class="datepicker-links list-unstyled">
+                            <li><a href data-calendar="startDate">Go to Today</a></li>
+                        </ul>
+                        <button class="datepicker-close" data-calendar="startDate">Apply</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="dpFinalDate">
+                <div class="tooltip-container tooltip-datepicker">
+                    <div class="tooltip-container-side" id="dpFinalDateCal"></div>
+                    <div class="tooltip-container-side datepicker-additional">
+                        <ul class="datepicker-links list-unstyled">
+                            <li><a href data-calendar="finalDate" data-calendar-add='{"months":6}'>6 months from Start
+                                Date</a></li>
+                            <li><a href data-calendar="finalDate" data-calendar-add='{"months":12}'>12 months from Start
+                                Date</a></li>
+                            <li><a href data-calendar="finalDate" data-calendar-manual='No End Date'>No End Date</a></li>
+                        </ul>
+                        <button class="datepicker-close" data-calendar="finalDate">Apply</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="uploadColorKey">
+                <div class="tooltip-container tooltip-colorkey">
+                    <h4>Accepted File Types</h4>
+                    <ul class="list-unstyled">
+                        <li class="tooltip-grid grid-colorkey colorkey-full-use">
+                            <p>jpg, png, tif, psd, ai, eps, pdf, mov, mp4</p>
+                        </li>
+                        <li class="tooltip-grid grid-colorkey colorkey-full-use">
+                            <p>Individual file size cannot exceed 2gb.</p>
+                        </li>
+                    </ul>
+
+                    <h4>Dimensions Color Key (jpg, png, tif only)</h4>
+
+                    <ul class="list-unstyled">
+                        <li class="tooltip-grid grid-colorkey colorkey-full-use">
+                            <h5>Full Use</h5>
+                            <p>Image dimensions are greater than <strong>2400x3680px</strong> and can be used for print and
+                                online.</p>
+                        </li>
+                        <li class="tooltip-grid grid-colorkey colorkey-limited-use">
+                            <h5>Limited Use</h5>
+                            <p>Image dimensions are less than <strong>2400x3680px</strong> and can only be used in limited
+                                online placements.</p>
+                        </li>
+                        <li class="tooltip-grid grid-colorkey colorkey-no-use">
+                            <h5>Cannot Be Used</h5>
+                            <p>Image dimensions do not meet the minimum <strong>1000x1000px</strong> size requirement and
+                                will not be included in the batch upload.</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div id="uploadType">
+                <div class="tooltip-container header-tooltip">
+                    <h4>Accepted File Types</h4>
+                    <p>jpg, png, tif, psd, ai, eps, pdf, mov, mp4</p>
+                </div>
+            </div>
+
+            <div id="uploadFileName">
+                <div class="tooltip-container header-tooltip">
+                    <h4>Unique File Names Required</h4>
+                    <p>No duplicate file names in a batch</p>
+                </div>
+            </div>
+
+            <div id="uploadDimensions">
+                <div class="tooltip-container header-tooltip">
+                    <h4>Required File  Dimensions</h4>
+                    <p>Images must have be a  minimum of 1000x1000px</p>
+                </div>
+            </div>
+
+            <div id="uploadSize">
+                <div class="tooltip-container header-tooltip">
+                    <h4>Maximum File Size</h4>
+                    <p>Images must be smaller than 2 GB</p>
+                </div>
+            </div>
+
+            <div id="uploadNotIncluded">
+                <div class="tooltip-container tooltip-colorkey">
+                    <p>This file does not meet the minimum 1000x1000 size requirement and will not be included in the batch
+                        upload.</p>
+                    <p>Please upload a larger image, or learn about our file requirements.</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="dzTemplate">
+            <div class="dz-preview dz-image-preview grid-fields">
+                <div style="-ms-grid-column: 1;"><img id="thumbnail" data-dz-thumbnail/></div>
+                <div style="-ms-grid-column: 2;" class="dz-details">
+                	<div class="dz-filename"><span data-dz-name></span>
+	                	<div class="tooltip_container">
+	                        <div class="icon" hidden></div>
+	                        <span class="tooltiptext"></span>
+	                    </div>
+                    </div>
+                </div>
+                <div style="-ms-grid-column: 3;" class="dz-type">
+                    <span data-dz-file-type></span>
+                    <div class="tooltip_container">
+                        <div class="icon" hidden></div>
+                        <span class="tooltiptext"></span>
+                    </div>
+                </div>
+                <div style="-ms-grid-column: 4;" class="dz-dpi">
+                    <span class="analyze" data-dz-dpi>Analyzing...</span>
+                    <div class="tooltip_container">
+                        <div class="icon" hidden></div>
+                        <span class="tooltiptext"></span>
+                    </div>
+                </div>
+                <div style="-ms-grid-column: 5;" class="dz-dimensions">
+                    <span class="analyze" data-dz-dimensions>Analyzing...</span>
+                    <div class="tooltip_container">
+                        <div class="icon" hidden></div>
+                        <span class="tooltiptext"></span>
+                    </div>
+                </div>
+                <div style="-ms-grid-column: 6;" class="dz-color">
+                    <span class="analyze" data-dz-color>Analyzing...</span>
+                    <div class="tooltip_container">
+                        <div class="icon" hidden></div>
+                        <span class="tooltiptext"></span>
+                    </div>
+                </div>
+                <div style="-ms-grid-column: 7;" class="dz-metadata" data-sly-test="${multiType}">
+                    <span data-dz-metadata></span>
+                    <div class="tooltip_container">
+                        <div class="icon" hidden></div>
+                        <span class="tooltiptext">
+                            Metadata file is not complete or contains unmatched filenames. Please correct metadata excel file and upload again.
+                            <br> <br>
+                            Please review  <span style="color: #003bde;">Help Documentation</span> and
+                            <span style="color: #003bde;">File requirements.</span>
+                        </span>
+                    </div>
+                </div>
+                <div class="dz-success-mark"><span>✔</span></div>
+                <div class="dz-error-mark"><span>✘</span></div>
+                <div style="-ms-grid-column: 8;" class="dz-remove-custom" data-dz-remove></div>
+            </div>
+        </div>
+
+        <div class="error-popup hidden" id="errorPopup">
+            <div class="error-popup_inner">
+                <div class="error-popup_close">
+                    <a class="close-error-popup" href="#errorPopup"></a>
+                </div>
+                <div class="error-popup_header">
+                    <h2 class="error-popup_title"></h2>
+                </div>
+                <div class="error-popup_body-title">
+                    <div class="title">File Name</div>
+                    <div class="title">Reason for failure</div>
+                </div>
+                <div class="error-popup_body">
+                    <ul class="error-list"></ul>
+                </div>
+                <div class="error-footer" >
+                    <button class="error-btn">OK</button>
+                    <a href="${properties.helpPageLink}" target="_blank">
+                        <span class="tooltip-file-requirements tooltipstered"
+                              style="color: #003bde;">Help</span></a>
+                </div>
+            </div>
+            <div class="error-popup_back close-error-popup"></div>
+        </div>
+
+    </section>
+
+
+    <sly data-sly-use.common="core/wcm/components/commons/v1/templates.html"
+         data-sly-call="${common.placeholder @ isEmpty=!model.title, emptyTextAppend=resource.name}"></sly>
+</template>
+
+<sly data-sly-call="${renderDragDrop @ model=model}" />

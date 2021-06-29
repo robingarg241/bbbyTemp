@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:Iptc4xmpCore="http://iptc.org/std/Iptc4xmpCore/1.0/xmlns/" xmlns:exif="http://ns.adobe.com/exif/1.0/" xmlns:photoshop="http://ns.adobe.com/photoshop/1.0/" xmlns:tiff="http://ns.adobe.com/tiff/1.0/" xmlns:xmp="http://ns.adobe.com/xap/1.0/" xmlns:xmpMM="http://ns.adobe.com/xap/1.0/mm/" xmlns:stEvt="http://ns.adobe.com/xap/1.0/sType/ResourceEvent#" xmlns:stRef="http://ns.adobe.com/xap/1.0/sType/ResourceRef#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:bbby="http://www.bbby.com" xmlns:dam="http://www.day.com/dam/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:mix="http://www.jcp.org/jcr/mix/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    jcr:isCheckedOut="{Boolean}true"
+    jcr:mixinTypes="[mix:referenceable,mix:versionable]"
+    jcr:primaryType="dam:Asset"
+    jcr:uuid="0677d96d-7318-408a-81fb-1f046b96a261">
+    <jcr:content
+        cq:name="DAM Logo_Final.jpg"
+        cq:parentPath="/content/dam/bedbath/vendor-portal"
+        dam:assetState="processed"
+        dam:imageServerAsset="{Boolean}true"
+        dam:relativePath="bedbath/vendor-portal/DAM Logo_Final.jpg"
+        dam:s7damType="Image"
+        jcr:lastModified="{Date}2019-08-20T01:19:40.372-04:00"
+        jcr:lastModifiedBy="admin"
+        jcr:primaryType="dam:AssetContent">
+        <metadata
+            bbby:assetUpdate="no"
+            dam:Bitsperpixel="{Long}24"
+            dam:extracted="{Date}2019-08-20T01:17:54.727-04:00"
+            dam:Fileformat="JPEG"
+            dam:MIMEtype="image/jpeg"
+            dam:Numberofimages="{Long}1"
+            dam:Numberoftextualcomments="{Long}0"
+            dam:Physicalheightindpi="{Long}300"
+            dam:Physicalheightininches="{Decimal}10.0"
+            dam:Physicalwidthindpi="{Long}300"
+            dam:Physicalwidthininches="{Decimal}8.0"
+            dam:Progressive="no"
+            dam:scene7APIServer="https://s7sps1apissl.scene7.com"
+            dam:scene7CloudConfigPath="/conf/global/settings/cloudconfigs/dmscene7"
+            dam:scene7CompanyID="c|229673"
+            dam:scene7Domain="http://s7d1.scene7.com/"
+            dam:scene7File="BBBDMS7DYNAMEDIADEV/DAM Logo_Final"
+            dam:scene7FileStatus="PublishIncomplete"
+            dam:scene7Folder="BBBDMS7DYNAMEDIADEV/bedbath/vendor-portal/"
+            dam:scene7ID="a|754993893"
+            dam:scene7LastModified="{Long}1566278284804"
+            dam:scene7Name="DAM Logo_Final"
+            dam:scene7Type="Image"
+            dam:scene7UploadTimeStamp="{Date}2019-08-20T01:18:32.761-04:00"
+            dam:sha1="9f419fecaad457b3925079a9e037c8f48e2d0263"
+            dam:size="{Long}326049"
+            dc:format="image/jpeg"
+            dc:modified="{Date}2019-08-20T01:19:40.287-04:00"
+            exif:ColorSpace="{Long}1"
+            exif:PixelXDimension="{Long}2400"
+            exif:PixelYDimension="{Long}3000"
+            jcr:lastModified="{Date}2019-08-20T01:19:40.287-04:00"
+            jcr:lastModifiedBy="admin"
+            jcr:mixinTypes="[cq:Taggable]"
+            jcr:primaryType="nt:unstructured"
+            photoshop:ColorMode="{Long}3"
+            photoshop:DocumentAncestors="[CCD666D41B101F81675DF35B39E04726,adobe:docid:photoshop:0a27e559-6ca4-8c49-81c2-b47bf0fdafa2,adobe:docid:photoshop:390b21f6-53f1-f64b-a395-d23f8b0d3c7f,adobe:docid:photoshop:6192cb0b-fcd7-ba42-b2db-c166261d3296,adobe:docid:photoshop:62f7a62b-67e1-b543-92d5-c2a4be1b7bbd,adobe:docid:photoshop:a58a9335-66c7-4c4c-a9f0-86ed85e0627b,adobe:docid:photoshop:a8d24504-70a1-b240-a395-15d44124f102,xmp.did:aa238395-300a-4b22-86a2-cfc1dd2a378b]"
+            photoshop:DocumentAncestors_xmpArrayType="rdf:Bag"
+            photoshop:ICCProfile="sRGB IEC61966-2.1"
+            tiff:ImageLength="{Long}3000"
+            tiff:ImageWidth="{Long}2400"
+            tiff:Orientation="{Long}1"
+            tiff:ResolutionUnit="{Long}2"
+            tiff:XResolution="3000000/10000"
+            tiff:YResolution="3000000/10000"
+            xmp:CreateDate="{Date}2019-06-25T15:38:05.000-04:00"
+            xmp:CreatorTool="Adobe Photoshop CC (Macintosh)"
+            xmp:MetadataDate="{Date}2019-06-28T12:27:17.000-04:00"
+            xmp:ModifyDate="{Date}2019-06-28T12:27:17.000-04:00"
+            xmpMM:DocumentID="adobe:docid:photoshop:e5d85dd7-78a1-5143-be59-4d81b1292099"
+            xmpMM:InstanceID="xmp.iid:1f6ee115-a703-4a6d-96a2-22df3ce96cd0"
+            xmpMM:OriginalDocumentID="xmp.did:18d16332-3e9c-4e3d-8fec-2c2dbb1d81c7">
+            <xmpMM:History
+                jcr:primaryType="nt:unstructured"
+                xmpArraySize="{Long}9"
+                xmpArrayType="rdf:Seq"
+                xmpNodeType="xmpArray">
+                <_x0031_
+                    jcr:primaryType="nt:unstructured"
+                    stEvt:action="created"
+                    stEvt:instanceID="xmp.iid:18d16332-3e9c-4e3d-8fec-2c2dbb1d81c7"
+                    stEvt:softwareAgent="Adobe Photoshop CC (Macintosh)"
+                    stEvt:when="{Date}2019-06-25T15:38:05.000-04:00"
+                    xmpNodeType="xmpStruct"/>
+                <_x0032_
+                    jcr:primaryType="nt:unstructured"
+                    stEvt:action="saved"
+                    stEvt:changed="/"
+                    stEvt:instanceID="xmp.iid:53054124-fa6b-409a-831b-eadee401054d"
+                    stEvt:softwareAgent="Adobe Photoshop CC (Macintosh)"
+                    stEvt:when="{Date}2019-06-25T16:32:47.000-04:00"
+                    xmpNodeType="xmpStruct"/>
+                <_x0033_
+                    jcr:primaryType="nt:unstructured"
+                    stEvt:action="converted"
+                    stEvt:parameters="from image/jpeg to application/vnd.adobe.photoshop"
+                    xmpNodeType="xmpStruct"/>
+                <_x0034_
+                    jcr:primaryType="nt:unstructured"
+                    stEvt:action="derived"
+                    stEvt:parameters="converted from image/jpeg to application/vnd.adobe.photoshop"
+                    xmpNodeType="xmpStruct"/>
+                <_x0035_
+                    jcr:primaryType="nt:unstructured"
+                    stEvt:action="saved"
+                    stEvt:changed="/"
+                    stEvt:instanceID="xmp.iid:7c0ad41b-bbfb-4171-bbfd-1ce67940748b"
+                    stEvt:softwareAgent="Adobe Photoshop CC (Macintosh)"
+                    stEvt:when="{Date}2019-06-25T16:32:47.000-04:00"
+                    xmpNodeType="xmpStruct"/>
+                <_x0036_
+                    jcr:primaryType="nt:unstructured"
+                    stEvt:action="saved"
+                    stEvt:changed="/"
+                    stEvt:instanceID="xmp.iid:b25f63f2-ef75-4862-b6c6-c2bee3747b72"
+                    stEvt:softwareAgent="Adobe Photoshop CC (Macintosh)"
+                    stEvt:when="{Date}2019-06-28T12:27:17.000-04:00"
+                    xmpNodeType="xmpStruct"/>
+                <_x0037_
+                    jcr:primaryType="nt:unstructured"
+                    stEvt:action="converted"
+                    stEvt:parameters="from application/vnd.adobe.photoshop to image/jpeg"
+                    xmpNodeType="xmpStruct"/>
+                <_x0038_
+                    jcr:primaryType="nt:unstructured"
+                    stEvt:action="derived"
+                    stEvt:parameters="converted from application/vnd.adobe.photoshop to image/jpeg"
+                    xmpNodeType="xmpStruct"/>
+                <_x0039_
+                    jcr:primaryType="nt:unstructured"
+                    stEvt:action="saved"
+                    stEvt:changed="/"
+                    stEvt:instanceID="xmp.iid:1f6ee115-a703-4a6d-96a2-22df3ce96cd0"
+                    stEvt:softwareAgent="Adobe Photoshop CC (Macintosh)"
+                    stEvt:when="{Date}2019-06-28T12:27:17.000-04:00"
+                    xmpNodeType="xmpStruct"/>
+            </xmpMM:History>
+            <xmpMM:DerivedFrom
+                jcr:primaryType="nt:unstructured"
+                stRef:documentID="adobe:docid:photoshop:8ecdf824-d858-1f40-9605-80a5cb72e6ff"
+                stRef:instanceID="xmp.iid:b25f63f2-ef75-4862-b6c6-c2bee3747b72"
+                stRef:originalDocumentID="xmp.did:18d16332-3e9c-4e3d-8fec-2c2dbb1d81c7"
+                xmpNodeType="xmpStruct"/>
+            <Iptc4xmpCore:CreatorContactInfo jcr:primaryType="nt:unstructured"/>
+        </metadata>
+        <related jcr:primaryType="nt:unstructured"/>
+    </jcr:content>
+</jcr:root>

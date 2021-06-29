@@ -1,0 +1,5 @@
+#base=css
+
+owl-carousel.min.css
+pagination.min.css
+pdm-metadata.css

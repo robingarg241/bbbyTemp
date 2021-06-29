@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0" xmlns:rep="internal"
+    jcr:lastModified="{Date}2019-08-13T15:00:42.023-04:00"
+    jcr:lastModifiedBy="cameron.dietz@bedbath.com"
+    jcr:mixinTypes="[rep:AccessControllable]"
+    jcr:primaryType="sling:OrderedFolder">
+    <rep:policy/>
+    <jcr:content
+        jcr:primaryType="nt:unstructured"
+        jcr:title="Vendor Portal">
+        <folderThumbnail/>
+    </jcr:content>
+    <bbby-dam-logo.png/>
+    <images.PNG/>
+    <_x0032_75362167839858p.jpg/>
+    <style-guides/>
+    <BBB_Metadata_Template_Final_v1.0.xlsx/>
+    <DAM_x0020_Logo_Final.jpg/>
+    <DAM_x0020_Logo_Final.png/>
+    <_x0030_1_MultiAsset.jpg/>
+    <_x0030_1_SingleAsset.jpg/>
+    <DAM_x0020_ShotTypes.pdf/>
+</jcr:root>

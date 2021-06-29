@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workspaceFilter version="1.0">
+    <!-- System Users -->
+    <filter root="/home/users/system/bbby-com"/>
+
+    <!-- ACLs -->
+    <filter root="/content/dam/rep:policy"/>
+    <filter root="/content/bbby-com/rep:policy"/>
+    <filter root="/content/vendor/rep:policy"/>
+</workspaceFilter>

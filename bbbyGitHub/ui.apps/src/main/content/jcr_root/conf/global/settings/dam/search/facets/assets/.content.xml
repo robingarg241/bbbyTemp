@@ -1,0 +1,546 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    jcr:primaryType="cq:Page">
+    <jcr:content
+        cq:lastModified="{Date}2019-07-22T14:45:07.182-04:00"
+        cq:lastModifiedBy="admin"
+        jcr:primaryType="nt:unstructured"
+        jcr:title="Assets Admin Search Rail"
+        sling:resourceType="granite/ui/components/foundation/contsys"
+        maxGeneratedOrder="90"
+        predicatesConfig="/mnt/overlay/settings/dam/search/facets/formbuilderconfig/predicatetypes">
+        <items jcr:primaryType="nt:unstructured">
+            <pathbrowser
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="dam/gui/coral/components/admin/customsearch/searchpredicates/pathbrowserpredicate"
+                emptyText="Select Search Directory"
+                fieldLabel="Path Browser"
+                listOrder="21"
+                metaType="pathbrowser"
+                rootPath="/content/dam"/>
+            <searchtype
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="dam/gui/coral/components/admin/customsearch/searchpredicates/searchtypepredicate"
+                fieldLabel="Show"
+                metaType="searchtype"/>
+            <primaryUPC
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="dam/gui/coral/components/admin/customsearch/searchpredicates/multivaluepropertypredicate"
+                delimiterEnabled="{Boolean}true"
+                delimiterRegExp="\[,|\\t|\\r|\\n|\\r\\n]"
+                emptyText="Use comma delimiter separated multiple values"
+                fieldLabel="Multi Value Property Predicate"
+                listOrder="22"
+                metaType="multivalueproperty"
+                name="jcr:content/upcmetadata/*/primaryUPC"
+                text="Primary UPC"/>
+            <sku
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="dam/gui/coral/components/admin/customsearch/searchpredicates/multivaluepropertypredicate"
+                delimiterEnabled="{Boolean}true"
+                delimiterRegExp="\[,|\\t|\\r|\\n|\\r\\n]"
+                emptyText="Use comma delimiter separated multiple values"
+                fieldLabel="Multi Value Property Predicate"
+                listOrder="23"
+                metaType="multivalueproperty"
+                name="jcr:content/upcmetadata/*/sku"
+                text="SKU"/>
+            <associatedWebProductID
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="dam/gui/coral/components/admin/customsearch/searchpredicates/multivaluepropertypredicate"
+                delimiterEnabled="{Boolean}true"
+                delimiterRegExp="\[,|\\t|\\r|\\n|\\r\\n]"
+                emptyText="Use comma delimiter separated multiple values"
+                fieldLabel="Multi Value Property Predicate"
+                listOrder="24"
+                metaType="multivalueproperty"
+                name="jcr:content/upcmetadata/*/associatedWebProductID"
+                text="Associated Web Product ID"/>
+            <associatedCollection
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="dam/gui/coral/components/admin/customsearch/searchpredicates/multivaluepropertypredicate"
+                delimiterEnabled="{Boolean}true"
+                delimiterRegExp="\[,|\\t|\\r|\\n|\\r\\n]"
+                emptyText="Use comma delimiter separated multiple values"
+                fieldLabel="Multi Value Property Predicate"
+                listOrder="25"
+                metaType="multivalueproperty"
+                name="jcr:content/upcmetadata/*/associatedCollectionID"
+                text="Associated Collection ID"/>
+            <departmentName
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="dam/gui/coral/components/admin/customsearch/searchpredicates/propertypredicate"
+                fieldLabel="Property Predicate"
+                listOrder="27"
+                metaType="property"
+                name="jcr:content/metadata/bbby:departmentName"
+                text="Parent Department Name"/>
+            <departmentNumber
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="dam/gui/coral/components/admin/customsearch/searchpredicates/multivaluepropertypredicate"
+                delimiterEnabled="{Boolean}true"
+                delimiterRegExp="\[,|\\t|\\r|\\n|\\r\\n]"
+                emptyText="Use comma delimiter separated multiple values"
+                fieldLabel="Department Number"
+                listOrder="28"
+                metaType="multivalueproperty"
+                name="jcr:content/metadata/bbby:departmentNumber"
+                text="Parent Department Number"/>
+            <primaryVendorNumber
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="dam/gui/coral/components/admin/customsearch/searchpredicates/propertypredicate"
+                fieldLabel="Property Predicate"
+                listOrder="29"
+                metaType="property"
+                name="jcr:content/upcmetadata/*/primaryVendorNumber"
+                text="Primary Vendor Number"/>
+            <primaryVendorName
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="dam/gui/coral/components/admin/customsearch/searchpredicates/propertypredicate"
+                fieldLabel="Property Predicate"
+                listOrder="30"
+                metaType="property"
+                name="jcr:content/upcmetadata/*/primaryVendorName"
+                text="Primary Vendor Name"/>
+            <priorityFlag
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="dam/gui/coral/components/admin/customsearch/searchpredicates/optionspredicate"
+                listOrder="31"
+                metaType="listoptions"
+                name="jcr:content/upcmetadata/*/priorityFlag"
+                text="Priority Flag"
+                value="true">
+                <items jcr:primaryType="nt:unstructured">
+                    <critical
+                        jcr:primaryType="nt:unstructured"
+                        text="Critical"
+                        value="0-Critical/Advertised"/>
+                    <high
+                        jcr:primaryType="nt:unstructured"
+                        text="High"
+                        value="1-High"/>
+                    <medium
+                        jcr:primaryType="nt:unstructured"
+                        text="Medium"
+                        value="2-Medium"/>
+                    <low
+                        jcr:primaryType="nt:unstructured"
+                        text="Low"
+                        value="3-Low"/>
+                </items>
+            </priorityFlag>
+            <brandCode
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="dam/gui/coral/components/admin/customsearch/searchpredicates/propertypredicate"
+                fieldLabel="Property Predicate"
+                listOrder="32"
+                metaType="property"
+                name="jcr:content/upcmetadata/*/brand"
+                text="Brand Code and Name"/>
+            <BBBYWebDisabled
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="dam/gui/coral/components/admin/customsearch/searchpredicates/optionspredicate"
+                listOrder="33"
+                metaType="listoptions"
+                name="jcr:content/upcmetadata/*/bbbyWebDisabled"
+                singleSelect="{Boolean}true"
+                text="BBBY Web Disabled"
+                value="true">
+                <items jcr:primaryType="nt:unstructured">
+                    <yes
+                        jcr:primaryType="nt:unstructured"
+                        text="Yes"
+                        value="Yes"/>
+                    <no
+                        jcr:primaryType="nt:unstructured"
+                        text="No"
+                        value="No"/>
+                </items>
+            </BBBYWebDisabled>
+            <babyWebDisabled
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="dam/gui/coral/components/admin/customsearch/searchpredicates/optionspredicate"
+                listOrder="34"
+                metaType="listoptions"
+                name="jcr:content/upcmetadata/*/babyWebDisabled"
+                singleSelect="{Boolean}true"
+                text="BABY Web Disabled"
+                value="true">
+                <items jcr:primaryType="nt:unstructured">
+                    <yes
+                        jcr:primaryType="nt:unstructured"
+                        text="Yes"
+                        value="Yes"/>
+                    <no
+                        jcr:primaryType="nt:unstructured"
+                        text="No"
+                        value="No"/>
+                </items>
+            </babyWebDisabled>
+            <CAWebDisabled
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="dam/gui/coral/components/admin/customsearch/searchpredicates/optionspredicate"
+                listOrder="35"
+                metaType="listoptions"
+                name="jcr:content/upcmetadata/*/caWebDisabled"
+                singleSelect="{Boolean}true"
+                text="CA Web Disabled"
+                value="true">
+                <items jcr:primaryType="nt:unstructured">
+                    <yes
+                        jcr:primaryType="nt:unstructured"
+                        text="Yes"
+                        value="Yes"/>
+                    <no
+                        jcr:primaryType="nt:unstructured"
+                        text="No"
+                        value="No"/>
+                </items>
+            </CAWebDisabled>
+            <BBBYWebOffered
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="dam/gui/coral/components/admin/customsearch/searchpredicates/optionspredicate"
+                listOrder="36"
+                metaType="listoptions"
+                name="jcr:content/upcmetadata/*/bbbyWebOfferedFlag"
+                singleSelect="{Boolean}true"
+                text="BBBY Web Offered"
+                value="true">
+                <items jcr:primaryType="nt:unstructured">
+                    <yes
+                        jcr:primaryType="nt:unstructured"
+                        text="Yes"
+                        value="Yes"/>
+                    <no
+                        jcr:primaryType="nt:unstructured"
+                        text="No"
+                        value="No"/>
+                </items>
+            </BBBYWebOffered>
+            <babyWebOffered
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="dam/gui/coral/components/admin/customsearch/searchpredicates/optionspredicate"
+                listOrder="37"
+                metaType="listoptions"
+                name="jcr:content/upcmetadata/*/babyWebOfferedFlag"
+                singleSelect="{Boolean}true"
+                text="BABY Web Offered"
+                value="true">
+                <items jcr:primaryType="nt:unstructured">
+                    <yes
+                        jcr:primaryType="nt:unstructured"
+                        text="Yes"
+                        value="Yes"/>
+                    <no
+                        jcr:primaryType="nt:unstructured"
+                        text="No"
+                        value="No"/>
+                </items>
+            </babyWebOffered>
+            <CAWebOffered
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="dam/gui/coral/components/admin/customsearch/searchpredicates/optionspredicate"
+                listOrder="38"
+                metaType="listoptions"
+                name="jcr:content/upcmetadata/*/caWebOfferedFlag"
+                singleSelect="{Boolean}true"
+                text="CA Web Offered"
+                value="true">
+                <items jcr:primaryType="nt:unstructured">
+                    <yes
+                        jcr:primaryType="nt:unstructured"
+                        text="Yes"
+                        value="Yes"/>
+                    <no
+                        jcr:primaryType="nt:unstructured"
+                        text="No"
+                        value="No"/>
+                </items>
+            </CAWebOffered>
+            <shotType
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="cq/gui/components/coral/common/admin/customsearch/searchpredicates/tagspredicate"
+                emptyText="Shot Type"
+                fieldLabel="Shot Type"
+                listOrder="39"
+                metaType="tags"
+                name="jcr:content/metadata/cq:tags"
+                rootPath="/content/cq:tags"/>
+            <product
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="dam/gui/coral/components/admin/customsearch/searchpredicates/multivaluepropertypredicate"
+                delimiterEnabled="{Boolean}true"
+                delimiterRegExp="\[,|\\t|\\r|\\n|\\r\\n]"
+                emptyText="Use comma delimiter separated multiple values"
+                fieldLabel="Product(EPH)"
+                listOrder="40"
+                metaType="multivalueproperty"
+                name="jcr:content/upcmetadata/*/product"
+                text="Product (EPH) "/>
+            <color
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="dam/gui/coral/components/admin/customsearch/searchpredicates/propertypredicate"
+                fieldLabel="Property Predicate"
+                listOrder="41"
+                metaType="property"
+                name="jcr:content/upcmetadata/*/colorCode"
+                text="Color"/>
+            <VDCItem
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="dam/gui/coral/components/admin/customsearch/searchpredicates/optionspredicate"
+                listOrder="42"
+                metaType="listoptions"
+                name="jcr:content/upcmetadata/*/vendorDirectToCustomerItem"
+                singleSelect="{Boolean}true"
+                text="Vendor Direct to Customer (VDC) Item"
+                value="true">
+                <items jcr:primaryType="nt:unstructured">
+                    <yes
+                        jcr:primaryType="nt:unstructured"
+                        text="Yes"
+                        value="Yes"/>
+                    <no
+                        jcr:primaryType="nt:unstructured"
+                        text="No"
+                        value="No"/>
+                </items>
+            </VDCItem>
+            <pdmBatchID
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="dam/gui/coral/components/admin/customsearch/searchpredicates/multivaluepropertypredicate"
+                delimiterEnabled="{Boolean}true"
+                delimiterRegExp="\[,|\\t|\\r|\\n|\\r\\n]"
+                emptyText="Use comma delimiter separated multiple values"
+                fieldLabel="Multi Value Property Predicate"
+                listOrder="43"
+                metaType="multivalueproperty"
+                name="jcr:content/upcmetadata/*/pdmBatchID"
+                text="PDM Batch ID"/>
+            <contentOpsReviewed
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="dam/gui/coral/components/admin/customsearch/searchpredicates/optionspredicate"
+                listOrder="45"
+                metaType="listoptions"
+                name="jcr:content/metadata/bbby:contentOpsReview"
+                singleSelect="{Boolean}true"
+                text="Content Ops Reviewed"
+                value="true">
+                <items jcr:primaryType="nt:unstructured">
+                    <yes
+                        jcr:primaryType="nt:unstructured"
+                        text="Yes"
+                        value="yes"/>
+                    <no
+                        jcr:primaryType="nt:unstructured"
+                        text="No"
+                        value="no"/>
+                </items>
+            </contentOpsReviewed>
+            <primaryImage
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="dam/gui/coral/components/admin/customsearch/searchpredicates/optionspredicate"
+                listOrder="46"
+                metaType="listoptions"
+                name="jcr:content/metadata/bbby:primaryImage"
+                singleSelect="{Boolean}true"
+                text="Primary Image"
+                value="true">
+                <items jcr:primaryType="nt:unstructured">
+                    <yes
+                        jcr:primaryType="nt:unstructured"
+                        text="Yes"
+                        value="yes"/>
+                    <no
+                        jcr:primaryType="nt:unstructured"
+                        text="No"
+                        value="no"/>
+                </items>
+            </primaryImage>
+            <assetType
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="cq/gui/components/coral/common/admin/customsearch/searchpredicates/tagspredicate"
+                emptyText="Asset Type"
+                fieldLabel="Asset Type"
+                listOrder="47"
+                metaType="tags"
+                name="jcr:content/metadata/cq:tags"
+                rootPath="/content/cq:tags"/>
+            <mimetype
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="dam/gui/coral/components/admin/customsearch/omnisearchpredicates/filetypepredicate"
+                fieldLabel="File Type"
+                isSuggestable="{Boolean}true"
+                listOrder="48"
+                metaType="filetypelist"
+                name="jcr:content/metadata/dc:format"
+                open="{Boolean}false"
+                optionPaths="/libs/dam/content/predicates/omnisearch/mimetypes"
+                text="File Type"
+                value="true"/>
+            <dms7
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/coral/foundation/container"/>
+            <filesize
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="dam/gui/coral/components/admin/customsearch/searchpredicates/filesizepredicate"
+                fieldLabel="File Size"
+                listOrder="4"
+                metaType="filesize"
+                name="jcr:content/metadata/dam:size"
+                open="{Boolean}false"
+                optionPaths="[/libs/dam/options/predicates/filesize]"
+                text="File Size"/>
+            <assetlastmodified
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="dam/gui/coral/components/admin/customsearch/omnisearchpredicates/daterangepredicate"
+                afterLabel="Modified After"
+                beforeLabel="Modified Before"
+                displayedFormat="D MMMM YYYY hh:mm a"
+                fieldLabel="Last Modified"
+                listOrder="5"
+                metaType="daterange"
+                name="jcr:content/jcr:lastModified"
+                numericOffset="1"
+                open="{Boolean}false"
+                text="Last Modified"/>
+            <statusgroup
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="dam/gui/coral/components/admin/customsearch/searchpredicates/grouppredicate"
+                fieldLabel="Status"
+                listOrder="21"
+                metaType="statusgroup"
+                open="{Boolean}false"
+                text="Status">
+                <items jcr:primaryType="nt:unstructured">
+                    <publish
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="dam/gui/coral/components/admin/customsearch/searchpredicates/publishpredicate"
+                        fieldLabel="Publish"
+                        isSuggestable="{Boolean}true"
+                        listOrder="6"
+                        metaType="publish"
+                        name="jcr:content/cq:lastReplicationAction"
+                        open="{Boolean}false"
+                        optionPaths="/libs/dam/options/predicates/publish"
+                        singleSelect="{Boolean}true"
+                        text="Publish"
+                        value="true"/>
+                    <status
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="dam/gui/coral/components/admin/customsearch/searchpredicates/statuspredicate"
+                        fieldLabel="Approval"
+                        isSuggestable="{Boolean}true"
+                        listOrder="7"
+                        metaType="status"
+                        name="jcr:content/metadata/dam:status"
+                        open="{Boolean}false"
+                        optionPaths="/libs/dam/options/predicates/status"
+                        singleSelect="{Boolean}true"
+                        text="Approval"
+                        value="true"/>
+                    <checkout
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="dam/gui/coral/components/admin/customsearch/searchpredicates/checkoutpredicate"
+                        fieldLabel="Checkout"
+                        isSuggestable="{Boolean}true"
+                        listOrder="8"
+                        metaType="checkout"
+                        name="jcr:content/cq:drivelock"
+                        open="{Boolean}false"
+                        optionPaths="/libs/dam/options/predicates/checkout"
+                        singleSelect="{Boolean}true"
+                        text="Checkout"/>
+                    <checkedoutbypredicate
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="dam/gui/coral/components/admin/customsearch/searchpredicates/checkedoutbypredicate"
+                        emptyText="Checked Out By"
+                        fieldLabel="Checked Out By"
+                        listOrder="9"
+                        metaType="checkedoutby"
+                        name="jcr:content/cq:drivelock"
+                        text="Checked Out By"/>
+                    <expirystatus
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="dam/gui/coral/components/admin/customsearch/searchpredicates/expiredassetpredicate"
+                        fieldLabel="Expiry"
+                        listOrder="10"
+                        metaType="expirystatus"
+                        name="jcr:content/metadata/prism:expirationDate"
+                        open="{Boolean}false"
+                        text="Expiry"
+                        value="true"/>
+                </items>
+            </statusgroup>
+            <orientation
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="dam/gui/coral/components/admin/customsearch/searchpredicates/multivaluepropertypredicate"
+                delimiterEnabled="{Boolean}true"
+                delimiterRegExp="\[,|\\t|\\r|\\n|\\r\\n]"
+                emptyText="Use comma delimiter separated multiple values"
+                fieldLabel="Orientation"
+                listOrder="13"
+                metaType="multivalueproperty"
+                name="jcr:content/metadata/tiff:Orientation"
+                text="Orientation"/>
+            <style
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="cq/gui/components/coral/common/admin/customsearch/searchpredicates/tagspredicate"
+                emptyText="Style"
+                fieldLabel="Style"
+                listOrder="14"
+                metaType="tags"
+                name="jcr:content/metadata/cq:tags"
+                open="{Boolean}false"
+                rootPath="[properties:style]"
+                text="Style"/>
+            <insightsgroup
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="dam/gui/coral/components/admin/customsearch/searchpredicates/grouppredicate"
+                fieldLabel="Insights"
+                listOrder="22"
+                metaType="insightsgroup"
+                open="{Boolean}false"
+                text="Insights">
+                <items jcr:primaryType="nt:unstructured">
+                    <usagescore
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="dam/gui/coral/components/admin/customsearch/searchpredicates/rangepredicate"
+                        fieldLabel="Range Predicate"
+                        globalMinOffset="1"
+                        listOrder="17"
+                        metaType="range"
+                        name="jcr:content/usages/dam:score"
+                        text="Usage Score"/>
+                    <impressionscore
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="dam/gui/coral/components/admin/customsearch/searchpredicates/rangepredicate"
+                        fieldLabel="Range Predicate"
+                        globalMinOffset="1"
+                        listOrder="18"
+                        metaType="range"
+                        name="jcr:content/performance/dam:impressionCount"
+                        text="Impression Score"/>
+                    <clickscore
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="dam/gui/coral/components/admin/customsearch/searchpredicates/rangepredicate"
+                        fieldLabel="Range Predicate"
+                        globalMinOffset="1"
+                        listOrder="19"
+                        metaType="range"
+                        name="jcr:content/performance/dam:clickCount"
+                        text="Click Score"/>
+                    <channels
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="dam/gui/coral/components/admin/customsearch/searchpredicates/optionspredicate"
+                        listOrder="20"
+                        metaType="listoptions"
+                        name="jcr:content/usages/usedBy"
+                        optionPaths="/libs/dam/options/predicates/solutions"
+                        selectAllMode="{Boolean}true"
+                        text="Channels"
+                        value="true"/>
+                </items>
+            </insightsgroup>
+        </items>
+    </jcr:content>
+</jcr:root>

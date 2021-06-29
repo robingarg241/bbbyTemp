@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0"
+          xmlns:nt="http://www.jcp.org/jcr/nt/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0"
+          xmlns:granite="http://www.adobe.com/jcr/granite/1.0"
+    jcr:primaryType="nt:unstructured"
+    jcr:title="Background Image"
+    extraClientlibs="[bbby.widgets.showhidedialogfields]"
+    sling:resourceType="cq/gui/components/authoring/dialog">
+    <content
+        jcr:primaryType="nt:unstructured"
+        sling:resourceType="granite/ui/components/coral/foundation/container">
+        <items jcr:primaryType="nt:unstructured">
+            <tabs
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/coral/foundation/tabs"
+                maximized="{Boolean}true">
+                <items jcr:primaryType="nt:unstructured">
+                    <content
+                        jcr:primaryType="nt:unstructured"
+                        jcr:title="Content"
+                        sling:resourceType="granite/ui/components/coral/foundation/container"
+                        margin="{Boolean}true">
+                        <items jcr:primaryType="nt:unstructured">
+                            <columns
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/coral/foundation/fixedcolumns"
+                                margin="{Boolean}true">
+                                <items jcr:primaryType="nt:unstructured">
+                                    <column
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/coral/foundation/container">
+                                        <items jcr:primaryType="nt:unstructured">
+                                            <verticalAlignment
+                                                fieldLabel="Vertical Alignment"
+                                                jcr:primaryType="nt:unstructured"
+                                                name="./verticalAlignment"
+                                                sling:resourceType="granite/ui/components/coral/foundation/form/select">
+                                                <items jcr:primaryType="nt:unstructured">
+                                                    <option0 jcr:primaryType="nt:unstructured" text="Center" value="align-items-center"/>
+                                                    <option1 jcr:primaryType="nt:unstructured" text="Top" value="align-items-start"/>
+                                                    <option2 jcr:primaryType="nt:unstructured" text="Bottom" value="align-items-end"/>
+                                                </items>
+                                            </verticalAlignment>
+                                        </items>
+                                    </column>
+                                </items>
+                            </columns>
+                        </items>
+                    </content>
+                    <assetDesktop
+                        jcr:primaryType="nt:unstructured"
+                        jcr:title="Desktop Image"
+                        sling:resourceType="granite/ui/components/coral/foundation/container"
+                        margin="{Boolean}true">
+                        <items jcr:primaryType="nt:unstructured">
+                            <columns
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/coral/foundation/fixedcolumns"
+                                margin="{Boolean}true">
+                                <items jcr:primaryType="nt:unstructured">
+                                    <include
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/coral/foundation/include"
+                                        path="/apps/bbby/components/content/image/cq:dialog/content/items/tabs/items/assetDesktop/items/columns/items/column">
+                                    </include>
+                                    <column
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/coral/foundation/container">
+                                        <items jcr:primaryType="nt:unstructured">
+                                            <desktopUseFixedHeight
+                                                fieldLabel="Use Fixed Height"
+                                                jcr:primaryType="nt:unstructured"
+                                                name="./desktopUseFixedHeight"
+                                                sling:resourceType="granite/ui/components/coral/foundation/form/select">
+                                                <granite:data
+                                                    jcr:primaryType="nt:unstructured"
+                                                    coral3-dropdown-showhide=""
+                                                    coral3-showhide-target=".desktopUseFixedHeight-showhide-target"/>
+                                                <items jcr:primaryType="nt:unstructured">
+                                                    <option0 jcr:primaryType="nt:unstructured" text="No" value="false"/>
+                                                    <option1 jcr:primaryType="nt:unstructured" text="Yes" value="true"/>
+                                                </items>
+                                            </desktopUseFixedHeight>
+                                            <desktopFixedHeight
+                                                granite:class="hide desktopUseFixedHeight-showhide-target"
+                                                jcr:primaryType="nt:unstructured"
+                                                sling:resourceType="granite/ui/components/coral/foundation/container">
+                                                <granite:data jcr:primaryType="nt:unstructured" showhidetargetvalue="true"/>
+                                                <items jcr:primaryType="nt:unstructured">
+                                                    <desktopHeight
+                                                        fieldLabel="Height"
+                                                        jcr:primaryType="nt:unstructured"
+                                                        min="{Double}0.0"
+                                                        name="./desktopHeight"
+                                                        sling:resourceType="granite/ui/components/coral/foundation/form/numberfield"
+                                                        step="{Double}1.0"/>
+                                                    <desktopHeightUnit
+                                                        fieldDescription="When using vh, config only shows with 'View as Published'"
+                                                        fieldLabel="Height Unit"
+                                                        jcr:primaryType="nt:unstructured"
+                                                        name="./desktopHeightUnit"
+                                                        sling:resourceType="granite/ui/components/coral/foundation/form/select">
+                                                        <items jcr:primaryType="nt:unstructured">
+                                                            <option0 jcr:primaryType="nt:unstructured" text="px" value="px"/>
+                                                            <option1 jcr:primaryType="nt:unstructured" text="vh (% of screen)" value="vh"/>
+                                                        </items>
+                                                    </desktopHeightUnit>
+                                                </items>
+                                            </desktopFixedHeight>
+                                            <desktopVertFP
+                                                fieldDescription="0 for top, 100 for bottom"
+                                                fieldLabel="Vertical Focal Point"
+                                                jcr:primaryType="nt:unstructured"
+                                                max="{Double}100.0"
+                                                min="{Double}0.0"
+                                                name="./desktopVertFP"
+                                                sling:resourceType="granite/ui/components/coral/foundation/form/numberfield"
+                                                step="{Double}1.0"/>
+                                            <desktopHorzFP
+                                                fieldDescription="0 for left, 100 for right"
+                                                fieldLabel="Horizontal Focal Point"
+                                                jcr:primaryType="nt:unstructured"
+                                                max="{Double}100.0"
+                                                min="{Double}0.0"
+                                                name="./desktopHorzFP"
+                                                sling:resourceType="granite/ui/components/coral/foundation/form/numberfield"
+                                                step="{Double}1.0"/>
+                                        </items>
+                                    </column>
+                                </items>
+                            </columns>
+                        </items>
+                    </assetDesktop>
+                    <assetTablet
+                        jcr:primaryType="nt:unstructured"
+                        jcr:title="Tablet Image"
+                        sling:resourceType="granite/ui/components/coral/foundation/container"
+                        margin="{Boolean}true">
+                        <items jcr:primaryType="nt:unstructured">
+                            <columns
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/coral/foundation/fixedcolumns"
+                                margin="{Boolean}true">
+                                <items jcr:primaryType="nt:unstructured">
+                                    <include
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/coral/foundation/include"
+                                        path="/apps/bbby/components/content/image/cq:dialog/content/items/tabs/items/assetTablet/items/columns/items/column">
+                                    </include>
+                                    <column
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/coral/foundation/container">
+                                        <items jcr:primaryType="nt:unstructured">
+                                            <tabletOverrides
+                                                fieldLabel="Tablet Specific Layout (Override Desktop)"
+                                                jcr:primaryType="nt:unstructured"
+                                                name="./tabletOverrides"
+                                                sling:resourceType="granite/ui/components/coral/foundation/form/select">
+                                                <granite:data
+                                                    jcr:primaryType="nt:unstructured"
+                                                    coral3-dropdown-showhide=""
+                                                    coral3-showhide-target=".tabletOverrides-showhide-target"/>
+                                                <items jcr:primaryType="nt:unstructured">
+                                                    <option0 jcr:primaryType="nt:unstructured" text="No" value="false"/>
+                                                    <option1 jcr:primaryType="nt:unstructured" text="Yes" value="true"/>
+                                                </items>
+                                            </tabletOverrides>
+                                            <tabletOverrideFields
+                                                granite:class="hide tabletOverrides-showhide-target"
+                                                jcr:primaryType="nt:unstructured"
+                                                sling:resourceType="granite/ui/components/coral/foundation/container">
+                                                <granite:data jcr:primaryType="nt:unstructured" showhidetargetvalue="true"/>
+                                                <items jcr:primaryType="nt:unstructured">
+                                                <tabletUseFixedHeight
+                                                    fieldLabel="Use Fixed Height"
+                                                    jcr:primaryType="nt:unstructured"
+                                                    name="./tabletUseFixedHeight"
+                                                    sling:resourceType="granite/ui/components/coral/foundation/form/select">
+                                                    <granite:data
+                                                        jcr:primaryType="nt:unstructured"
+                                                        coral3-dropdown-showhide=""
+                                                        coral3-showhide-target=".tabletUseFixedHeight-showhide-target"/>
+                                                    <items jcr:primaryType="nt:unstructured">
+                                                        <option0 jcr:primaryType="nt:unstructured" text="No" value="false"/>
+                                                        <option1 jcr:primaryType="nt:unstructured" text="Yes" value="true"/>
+                                                    </items>
+                                                </tabletUseFixedHeight>
+                                                <tabletFixedHeight
+                                                    granite:class="hide tabletUseFixedHeight-showhide-target"
+                                                    jcr:primaryType="nt:unstructured"
+                                                    sling:resourceType="granite/ui/components/coral/foundation/container">
+                                                    <granite:data jcr:primaryType="nt:unstructured" showhidetargetvalue="true"/>
+                                                    <items jcr:primaryType="nt:unstructured">
+                                                        <tabletHeight
+                                                            fieldLabel="Height"
+                                                            jcr:primaryType="nt:unstructured"
+                                                            min="{Double}0.0"
+                                                            name="./tabletHeight"
+                                                            sling:resourceType="granite/ui/components/coral/foundation/form/numberfield"
+                                                            step="{Double}1.0"/>
+                                                        <tabletHeightUnit
+                                                            fieldDescription="When using vh, config only shows with 'View as Published'"
+                                                            fieldLabel="Height Unit"
+                                                            jcr:primaryType="nt:unstructured"
+                                                            name="./tabletHeightUnit"
+                                                            sling:resourceType="granite/ui/components/coral/foundation/form/select">
+                                                            <items jcr:primaryType="nt:unstructured">
+                                                                <option0 jcr:primaryType="nt:unstructured" text="px" value="px"/>
+                                                                <option1 jcr:primaryType="nt:unstructured" text="vh (% of screen)" value="vh"/>
+                                                            </items>
+                                                        </tabletHeightUnit>
+                                                    </items>
+                                                </tabletFixedHeight>
+                                                <tabletVertFP
+                                                    fieldDescription="0 for top, 100 for bottom"
+                                                    fieldLabel="Vertical Focal Point"
+                                                    jcr:primaryType="nt:unstructured"
+                                                    max="{Double}100.0"
+                                                    min="{Double}0.0"
+                                                    name="./tabletVertFP"
+                                                    sling:resourceType="granite/ui/components/coral/foundation/form/numberfield"
+                                                    step="{Double}1.0"/>
+                                                <tabletHorzFP
+                                                    fieldDescription="0 for left, 100 for right"
+                                                    fieldLabel="Horizontal Focal Point"
+                                                    jcr:primaryType="nt:unstructured"
+                                                    max="{Double}100.0"
+                                                    min="{Double}0.0"
+                                                    name="./tabletHorzFP"
+                                                    sling:resourceType="granite/ui/components/coral/foundation/form/numberfield"
+                                                    step="{Double}1.0"/>
+                                                </items>
+                                            </tabletOverrideFields>
+                                        </items>
+                                    </column>
+                                </items>
+                            </columns>
+                        </items>
+                    </assetTablet>
+                    <assetMobile
+                        jcr:primaryType="nt:unstructured"
+                        jcr:title="Mobile Image"
+                        sling:resourceType="granite/ui/components/coral/foundation/container"
+                        margin="{Boolean}true">
+                        <items jcr:primaryType="nt:unstructured">
+                            <columns
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/coral/foundation/fixedcolumns"
+                                margin="{Boolean}true">
+                                <items jcr:primaryType="nt:unstructured">
+                                    <include
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/coral/foundation/include"
+                                        path="/apps/bbby/components/content/image/cq:dialog/content/items/tabs/items/assetMobile/items/columns/items/column">
+                                    </include>
+                                    <column
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/coral/foundation/container">
+                                        <items jcr:primaryType="nt:unstructured">
+                                            <mobileOverrides
+                                                fieldLabel="Mobile Specific Layout (Override Desktop)"
+                                                jcr:primaryType="nt:unstructured"
+                                                name="./mobileOverrides"
+                                                sling:resourceType="granite/ui/components/coral/foundation/form/select">
+                                                <granite:data
+                                                    jcr:primaryType="nt:unstructured"
+                                                    coral3-dropdown-showhide=""
+                                                    coral3-showhide-target=".mobileOverrides-showhide-target"/>
+                                                <items jcr:primaryType="nt:unstructured">
+                                                    <option0 jcr:primaryType="nt:unstructured" text="No" value="false"/>
+                                                    <option1 jcr:primaryType="nt:unstructured" text="Yes" value="true"/>
+                                                </items>
+                                            </mobileOverrides>
+                                            <mobileOverrideFields
+                                                granite:class="hide mobileOverrides-showhide-target"
+                                                jcr:primaryType="nt:unstructured"
+                                                sling:resourceType="granite/ui/components/coral/foundation/container">
+                                                <granite:data jcr:primaryType="nt:unstructured" showhidetargetvalue="true"/>
+                                                <items jcr:primaryType="nt:unstructured">
+                                                <mobileUseFixedHeight
+                                                    fieldLabel="Use Fixed Height"
+                                                    jcr:primaryType="nt:unstructured"
+                                                    name="./mobileUseFixedHeight"
+                                                    sling:resourceType="granite/ui/components/coral/foundation/form/select">
+                                                    <granite:data
+                                                        jcr:primaryType="nt:unstructured"
+                                                        coral3-dropdown-showhide=""
+                                                        coral3-showhide-target=".mobileUseFixedHeight-showhide-target"/>
+                                                    <items jcr:primaryType="nt:unstructured">
+                                                        <option0 jcr:primaryType="nt:unstructured" text="No" value="false"/>
+                                                        <option1 jcr:primaryType="nt:unstructured" text="Yes" value="true"/>
+                                                    </items>
+                                                </mobileUseFixedHeight>
+                                                <mobileFixedHeight
+                                                    granite:class="hide mobileUseFixedHeight-showhide-target"
+                                                    jcr:primaryType="nt:unstructured"
+                                                    sling:resourceType="granite/ui/components/coral/foundation/container">
+                                                    <granite:data jcr:primaryType="nt:unstructured" showhidetargetvalue="true"/>
+                                                    <items jcr:primaryType="nt:unstructured">
+                                                        <mobileHeight
+                                                            fieldLabel="Height"
+                                                            jcr:primaryType="nt:unstructured"
+                                                            min="{Double}0.0"
+                                                            name="./mobileHeight"
+                                                            sling:resourceType="granite/ui/components/coral/foundation/form/numberfield"
+                                                            step="{Double}1.0"/>
+                                                        <mobileHeightUnit
+                                                            fieldDescription="When using vh, config only shows with 'View as Published'"
+                                                            fieldLabel="Height Unit"
+                                                            jcr:primaryType="nt:unstructured"
+                                                            name="./mobileHeightUnit"
+                                                            sling:resourceType="granite/ui/components/coral/foundation/form/select">
+                                                            <items jcr:primaryType="nt:unstructured">
+                                                                <option0 jcr:primaryType="nt:unstructured" text="px" value="px"/>
+                                                                <option1 jcr:primaryType="nt:unstructured" text="vh (% of screen)" value="vh"/>
+                                                            </items>
+                                                        </mobileHeightUnit>
+                                                    </items>
+                                                </mobileFixedHeight>
+                                                <mobileVertFP
+                                                    fieldDescription="0 for top, 100 for bottom"
+                                                    fieldLabel="Vertical Focal Point"
+                                                    jcr:primaryType="nt:unstructured"
+                                                    max="{Double}100.0"
+                                                    min="{Double}0.0"
+                                                    name="./mobileVertFP"
+                                                    sling:resourceType="granite/ui/components/coral/foundation/form/numberfield"
+                                                    step="{Double}1.0"/>
+                                                <mobileHorzFP
+                                                    fieldDescription="0 for left, 100 for right"
+                                                    fieldLabel="Horizontal Focal Point"
+                                                    jcr:primaryType="nt:unstructured"
+                                                    max="{Double}100.0"
+                                                    min="{Double}0.0"
+                                                    name="./mobileHorzFP"
+                                                    sling:resourceType="granite/ui/components/coral/foundation/form/numberfield"
+                                                    step="{Double}1.0"/>
+                                                </items>
+                                            </mobileOverrideFields>
+                                        </items>
+                                    </column>
+                                </items>
+                            </columns>
+                        </items>
+                    </assetMobile>
+                </items>
+            </tabs>
+        </items>
+    </content>
+</jcr:root>

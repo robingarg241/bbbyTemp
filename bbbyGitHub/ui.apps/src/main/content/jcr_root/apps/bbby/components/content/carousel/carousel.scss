@@ -1,0 +1,108 @@
+@import "styles/mixins/reset.scss";
+
+/**
+ *  Main css for carousel
+ */
+
+$dots-height: 40px;
+
+.cmp-carousel.owl-theme {
+    // Owl hides uninitialized carousels. In edit mode since carousel is never
+    // initialized so force display.
+    body.edit &, body.design & {
+        display: block !important;
+    }
+}
+
+.cmp-carousel {
+
+    &.cmp-carousel--has-arrows {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    &.cmp-carousel--has-dots {
+        margin-bottom: $dots-height;
+    }
+    &.cmp-carousel--has-dots-up {
+        margin-bottom: 0;
+
+        .owl-dots {
+            bottom: $dots-height / 3;
+        }
+    }
+
+    /* nav / arrows */
+    .owl-nav {
+        &.disabled {
+            .owl-prev, .owl-next {
+                display: none;
+            }
+        }
+    }
+    .owl-prev, .owl-next {
+        @include reset-button;
+        color: $dark;
+        font-size: 2em;
+        opacity: .8;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+
+        &:before {
+            @include fa-icon();
+            @extend .fa;
+        }
+    }
+    .owl-prev {
+        left: 10px;
+        &:before { @extend .fa-chevron-left; }
+    }
+    .owl-next {
+        right: 10px;
+        &:before { @extend .fa-chevron-right; }
+    }
+
+    .owl-dots {
+        position: absolute;
+        text-align: center;
+        width: 100%;
+        margin: 0 !important;
+        padding: 0 !important;
+        bottom: -$dots-height;
+    }
+    .owl-dot {
+        @include reset-button;
+        margin: 0 spacer(1);
+        display: inline-block;
+
+        & > span:before {
+            @include fa-icon();
+            @extend .fa;
+            @extend .fa-circle-o;
+        }
+    }
+
+    @include media-breakpoint-up(md) {
+        .owl-nav {
+            // show nav starting at sm
+            &:not(.disabled) { display: block; }
+            .owl-prev { left: 15px; }
+            .owl-next { right: 15px; }
+        }
+    }
+
+    @include media-breakpoint-up(lg) {
+        .owl-nav {
+            .owl-prev { left: 20px; }
+            .owl-next { right: 20px; }
+        }
+    }
+
+    @include media-breakpoint-up(xl) {
+        .owl-nav {
+            .owl-prev { left: 40px; }
+            .owl-next { right: 40px; }
+        }
+    }
+}

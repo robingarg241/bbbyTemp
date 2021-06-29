@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    jcr:primaryType="sling:OsgiConfig"
+    rules="[sling/servlet/default:::thumb\\.(140\\.100|319\\.319|48\\.48),cq:Dialog:::(infinity|overlay\\.infinity|[0-10]),cq:ClientLibraryFolder:::(min|ACSHASH[0-9a-z]+|min\\.ACSHASH[0-9a-z]+),dam:Asset:::img\[wt\]\\.(3600\\.3600|1920\\.1920|1200\\.1200|600\\.600|140\\.100|319\\.319|48\\.48),cq:Page:::scaffolding,cq:Page:::sitemap]"/>

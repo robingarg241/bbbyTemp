@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0"
+          xmlns:nt="http://www.jcp.org/jcr/nt/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0"
+          xmlns:granite="http://www.adobe.com/jcr/granite/1.0"
+          jcr:primaryType="nt:unstructured"
+          jcr:title="Iframe"
+          sling:resourceType="cq/gui/components/authoring/dialog"
+          extraClientlibs="[bbby.widgets.showhidedialogfields]">
+    <content
+        jcr:primaryType="nt:unstructured"
+        sling:resourceType="granite/ui/components/coral/foundation/container">
+        <items jcr:primaryType="nt:unstructured">
+            <tabs
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/coral/foundation/tabs"
+                maximized="{Boolean}true">
+                <items jcr:primaryType="nt:unstructured">
+                    <General
+                        jcr:primaryType="nt:unstructured"
+                        jcr:title="General"
+                        sling:resourceType="granite/ui/components/coral/foundation/container"
+                        margin="{Boolean}true">
+                        <items jcr:primaryType="nt:unstructured">
+                            <columns
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/coral/foundation/fixedcolumns"
+                                margin="{Boolean}true">
+                                <items jcr:primaryType="nt:unstructured">
+                                    <column
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/coral/foundation/container">
+                                        <items jcr:primaryType="nt:unstructured">
+                                            <Name
+                                                jcr:primaryType="nt:unstructured"
+                                                sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                                                fieldDescription="The name attribute specifies a name for the iframe."
+                                                name="./name"
+                                                fieldLabel="Name"/>
+                                            <!--selector-->
+                                            <srcSelect
+                                                jcr:primaryType="nt:unstructured"
+                                                sling:resourceType="granite/ui/components/coral/foundation/form/select"
+                                                defaultValue="src"
+                                                fieldLabel="Src Type"
+                                                name="./srcType"
+                                                required="{Boolean}false">
+                                                <granite:data
+                                                    jcr:primaryType="nt:unstructured"
+                                                    coral3-dropdown-showhide=""
+                                                    coral3-showhide-target=".src-hide-show"/>
+                                                <items jcr:primaryType="nt:unstructured">
+                                                    <src jcr:primaryType="nt:unstructured" text="src" value="src"/>
+                                                    <srcdoc jcr:primaryType="nt:unstructured" text="srcdoc"
+                                                            value="srcdoc"/>
+                                                </items>
+                                            </srcSelect>
+                                            <src
+                                                granite:class="show src-hide-show"
+                                                jcr:primaryType="nt:unstructured"
+                                                sling:resourceType="granite/ui/components/coral/foundation/container"
+                                                required="{Boolean}true">
+                                                <granite:data jcr:primaryType="nt:unstructured"
+                                                              showhidetargetvalue="src"/>
+                                                <items jcr:primaryType="nt:unstructured">
+                                                    <src
+                                                        jcr:primaryType="nt:unstructured"
+                                                        sling:resourceType="granite/ui/components/coral/foundation/form/pathfield"
+                                                        fieldDescription="Url of the content you wish to display in iframe."
+                                                        name="./src"
+                                                        fieldLabel="Src"
+                                                        rootPath="/content"/>
+                                                </items>
+                                            </src>
+                                            <srcdoc
+                                                granite:class="show src-hide-show"
+                                                jcr:primaryType="nt:unstructured"
+                                                sling:resourceType="granite/ui/components/coral/foundation/container"
+                                                required="{Boolean}true">
+                                                <granite:data jcr:primaryType="nt:unstructured"
+                                                              showhidetargetvalue="srcdoc"/>
+
+                                                <items jcr:primaryType="nt:unstructured">
+                                                    <srcDoc
+                                                        jcr:primaryType="nt:unstructured"
+                                                        sling:resourceType="granite/ui/components/coral/foundation/form/textarea"
+                                                        fieldDescription="srcdoc of the content you wish to display in iframe."
+                                                        name="./srcdoc"
+                                                        fieldLabel="Srcdoc"/>
+                                                </items>
+                                            </srcdoc>
+                                            <Sandbox
+                                                jcr:primaryType="nt:unstructured"
+                                                sling:resourceType="granite/ui/components/foundation/form/fieldset"
+                                                text="Sandbox"
+                                                margin="{Boolean}true">
+                                                <items jcr:primaryType="nt:unstructured">
+                                                    <allow-forms
+                                                        jcr:primaryType="nt:unstructured"
+                                                        sling:resourceType="granite/ui/components/coral/foundation/form/checkbox"
+                                                        checked="true"
+                                                        fieldDescription="Enable form submission."
+                                                        name="./allowForms"
+                                                        text="allow forms"
+                                                        uncheckedValue=""
+                                                        value="allow-forms"/>
+                                                    <allow-pointer-lock
+                                                        jcr:primaryType="nt:unstructured"
+                                                        sling:resourceType="granite/ui/components/coral/foundation/form/checkbox"
+                                                        checked="true"
+                                                        fieldDescription="Enable APIs."
+                                                        name="./allowPointerLock"
+                                                        text="allow pointer lock"
+                                                        uncheckedValue=""
+                                                        value="allow-pointer-lock"/>
+                                                    <allow-popups
+                                                        jcr:primaryType="nt:unstructured"
+                                                        sling:resourceType="granite/ui/components/coral/foundation/form/checkbox"
+                                                        checked="true"
+                                                        fieldDescription="Enable popups."
+                                                        name="./allowPopups"
+                                                        text="allow popups"
+                                                        uncheckedValue=""
+                                                        value="allow-popups"/>
+                                                    <allow-same-origin
+                                                        jcr:primaryType="nt:unstructured"
+                                                        sling:resourceType="granite/ui/components/coral/foundation/form/checkbox"
+                                                        checked="true"
+                                                        fieldDescription="Allow the iframe content to be treated as being from the same origin."
+                                                        name="./allowSameOrigin"
+                                                        text="allow same origin"
+                                                        uncheckedValue=""
+                                                        value="allow-same-origin"/>
+                                                    <allow-scripts
+                                                        jcr:primaryType="nt:unstructured"
+                                                        sling:resourceType="granite/ui/components/coral/foundation/form/checkbox"
+                                                        checked="true"
+                                                        fieldDescription="Enable scripts."
+                                                        name="./allowScripts"
+                                                        text="allow scripts"
+                                                        uncheckedValue=""
+                                                        value="allow-scripts"/>
+                                                    <allow-top-navigation
+                                                        jcr:primaryType="nt:unstructured"
+                                                        sling:resourceType="granite/ui/components/coral/foundation/form/checkbox"
+                                                        checked="true"
+                                                        fieldDescription="Allow the iframe content to navigate its top-level browsing context."
+                                                        name="./allowTopNavigation"
+                                                        text="allow top navigation"
+                                                        uncheckedValue=""
+                                                        value="allow-top-navigation"/>
+                                                </items>
+                                            </Sandbox>
+                                        </items>
+                                    </column>
+                                </items>
+                            </columns>
+                        </items>
+                    </General>
+                    <!-- window tab -->
+                    <Window
+                        jcr:primaryType="nt:unstructured"
+                        jcr:title="Window"
+                        sling:resourceType="granite/ui/components/coral/foundation/container"
+                        margin="{Boolean}true">
+                        <items jcr:primaryType="nt:unstructured">
+                            <columns
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/coral/foundation/fixedcolumns"
+                                margin="{Boolean}true">
+                                <items jcr:primaryType="nt:unstructured">
+                                    <column
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/coral/foundation/container">
+                                        <items jcr:primaryType="nt:unstructured">
+                                            <Width
+                                                jcr:primaryType="nt:unstructured"
+                                                sling:resourceType="granite/ui/components/coral/foundation/form/numberfield"
+                                                fieldLabel="Iframe Width"
+                                                fieldDescription="Width of the iframe"
+                                                min="0"
+                                                name="./width"
+                                                value="500"
+                                                step="1"/>
+                                            <widthPercent
+                                                jcr:primaryType="nt:unstructured"
+                                                sling:resourceType="granite/ui/components/coral/foundation/form/checkbox"
+                                                name="./widthPercent"
+                                                text="Width Percent"
+                                                fieldDescription="Make Width value a percentage value"
+                                                value="%"/>
+                                            <Height
+                                                jcr:primaryType="nt:unstructured"
+                                                sling:resourceType="granite/ui/components/coral/foundation/form/numberfield"
+                                                fieldLabel="Iframe Height"
+                                                fieldDescription="height of the iframe"
+                                                min="0"
+                                                name="./height"
+                                                value="500"
+                                                step="1"/>
+                                            <heightPercent
+                                                jcr:primaryType="nt:unstructured"
+                                                sling:resourceType="granite/ui/components/coral/foundation/form/checkbox"
+                                                name="./heightPercent"
+                                                text="Height Percent"
+                                                fieldDescription="Make Height value a percentage value"
+                                                value="%"/>
+                                        </items>
+                                    </column>
+                                </items>
+                            </columns>
+                        </items>
+                    </Window>
+                    <!-- background tab -->
+                    <background
+                        jcr:primaryType="nt:unstructured"
+                        jcr:title="Background"
+                        sling:resourceType="granite/ui/components/coral/foundation/container"
+                        margin="{Boolean}true">
+                        <items jcr:primaryType="nt:unstructured">
+                            <columns
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/coral/foundation/fixedcolumns"
+                                margin="{Boolean}true">
+                                <items jcr:primaryType="nt:unstructured">
+                                    <include
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/coral/foundation/include"
+                                        path="/apps/bbby/components/content/background/cq:dialog/content/items/tabs/items/properties/items/columns/items/column">
+                                    </include>
+                                </items>
+                            </columns>
+                        </items>
+                    </background>
+                </items>
+            </tabs>
+        </items>
+    </content>
+</jcr:root>

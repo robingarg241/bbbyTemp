@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0"
+          className="com.bbby.aem.core.models.component.Breadcrumbs"
+          componentGroup="BBBY Content"
+          cq:isContainer="{Boolean}false"
+          cq:noDecoration="{Boolean}false"
+          jcr:primaryType="cq:Component"
+          jcr:title="BreadCrumbs"/>

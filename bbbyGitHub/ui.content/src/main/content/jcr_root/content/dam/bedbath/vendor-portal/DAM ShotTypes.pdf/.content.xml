@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:pdf="http://ns.adobe.com/pdf/1.3/" xmlns:xmp="http://ns.adobe.com/xap/1.0/" xmlns:xmpMM="http://ns.adobe.com/xap/1.0/mm/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dam="http://www.day.com/dam/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:mix="http://www.jcp.org/jcr/mix/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    jcr:mixinTypes="[mix:referenceable]"
+    jcr:primaryType="dam:Asset"
+    jcr:uuid="d429d2df-6d9a-49c1-8cec-3d37f57a01aa">
+    <jcr:content
+        cq:lastReplicated="{Date}2019-09-05T17:04:40.412-04:00"
+        cq:lastReplicatedBy="admin"
+        cq:lastReplicationAction="Activate"
+        dam:assetState="processed"
+        dam:relativePath="bedbath/vendor-portal/DAM ShotTypes.pdf"
+        jcr:lastModified="{Date}2019-09-04T15:58:55.117-04:00"
+        jcr:lastModifiedBy="damadmin"
+        jcr:mixinTypes="[cq:ReplicationStatus]"
+        jcr:primaryType="dam:AssetContent">
+        <metadata
+            dam:Author="Stacey Della torre"
+            dam:extracted="{Date}2019-09-04T15:58:54.714-04:00"
+            dam:numPages="{Long}11"
+            dam:Physicalheightininches="{Decimal}7.5"
+            dam:Physicalwidthininches="{Decimal}13.333333333333334"
+            dam:Producer="Microsoft® PowerPoint® for Office 365"
+            dam:scene7APIServer="https://s7sps1apissl.scene7.com"
+            dam:scene7CloudConfigPath="/conf/global/settings/cloudconfigs/dmscene7"
+            dam:scene7CompanyID="c|229673"
+            dam:scene7Domain="http://s7d1.scene7.com/"
+            dam:scene7File="BBBDMS7DYNAMEDIADEV/DAM ShotTypespdf"
+            dam:scene7FileStatus="PublishComplete"
+            dam:scene7Folder="BBBDMS7DYNAMEDIADEV/bedbath/vendor-portal/"
+            dam:scene7ID="a|761002387"
+            dam:scene7LastModified="{Long}1567627141056"
+            dam:scene7Name="DAM ShotTypespdf"
+            dam:scene7Type="Pdf"
+            dam:scene7UploadTimeStamp="{Date}2019-09-04T16:01:11.138-04:00"
+            dam:sha1="3cecd4be99be74680556cc3b1b3eef383a43fc85"
+            dam:size="{Long}1039518"
+            dc:creator="[Stacey Della torre]"
+            dc:creator_xmpArrayType="rdf:Seq"
+            dc:format="application/pdf"
+            dc:title="PowerPoint Presentation"
+            jcr:mixinTypes="[cq:Taggable]"
+            jcr:primaryType="nt:unstructured"
+            jcr:title="PowerPoint Presentation"
+            pdf:Producer="Microsoft® PowerPoint® for Office 365"
+            xmp:CreateDate="{Date}2019-09-04T15:42:13.000-04:00"
+            xmp:CreatorTool="Microsoft® PowerPoint® for Office 365"
+            xmp:MetadataDate="{Date}2019-09-04T15:58:37.000-04:00"
+            xmp:ModifyDate="{Date}2019-09-04T15:58:37.000-04:00"
+            xmpMM:DocumentID="uuid:5493D326-387C-45B8-879D-B866C34A80F9"
+            xmpMM:InstanceID="uuid:96045b14-212e-4bff-af79-02353c328dad"/>
+        <related jcr:primaryType="nt:unstructured"/>
+    </jcr:content>
+</jcr:root>

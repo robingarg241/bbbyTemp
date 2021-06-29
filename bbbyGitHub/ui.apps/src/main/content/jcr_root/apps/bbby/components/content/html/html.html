@@ -1,0 +1,62 @@
+<span class="edit-start container" data-sly-test="${wcmmode.edit || wcmmode.preview || wcmmode.design}">&nbsp;${resource.name} <i class="fa fa-long-arrow-down" aria-hidden="true"></i></span>
+
+<template data-sly-template.renderHtml="${ @ model }">
+    <sly data-sly-use.model="com.bbby.aem.core.models.component.Html"></sly>
+
+    <style>
+        ${model.htmlContent.css @ context='unsafe'}
+    </style>
+    <div id="${model.componentId}">
+        ${model.htmlContent.text @ context='html'}
+    </div>
+    <script>
+        ${model.htmlContent.js @ context='unsafe'}
+    </script>
+
+    <sly data-sly-call="${htmlEditorConfig @ model=model}"/>
+</template>
+
+<!--/*
+    model: Must implement the HtmlEditorTrait
+*/-->
+<template data-sly-template.htmlEditorConfig="${ @ model }">
+    <sly data-sly-test="${wcmmode.edit || wcmmode.preview || wcmmode.design}">
+        <!--/* Alert for missing variables */-->
+        <div id="${model.componentId}-unresolved-vars" data-sly-test.unresolvedVars="${model.unresolvedHtmlVariables}">
+            <span data-sly-repeat.var="${unresolvedVars}"
+                class="html-missing-var"
+                style="display: none;">${var}</span>
+            <script>
+                (function() {
+                    var thisDivElem = document.getElementById('${model.componentId @ context="scriptString"}-unresolved-vars')
+                    var missingVarElems = thisDivElem.getElementsByClassName('html-missing-var')
+
+                    var missingStr = 'MISSING:\n\n'
+                    for (var i = 0; i < missingVarElems.length; i++) {
+                        missingStr += missingVarElems[i].innerHTML + '\n'
+                    }
+
+                    missingStr += '\nComponent contains unresolved variables:'
+                    missingStr += '\n${resource.path @ context="scriptString"}'
+                    alert(missingStr)
+                })();
+            </script>
+        </div>
+
+        <div
+            data-sly-test="${wcmmode.edit || wcmmode.preview || wcmmode.design}"
+            class="ace-editor-config"
+            data-config="${model.htmlEditorConfigJson @ context='attribute'}"
+            style="display: none">
+        </div>
+    </sly>
+
+    <!--/* Placeholder */-->
+    <sly data-sly-use.common="core/wcm/components/commons/v1/templates.html"
+         data-sly-call="${common.placeholder @ isEmpty=!model.htmlContent.text && !model.htmlContent.js && !model.htmlContent.css, emptyTextAppend=resource.name}"></sly>
+
+</template>
+
+<sly data-sly-use.background="bbby/components/content/background/background.html"
+    data-sly-call="${background.renderBackground @ contentTemplate=renderHtml}" />
+

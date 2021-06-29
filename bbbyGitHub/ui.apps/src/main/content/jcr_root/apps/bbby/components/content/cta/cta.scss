@@ -1,0 +1,35 @@
+/**
+ *  Main css for cta
+ */
+
+.cmp-cta {
+    &.left { text-align: left; }
+    &.center { text-align: center; }
+    &.right { text-align: right; }
+
+    .btn {
+
+        background: transparent;
+        color: #007bff;
+        cursor: pointer;
+        opacity: 1;
+        pointer-events: all;
+        border: 2px solid #007bff;
+
+        font-family: $font-sans-serif-medium;
+        font-size: 14px;
+    
+    
+        &:first-child {
+            margin: 0 0;
+        }
+        &:hover {
+            background: #007bff;
+            color: white;
+        }
+
+        @include media-breakpoint-up(md) {
+            display: inline-block;
+        }
+    }
+}

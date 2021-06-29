@@ -1,0 +1,12 @@
+{
+  "name": "content-fragment",
+  "version": "1.0.0",
+  "description": "This is a wrapper component for core content fragment component",
+  "main": "content-fragment.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "UNLICENSED",
+  "private": true
+}

@@ -1,0 +1,7 @@
+function check() {
+    log.info("GOTO step: lastTaskAction = " + workflowData.getMetaDataMap().get("lastTaskAction", ""));
+    if (workflowData.getMetaDataMap().get("lastTaskAction", "") == "Accept") {
+        return false;
+    }
+    return true;
+}

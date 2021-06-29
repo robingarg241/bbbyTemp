@@ -1,0 +1,12 @@
+{
+  "name": "text-image-two-column",
+  "version": "1.0.0",
+  "description": "",
+  "main": "text-image-two-column.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "UNLICENSED",
+  "private": true
+}

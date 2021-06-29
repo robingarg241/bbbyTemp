@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:granite="http://www.adobe.com/jcr/granite/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    xmlns:rep="internal"
+    cq:showOnCreate="{Boolean}false"
+    jcr:primaryType="nt:unstructured"
+    jcr:title="SEO"
+    sling:resourceType="granite/ui/components/coral/foundation/fixedcolumns">
+    <items jcr:primaryType="nt:unstructured">
+        <column
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="granite/ui/components/foundation/container">
+            <items jcr:primaryType="nt:unstructured">
+                <seo
+                    jcr:primaryType="nt:unstructured"
+                    jcr:title="SEO"
+                    sling:resourceType="granite/ui/components/coral/foundation/form/fieldset">
+                    <items jcr:primaryType="nt:unstructured">
+                        <seoPageTitle
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/foundation/form/textfield"
+                            cq-msm-lockable="seoPageTitle"
+                            fieldDescription="The title that will be shown in Google search results."
+                            fieldLabel="SEO Page Title"
+                            name="./seoPageTitle"
+                            renderReadOnly="true"/>
+                        <seoDescription
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/foundation/form/textarea"
+                            cq-msm-lockable="seoDescription"
+                            fieldDescription="The description that may be shown in Google search results."
+                            fieldLabel="SEO Description"
+                            name="./seoDescription"
+                            renderReadOnly="true"/>
+                        <changefreq
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/foundation/form/select"
+                            allowBulkEdit="true"
+                            cq-msm-lockable="changefreq"
+                            fieldDescription="How frequently the page is likely to change. This value provides general information to search engines and may not correlate exactly to how often they crawl the page. 'always' describes pages that change each time they are accessed."
+                            fieldLabel="Sitemap Change Frequency"
+                            name="./changefreq"
+                            renderReadOnly="true">
+                            <items jcr:primaryType="nt:unstructured">
+                                <default
+                                    jcr:primaryType="nt:unstructured"
+                                    text=""
+                                    value=""/>
+                                <always
+                                    jcr:primaryType="nt:unstructured"
+                                    text="Always"
+                                    value="always"/>
+                                <hourly
+                                    jcr:primaryType="nt:unstructured"
+                                    text="Hourly"
+                                    value="hourly"/>
+                                <daily
+                                    jcr:primaryType="nt:unstructured"
+                                    text="Daily"
+                                    value="daily"/>
+                                <weekly
+                                    jcr:primaryType="nt:unstructured"
+                                    text="Weekly"
+                                    value="weekly"/>
+                                <monthly
+                                    jcr:primaryType="nt:unstructured"
+                                    text="Monthly"
+                                    value="monthly"/>
+                                <yearly
+                                    jcr:primaryType="nt:unstructured"
+                                    text="Yearly"
+                                    value="yearly"/>
+                                <never
+                                    jcr:primaryType="nt:unstructured"
+                                    text="Never"
+                                    value="never"/>
+                            </items>
+                        </changefreq>
+                        <robotsOptions
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/foundation/form/select"
+                            allowBulkEdit="true"
+                            cq-msm-lockable="robotsOptions"
+                            fieldDescription="Default means no special rules. Rules apply to this page only. For the noindex meta tag to be effective, the page must not be blocked by a robots.txt file."
+                            fieldLabel="Robots Options"
+                            name="./robotsOptions"
+                            renderReadOnly="true">
+                            <items jcr:primaryType="nt:unstructured">
+                                <noRules
+                                    jcr:primaryType="nt:unstructured"
+                                    text="Default"
+                                    value="default"/>
+                                <noindex
+                                    jcr:primaryType="nt:unstructured"
+                                    text="No Index"
+                                    value="noindex"/>
+                                <noindexNoFollow
+                                    jcr:primaryType="nt:unstructured"
+                                    text="No Index, No Follow"
+                                    value="noindex, nofollow"/>
+                            </items>
+                        </robotsOptions>
+                    </items>
+                </seo>
+                <inherited
+                    jcr:primaryType="nt:unstructured"
+                    jcr:title="Inheritable Properties"
+                    sling:resourceType="granite/ui/components/coral/foundation/form/fieldset">
+                    <items jcr:primaryType="nt:unstructured">
+                        <seoTitleSuffix
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/foundation/form/textfield"
+                            cq-msm-lockable="seoTitleSuffix"
+                            fieldDescription="Text appended to the end of HTML &lt;title> tag"
+                            fieldLabel="SEO Page Title Suffix"
+                            name="./seoTitleSuffix"
+                            renderReadOnly="true"/>
+                        <seoTwitterHandle
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/foundation/form/textfield"
+                            cq-msm-lockable="seoTwitterHandle"
+                            fieldDescription="Twitter handle associated with the site"
+                            fieldLabel="Site Twitter Handle"
+                            name="./seoTwitterHandle"
+                            renderReadOnly="true"/>
+                        <priority
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/foundation/form/select"
+                            cq-msm-lockable="priority"
+                            fieldDescription="The priority of this URL relative to other URLs on your site. Valid values range from 0.0 to 1.0. This value does not affect how your pages are compared to pages on other sites. Default is 0.5. This value is inherited by child pages (except when set on the homepage)."
+                            fieldLabel="Sitemap Priority"
+                            name="./priority"
+                            renderReadOnly="true">
+                            <items jcr:primaryType="nt:unstructured">
+                                <default
+                                    jcr:primaryType="nt:unstructured"
+                                    text=""
+                                    value=""/>
+                                <p0
+                                    jcr:primaryType="nt:unstructured"
+                                    text="0.0"
+                                    value="0.0"/>
+                                <p1
+                                    jcr:primaryType="nt:unstructured"
+                                    text="0.1"
+                                    value="0.1"/>
+                                <p2
+                                    jcr:primaryType="nt:unstructured"
+                                    text="0.2"
+                                    value="0.2"/>
+                                <p3
+                                    jcr:primaryType="nt:unstructured"
+                                    text="0.3"
+                                    value="0.3"/>
+                                <p4
+                                    jcr:primaryType="nt:unstructured"
+                                    text="0.4"
+                                    value="0.4"/>
+                                <p5
+                                    jcr:primaryType="nt:unstructured"
+                                    text="0.5"
+                                    value="0.5"/>
+                                <p6
+                                    jcr:primaryType="nt:unstructured"
+                                    text="0.6"
+                                    value="0.6"/>
+                                <p7
+                                    jcr:primaryType="nt:unstructured"
+                                    text="0.7"
+                                    value="0.7"/>
+                                <p8
+                                    jcr:primaryType="nt:unstructured"
+                                    text="0.8"
+                                    value="0.8"/>
+                                <p9
+                                    jcr:primaryType="nt:unstructured"
+                                    text="0.9"
+                                    value="0.9"/>
+                                <p10
+                                    jcr:primaryType="nt:unstructured"
+                                    text="1.0"
+                                    value="1.0"/>
+                            </items>
+                        </priority>
+                    </items>
+                </inherited>
+            </items>
+        </column>
+    </items>
+</jcr:root>

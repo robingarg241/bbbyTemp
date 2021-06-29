@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:granite="http://www.adobe.com/jcr/granite/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    jcr:primaryType="nt:unstructured">
+    <project
+        jcr:primaryType="nt:unstructured"
+        sling:resourceType="granite/ui/components/coral/foundation/fixedcolumns"
+        margin="{Boolean}true">
+        <items jcr:primaryType="nt:unstructured">
+            <taskdefaultvalues
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="cq/gui/components/projects/admin/inbox/setupDefaultValuesFromTask"
+                taskId="${param.taskid}"/>
+            <column1
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/coral/foundation/container">
+                <items jcr:primaryType="nt:unstructured">
+                    <cover
+                        granite:rel="cq-projects-wizard-fileupload"
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="cq/gui/components/projects/admin/wizard/properties/thumbnail"
+                        autoStart="{Boolean}false"
+                        mimeTypes="[image/png,image/jpeg,image/gif]"
+                        multiple="{Boolean}false"
+                        name="coverImage"
+                        sizeLimit="100000000"
+                        text="Add Thumbnail"
+                        uploadUrl="will_be_replaced"
+                        useHTML5="{Boolean}false"/>
+                </items>
+            </column1>
+            <column2
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/coral/foundation/container">
+                <items jcr:primaryType="nt:unstructured">
+                    <tabs
+                        granite:rel="cq-projects-wizard-tabslist"
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="granite/ui/components/coral/foundation/tabs"
+                        margin="{Boolean}true"
+                        orientation="horizontal">
+                        <parentConfig
+                            jcr:primaryType="nt:unstructured"
+                            active="{Boolean}true"/>
+                        <items jcr:primaryType="nt:unstructured">
+                            <basic
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/foundation/include"
+                                path="nordstrom/projects/wizards/common/basic/project"/>
+                            <advanced
+                                jcr:primaryType="nt:unstructured"
+                                jcr:title="Advanced"
+                                sling:resourceType="granite/ui/components/coral/foundation/container">
+                                <items jcr:primaryType="nt:unstructured">
+                                    <nodename
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                                        fieldDescription="The name is used to create the URI"
+                                        fieldLabel="Name"
+                                        name="name"
+                                        required="{Boolean}true"
+                                        validation="foundation.jcr.name"/>
+                                </items>
+                            </advanced>
+                        </items>
+                    </tabs>
+                </items>
+            </column2>
+        </items>
+    </project>
+    <master
+        jcr:primaryType="nt:unstructured"
+        sling:resourceType="granite/ui/components/coral/foundation/fixedcolumns"
+        margin="{Boolean}true">
+        <items jcr:primaryType="nt:unstructured">
+            <column1
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/coral/foundation/container">
+                <items jcr:primaryType="nt:unstructured">
+                    <cover
+                        granite:rel="cq-projects-wizard-fileupload"
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="cq/gui/components/projects/admin/wizard/properties/thumbnail"
+                        autoStart="{Boolean}false"
+                        mimeTypes="[image/png,image/jpeg,image/gif]"
+                        multiple="{Boolean}false"
+                        name="coverImage"
+                        sizeLimit="100000000"
+                        text="Add Thumbnail"
+                        uploadUrl="will_be_replaced"
+                        useHTML5="{Boolean}false"/>
+                </items>
+            </column1>
+            <column2
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/coral/foundation/container">
+                <items jcr:primaryType="nt:unstructured">
+                    <tabs
+                        granite:rel="cq-projects-wizard-tabslist"
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="granite/ui/components/coral/foundation/tabs"
+                        margin="{Boolean}true"
+                        orientation="horizontal">
+                        <parentConfig
+                            jcr:primaryType="nt:unstructured"
+                            active="{Boolean}true"/>
+                        <items jcr:primaryType="nt:unstructured">
+                            <basic
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/foundation/include"
+                                path="nordstrom/projects/wizards/common/basic/master"/>
+                            <advanced
+                                jcr:primaryType="nt:unstructured"
+                                jcr:title="Advanced"
+                                sling:resourceType="granite/ui/components/coral/foundation/container">
+                                <items jcr:primaryType="nt:unstructured">
+                                    <nodename
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                                        fieldDescription="The name is used to create the URI"
+                                        fieldLabel="Name"
+                                        name="name"
+                                        required="{Boolean}true"
+                                        validation="foundation.jcr.name"/>
+                                </items>
+                            </advanced>
+                        </items>
+                    </tabs>
+                </items>
+            </column2>
+        </items>
+    </master>
+    <projecttemplatestep
+        jcr:primaryType="nt:unstructured"
+        sling:resourceType="granite/ui/components/coral/foundation/form/advancedselect"
+        maximized="{Boolean}true"
+        name="modelId"
+        required="{Boolean}true">
+        <granite:data
+            jcr:primaryType="nt:unstructured"
+            foundation-validation-ui="none"/>
+        <field
+            granite:class="cq-projects-startwork-modelselect"
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="granite/ui/components/coral/foundation/masonry"
+            selectionCount="single"
+            selectionMode="{Boolean}true">
+            <datasource
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="cq/gui/components/projects/admin/datasource/workflowmodelsdatasource"
+                itemResourceType="cq/gui/components/projects/admin/card/workflowmodelcard"/>
+        </field>
+    </projecttemplatestep>
+</jcr:root>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0"
+    jcr:primaryType="cq:WorkflowLauncher"
+    condition=""
+    conditions="[../dam:assetState==processed]"
+    description="Launcher config to Initiate Call to PDM from Approved DAM folder"
+    disabledFeatures="[]"
+    enabled="{Boolean}true"
+    eventType="{Long}16"
+    excludeList="jcr:lastModified,dc:modified,dc:format,jcr:lastModifiedBy,dam:scene7(.*),event-user-data:changedByWorkflowProcess,bbby:instructions,bbby:vendorPortalID,bbby:displayOnWeb,bbby:sequence,bbby:vendorEmail,bbby:requestedBy,bbby:batchID,bbby:rejectionFollowup,bbby:additionalUPC,bbby:assetUpdate,bbby:reasonForAssetUpdate,bbby:uploadedAssetName,bbby:finalImageApproverName,bbby:srtProvided,bbby:bbbyToCreateSRT,bbby:departmentName,bbby:departmentNumber,dc:title,dc:description,dc:language,bbby:rejectionReason,bbby:imagesetNightlyPublish,dam:path"
+    features="[]"
+    glob="/content/dam/bbby/approved_dam(/.*)/jcr:content/metadata"
+    nodetype="nt:unstructured"
+    runModes="author"
+    workflow="/var/workflow/models/call-to-pdm"/>

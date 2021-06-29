@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0"
+          xmlns:nt="http://www.jcp.org/jcr/nt/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0"
+          xmlns:granite="http://www.adobe.com/jcr/granite/1.0"
+          jcr:primaryType="nt:unstructured"
+          jcr:title="BreadCrumb"
+          sling:resourceType="cq/gui/components/authoring/dialog"
+          extraClientlibs="[bbby.widgets.showhidedialogfields]">
+    <content
+        jcr:primaryType="nt:unstructured"
+        sling:resourceType="granite/ui/components/coral/foundation/container">
+        <items jcr:primaryType="nt:unstructured">
+            <tabs
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/coral/foundation/tabs"
+                maximized="{Boolean}true">
+                <items jcr:primaryType="nt:unstructured">
+                    <properties
+                        jcr:primaryType="nt:unstructured"
+                        jcr:title="Properties"
+                        sling:resourceType="granite/ui/components/coral/foundation/container"
+                        margin="{Boolean}true">
+                        <items jcr:primaryType="nt:unstructured">
+                            <columns
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/coral/foundation/fixedcolumns"
+                                margin="{Boolean}true">
+                                <items jcr:primaryType="nt:unstructured">
+                                    <column
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/coral/foundation/container">
+                                        <items jcr:primaryType="nt:unstructured">
+                                            <listType
+                                                jcr:primaryType="nt:unstructured"
+                                                sling:resourceType="granite/ui/components/coral/foundation/form/select"
+                                                defaultValue="dynamic"
+                                                fieldLabel="Build list using"
+                                                name="./listType">
+                                                <granite:data
+                                                    jcr:primaryType="nt:unstructured"
+                                                    coral3-dropdown-showhide=""
+                                                    coral3-showhide-target=".list-option-listfrom-showhide-target"/>
+                                                <items jcr:primaryType="nt:unstructured">
+                                                    <dynamic jcr:primaryType="nt:unstructured" text="Dynamic Values"
+                                                             value="dynamicFields"/>
+                                                    <static jcr:primaryType="nt:unstructured" text="Static Values"
+                                                            value="staticFields"/>
+                                                </items>
+                                            </listType>
+                                            <breadcrumbsTextColor
+                                                jcr:primaryType="nt:unstructured"
+                                                sling:resourceType="granite/ui/components/coral/foundation/form/select"
+                                                defaultValue="darkText"
+                                                fieldLabel="Text Color"
+                                                name="./breadcrumbsTextColor">
+                                                <items jcr:primaryType="nt:unstructured">
+                                                    <dark jcr:primaryType="nt:unstructured" text="Dark"
+                                                          value="dark-text"/>
+                                                    <light jcr:primaryType="nt:unstructured" text="Light"
+                                                           value="white-text"/>
+                                                </items>
+                                            </breadcrumbsTextColor>
+                                            <dynamicFields
+                                                granite:class="show list-option-listfrom-showhide-target"
+                                                jcr:primaryType="nt:unstructured"
+                                                sling:resourceType="granite/ui/components/coral/foundation/form/fieldset"
+                                                jcr:title="Options for Dynamic Values"
+                                                renderReadOnly="{Boolean}true"
+                                                required="{Boolean}true">
+                                                <granite:data jcr:primaryType="nt:unstructured"
+                                                              showhidetargetvalue="dynamicFields"/>
+                                                <items jcr:primaryType="nt:unstructured">
+                                                    <startLevelAbs
+                                                        disabled="{Boolean}false"
+                                                        fieldDescription="2 (default) for /content/bbby-com/en-us. Applies to this page only. Inherits from design if not set."
+                                                        fieldLabel="Start Level Override (Absolute)"
+                                                        jcr:primaryType="nt:unstructured"
+                                                        name="./startLevelAbs"
+                                                        sling:resourceType="granite/ui/components/coral/foundation/form/numberfield"
+                                                        min="0"
+                                                        value="2"
+                                                        step="1"
+                                                    />
+                                                    <stopLevelRel
+                                                        disabled="{Boolean}false"
+                                                        fieldDescription="0 (default) for current page. Applies to this page only. Inherits from design if not set."
+                                                        fieldLabel="Stop Level Override (Relative)"
+                                                        jcr:primaryType="nt:unstructured"
+                                                        name="./stopLevelRel"
+                                                        sling:resourceType="granite/ui/components/coral/foundation/form/numberfield"
+                                                        min="0"
+                                                        value="0"
+                                                        step="1"
+                                                    />
+                                                </items>
+                                            </dynamicFields>
+                                            <staticFields
+                                                granite:class="show list-option-listfrom-showhide-target"
+                                                jcr:primaryType="nt:unstructured"
+                                                sling:resourceType="granite/ui/components/coral/foundation/form/fieldset"
+                                                jcr:title="Options for Static Values"
+                                                renderReadOnly="{Boolean}true"
+                                                required="{Boolean}true">
+                                                <granite:data jcr:primaryType="nt:unstructured"
+                                                              showhidetargetvalue="staticFields"/>
+                                                <items jcr:primaryType="nt:unstructured">
+                                                    <ctaList fieldLabel="Static Items"
+                                                             jcr:primaryType="nt:unstructured"
+                                                             composite="{Boolean}true"
+                                                             sling:resourceType="granite/ui/components/coral/foundation/form/multifield">
+                                                        <field
+                                                            granite:class="cq-paragraphstyles-field"
+                                                            jcr:primaryType="nt:unstructured"
+                                                            sling:resourceType="granite/ui/components/coral/foundation/container"
+                                                            name="./staticPagePaths">
+                                                            <items jcr:primaryType="nt:unstructured">
+                                                                <title
+                                                                    fieldDescription="The text of the static link"
+                                                                    fieldLabel="Title"
+                                                                    jcr:primaryType="nt:unstructured"
+                                                                    name="./title"
+                                                                    sling:resourceType="granite/ui/components/coral/foundation/form/textfield"/>
+                                                                <link
+                                                                    fieldLabel="Link"
+                                                                    jcr:primaryType="nt:unstructured"
+                                                                    name="./link"
+                                                                    rootPath="/content/"
+                                                                    sling:resourceType="granite/ui/components/coral/foundation/form/pathbrowser"/>
+                                                                <newTab
+                                                                    fieldLabel="New Tab"
+                                                                    jcr:primaryType="nt:unstructured"
+                                                                    name="./newTab"
+                                                                    sling:resourceType="granite/ui/components/coral/foundation/form/checkbox"
+                                                                    text="New Tab"
+                                                                    value="true"/>
+                                                            </items>
+                                                        </field>
+                                                    </ctaList>
+                                                </items>
+                                            </staticFields>
+                                        </items>
+                                    </column>
+                                </items>
+                            </columns>
+                        </items>
+                    </properties>
+                    <background
+                        jcr:primaryType="nt:unstructured"
+                        jcr:title="Background"
+                        sling:resourceType="granite/ui/components/coral/foundation/container"
+                        margin="{Boolean}true">
+                        <items jcr:primaryType="nt:unstructured">
+                            <columns
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/coral/foundation/fixedcolumns"
+                                margin="{Boolean}true">
+                                <items jcr:primaryType="nt:unstructured">
+                                    <include
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/coral/foundation/include"
+                                        path="/apps/bbby/components/content/background/cq:dialog/content/items/tabs/items/properties/items/columns/items/column">
+                                    </include>
+                                </items>
+                            </columns>
+                        </items>
+                    </background>
+                </items>
+            </tabs>
+        </items>
+    </content>
+</jcr:root>

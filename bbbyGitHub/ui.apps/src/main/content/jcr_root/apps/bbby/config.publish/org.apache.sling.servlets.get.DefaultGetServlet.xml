@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0"
+    jcr:primaryType="sling:OsgiConfig"
+
+    aliases="xml:pdf"
+    index="{Boolean}false"
+    index.files="[\[index\,index.html\]]"
+    enable.html="{Boolean}false"
+    enable.txt="{Boolean}false"
+    enable.json="{Boolean}true"
+    enable.xml="{Boolean}false"
+    json.maximumresults="{Long}1000"
+/>

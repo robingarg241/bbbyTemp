@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:mix="http://www.jcp.org/jcr/mix/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    jcr:primaryType="cq:Page">
+    <jcr:content
+        cq:contextHubPath="/etc/cloudsettings/default/contexthub"
+        cq:contextHubSegmentsPath="/etc/segmentation/contexthub"
+        cq:lastModified="{Date}2018-07-06T08:42:35.365-07:00"
+        cq:lastModifiedBy="admin"
+        cq:lastReplicated="{Date}2017-04-19T17:54:57.299Z"
+        cq:lastReplicatedBy="admin"
+        cq:lastReplicationAction="Activate"
+        cq:template="/apps/bbby/templates/page-home"
+        jcr:isCheckedOut="{Boolean}true"
+        jcr:language="en_us"
+        jcr:lastModified="{Date}2017-01-12T14:10:42.957-08:00"
+        jcr:lastModifiedBy="admin"
+        jcr:mixinTypes="[mix:versionable]"
+        jcr:primaryType="cq:PageContent"
+        jcr:title="Home Page"
+        jcr:uuid="5cfa4c34-7909-4241-a507-a77c2064e2bc"
+        sling:resourceType="bbby/components/structure/pageHome"
+        analytics.pageId="homepage:homepage:QVnrVqdx"
+        footerPath="/content/bbby-components/homepage/fragments/jcr:content/par/text_jumbo"
+        headerPath="/content/bbby-components/homepage/fragments/jcr:content/par/navbar"
+        robotsOptions="default"
+        seoTwitterHandle="@herodigital">
+        <par
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="wcm/foundation/components/parsys">
+            <carousel
+                jcr:created="{Date}2016-10-06T16:28:58.728-07:00"
+                jcr:createdBy="admin"
+                jcr:lastModified="{Date}2018-07-02T11:15:01.344-07:00"
+                jcr:lastModifiedBy="admin"
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="bbby/components/content/carousel"
+                adaptiveHeight="true"
+                autoplay="true"
+                autoplaySpeed="3000"
+                backgroundColor="bg-transparent"
+                backgroundHorizontalSpacing="w-100"
+                dots="true"
+                moveDotsUp="true"
+                speed="500">
+                <slides
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="bbby/components/content/carousel/parsys">
+                    <hero_banner
+                        jcr:created="{Date}2016-10-04T10:24:54.782-07:00"
+                        jcr:createdBy="admin"
+                        jcr:lastModified="{Date}2018-07-02T11:09:47.397-07:00"
+                        jcr:lastModifiedBy="admin"
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="bbby/components/content/hero-banner"
+                        fileReference="/content/dam/bbby-components/landscape-image.jpg"
+                        heroBannerAlignment="left"
+                        heroBannerTextColor="text-white"
+                        superTitle="Hero Digital"
+                        title="Slide 1"
+                        titleSize="_empty_">
+                        <image
+                            jcr:lastModified="{Date}2016-10-06T16:34:19.434-07:00"
+                            jcr:lastModifiedBy="admin"
+                            jcr:primaryType="nt:unstructured"
+                            fileReference="/content/dam/bbby-components/landscape-image.jpg"/>
+                        <cta jcr:primaryType="nt:unstructured">
+                            <item0
+                                jcr:primaryType="nt:unstructured"
+                                link="/content/bbby-components/homepage/about-us"
+                                title="About Us"/>
+                        </cta>
+                    </hero_banner>
+                    <hero_banner_copy
+                        jcr:created="{Date}2016-10-04T10:24:54.782-07:00"
+                        jcr:createdBy="admin"
+                        jcr:lastModified="{Date}2018-07-02T11:09:53.634-07:00"
+                        jcr:lastModifiedBy="admin"
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="bbby/components/content/hero-banner"
+                        fileReference="/content/dam/bbby-components/portrait-image.jpg"
+                        heroBannerAlignment="left"
+                        heroBannerTextColor="text-white"
+                        superTitle="Hero Digital"
+                        title="Slide 2"
+                        titleSize="_empty_">
+                        <image
+                            jcr:lastModified="{Date}2016-10-06T16:34:28.078-07:00"
+                            jcr:lastModifiedBy="admin"
+                            jcr:primaryType="nt:unstructured"
+                            fileReference="/content/dam/bbby-components/landscape-image.jpg"/>
+                        <cta jcr:primaryType="nt:unstructured">
+                            <item0
+                                jcr:primaryType="nt:unstructured"
+                                link="/content/bbby-components/homepage/article"
+                                title="Learn More"/>
+                        </cta>
+                    </hero_banner_copy>
+                </slides>
+            </carousel>
+            <text_jumbo
+                jcr:created="{Date}2016-10-04T10:28:54.461-07:00"
+                jcr:createdBy="admin"
+                jcr:lastModified="{Date}2018-07-06T08:42:35.361-07:00"
+                jcr:lastModifiedBy="admin"
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="bbby/components/content/text-jumbo"
+                backgroundBottomSpacing="pb-3"
+                backgroundColor="bg-transparent"
+                backgroundHorizontalSpacing="_none_"
+                backgroundTopSpacing="pt-3"
+                text="&lt;p>Duis laoreet tempus egestas. Aenean sed blandit lorem, et ullamcorper nisi. Pellentesque molestie scelerisque elit et viverra. Nullam dapibus pulvinar risus scelerisque tincidunt.&lt;br />&#xd;&#xa;&lt;/p>&#xd;&#xa;"
+                textIsRich="true"
+                textJumboAlignment="center"
+                textJumboTitleSize="h2"
+                title="Donec ultrices ullamcorper libero"/>
+            <text_image_two_colum
+                jcr:created="{Date}2016-10-04T10:26:02.883-07:00"
+                jcr:createdBy="admin"
+                jcr:lastModified="{Date}2018-07-02T11:10:10.778-07:00"
+                jcr:lastModifiedBy="admin"
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="bbby/components/content/text-image-two-column"
+                backgroundColor="bg-transparent"
+                backgroundHorizontalSpacing="px-0"
+                fileReference="/content/dam/bbby-components/landscape-image.jpg"
+                imageAlt="potted plants"
+                superTitle="Morbi efficitur"
+                text="&lt;p>Vestibulum venenatis bibendum dui, varius ullamcorper nisi fringilla a. Etiam rhoncus maximus hendrerit. In elementum, massa at scelerisque molestie, nunc ante mollis lacus, a tempus ipsum nibh id sem. Fusce id urna volutpat lacus blandit ultricies nec ac neque. Cras rutrum nibh nunc, sed eleifend ante laoreet at. Vivamus tempus ex at venenatis luctus. Nulla vel leo velit.&lt;br>&#xa;&lt;/p>&#xa;"
+                textImage2ColumnRendition="imageLeft"
+                textIsRich="true"
+                title="Lorem ipsum dolor sit amet">
+                <image
+                    jcr:lastModified="{Date}2016-10-04T10:29:58.375-07:00"
+                    jcr:lastModifiedBy="admin"
+                    jcr:primaryType="nt:unstructured"
+                    fileReference="/content/dam/bbby-components/portrait-image.jpg"/>
+                <cta jcr:primaryType="nt:unstructured">
+                    <item0
+                        jcr:primaryType="nt:unstructured"
+                        link="/content/bbby-components/homepage/article"
+                        title="Article Demo"/>
+                </cta>
+            </text_image_two_colum>
+        </par>
+        <image
+            jcr:lastModified="{Date}2017-01-12T14:10:42.957-08:00"
+            jcr:lastModifiedBy="admin"
+            jcr:primaryType="nt:unstructured"
+            fileReference="/content/dam/bbby-components/portrait-image.jpg"/>
+    </jcr:content>
+    <about-us/>
+    <article/>
+    <search-results/>
+    <fragments/>
+</jcr:root>

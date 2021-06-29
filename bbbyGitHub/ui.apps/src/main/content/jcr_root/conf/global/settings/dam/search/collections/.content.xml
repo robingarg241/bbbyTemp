@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:granite="http://www.adobe.com/jcr/granite/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    jcr:primaryType="cq:Page">
+    <jcr:content
+        jcr:primaryType="nt:unstructured"
+        jcr:title="Asset Collections Admin Search Rail"
+        sling:resourceType="granite/ui/components/coral/foundation/container"
+        maxGeneratedOrder="14"
+        predicatesConfig="/mnt/overlay/settings/dam/search/facets/formbuilderconfig/predicatetypes">
+        <items jcr:primaryType="nt:unstructured">
+            <type
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/coral/foundation/form/hidden"
+                metaType="hidden"
+                name="type"
+                value="nt:unstructured"/>
+            <charset
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/coral/foundation/form/hidden"
+                ignoreData="{Boolean}true"
+                metaType="hidden"
+                name="_charset_"
+                value="utf-8"/>			
+            <daterangepredicate
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="cq/gui/components/coral/common/admin/customsearch/searchpredicates/daterangepredicate"
+                afterLabel="Modified After"
+                beforeLabel="Modified Before"
+                displayedFormat="D MMMM YYYY hh:mm a"
+                fieldLabel="Modified Date"
+                listOrder="320"
+                metaType="daterange"
+                name="jcr:lastModified"/>
+            <resourcetype
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="dam/gui/coral/components/admin/customsearch/searchpredicates/typepredicategroup">
+                <items jcr:primaryType="nt:unstructured">
+                    <property
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="granite/ui/components/foundation/form/hidden"
+                        name="group.0_property"
+                        value="sling:resourceType"/>
+                    <searchcollection
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="granite/ui/components/foundation/form/hidden"
+                        name="group.0_property.1_value"
+                        value="dam/smartcollection"/>
+                    <damcollection
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="granite/ui/components/foundation/form/hidden"
+                        name="group.0_property.0_value"
+                        value="dam/collection"/>
+                    <superTypeProperty
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="granite/ui/components/foundation/form/hidden"
+                        name="group.1_property"
+                        value="sling:resourceSuperType"/>
+                    <slingcollection
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="granite/ui/components/foundation/form/hidden"
+                        name="group.1_property.value"
+                        value="sling/collection"/>
+                </items>
+            </resourcetype>
+            <tags
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="cq/gui/components/coral/common/admin/customsearch/searchpredicates/tagspredicate"
+                emptyText="Select Tag(s)"
+                fieldLabel="Tags"
+                listOrder="1000"
+                metaType="tags"
+                name="cq:tags"
+                tagsOr="{Boolean}true"/>
+            <path
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="dam/gui/coral/components/commons/ui/form/dampathhiddenfield"
+                metaType="hidden"
+                relativePath="/collections"/>
+			<createdByLabel 
+				jcr:primaryType="nt:unstructured"
+				sling:resourceType="dam/gui/coral/components/admin/customsearch/searchpredicates/grouppredicate"
+				metaType="group"
+				listOrder="21"
+				text="Created By">
+					<items 
+						jcr:primaryType="nt:unstructured">
+							<createdBy
+								jcr:primaryType="nt:unstructured"
+								sling:resourceType="cq/gui/components/coral/common/admin/customsearch/searchpredicates/userpredicate"
+								name="jcr:createdBy"
+								metaType="user"
+								listOrder="93"
+								fieldLabel="Created By"
+								emptyText="Created By"
+								text="Created By"/>
+					</items>
+			</createdByLabel>
+        </items>
+    </jcr:content>
+</jcr:root>

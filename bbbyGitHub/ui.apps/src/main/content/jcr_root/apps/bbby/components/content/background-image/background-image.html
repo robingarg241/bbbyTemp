@@ -1,0 +1,57 @@
+<span class="edit-start container" data-sly-test="${wcmmode.edit || wcmmode.preview || wcmmode.design}">&nbsp;${resource.name} <i class="fa fa-arrow-circle-down" aria-hidden="true"></i></span>
+
+<!--/*
+    Main HTL template for the background-image component.
+    model: The java model containing all fields necessary for rendering.
+*/-->
+<template data-sly-template.renderBackgroundImage="${ @ model }">
+    <!--/* Author only CSS to prevent VH issue due to use of of the author mode iframe */-->
+    <style data-sly-test="${(model.mobileHeightUnit == 'vh' || model.tabletHeightUnit == 'vh' || model.dekstopHeightUnit == 'vh') && (wcmmode.edit || wcmmode.preview || wcmmode.design)}">
+        @media only screen and (max-width: ${model.maxWidthMobile @ context='styleString'}px) {
+            body.edit #${model.componentId @ context='styleToken'} {
+                height: 500px !important;
+            }
+        }
+    </style>
+
+    <!--/* Fixed height CSS */-->
+    <style>
+        #${model.componentId @ context='styleToken'} {
+            height: ${model.mobileHeightCss @ context='styleString'};
+        }
+        @media only screen and (min-width: ${model.minWidthTablet @ context='styleString'}px)  and (max-width: ${model.maxWidthTablet @ context='styleString'}px){
+            #${model.componentId @ context='styleToken'} {
+                height: ${model.tabletHeightCss @ context='styleString'};
+            }
+        }
+        @media only screen and (min-width: ${model.minWidthDesktop @ context='styleString'}px) {
+            #${model.componentId @ context='styleToken'} {
+                height: ${model.desktopHeightCss @ context='styleString'};
+            }
+        }
+    </style>
+
+    <!--/* Background image CSS */-->
+    <sly data-sly-use.image="bbby/components/content/image/image.html"
+        data-sly-call="${image.renderBackgroundImageStyleTag @
+            id=model.componentId,
+            model=model,
+            extraModsDesktop=model.desktopImageStyles,
+            extraModsTablet=model.tabletImageStyles,
+            extraModsMobile=model.mobileImageStyles
+        }" />
+
+    <!--/* Component markup */-->
+    <section id="${model.componentId}" class="cmp-background-image d-flex ${model.verticalAlignment}">
+        <div class="container" data-sly-resource="${'content' @ resourceType='wcm/foundation/components/parsys'}"></div>
+    </section>
+
+    <!--/* Placeholder */-->
+    <sly data-sly-use.common="core/wcm/components/commons/v1/templates.html"
+         data-sly-call="${common.placeholder @ isEmpty=!model.fileReference && !model.fileReferenceTablet && !model.fileReferenceMobile , emptyTextAppend=resource.name}"></sly>
+
+</template>
+
+<sly data-sly-use.model="com.bbby.aem.core.models.component.BackgroundImage" data-sly-call="${renderBackgroundImage @ model=model}" />
+
+<span class="edit-start container" data-sly-test="${wcmmode.edit || wcmmode.preview || wcmmode.design}">&nbsp;${resource.name} <i class="fa fa-arrow-circle-up" aria-hidden="true"></i></span>

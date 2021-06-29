@@ -1,0 +1,31 @@
+/**
+ *  Main css for article
+ */
+
+.cmp-article {
+
+}
+
+/* Only mobile */
+@include media-breakpoint-down(xs) {
+    .cmp-article__content{
+        -webkit-column-count:1 !important;
+        -moz-column-count: 1 !important;
+    }
+}
+
+/* Large phones */
+@include media-breakpoint-only(sm) {
+    .cmp-article__content{
+        -webkit-column-count: 2 !important;
+        -moz-column-count: 2 !important;
+    }
+}
+
+/* Tablet */
+@include media-breakpoint-only(md) {
+    .cmp-article__content{
+        -webkit-column-count: auto;
+        -moz-column-count: auto;
+    }
+}

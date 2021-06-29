@@ -1,0 +1,19 @@
+/**
+ *  Main css for Pdm Metadata
+ */
+
+.cmp-pdm-metadata {
+    width: 900px;
+}
+
+.cmp-pdm-metadata__content--item {
+    display: flex;
+}
+
+.cmp-pdm-metadata__container--first-column, .cmp-pdm-metadata__container--second-column {
+    margin-right: 40px;
+}
+
+.cmp-pdm-metadata__container--first-column, .cmp-pdm-metadata__container--second-column, .cmp-pdm-metadata__container--third-column{
+    min-width: 250px;
+}

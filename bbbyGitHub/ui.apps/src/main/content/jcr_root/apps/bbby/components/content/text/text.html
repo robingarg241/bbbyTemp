@@ -1,0 +1,18 @@
+<span class="edit-start container" data-sly-test="${wcmmode.edit || wcmmode.preview || wcmmode.design}">&nbsp;${resource.name} <i class="fa fa-long-arrow-down" aria-hidden="true"></i></span>
+
+<template data-sly-template.renderText>
+    <div data-sly-use.textModel="com.adobe.cq.wcm.core.components.models.Text"
+        data-sly-test.text="${textModel.text}"
+        class="cmp-text">
+
+        <p class="cmp-text__paragraph"
+            data-sly-unwrap="${textModel.isRichText}">${text @ context=textModel.isRichText ? 'html' : 'text'}</p>
+    </div>
+
+    <!--/* Placeholder */-->
+    <sly data-sly-use.common="core/wcm/components/commons/v1/templates.html"
+         data-sly-call="${common.placeholder @ isEmpty=!textModel.text, emptyTextAppend=resource.name}"></sly>
+</template>
+
+<sly data-sly-use.background="bbby/components/content/background/background.html"
+     data-sly-call="${background.renderBackground @ contentTemplate=renderText}"/>

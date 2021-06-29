@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:granite="http://www.adobe.com/jcr/granite/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    jcr:primaryType="cq:Page">
+    <jcr:content
+        jcr:mixinTypes="[sling:VanityPath]"
+        jcr:primaryType="nt:unstructured"
+        jcr:title="Rendition"
+        sling:resourceType="granite/ui/components/coral/foundation/page">
+        <head jcr:primaryType="nt:unstructured">
+            <favicon
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/coral/foundation/page/favicon"/>
+            <viewport
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/coral/foundation/admin/page/viewport"/>
+            <clientlibs
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/coral/foundation/includeclientlibs"
+                categories="[coralui3,granite.ui.coral.foundation,granite.ui.shell,dam.gui.admin.coral,eaem.assets.send.mail]"/>
+        </head>
+        <body
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="granite/ui/components/coral/foundation/page/body">
+            <items jcr:primaryType="nt:unstructured">
+                <content
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="granite/ui/components/coral/foundation/form"
+                    action="/bin/bbby/download-custom-rendition"
+                    foundationForm="{Boolean}true"
+                    maximized="{Boolean}true"
+                    method="get"
+                    novalidate="{Boolean}true"
+                    style="vertical">
+                    <successresponse
+                        jcr:primaryType="nt:unstructured"
+                        jcr:title="Success"
+                        sling:resourceType="granite/ui/components/coral/foundation/form/responses/openprompt"
+                        open="/assets.html"
+                        redirect="/apps/download-custom-rendition/download-custom-rendition-dialog.html"
+                        text="Email sent"/>
+                    <items jcr:primaryType="nt:unstructured">
+                        <wizard
+                            jcr:primaryType="nt:unstructured"
+                            jcr:title="Rendition"
+                            sling:resourceType="granite/ui/components/coral/foundation/wizard">
+                            <items jcr:primaryType="nt:unstructured">
+                                <container
+                                    granite:class="eaem-send-mail-form"
+                                    jcr:primaryType="nt:unstructured"
+                                    jcr:title="Download Custom Rendition"
+                                    sling:resourceType="granite/ui/components/coral/foundation/container">
+                                    <items jcr:primaryType="nt:unstructured">
+                                        <actionbar
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/coral/foundation/container">
+                                            <items jcr:primaryType="nt:unstructured">
+                                                <_x0031_
+                                                    granite:class="row"
+                                                    jcr:primaryType="nt:unstructured"
+                                                    sling:resourceType="granite/ui/components/coral/foundation/container">
+                                                    <items jcr:primaryType="nt:unstructured">
+                                                        <checkbox
+                                                            granite:class="flatstructure-select dam-download-type"
+                                                            jcr:primaryType="nt:unstructured"
+                                                            sling:resourceType="granite/ui/components/coral/foundation/form/checkbox"
+                                                            checked="{Boolean}false"
+                                                            name="jpg72"
+                                                            text="2000x2000 JPG 72 dpi"/>
+                                                    </items>
+                                                </_x0031_>
+                                                <_x0032_
+                                                    granite:class="row"
+                                                    jcr:primaryType="nt:unstructured"
+                                                    sling:resourceType="granite/ui/components/coral/foundation/container">
+                                                    <items jcr:primaryType="nt:unstructured">
+                                                        <checkbox
+                                                            granite:class="flatstructure-select dam-download-type"
+                                                            jcr:primaryType="nt:unstructured"
+                                                            sling:resourceType="granite/ui/components/coral/foundation/form/checkbox"
+                                                            checked="{Boolean}false"
+                                                            name="png72"
+                                                            text="2000x2000 PNG 72 dpi"/>
+                                                    </items>
+                                                </_x0032_>
+                                                <_x0033_
+                                                    granite:class="row"
+                                                    jcr:primaryType="nt:unstructured"
+                                                    sling:resourceType="granite/ui/components/coral/foundation/container">
+                                                    <items jcr:primaryType="nt:unstructured">
+                                                        <checkbox
+                                                            granite:class="flatstructure-select dam-download-type"
+                                                            jcr:primaryType="nt:unstructured"
+                                                            sling:resourceType="granite/ui/components/coral/foundation/form/checkbox"
+                                                            checked="{Boolean}false"
+                                                            name="jpg300"
+                                                            text="2000x2000 JPG 300 dpi"/>
+                                                    </items>
+                                                </_x0033_>
+                                                <_x0034_
+                                                    granite:class="row"
+                                                    jcr:primaryType="nt:unstructured"
+                                                    sling:resourceType="granite/ui/components/coral/foundation/container">
+                                                    <items jcr:primaryType="nt:unstructured">
+                                                        <checkbox
+                                                            granite:class="flatstructure-select dam-download-type"
+                                                            jcr:primaryType="nt:unstructured"
+                                                            sling:resourceType="granite/ui/components/coral/foundation/form/checkbox"
+                                                            checked="{Boolean}false"
+                                                            name="png300"
+                                                            text="2000x2000 PNG 300 dpi"/>
+                                                    </items>
+                                                </_x0034_>
+                                                <_x0035_
+                                                    granite:class="row"
+                                                    jcr:primaryType="nt:unstructured"
+                                                    sling:resourceType="granite/ui/components/coral/foundation/container">
+                                                    <items jcr:primaryType="nt:unstructured">
+                                                        <checkbox
+                                                            granite:class="flatstructure-select dam-download-type cq-dialog-checkbox-showhide"
+                                                            jcr:primaryType="nt:unstructured"
+                                                            sling:resourceType="granite/ui/components/coral/foundation/form/checkbox"
+															fieldDescription="Please check for the Custom Rendition in JPG format."
+                                                            checked="{Boolean}false"
+                                                            name="other"
+                                                            text="Other"/>
+                                                    </items>
+                                                </_x0035_>
+                                                <_x0036_
+                                                    granite:class="row togglefield"
+                                                    jcr:primaryType="nt:unstructured"
+                                                    sling:resourceType="granite/ui/components/coral/foundation/container">
+                                                    <items jcr:primaryType="nt:unstructured">
+                                                        <Width
+                                                            jcr:primaryType="nt:unstructured"
+                                                            sling:resourceType="granite/ui/components/coral/foundation/form/numberfield"
+                                                            cols="5"
+                                                            fieldDescription="Please enter width. Default is 500."
+                                                            fieldLabel="Width"
+                                                            id="width"
+                                                            name="width"
+                                                            rows="1"/>
+                                                        <checkbox
+                                                            granite:class="flatstructure-select dam-download-type "
+                                                            jcr:primaryType="nt:unstructured"
+                                                            sling:resourceType="granite/ui/components/coral/foundation/form/checkbox"
+															fieldDescription="Checked for auto calculation of Height according to Width."
+                                                            checked="{Boolean}false"
+                                                            name="calculateHeight"
+                                                            text="Calculate Height"/>
+                                                    </items>
+                                                </_x0036_>
+                                                <_x0037_
+                                                    granite:class="row"
+                                                    jcr:primaryType="nt:unstructured"
+                                                    sling:resourceType="granite/ui/components/coral/foundation/container">
+                                                    <items jcr:primaryType="nt:unstructured">
+                                                        <Height
+                                                            jcr:primaryType="nt:unstructured"
+                                                            sling:resourceType="granite/ui/components/coral/foundation/form/numberfield"
+                                                            cols="5"
+                                                            fieldDescription="Please enter height. Default is 500."
+                                                            fieldLabel="Height"
+                                                            id="height"
+                                                            name="height"
+                                                            rows="1"/>
+                                                        <checkbox
+                                                            granite:class="flatstructure-select dam-download-type "
+                                                            jcr:primaryType="nt:unstructured"
+                                                            sling:resourceType="granite/ui/components/coral/foundation/form/checkbox"
+															fieldDescription="Checked for auto calculation of Width according to Height."
+                                                            checked="{Boolean}false"
+                                                            name="calculateWidth"
+                                                            text="Calculate Width"/>
+                                                    </items>
+                                                </_x0037_>
+                                                <_x0038_
+                                                    granite:class="row"
+                                                    jcr:primaryType="nt:unstructured"
+                                                    sling:resourceType="granite/ui/components/coral/foundation/container">
+                                                    <items jcr:primaryType="nt:unstructured">
+                                                        <Resolution
+                                                            jcr:primaryType="nt:unstructured"
+                                                            sling:resourceType="granite/ui/components/coral/foundation/form/numberfield"
+                                                            cols="5"
+                                                            fieldDescription="Please enter resolution. Default is 72."
+                                                            fieldLabel="Resolution"
+                                                            id="resolution"
+                                                            name="resolution"
+                                                            rows="1"/>
+                                                    </items>
+                                                </_x0038_>
+                                                <assets
+                                                    jcr:primaryType="nt:unstructured"
+                                                    sling:resourceType="granite/ui/components/foundation/form/hidden"
+                                                    cols="15"
+                                                    fieldDescription="Asset List..."
+                                                    fieldLabel="Assets"
+                                                    id="selectedAssetId"
+                                                    name="./assets"
+                                                    rows="1"/>
+                                            </items>
+                                        </actionbar>
+                                    </items>
+                                    <parentConfig jcr:primaryType="nt:unstructured">
+                                        <prev
+                                            granite:class="foundation-wizard-control"
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/coral/foundation/anchorbutton"
+                                            href="/aem/start.html"
+                                            text="Cancel">
+                                            <granite:data
+                                                jcr:primaryType="nt:unstructured"
+                                                foundation-wizard-control-action="cancel"/>
+                                        </prev>
+                                        <next
+                                            granite:class="foundation-wizard-control"
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/coral/foundation/button"
+                                            text="Download"
+                                            type="submit"
+                                            variant="primary">
+                                            <granite:data
+                                                jcr:primaryType="nt:unstructured"
+                                                foundation-wizard-control-action="next"/>
+                                        </next>
+                                    </parentConfig>
+                                </container>
+                            </items>
+                        </wizard>
+                    </items>
+                </content>
+            </items>
+        </body>
+    </jcr:content>
+</jcr:root>

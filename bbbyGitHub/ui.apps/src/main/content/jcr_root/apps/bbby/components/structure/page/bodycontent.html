@@ -1,0 +1,8 @@
+<sly data-sly-use.templatedContainer="com.day.cq.wcm.foundation.TemplatedContainer"/>
+<!--/* Editable Page Template Support */-->
+<sly data-sly-test.supportsEditableTemplate="${templatedContainer.hasStructureSupport}"
+     data-sly-repeat.child="${templatedContainer.structureResources}"
+     data-sly-resource="${child.path @ resourceType=child.resourceType, decorationTagName='div'}"/>
+<!--/* Backwards Compatibility */-->
+<sly data-sly-test="${!supportsEditableTemplate}"
+    data-sly-resource="${'par' @ resourceType='wcm/foundation/components/parsys'}"/>

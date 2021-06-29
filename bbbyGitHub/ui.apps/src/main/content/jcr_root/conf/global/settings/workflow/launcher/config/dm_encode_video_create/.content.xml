@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0"
+    jcr:primaryType="cq:WorkflowLauncher"
+    condition=""
+    conditions="[jcr:content/jcr:mimeType==video/.*]"
+    description="Marketing Dynamic Media Encode Video - Create"
+    disabledFeatures="[]"
+    enabled="{Boolean}true"
+    eventType="{Long}1"
+    excludeList=""
+    features="[com.adobe.dam.asset.dynamicmedia.feature.flag]"
+    glob="/content/dam/marketing(/.*/)renditions/original"
+    nodetype="nt:file"
+    runModes="author"
+    workflow="/var/workflow/models/dam/dynamic-media-encode-video"/>

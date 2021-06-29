@@ -1,0 +1,210 @@
+/**
+ *  Main css for Vendor Portal History
+ */
+
+@import "./vanilla-dataTables";
+
+.component-vendor-portal-history {
+    width: 100%;
+    padding: 36px 40px;
+
+    // font-family: 'brandon', sans-serif;
+
+    #historySpinner {
+        height: 250px;
+    }
+
+    #historyContainer,
+    #historyError {
+        display: none;
+    }
+
+    #historyError {
+        padding: 50px;
+
+        color: #ff0000;
+        text-align: center;
+    }
+
+    // h3 {
+    //     font-size: 26px;
+    //     line-height: 37px;
+    //     font-weight: 300;
+    // }
+    .intro-text {
+        // font-family: BrandonGrotesque-Regular;
+        font-size: 26px;
+        color: $black;
+        letter-spacing: 0;
+    }
+    // .batches {
+    //     // font-family: BrandonGrotesque-Bold;
+    //     font-size: 18px;
+    //     color: #000000;
+    //     letter-spacing: 0;
+    //     font-weight: bold;
+    //     margin: 25px 0 15px 0;
+    // }
+
+    table,
+    table.dataTable-table {
+        width: 100%;
+        margin: 0 auto;
+
+        th,
+        .table-header {
+            font-size: 18px;
+            letter-spacing: 0;
+            a {
+                &.sort-up {
+                    &::after {
+                        background-image: url('/etc/designs/bbby/images/sort-arrow_up.png');
+                        background-repeat: no-repeat;
+                        background-size: cover;
+                        content: '';
+                        display: inline-block;
+                        height: 12px;
+                        margin-left: 5px;
+                        margin-top: -2px;
+                        vertical-align: middle;
+                        width: 10px;
+                    }
+                }
+                &.sort-down {
+                    &::after {
+                        background-image: url('/etc/designs/bbby/images/sort-arrow_down.png');
+                        background-repeat: no-repeat;
+                        background-size: cover;
+                        content: '';
+                        display: inline-block;
+                        height: 12px;
+                        margin-left: 5px;
+                        margin-top: -2px;
+                        vertical-align: middle;
+                        width: 10px;
+                    }
+                }
+            }
+        }
+        th {
+            padding: 8px 15px;
+            &:first-of-type {
+                padding-left: 0;
+            }
+
+            a {
+                display: inline;
+
+                &::before,
+                &::after {
+                    border: none;
+                    opacity: 1;
+                    position: static;
+                }
+            }
+
+            &.asc {
+                &::after {
+                    background-image: url('/etc/designs/bbby/images/sort-arrow_up.png');
+                    background-repeat: no-repeat;
+                    background-size: cover;
+                    content: '';
+                    display: inline-block;
+                    height: 12px;
+                    margin-left: 5px;
+                    margin-top: -2px;
+                    vertical-align: middle;
+                    width: 10px;
+                }
+            }
+            &.desc {
+                &::after {
+                    background-image: url('/etc/designs/bbby/images/sort-arrow_down.png');
+                    background-repeat: no-repeat;
+                    background-size: cover;
+                    content: '';
+                    display: inline-block;
+                    height: 12px;
+                    margin-left: 5px;
+                    margin-top: -2px;
+                    vertical-align: middle;
+                    width: 10px;
+                }
+            }
+        }
+
+        tr {
+            td {
+                padding: 5px 15px;
+                &:first-of-type {
+                    padding-left: 0;
+                }
+                &.batch {
+                    width: 15%;
+                }
+                &.campaign {
+                    width: 30%;
+                }
+                &.brand {
+                    width: 25%;
+                }
+                &.date {
+                    width: 15%;
+                }
+                &.number {
+                    width: 15%;
+                }
+            }
+        }
+
+        tr.body,
+        tbody tr {
+            // font-family: BrandonText-Regular;
+            font-size: 14px;
+            color: $black;
+            letter-spacing: 0;
+            td {
+                padding: 15px;
+                cursor: pointer;
+            }
+
+            &:nth-child(odd) {
+                background-color: $color-table-odd;
+            }
+
+            &:nth-child(even) {
+                background-color: $white;
+            }
+
+            &:hover {
+                background-color: $light-blue;
+            }
+
+        }
+    }
+
+    .dataTable-bottom {
+        margin-top: 20px;
+        position: relative;
+        text-align: center;
+    }
+    .dataTable-info {
+        left: 0;
+        margin: 0;
+        position: absolute;
+    }
+    .dataTable-pagination {
+        display: inline-block;
+    }
+    .history-title {
+        text-align: center;
+    }
+    .history-subtitle {
+        font-family: $font-sans-serif-medium;
+        margin-bottom: 45px;
+    }
+    .batches {
+        font-family: $font-sans-serif-medium;
+        margin-bottom: 35px;
+    }
+}

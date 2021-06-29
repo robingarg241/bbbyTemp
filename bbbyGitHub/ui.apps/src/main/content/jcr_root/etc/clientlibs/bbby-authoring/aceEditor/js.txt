@@ -1,0 +1,10 @@
+# Ace files taken from https://github.com/ajaxorg/ace-builds/tree/master/src-noconflict
+lib/ace.js
+lib/mode-html.js
+lib/mode-javascript.js
+lib/mode-css.js
+lib/mode-groovy.js
+lib/ext-searchbox.js
+lib/ext-split.js
+
+AceEditor.js

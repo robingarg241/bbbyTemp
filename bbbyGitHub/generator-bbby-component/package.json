@@ -1,0 +1,35 @@
+{
+  "name": "generator-bbby-component",
+  "version": "0.3.0",
+  "description": "AEM front end component generator",
+  "homepage": "https://bitbucket.org/herodigital-ondemand/bbby-com",
+  "author": {
+    "name": "Joel Epps",
+    "email": "joel@herodigital.com",
+    "url": "http://herodigital.com/"
+  },
+  "files": [
+    "generators"
+  ],
+  "main": "generators/index.js",
+  "keywords": [
+    "yeoman-generator",
+    "cq"
+  ],
+  "dependencies": {
+    "chalk": "^1.0.0",
+    "find": "^0.2.7",
+    "html-wiring": "^1.2.0",
+    "path": "^0.12.7",
+    "path-exists": "^3.0.0",
+    "yeoman-generator": "^0.24.1",
+    "yosay": "^1.2.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": "git@bitbucket.org:herodigital-ondemand/bbby-com.git",
+  "license": "UNLICENSED",
+  "private": true
+}

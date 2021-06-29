@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    jcr:primaryType="cq:Page">
+    <jcr:content
+        cq:lastModified="{Date}2018-07-02T11:06:49.315-07:00"
+        cq:lastModifiedBy="admin"
+        cq:tags="[bbby:page-type/component-test]"
+        cq:template="/apps/bbby/templates/page-content"
+        jcr:primaryType="cq:PageContent"
+        jcr:title="HTML"
+        sling:resourceType="bbby/components/structure/page"
+        robotsOptions="default">
+        <par
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="wcm/foundation/components/parsys">
+            <html
+                jcr:created="{Date}2017-03-15T14:45:21.004-07:00"
+                jcr:createdBy="admin"
+                jcr:lastModified="{Date}2018-07-02T11:06:49.311-07:00"
+                jcr:lastModifiedBy="admin"
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="bbby/components/content/html"
+                backgroundColor="bg-transparent"
+                backgroundHorizontalSpacing="px-0"
+                css="/* CSS */&#xa;#i421950f22d92a4a286b29983b4c2122f .custom-h1 {&#xa;    color: gray;&#xa;}"
+                js="// JavaScript&#xa;document.addEventListener(&quot;DOMContentLoaded&quot;, function() { &#xa;    var $h1 = $('#i421950f22d92a4a286b29983b4c2122f .custom-h1')&#xa;    $h1.text($h1.text() + '!')&#xa;})"
+                text="&lt;h1 class=&quot;custom-h1&quot;>${text.title}&lt;/h1>&#xa;&lt;p>Image 1&lt;img width=&quot;100&quot; src=&quot;${asset.pic1}&quot;>&lt;/p>&#xa;&lt;p>Image 2&lt;img width=&quot;100&quot; src=&quot;${asset.pic2}&quot;>&lt;/p>&#xa;&lt;p>A &lt;a href=&quot;${path.link1}&quot;>link&lt;/a> and another &lt;a href=&quot;${path.link2}&quot;>link&lt;/a>&lt;/p>&#xa;">
+                <paths jcr:primaryType="nt:unstructured">
+                    <item0
+                        jcr:primaryType="nt:unstructured"
+                        name="link1"
+                        value="/content/bbby-components/html"/>
+                    <item1
+                        jcr:primaryType="nt:unstructured"
+                        name="link2"
+                        value="https://example.com"/>
+                </paths>
+                <assets jcr:primaryType="nt:unstructured">
+                    <item0
+                        jcr:primaryType="nt:unstructured"
+                        name="pic1"
+                        value="/content/dam/bbby-components/landscape-image.jpg"/>
+                    <item1
+                        jcr:primaryType="nt:unstructured"
+                        name="pic2"
+                        value="/content/dam/bbby-components/portrait-image.jpg"/>
+                </assets>
+                <texts jcr:primaryType="nt:unstructured">
+                    <item0
+                        jcr:primaryType="nt:unstructured"
+                        name="title"
+                        value="This is some text."/>
+                </texts>
+            </html>
+        </par>
+    </jcr:content>
+</jcr:root>

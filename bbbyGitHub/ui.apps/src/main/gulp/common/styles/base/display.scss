@@ -1,0 +1,15 @@
+@each $breakpoint in map-keys($grid-breakpoints) {
+  @include media-breakpoint-only($breakpoint) {
+    $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+
+    .d#{$infix}-only-none         { display: none !important; }
+    .d#{$infix}-only-inline       { display: inline !important; }
+    .d#{$infix}-only-inline-block { display: inline-block !important; }
+    .d#{$infix}-only-block        { display: block !important; }
+    .d#{$infix}-only-table        { display: table !important; }
+    .d#{$infix}-only-table-row    { display: table-row !important; }
+    .d#{$infix}-only-table-cell   { display: table-cell !important; }
+    .d#{$infix}-only-flex         { display: flex !important; }
+    .d#{$infix}-only-inline-flex  { display: inline-flex !important; }
+  }
+}

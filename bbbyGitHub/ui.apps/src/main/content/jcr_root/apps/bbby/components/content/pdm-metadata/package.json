@@ -1,0 +1,12 @@
+{
+  "name": "pdm-metadata",
+  "version": "1.0.0",
+  "description": "",
+  "main": "pdm-metadata.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "UNLICENSED",
+  "private": true
+}

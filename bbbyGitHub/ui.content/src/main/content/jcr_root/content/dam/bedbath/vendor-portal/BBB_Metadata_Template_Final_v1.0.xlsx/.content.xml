@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:Iptc4xmpCore="http://iptc.org/std/Iptc4xmpCore/1.0/xmlns/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:bbby="http://www.bbby.com" xmlns:dam="http://www.day.com/dam/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:mix="http://www.jcp.org/jcr/mix/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    jcr:mixinTypes="[mix:referenceable]"
+    jcr:primaryType="dam:Asset"
+    jcr:uuid="5be8b5b4-40e5-498f-afa1-6a092bb08ac2">
+    <jcr:content
+        cq:lastReplicated="{Date}2019-08-20T01:14:55.855-04:00"
+        cq:lastReplicatedBy="admin"
+        cq:lastReplicationAction="Activate"
+        dam:assetState="processed"
+        dam:relativePath="bedbath/vendor-portal/BBB_Metadata_Template_Final_v1.0.xlsx"
+        jcr:lastModified="{Date}2019-08-20T01:13:59.291-04:00"
+        jcr:lastModifiedBy="admin"
+        jcr:mixinTypes="[cq:ReplicationStatus]"
+        jcr:primaryType="dam:AssetContent">
+        <metadata
+            bbby:assetUpdate="no"
+            dam:Application="Microsoft Excel"
+            dam:AppVersion="{Decimal}16.0300"
+            dam:created="{Date}2019-05-06T15:58:52.000Z"
+            dam:DocSecurity="{Long}0"
+            dam:extracted="{Date}2019-08-20T01:13:44.145-04:00"
+            dam:HeadingPairs="Worksheets3"
+            dam:HyperlinksChanged="false"
+            dam:i4="{Long}3"
+            dam:lastModifiedBy="Chetana Ballman"
+            dam:LinksUpToDate="false"
+            dam:lpstr="Sheet2"
+            dam:modified="{Date}2019-08-20T05:12:28.000Z"
+            dam:ScaleCrop="false"
+            dam:scene7FileStatus="NotSupported"
+            dam:sha1="61e781e98b41c62ff3943ab8551b19ca10fcad2d"
+            dam:SharedDoc="false"
+            dam:size="{Long}97039"
+            dam:TitlesOfParts="OverviewDataSheet2"
+            dam:TotalTime="{Long}0"
+            dam:variant="{Long}3"
+            dam:vector="OverviewDataSheet2"
+            dc:creator="[Chetana Ballman]"
+            dc:creator_xmpArrayType="rdf:Bag"
+            dc:format="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+            dc:modified="{Date}2019-08-20T01:13:59.291-04:00"
+            jcr:lastModified="{Date}2019-08-20T01:13:59.291-04:00"
+            jcr:lastModifiedBy="admin"
+            jcr:mixinTypes="[cq:Taggable]"
+            jcr:primaryType="nt:unstructured">
+            <Iptc4xmpCore:CreatorContactInfo jcr:primaryType="nt:unstructured"/>
+        </metadata>
+        <related jcr:primaryType="nt:unstructured"/>
+    </jcr:content>
+</jcr:root>

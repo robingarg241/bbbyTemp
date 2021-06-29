@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workspaceFilter version="1.0">
+<!--     <filter root="/home/users/system/bbby"/>-->
+    <filter root="/apps/bbby">
+        <exclude pattern="/apps/bbby/install" />
+    </filter>
+    <!-- This was an old location for clientlibs. New projects can delete this line if they so choose. -->
+    <filter root="/apps/bbby-author" />
+
+    <!-- ACS Commons error page handling -->
+    <filter root="/apps/sling/servlet/errorhandler" />
+
+    <!-- Create "policies" node if it doesn't exist -->
+    <filter root="/conf/bbby/settings/wcm/policies" mode="merge">
+        <exclude pattern="/conf/bbby/settings/wcm/policies/.*" />
+    </filter>
+    <!-- Create "templates" node if it doesn't exist -->
+    <filter root="/conf/bbby/settings/wcm/templates" mode="merge">
+        <exclude pattern="/conf/bbby/settings/wcm/templates/.*" />
+    </filter>
+    <!-- Tempalte types are managed in the code base, overwrite on deploy -->
+    <filter root="/conf/bbby/settings/wcm/template-types"/>
+
+    <!-- Workflow: DAM -->
+    <filter root="/conf/global/settings/workflow/models/dam/update_asset"/>
+    <filter root="/var/workflow/models/dam/update_asset"/>
+    <filter root="/conf/global/settings/workflow/models/dam/bbby-update-asset"/>
+    <filter root="/var/workflow/models/dam/bbby-update-asset"/>
+    <filter root="/conf/global/settings/workflow/models/dam/bbby-vendor-update-asset"/>
+    <filter root="/var/workflow/models/dam/bbby-vendor-update-asset"/>
+    <filter root="/conf/global/settings/workflow/launcher/config/bbby-non-product-cleanup"/>
+    <filter root="/conf/global/settings/workflow/models/dam/bbby-marketing-update-asset"/>
+    <filter root="/var/workflow/models/dam/bbby-marketing-update-asset"/>
+    <filter root="/conf/global/settings/workflow/models/dam/bbby-scene7-marketing-update-asset"/>
+    <filter root="/var/workflow/models/dam/bbby-scene7-marketing-update-asset"/>
+    <filter root="/conf/global/settings/workflow/models/dam/dynamic-media-encode-video"/>
+    <filter root="/var/workflow/models/dam/dynamic-media-encode-video"/>
+
+    <!-- Default robots file used -->
+    <filter root="/content/robots/robots-preprod.txt" />
+
+    <!-- Designs and Clientlibs -->
+    <filter root="/etc/clientlibs/bbby-authoring" />
+    <filter root="/etc/clientlibs/bbby-headlibs" />
+    <filter root="/etc/clientlibs/bbby-pagelibs" />
+    <filter root="/etc/designs/bbby">
+        <exclude pattern="/etc/designs/bbby/jcr:content/.*"/>
+    </filter>
+
+    <!-- These are needed in order for sub-content packages to install -->
+    <filter root="/etc/packages/adobe/consulting"/>
+    <filter root="/etc/packages/adobe/cq60"/>
+    <filter root="/etc/packages/bbby/author"/>
+
+    <!-- Custom Permissions -->
+    <filter root="/content/rep:policy"/>
+    <filter root="/conf/bbby/rep:policy"/>
+    <filter root="/etc/designs/bbby/rep:policy"/>
+
+    <!-- Workflow Stuff -->
+    <filter root="/conf/global/settings/workflow/models/project_cleanup"/>
+    <filter root="/conf/global/settings/workflow/models/call-to-pdm"/>
+    <filter root="/conf/global/settings/workflow/models/bbby-move-assets-to-dmz"/>
+    <filter root="/conf/global/settings/workflow/models/bbby-scene7-update-asset"/>
+    <filter root="/conf/global/settings/workflow/models/bbby-product-collateral-asset"/>
+    <filter root="/conf/global/settings/workflow/models/bbby-dynamic-media-encode-video"/>
+    <filter root="/conf/global/settings/workflow/models/bbby-s7-batch-upload"/>
+    <filter root="/conf/global/settings/workflow/models/bbby-approve-and-publish--beta-"/>
+    <filter root="/conf/global/settings/workflow/models/bbby-approve-and-publish-nightly-"/>
+    <filter root="/var/workflow/models/project_cleanup"/>
+    <filter root="/var/workflow/models/call-to-pdm"/>
+    <filter root="/var/workflow/models/bbby-move-assets-to-dmz"/>
+    <filter root="/var/workflow/models/bbby-scene7-update-asset"/>
+    <filter root="/var/workflow/models/bbby-product-collateral-asset"/>
+    <filter root="/var/workflow/models/bbby-dynamic-media-encode-video"/>
+    <filter root="/var/workflow/models/bbby-s7-batch-upload"/>
+    <filter root="/var/workflow/models/bbby-approve-and-publish--beta-"/> 
+    <filter root="/var/workflow/models/bbby-approve-and-publish-nightly-"/>
+    
+    <!--Workflow Launcher Config-->
+    <filter root="/conf/global/settings/workflow/launcher/config/call-to-pdm"/>
+    <filter root="/conf/global/settings/workflow/launcher/config/call-to-pdm-e-comm"/>
+    <filter root="/conf/global/settings/workflow/launcher/config/call-to-pdm-internal"/>
+    <filter root="/conf/global/settings/workflow/launcher/config/call-to-pdm-approved-dam"/>
+    <filter root="/conf/global/settings/workflow/launcher/config/call-to-pdm-marketing"/>
+    <filter root="/conf/global/settings/workflow/launcher/config/bbby-move-assets-to-dmz"/>
+    <filter root="/conf/global/settings/workflow/launcher/config/ecomm-asset-update"/>
+    <filter root="/conf/global/settings/workflow/launcher/config/ecomm-asset-create"/>
+    <filter root="/conf/global/settings/workflow/launcher/config/dam_xmp_writeback"/>
+    <filter root="/conf/global/settings/workflow/launcher/config/metadata_set_lastmodified"/>
+    
+    <filter root="/conf/global/settings/workflow/launcher/config/dm_encode_video_create"/>
+    <filter root="/conf/global/settings/workflow/launcher/config/dm_encode_video_create_(post-6.3)"/>
+    <filter root="/conf/global/settings/workflow/launcher/config/dm_encode_video_mod"/>
+    <filter root="/conf/global/settings/workflow/launcher/config/dm_encode_video_mod_(post-6.3)"/>
+    <filter root="/conf/global/settings/workflow/launcher/config/dm_encode_video_mod_reupload"/>
+    
+    <filter root="/conf/global/settings/workflow/launcher/config/bbby-dm-encode-video-create"/>
+    <filter root="/conf/global/settings/workflow/launcher/config/bbby-dm-encode-video-mod"/>
+    <filter root="/conf/global/settings/workflow/launcher/config/bbby-dm-encode-video-mod-reupload"/>
+    
+    <filter root="/conf/global/settings/workflow/launcher/config/update_asset_create"/>
+    <filter root="/conf/global/settings/workflow/launcher/config/update_asset_create_without_DM"/>
+    <filter root="/conf/global/settings/workflow/launcher/config/update_asset_mod"/>
+    <filter root="/conf/global/settings/workflow/launcher/config/update_asset_mod_without_DM"/>
+    <filter root="/conf/global/settings/workflow/launcher/config/update_asset_mod_without_DM_reupload"/>
+    
+    <filter root="/conf/global/settings/workflow/launcher/config/bbby-update-asset-create"/>
+    <filter root="/conf/global/settings/workflow/launcher/config/bbby-update-asset-create-without-DM"/>
+    <filter root="/conf/global/settings/workflow/launcher/config/bbby-update-asset-mod"/>
+    <filter root="/conf/global/settings/workflow/launcher/config/bbby-update-asset-mod-without-DM"/>
+    <filter root="/conf/global/settings/workflow/launcher/config/bbby-update-asset-mod-without-DM-reupload"/>
+    
+    <filter root="/conf/global/settings/workflow/launcher/config/bbby-vendor-update-asset-create"/>
+    <filter root="/conf/global/settings/workflow/launcher/config/bbby-vendor-update-asset-create-without-DM"/>
+    <filter root="/conf/global/settings/workflow/launcher/config/bbby-vendor-update-asset-mod"/>
+    <filter root="/conf/global/settings/workflow/launcher/config/bbby-vendor-update-asset-mod-without-DM"/>
+    <filter root="/conf/global/settings/workflow/launcher/config/bbby-vendor-update-asset-mod-without-DM-reupload"/>
+    
+    <filter root="/conf/global/settings/workflow/launcher/config/bbby-marketing-update-asset-create"/>
+    <filter root="/conf/global/settings/workflow/launcher/config/bbby-marketing-update-asset-mod"/>
+    
+    
+    <!-- Metadata Schema -->
+    <filter root="/conf/global/settings/dam/adminui-extension/metadataschema/default/"/>
+    <filter root="/conf/global/settings/dam/adminui-extension/metadataschema/marketing_schema/"/>
+    <filter root="/conf/global/settings/dam/adminui-extension/foldermetadataschema/folder_schema/"/>
+    
+    <!--Assets Search Rail  -->
+    <filter root="/conf/global/settings/dam/search/facets/assets/"/>
+    
+    <!--Assets Collections Search Rail  -->
+    <filter root="/conf/global/settings/dam/search/collections"/>
+
+    <!-- Project stuff -->
+    <filter root="/apps/cq/core/content/projects/workflowwizards"/>
+
+    <!-- Asset Sorter Stuff -->
+    <filter root="/conf/global/settings/workflow/models/bbby-sorting-hat"/>
+    <filter root="/var/workflow/models/bbby-sorting-hat"/>
+    <filter root="/conf/global/settings/workflow/launcher/config/asset_sorter_launcher"/>
+    <filter root="/conf/global/settings/workflow/launcher/config/1893141365"/>
+
+    <!-- Asset Folder Stuff -->
+
+    <filter root="/conf/global/settings/workflow/launcher/config/-2116371608"/>
+    <filter root="/conf/global/settings/workflow/models/bbby-add-attributes-to-folders"/>
+    <filter root="/var/workflow/models/bbby-add-attributes-to-folders"/>
+    
+    
+    <!-- List View Overlay Stuff -->    
+    <filter root="/apps/dam/gui"/>
+	
+	<!-- Notify Email Stuff -->
+	<filter root="/apps/notify"/>
+	
+	<!-- View PDF Stuff -->
+	<filter root="/apps/bbby-view-pdf"/>
+	
+	<!-- Marketing File Size in Schema Stuff -->
+	<filter root="/apps/marketing-file-size"/>
+	
+	<!-- Copy Marketing Assets to AD Stuff -->
+	<filter root="/apps/copy-mktg"/>
+	
+	<!-- Delete Button Overlay Stuff --> 
+	<filter root="/apps/bbby-delete-rendercondition"/>
+	<filter root="/apps/granite"/>
+
+</workspaceFilter>

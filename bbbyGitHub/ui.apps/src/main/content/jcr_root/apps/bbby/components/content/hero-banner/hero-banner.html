@@ -1,0 +1,45 @@
+<span class="edit-start container" data-sly-test="${wcmmode.edit || wcmmode.preview || wcmmode.design}">&nbsp;${resource.name} <i class="fa fa-long-arrow-down" aria-hidden="true"></i></span>
+
+<template data-sly-template.renderHeroBanner>
+
+    <sly data-sly-use.model="com.bbby.aem.core.models.component.HeroBanner"
+        data-sly-use.image="bbby/components/content/image/image.html"
+        data-sly-call="${image.renderBackgroundImageStyleTag @
+            id=model.componentId,
+            model=model,
+            extraModsDesktop=' 50% 50%',
+            extraModsMobile=' 50% 50%, linear-gradient(rgba(0,0,0, 0.3), rgba(0,0,0, 0.3)) '
+        }" />
+
+    <section id="${model.componentId}" class="cmp-hero-banner d-flex align-items-center ${model.heroBannerTextColor}"
+        style="background-repeat: no-repeat; background-size: cover;"
+        data-title="${model.title}"
+        data-sly-use.text="bbby/components/content/text/text.html"
+        data-sly-use.cta="bbby/components/content/cta/cta.html">
+
+        <div class="cmp-hero-banner__text-overlay">
+            <div class="container d-flex align-items-center cmp-banner--align-${model.heroBannerAlignment @ context='attribute'}">
+                <div class="flex-align-center col-md-8 col-xs-12">
+                    <p class="super">${model.superTitle}</p>
+
+                    <div class="cmp-text text-block">
+                        <h1>
+                            ${model.title}
+                        </h1>
+                    </div>
+
+                    <sly data-sly-call="${text.renderText}"/>
+                    <sly data-sly-call="${cta.renderCta}"/>
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <!--/* Placeholder */-->
+    <sly data-sly-use.common="core/wcm/components/commons/v1/templates.html"
+         data-sly-call="${common.placeholder @ isEmpty=!cta.ctaList && !text.text && !model.title && !model.superTitle && !model.fileReference && !model.fileReferenceTablet && !model.fileReferenceMobile, emptyTextAppend=resource.name}"></sly>
+
+</template>
+
+<sly data-sly-call="${renderHeroBanner}" />
+

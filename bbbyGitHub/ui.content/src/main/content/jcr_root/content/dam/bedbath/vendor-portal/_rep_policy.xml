@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:crx="http://www.day.com/crx/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:rep="internal"
+    jcr:primaryType="rep:ACL">
+    <deny
+        jcr:primaryType="rep:DenyACE"
+        rep:principalName="BBBY-dam-content-ops"
+        rep:privileges="{Name}[jcr:versionManagement,jcr:read,rep:write,jcr:lockManagement]"/>
+    <deny1
+        jcr:primaryType="rep:DenyACE"
+        rep:principalName="dam-users"
+        rep:privileges="{Name}[jcr:read]"/>
+    <allow2
+        jcr:primaryType="rep:GrantACE"
+        rep:principalName="mac-default-vendorportal-owner"
+        rep:privileges="{Name}[jcr:versionManagement,jcr:modifyAccessControl,jcr:read,jcr:readAccessControl,crx:replicate,rep:write,jcr:lockManagement]"/>
+    <allow3
+        jcr:primaryType="rep:GrantACE"
+        rep:principalName="mac-default-vendorportal-editor"
+        rep:privileges="{Name}[jcr:removeChildNodes,jcr:versionManagement,jcr:modifyProperties,jcr:read,jcr:addChildNodes,jcr:readAccessControl,crx:replicate,jcr:lockManagement,jcr:nodeTypeManagement]"/>
+    <allow4
+        jcr:primaryType="rep:GrantACE"
+        rep:principalName="mac-default-vendorportal-editor"
+        rep:privileges="{Name}[jcr:removeNode]">
+        <rep:restrictions
+            jcr:primaryType="rep:Restrictions"
+            rep:glob="/*"/>
+    </allow4>
+    <allow5
+        jcr:primaryType="rep:GrantACE"
+        rep:principalName="mac-default-vendorportal"
+        rep:privileges="{Name}[jcr:read]"/>
+</jcr:root>

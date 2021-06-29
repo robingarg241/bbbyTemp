@@ -1,0 +1,96 @@
+<span class="edit-start container" data-sly-test="${wcmmode.edit || wcmmode.preview || wcmmode.design}">&nbsp;${resource.name} <i class="fa fa-long-arrow-down" aria-hidden="true"></i></span>
+
+<!--/*
+    model: model that extends ImageSupport
+*/-->
+<template data-sly-template.renderImage="${ @ model }">
+    <a data-sly-unwrap="${!model.link}"
+        class="cmp-image__link"
+        href="${model.link}"
+        target="${model.newTab ? '_blank' : ''}">
+
+        <picture data-sly-test="${model.fileReference}">
+
+            <sly data-sly-list.rendition="${model.renditions}">
+                <source media="${rendition.media @ context='attribute'}" srcset="${rendition.srcset @ context='attribute'}">
+            </sly>
+
+            <img src="${model.allRenditions.DESKTOP_ORIGINAL}"
+                title="${model.title}"
+                alt="${model.alt}"
+                class="cmp-image__img ${model.naturalSize ? 'img-fluid' : 'img-fill'}">
+        </picture>
+    </a>
+
+    <sly data-sly-use.common="core/wcm/components/commons/v1/templates.html"
+        data-sly-call="${common.placeholder @ isEmpty=!model.fileReference, emptyTextAppend=resource.name}"></sly>
+</template>
+
+<sly data-sly-use.model="com.bbby.aem.core.models.component.Image"
+    data-sly-use.background="bbby/components/content/background/background.html"
+    data-sly-call="${background.renderBackground @ contentModel=model, contentTemplate=renderImage}" />
+
+<!--/*
+    id: the ID of the html tag (<div id="${id}></div>) that this image will be the background for
+    model: model that extends ImageSupport
+    extraModsMobile: extra css rules that will be placed in the 'background' css rule for mobile
+    extraModsTablet: extra css rules that will be placed in the 'background' css rule for tablet
+    extraModsDesktop: extra css rules that will be placed in the 'background' css rule for desktop
+*/-->
+<template data-sly-template.renderBackgroundImageStyleTag="${ @ id, model, extraModsMobile, extraModsTablet, extraModsDesktop }">
+
+    <style data-sly-test="${model.fileReference}">
+        <!--/* Mobile x1 */-->
+        @media
+            only screen and (max-width: ${model.maxWidthMobile @ context='styleString'}px) {
+            #${id @ context='styleToken'} {
+                ${extraModsMobile ? 'background' : 'background-image' @ context='styleString'}: url("${model.allRenditions.MOBILE_PORTRAIT_X1 @ context='styleString'}") ${extraModsMobile @ context='unsafe'};
+            }
+        }
+
+        <!--/* Mobile x2 */-->
+        @media
+            only screen and (max-width: ${model.maxWidthMobile @ context='styleString'}px) and (-webkit-min-device-pixel-ratio: 2),
+            only screen and (max-width: ${model.maxWidthMobile @ context='styleString'}px) and (min-resolution: 192dpi) {
+
+           #${id @ context='styleToken'} {
+               ${extraModsMobile ? 'background' : 'background-image' @ context='styleString'}: url("${model.allRenditions.MOBILE_PORTRAIT_X2 @ context='styleString'}") ${extraModsMobile @ context='unsafe'};
+           }
+        }
+
+        <!--/* Tablet x1 */-->
+        @media
+            only screen and (min-width: ${model.minWidthTablet @ context='styleString'}px) and (max-width: ${model.maxWidthTablet @ context='styleString'}px) {
+            #${id @ context='styleToken'} {
+                ${extraModsTablet ? 'background' : 'background-image' @ context='styleString'}: url("${model.allRenditions.TABLET_PORTRAIT_X2 @ context='styleString'}") ${extraModsTablet @ context='unsafe'};
+            }
+        }
+
+        <!--/* Tablet x2 */-->
+        @media
+            only screen and (min-width: ${model.minWidthTablet @ context='styleString'}px) and (max-width: ${model.maxWidthTablet @ context='styleString'}px) and (-webkit-min-device-pixel-ratio: 2),
+            only screen and (min-width: ${model.minWidthTablet @ context='styleString'}px) and (max-width: ${model.maxWidthTablet @ context='styleString'}px) and (min-resolution: 192dpi) {
+            #${id @ context='styleToken'} {
+                ${extraModsTablet ? 'background' : 'background-image' @ context='styleString'}: url("${model.allRenditions.TABLET_LANDSCAPE_X1 @ context='styleString'}") ${extraModsTablet @ context='unsafe'};
+            }
+        }
+
+        <!--/* Desktop x1 */-->
+        @media only screen and (min-width: ${model.minWidthDesktop @ context='styleString'}px) {
+           #${id @ context='styleToken'} {
+               ${extraModsDesktop ? 'background' : 'background-image' @ context='styleString'}: url("${model.allRenditions.DESKTOP_LANDSCAPE_X1 @ context='styleString'}") ${extraModsDesktop @ context='unsafe'};
+           }
+        }
+
+        <!--/* Desktop x2 */-->
+        @media
+            only screen and (min-width: ${model.minWidthDesktop @ context='styleString'}px) and (-webkit-min-device-pixel-ratio: 2),
+            only screen and (min-width: ${model.minWidthDesktop @ context='styleString'}px) and (min-resolution: 192dpi) {
+
+           #${id @ context='styleToken'} {
+               ${extraModsDesktop ? 'background' : 'background-image' @ context='styleString'}: url("${model.allRenditions.DESKTOP_LANDSCAPE_X2 @ context='styleString'}") ${extraModsDesktop @ context='unsafe'};
+           }
+        }
+    </style>
+
+</template>

@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    jcr:primaryType="nt:unstructured">
+    <upc
+        jcr:primaryType="nt:unstructured"
+        jcr:title="UPC"
+        sling:orderBefore="language"
+        columnGroup="BBBY"
+        default="{Boolean}false"
+        sortable="{Boolean}true"/>
+	<sku
+		jcr:primaryType="nt:unstructured"
+		jcr:title="Sku"
+		sling:orderBefore="language"
+		columnGroup="Marketing"
+		default="{Boolean}false"
+		sortable="{Boolean}true"/>
+    <vendorName
+        jcr:primaryType="nt:unstructured"
+        jcr:title="Vendor Name"
+        sling:orderBefore="language"
+        columnGroup="BBBY"
+        default="{Boolean}false"
+        sortable="{Boolean}true"/>
+    <instructions
+        jcr:primaryType="nt:unstructured"
+        jcr:title="Instructions"
+        sling:orderBefore="language"
+        columnGroup="BBBY"
+        default="{Boolean}true"
+        sortable="{Boolean}true"/>
+    <contentOpsReview
+        jcr:primaryType="nt:unstructured"
+        jcr:title="Content Ops Review"
+        sling:orderBefore="language"
+        columnGroup="BBBY"
+        default="{Boolean}true"
+        sortable="{Boolean}true"/>
+    <assetUpdate
+        jcr:primaryType="nt:unstructured"
+        jcr:title="Asset Update"
+        sling:orderBefore="language"
+        columnGroup="BBBY"
+        default="{Boolean}true"
+        sortable="{Boolean}true"/>
+    <primaryImage
+        jcr:primaryType="nt:unstructured"
+        jcr:title="Primary Image"
+        sling:orderBefore="language"
+        columnGroup="BBBY"
+        default="{Boolean}true"
+        sortable="{Boolean}true"/>
+    <rejectionReason
+        jcr:primaryType="nt:unstructured"
+        jcr:title="Rejection Reason"
+        sling:orderBefore="language"
+        columnGroup="BBBY"
+        default="{Boolean}false"
+        sortable="{Boolean}true"/>
+    <priorityFlag
+        jcr:primaryType="nt:unstructured"
+        jcr:title="Priority Flag"
+        sling:orderBefore="language"
+        columnGroup="BBBY"
+        default="{Boolean}false"
+        sortable="{Boolean}true"/>
+    <rollupType
+        jcr:primaryType="nt:unstructured"
+        jcr:title="Rollup Type"
+        sling:orderBefore="language"
+        columnGroup="BBBY"
+        default="{Boolean}false"
+        sortable="{Boolean}true"/>
+	<rejectionFollowup
+        jcr:primaryType="nt:unstructured"
+        jcr:title="Rejection Followup"
+        sling:orderBefore="language"
+        columnGroup="BBBY"
+        default="{Boolean}false"
+        sortable="{Boolean}true"/>
+	<colorSpace
+        jcr:primaryType="nt:unstructured"
+        jcr:title="Color Space"
+        sling:orderBefore="language"
+        columnGroup="BBBY"
+        default="{Boolean}false"
+        sortable="{Boolean}true"/>
+    <scene7FileStatus
+        jcr:primaryType="nt:unstructured"
+        jcr:title="Scene7 File Status"
+        sling:orderBefore="language"
+        columnGroup="BBBY"
+        default="{Boolean}false"
+        sortable="{Boolean}true"/>
+    <count
+        jcr:primaryType="nt:unstructured"
+        jcr:title="Count"
+        sling:orderBefore="language"
+        columnGroup="BBBY"
+        default="{Boolean}false"
+        sortable="{Boolean}true"/>
+	<expirationDate
+		jcr:primaryType="nt:unstructured"
+		jcr:title="Expiration Date"
+		sling:orderBefore="language"
+		columnGroup="Marketing"
+		default="{Boolean}false"
+		sortable="{Boolean}true"/>
+	<relPath
+        jcr:primaryType="nt:unstructured"
+        jcr:title="Relative Path"
+        sling:orderBefore="language"
+        columnGroup="BBBY"
+        default="{Boolean}false"
+        sortable="{Boolean}true"/>
+    <updatedBy
+        jcr:primaryType="nt:unstructured"
+        jcr:title="Updated By"
+        sling:orderBefore="modified"
+        columnGroup="BBBY"
+        default="{Boolean}true"
+        sortable="{Boolean}true"/>
+	<creator
+        jcr:primaryType="nt:unstructured"
+        jcr:title="Creator"
+        sling:orderBefore="language"
+        columnGroup="Marketing"
+        default="{Boolean}false"
+        sortable="{Boolean}true"/>
+	<captureDate
+        jcr:primaryType="nt:unstructured"
+        jcr:title="Capture date"
+        sling:orderBefore="language"
+        columnGroup="Marketing"
+        default="{Boolean}false"
+        sortable="{Boolean}true"/>
+</jcr:root>

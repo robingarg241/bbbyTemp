@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0"
+    jcr:primaryType="cq:WorkflowLauncher"
+    condition=""
+    conditions="[jcr:content/jcr:mimeType==video/.*]"
+    description="Update Asset - Create (with DM feature check)"
+    disabledFeatures="[com.adobe.dam.asset.dynamicmedia.feature.flag,com.adobe.dam.asset.scene7.feature.flag]"
+    enabled="{Boolean}false"
+    eventType="{Long}1"
+    excludeList="event-user-data:changedByWorkflowProcess"
+    features="[]"
+    glob="/content/dam(/.*/)renditions/original"
+    nodetype="nt:file"
+    runModes="author"
+    workflow="/var/workflow/models/dam/update_asset"/>

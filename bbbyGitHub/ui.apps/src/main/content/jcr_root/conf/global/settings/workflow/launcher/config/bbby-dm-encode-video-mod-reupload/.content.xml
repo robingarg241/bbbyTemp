@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0"
+    jcr:primaryType="cq:WorkflowLauncher"
+    condition=""
+    conditions="[jcr:content/jcr:mimeType==video/.*,dam:scene7FileStatus==NeedsReupload]"
+    description="BBBY Dynamic Media Encode Video - Modification / Reupload"
+    disabledFeatures="[]"
+    enabled="{Boolean}true"
+    eventType="{Long}16"
+    excludeList="event-user-data:changedByWorkflowProcess"
+    features="[com.adobe.dam.asset.scene7.feature.flag]"
+    glob="/content/dam/bbby(/.*)/jcr:content/metadata"
+    nodetype="nt:unstructured"
+    runModes="author"
+    workflow="/var/workflow/models/bbby-dynamic-media-encode-video"/>

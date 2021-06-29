@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0"
+      jcr:primaryType="sling:OsgiConfig"
+
+     service.ranking="{Long}0"
+	 user.mapping="[com.bbby.aem.bbby-com.core:writeservice=vp-content-service,
+	 				com.bbby.aem.bbby-com.core:pdm-content-service=pdm-user,
+	 				com.bbby.aem.bbby-com.core:workflow-service=bbby-workflow-service]"
+/>

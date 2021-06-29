@@ -1,0 +1,429 @@
+/**
+ *  Main css for Vendor Asset Approval
+ */
+
+.component-vendor-asset-approval {
+
+    .container {
+        font-family: 'brandon', helvetica, sans-serif;
+
+        //margin: 0 auto;
+        // For grow & shrink as per screen size change values as per your requirements
+        width: auto;
+        margin-bottom: 100px;
+        height: auto;
+        overflow: hidden;
+        .row {
+
+            .loading {
+                align-items: center;
+
+                justify-content: center;
+                display: flex;
+                overflow: hidden;
+                position: relative;
+                height: 100vh;
+
+                .spinner {
+                    margin: 0 auto;
+                    position: relative;
+                    img {
+                        width: 60px;
+                        height: 50px;
+                    }
+                }
+            }
+
+            //background: blue;
+            .asset-display {
+                margin-top: 10px;
+                background: black;
+                border: 2px solid black;
+
+                height: 55vh;
+
+                align-items: center;
+
+                justify-content: center;
+                display: flex;
+                overflow: hidden;
+                position: relative;
+
+                .left-arrow {
+                    z-index: 10;
+                    float: left;
+                    height: 10vh;
+                    opacity: 0.3;
+                    width: 10%;
+                    position: absolute;
+                    left: -3%;
+                }
+
+                .left-arrow:hover {
+                    opacity: 1;
+                }
+
+                .right-arrow {
+                    z-index: 10;
+                    float: right;
+                    height: 10vh;
+                    opacity: 0.3;
+                    width: 10%;
+                    position: absolute;
+                    right: -3%;
+                }
+
+                .right-arrow:hover {
+                    opacity: 1;
+                }
+
+                .asset-case {
+                    border: 1px solid black;
+
+                    margin: auto;
+                    //max-width: auto;
+                    //max-height: 400px;
+                    left: 0;
+                    right: 0;
+                    top: 0;
+                    bottom: 0;
+                    max-width: 100%;
+                    max-height: 55vh;
+                    height: auto;
+                    width: auto;
+                    transition: 0.5s ease;
+                    position: absolute;
+                    padding-top: 10px;
+                    padding-bottom: 10px;
+                }
+
+                .left {
+                    right: 100%;
+                    opacity: 0;
+                    transition: 0.5s ease;
+                }
+
+                .right {
+                    left: 100%;
+                    opacity: 0;
+                    transition: 0.5s ease;
+                }
+            }
+
+            .carousel {
+                .left-scroll {
+
+                    width:100%;
+                    height: 10vh;
+                }
+
+                .right-scroll {
+                    width: 100%;
+                    height: 10vh;
+                }
+
+                .asset-queue {
+                    border: 0px solid black;
+                    height: 12vh;
+
+                    display: flex;
+                    overflow: scroll;
+                    .asset-thumbnail-case {
+                        margin-left: 2px;
+                        margin-right: 2px;
+
+                        height: 10vh;
+                        width: 10vh;
+                        display: inline-block;
+                        vertical-align: top;
+                        border: 1px solid #e1e1ea;
+                        position: relative;
+
+                        .round-checkbox {
+                            z-index: 20;
+                            //margin-left: 10px;
+                            //float: left;
+                            position: absolute;
+
+                            .checkbox {
+                                margin-top: 0px;
+                                margin-left: 10%;
+                            }
+
+                        }
+
+                        .asset-thumbnail {
+                            max-height: 100%;
+                            max-width: 100%;
+                            width: auto;
+                            height: auto;
+                            position: absolute;
+                            top: 0;
+                            bottom: 0;
+                            left: 0;
+                            right: 0;
+                            margin: auto;
+                            transition: 0.5s ease;
+                        }
+
+                        .reject {
+                            opacity: 0.5;
+                            transition: 0.5s ease;
+                        }
+
+                        .like-icon {
+                            z-index: 10;
+                            max-height: 30%;
+                            max-width: 30%;
+                            width: auto;
+                            height: auto;
+                            position: absolute;
+                            top: 0;
+                            bottom: 0;
+                            left: 0;
+                            right: 0;
+                            margin: auto;
+                            opacity: 0;
+                            transition: 0.5s ease;
+                            //background-image: url("/etc/designs/nordstrom/images/check_mark.png");
+                        }
+
+                        .like-icon-show {
+                            opacity: 1;
+                            transition: 0.5s ease;
+                        }
+
+                        .dislike-icon {
+                            z-index: 10;
+                            max-height: 30%;
+                            max-width: 30%;
+                            width: auto;
+                            height: auto;
+                            position: absolute;
+                            top: 0;
+                            bottom: 0;
+                            left: 0;
+                            right: 0;
+                            margin: auto;
+                            opacity: 0;
+                            transition: 0.5s ease;
+                            //background-image: url("/etc/designs/nordstrom/images/x_mark.png");
+                        }
+
+                        .dislike-icon-show {
+                            opacity: 1;
+                            transition: 0.5s ease;
+                        }
+
+                    }
+
+                    .selected {
+                        border: 2px solid blue;
+
+                    }
+
+                    .accepted {
+                        border: 2px solid #56c45a;
+
+                    }
+
+                }
+            }
+
+            .config-buttons {
+                margin: 10px;
+                font-weight: bold;
+            }
+
+            .project-properties {
+                table {
+                    width: 100%;
+                    tr {
+
+                        th {
+                            padding-top: 10px;
+                            padding-bottom: 10px;
+                        }
+                        td {
+                            overflow-wrap: break-word;
+                            padding-top: 10px;
+                            padding-bottom: 10px;
+                        }
+                    }
+                }
+
+                .division-line {
+                    display: block;
+                    margin-top: 20px;
+                    margin-bottom: 20px;
+                    margin-left: auto;
+                    margin-right: auto;
+                    border-style: inset;
+                    border-width: 1px;
+                }
+
+                .complete-button {
+                    background: black;
+                    color: white;
+                    font-weight: bold;
+                    font-size: 12px;
+                    text-transform: uppercase;
+
+                    padding-left: 25px;
+                    padding-right: 25px;
+                    padding-top: 5px;
+                    padding-bottom: 5px;
+
+                }
+            }
+
+            .control-buttons {
+                display: inline;
+
+                //margin-top: 10px;
+                //margin-bottom: 10px;
+
+                .button-group-left {
+
+                    font-size: 14px;
+                    font-weight: bold;
+                    float: left;
+                    padding-left: 10px;
+                    margin-bottom: 10px;
+                    @media only screen and (max-width: 768px) {
+                        float: none;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                    }
+                }
+
+                .critique-buttons {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    //padding: 5px 5px 5px 5px;
+
+                    //
+                    //button {
+                    //    margin: 5px;
+                    //}
+
+                    white-space: nowrap;
+                    font-size: 12px;
+                    margin-bottom: 10px;
+
+                    .like-button {
+                        background-color: #56c45a;
+                        background-image: url("/etc/designs/nordstrom/images/check_mark_white.png");
+                        background-size: 20px 20px;
+                        background-repeat: no-repeat;
+                        background-position: 10% 50%;
+                        //height: 35px;
+                        padding-left: 40px;
+                        padding-right: 10px;
+                        padding-top: 10px;
+                        padding-bottom: 10px;
+                        color: white;
+                        font-weight: bold;
+                        margin-left: 1px;
+                        text-transform: uppercase;
+
+                    }
+
+                    .dislike-button {
+                        background: #DB4F37;
+                        background-image: url("/etc/designs/nordstrom/images/x_mark_white.png");
+                        background-size: 20px 20px;
+                        background-repeat: no-repeat;
+                        background-position: 10% 50%;
+                        //height: 35px;
+                        padding-left: 40px;
+                        padding-right: 10px;
+                        padding-top: 10px;
+                        padding-bottom: 10px;
+                        color: white;
+                        font-weight: bold;
+                        margin-right: 10px;
+                        text-transform: uppercase;
+
+                    }
+
+                }
+
+                .navigation-buttons {
+                    float: right;
+                    font-size: 12px;
+
+                    //background: red;
+
+                    //a {
+                    //    font-size: 14px;
+                    //    font-weight: bold;
+                    //    margin-right: 10px;
+                    //}
+
+                    //button{
+                    //    color: black;
+                    //    background-color: ghostwhite;
+                    //    height: 40px;
+                    //    width: 40px;
+                    //    border: 2px solid black;
+                    //    p {
+                    //        font-size: 20px;
+                    //        font-weight: bold;
+                    //    }
+                    //}
+
+                    .reset-button {
+                        background-color: #33ccff;
+                        background-image: url("/etc/designs/nordstrom/images/refresh_icon_white.png");
+                        background-size: 28px 28px;
+                        background-repeat: no-repeat;
+                        background-position: 10% 50%;
+                        //height: 35px;
+                        padding-left: 45px;
+                        padding-right: 10px;
+                        padding-top: 10px;
+                        padding-bottom: 10px;
+                        color: white;
+                        font-weight: bold;
+                        margin-left: 1px;
+                        text-transform: uppercase;
+
+                    }
+                    @media only screen and (max-width: 768px) {
+                        float: none;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                    }
+
+                }
+
+            }
+
+            .complete {
+                align-items: center;
+
+                justify-content: center;
+                display: flex;
+                overflow: hidden;
+                position: relative;
+                height: 100vh;
+
+                img {
+                    height: 20px;
+                    width: 20px;
+                    margin-bottom: 10px;
+                    margin-right: 10px;
+
+                }
+                p {
+                    font-size: 20px;
+                    font-weight: bold;
+                }
+            }
+        }
+    }
+}

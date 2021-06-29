@@ -1,0 +1,21 @@
+<span class="edit-start container" data-sly-test="${wcmmode.edit || wcmmode.preview || wcmmode.design}">&nbsp;${resource.name} <i
+    class="fa fa-long-arrow-down" aria-hidden="true"></i></span>
+
+<template data-sly-template.renderTitle>
+    <div class="cmp-title"
+         data-sly-use.model="com.bbby.aem.core.models.component.Title"
+         data-sly-use.title="com.adobe.cq.wcm.core.components.models.Title"
+         data-sly-use.template="core/wcm/components/commons/v1/templates.html"
+         data-sly-test.text="${title.text}">
+
+        <a data-sly-unwrap="${!model.linkUrl}"
+           class="cmp-image__link" href="${model.linkUrl @ context='uri'}"
+           data-cmp-hook-image="link"
+           target="${model.newTab ? '_blank' : ''}">
+            <h1 class="cmp-title__text" data-sly-element="${title.type}">${text}</h1>
+        </a>
+    </div>
+</template>
+<sly data-sly-use.backgroundModel="com.bbby.aem.core.models.component.Background"
+     data-sly-use.background="bbby/components/content/background/background.html"
+     data-sly-call="${background.renderBackground @ model=model, contentTemplate=renderTitle}"/>

@@ -1,0 +1,5 @@
+#base=js
+
+owl-carousel.min.js
+pagination.min.js
+pdm-metadata.js

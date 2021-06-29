@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    jcr:primaryType="cq:Page">
+    <jcr:content
+        cq:lastModified="{Date}2018-07-02T10:22:43.870-07:00"
+        cq:lastModifiedBy="admin"
+        cq:template="/apps/bbby/templates/page-content"
+        jcr:primaryType="cq:PageContent"
+        jcr:title="Reference"
+        sling:resourceType="bbby/components/structure/page"
+        analytics.pageId="reference:reference:uhPubPwx"
+        robotsOptions="default">
+        <par
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="wcm/foundation/components/parsys">
+            <reference
+                jcr:created="{Date}2017-05-25T11:42:16.326-07:00"
+                jcr:createdBy="admin"
+                jcr:lastModified="{Date}2017-05-25T11:45:33.476-07:00"
+                jcr:lastModifiedBy="admin"
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="bbby/components/content/reference"
+                path="/content/bbby-components/html/jcr:content/par/html"/>
+        </par>
+    </jcr:content>
+</jcr:root>

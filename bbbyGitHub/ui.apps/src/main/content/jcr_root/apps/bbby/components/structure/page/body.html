@@ -1,0 +1,27 @@
+<div class="site-wrapper ${wcmmode.edit ? 'edit' : ''} ${wcmmode.design ? 'design' : ''} ${wcmmode.preview ? 'preview' : ''} ${wcmmode.disabled ? 'publish' : ''}"
+    data-sly-use.bypassEditingModel="com.bbby.aem.core.models.BypassComponentHandlingModel"
+    data-sly-use.inheritedProperties="com.bbby.aem.core.models.common.InheritedPageProps">
+
+    <!--/* HEADER */-->
+    <sly data-sly-test="${bypassEditingModel.disableComponentEditing}"></sly>
+    <div data-sly-test="${inheritedProperties.headerPath}"
+        data-sly-unwrap="${!wcmmode.edit}"
+        data-sly-resource="${inheritedProperties.headerPath}"></div>
+    <sly data-sly-test="${bypassEditingModel.restoreComponentEditing}"></sly>
+
+    <div class="site-content">
+
+        <span class="edit-start container" data-sly-test="${wcmmode.edit || wcmmode.preview || wcmmode.design}">&nbsp;Body <i class="fa fa-arrow-circle-down" aria-hidden="true"></i></span>
+        <sly data-sly-include="bodycontent.html"></sly>
+        <span class="edit-end container" data-sly-test="${wcmmode.edit || wcmmode.preview || wcmmode.design}">&nbsp;Body <i class="fa fa-arrow-circle-up" aria-hidden="true"></i></span>
+
+    </div>
+
+    <!--/* FOOTER */-->
+    <sly data-sly-test="${bypassEditingModel.disableComponentEditing}"></sly>
+    <div data-sly-test="${inheritedProperties.footerPath}"
+        data-sly-unwrap="${!wcmmode.edit}"
+        data-sly-resource="${inheritedProperties.footerPath}"></div>
+    <sly data-sly-test="${bypassEditingModel.restoreComponentEditing}"></sly>
+
+</div>

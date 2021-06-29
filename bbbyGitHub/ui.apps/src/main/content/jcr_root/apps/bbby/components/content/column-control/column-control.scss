@@ -1,0 +1,18 @@
+/**
+ *  Main css for Column Control
+ */
+
+.cmp-column-control {
+    /*
+     * Author only rule for parsys drop zone.
+     */
+    .new.section {
+        @extend .col-12;
+    }
+
+
+}
+
+.bbb-grey {
+        background-color: #f2f2f2;
+    }

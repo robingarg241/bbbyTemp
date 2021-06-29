@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    jcr:primaryType="cq:Page">
+    <jcr:content
+        cq:contextHubPath="/etc/cloudsettings/default/contexthub"
+        cq:contextHubSegmentsPath="/etc/segmentation/contexthub"
+        cq:lastModified="{Date}2018-07-06T08:43:55.275-07:00"
+        cq:lastModifiedBy="admin"
+        cq:tags="[bbby:page-type/component-test]"
+        cq:template="/apps/bbby/templates/page-content"
+        jcr:primaryType="cq:PageContent"
+        jcr:title="Article"
+        sling:resourceType="bbby/components/structure/page"
+        robotsOptions="default">
+        <par
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="wcm/foundation/components/parsys">
+            <text_jumbo
+                jcr:created="{Date}2016-10-04T08:43:37.619-07:00"
+                jcr:createdBy="admin"
+                jcr:lastModified="{Date}2016-10-04T08:43:50.510-07:00"
+                jcr:lastModifiedBy="admin"
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="bbby/components/content/text-jumbo"
+                backgroundBottomSpacing="vert-pad-bottom-md"
+                backgroundColor="_empty_"
+                backgroundHorizontalSpacing="_empty_"
+                backgroundTopSpacing="vert-pad-top-md"
+                textJumboAlignment="left"
+                textJumboTitleSize="h1"
+                title="Article"/>
+            <article
+                jcr:created="{Date}2016-10-04T08:43:33.661-07:00"
+                jcr:createdBy="admin"
+                jcr:lastModified="{Date}2018-07-02T09:56:23.730-07:00"
+                jcr:lastModifiedBy="admin"
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="bbby/components/content/article"
+                articleColumnCount="3"
+                articleTitleSize="h2"
+                backgroundColor="bg-light"
+                backgroundHorizontalSpacing="px-0"
+                text="&lt;p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sed eros facilisis orci fringilla tempor. Integer sodales nisi sit amet bibendum posuere. Maecenas hendrerit dapibus tempor. Proin rutrum posuere leo, id pulvinar sapien condimentum ut. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean mattis dictum sapien, malesuada dignissim felis lobortis eu. Nam et purus aliquam, aliquet ex et, mollis dui. Sed id tristique felis. In vitae ex diam. Pellentesque non justo eu arcu porta hendrerit non nec est. Maecenas a ullamcorper lectus. Quisque nibh dui, condimentum at egestas sit amet, blandit nec lorem.&lt;/p>&#xa;&lt;p>Donec eget iaculis enim, eget sodales purus. Aliquam erat volutpat. Nullam sit amet posuere lorem. In porttitor aliquet diam in ornare. Etiam ac orci nec arcu auctor cursus. Fusce porta consectetur interdum. Vestibulum ullamcorper lacinia commodo.&lt;/p>&#xa;&lt;p>Nunc lobortis at est id consequat. Duis pharetra molestie venenatis. Vivamus sollicitudin laoreet nibh, et maximus lectus interdum id. Vestibulum nec odio velit. Pellentesque urna arcu, aliquam vitae massa vitae, vulputate euismod lorem. Duis rhoncus orci quam, quis molestie risus imperdiet ac. Donec porta convallis turpis, sollicitudin mollis libero fermentum vel. Nullam vehicula enim porttitor ante bibendum, vitae pretium ipsum malesuada. Nullam fringilla malesuada erat vel molestie. Curabitur mollis vitae orci ac varius. Nullam fermentum congue leo ac bibendum. Etiam diam augue, tempor id porttitor quis, congue sit amet dolor.&lt;/p>&#xa;"
+                textIsRich="true"
+                title="Title"/>
+        </par>
+    </jcr:content>
+</jcr:root>

@@ -1,0 +1,55 @@
+<span class="edit-start container" data-sly-test="${wcmmode.edit || wcmmode.preview || wcmmode.design}">&nbsp;${resource.name} <i
+    class="fa fa-long-arrow-down" aria-hidden="true"></i></span>
+
+<!--/*
+    Main HTL template for the vendor-portal-header component.
+    model: The java model containing all fields necessary for rendering.
+*/-->
+<template data-sly-template.renderVendorPortalHeader="${ @ model }">
+    <section class="component-vendor-portal-header">
+
+        <!--/*
+        Uncomment for debug output
+        <sly data-sly-use.debug="../_debugging/_debugging.html" data-sly-call="${debug.renderDebugging @ model=model}" />
+        */-->
+
+        <a class="logo"   href="${model.homeUrl}">
+            <img src="${model.logoPath}"/>
+        </a>
+
+        <div class="navigation-links">
+            <ul>
+                <li >
+                    <a id="navUpload" href="${model.homeUrl}" class="${model.isHome ? 'active-link' : ''}">
+                        <i class="fa fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                </li>
+                <li >
+                    <a id="navHistory" href="${model.uploadHistoryUrl}" class="${model.isUploadHistory ? 'active-link' : ''}">
+                        <i class="fa fa-clock-o"></i>
+                        <span>View History</span>
+                    </a>
+                </li>
+                <li >
+                    <a id="help" href="${model.helpUrl}" class="${model.isHelp ? 'active-link' : ''}">
+                        <i class="fa fa-info-circle"></i>
+                        <span>Help</span>
+                    </a>
+                </li>
+                <li>
+                    <a id="refDoc" href="${model.refDocUrl}" class="${model.isRefDoc ? 'active-link' : ''}">
+                        <i class="fa fa-files-o"></i>
+                        <span>Reference</span>
+                        <span style="display: block;">Documentation</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+    </section>
+</template>
+
+<sly data-sly-use.model="com.bbby.aem.core.models.component.VendorPortalHeader"
+     data-sly-call="${renderVendorPortalHeader @ model=model}"/>
+

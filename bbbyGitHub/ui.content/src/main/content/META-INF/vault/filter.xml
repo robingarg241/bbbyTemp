@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workspaceFilter version="1.0">
+    <filter root="/content/bbby-components"/>
+    <filter root="/content/bedbath" mode="update"/>
+    <filter root="/content/dam/bbby-components" mode="update"/>
+    <filter root="/content/dam/bedbath/vendor-portal" mode="merge"/>
+    <filter root="/content/dam/bbby/reference_assets" mode="merge"/>
+    <filter root="/var/rep:policy"/>
+    <filter root="/var/vendor/rep:policy"/>
+</workspaceFilter>

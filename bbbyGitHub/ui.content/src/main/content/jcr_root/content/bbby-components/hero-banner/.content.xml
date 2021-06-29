@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    jcr:primaryType="cq:Page">
+    <jcr:content
+        cq:contextHubPath="/etc/cloudsettings/default/contexthub"
+        cq:contextHubSegmentsPath="/etc/segmentation/contexthub"
+        cq:lastModified="{Date}2018-07-02T10:22:15.257-07:00"
+        cq:lastModifiedBy="admin"
+        cq:tags="[bbby:page-type/component-test]"
+        cq:template="/apps/bbby/templates/page-content"
+        jcr:primaryType="cq:PageContent"
+        jcr:title="Hero Banner"
+        sling:resourceType="bbby/components/structure/page"
+        robotsOptions="default">
+        <par
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="wcm/foundation/components/parsys">
+            <hero_banner
+                jcr:created="{Date}2016-09-30T13:18:14.043-07:00"
+                jcr:createdBy="admin"
+                jcr:lastModified="{Date}2018-07-02T09:51:39.070-07:00"
+                jcr:lastModifiedBy="admin"
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="bbby/components/content/hero-banner"
+                fileReference="/content/dam/bbby-components/portrait-image.jpg"
+                fileReferenceMobile="/content/dam/bbby-components/portrait-image.jpg"
+                fileReferenceTablet="/content/dam/bbby-components/landscape-image.jpg"
+                heroBannerAlignment="left"
+                heroBannerTextColor="text-white"
+                superTitle="Super Title"
+                text="&lt;p>Background image is kept in mobile&lt;/p>&#xa;"
+                textIsRich="true"
+                title="Hero Banner"
+                titleSize="_empty_">
+                <image
+                    jcr:lastModified="{Date}2016-09-30T17:10:10.241-07:00"
+                    jcr:lastModifiedBy="admin"
+                    jcr:primaryType="nt:unstructured"
+                    fileReference="/content/dam/bbby-components/landscape-image.jpg"/>
+                <analytics jcr:primaryType="nt:unstructured">
+                    <item1
+                        jcr:primaryType="nt:unstructured"
+                        name="data-test"
+                        value="212512512"/>
+                </analytics>
+                <cta jcr:primaryType="nt:unstructured">
+                    <item0
+                        jcr:primaryType="nt:unstructured"
+                        link="https://google.com"
+                        newTab="true"
+                        title="CTA Button"/>
+                </cta>
+            </hero_banner>
+            <text_jumbo
+                jcr:created="{Date}2016-09-30T14:27:35.128-07:00"
+                jcr:createdBy="admin"
+                jcr:lastModified="{Date}2016-09-30T14:27:43.745-07:00"
+                jcr:lastModifiedBy="admin"
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="bbby/components/content/text-jumbo"
+                backgroundBottomSpacing="vert-pad-bottom-xs"
+                backgroundColor="_empty_"
+                backgroundHorizontalSpacing="_empty_"
+                backgroundTopSpacing="vert-pad-top-xs"
+                textJumboAlignment="left"
+                textJumboTitleSize="h2"/>
+            <hero_banner_809822265
+                jcr:created="{Date}2016-09-30T14:26:15.187-07:00"
+                jcr:createdBy="admin"
+                jcr:lastModified="{Date}2018-07-02T09:51:47.064-07:00"
+                jcr:lastModifiedBy="admin"
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="bbby/components/content/hero-banner"
+                fileReference="/content/dam/bbby-components/landscape-image.jpg"
+                fileReferenceMobile="/content/dam/bbby-components/landscape-image.jpg"
+                fileReferenceTablet="/content/dam/bbby-components/portrait-image.jpg"
+                heroBannerAlignment="center"
+                heroBannerHideImageMobile="true"
+                heroBannerTextColor="text-dark"
+                superTitle="Small H1 | Dark Text | Center Align"
+                text="&lt;p>Background image hides in mobile.&lt;/p>&#xa;"
+                textIsRich="true"
+                title="Hero Banner"
+                titleSize="h1-small">
+                <image
+                    jcr:lastModified="{Date}2016-09-30T14:34:08.109-07:00"
+                    jcr:lastModifiedBy="admin"
+                    jcr:primaryType="nt:unstructured"
+                    fileReference="/content/dam/bbby-components/landscape-image.jpg"/>
+                <cta jcr:primaryType="nt:unstructured">
+                    <item0
+                        jcr:primaryType="nt:unstructured"
+                        link="http://google.com"
+                        newTab="true"
+                        title="CTA Button"/>
+                </cta>
+            </hero_banner_809822265>
+        </par>
+    </jcr:content>
+</jcr:root>

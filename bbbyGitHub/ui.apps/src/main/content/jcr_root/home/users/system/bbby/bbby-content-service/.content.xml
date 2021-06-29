@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:rep="internal"
+    jcr:primaryType="rep:SystemUser"
+    jcr:uuid="828ab432-cdbd-35e1-bd80-d9f4e4411fb4"
+    rep:authorizableId="bbby-content-service"
+    rep:principalName="bbby-content-service"/>

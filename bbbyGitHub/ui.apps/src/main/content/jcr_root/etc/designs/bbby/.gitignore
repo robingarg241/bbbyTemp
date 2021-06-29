@@ -1,0 +1,2 @@
+# This entire favicon directory is populated by the gulp build. It should not be included in source control.
+favicon/*
