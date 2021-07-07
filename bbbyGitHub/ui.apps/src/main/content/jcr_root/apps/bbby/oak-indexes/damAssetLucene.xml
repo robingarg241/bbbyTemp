@@ -314,7 +314,7 @@
                 <contentOpsReviewed
                     jcr:primaryType="nt:unstructured"
                     name="jcr:content/metadata/bbby:contentOpsReview"
-                    propertyIndex="{Boolean}true"/>
+                    propertyIndex="{Boolean}true"/>	
                 <primaryImage
                     jcr:primaryType="nt:unstructured"
                     name="jcr:content/metadata/bbby:primaryImage"
@@ -323,6 +323,10 @@
                     jcr:primaryType="nt:unstructured"
                     name="jcr:content/metadata/cq:tags"
                     propertyIndex="{Boolean}true"/>
+				 <uploadedAssetName
+                    jcr:primaryType="nt:unstructured"
+                    name="jcr:content/metadata/bbby:uploadedAssetName"
+                    propertyIndex="{Boolean}true"/>	
 				<assetHash
                     jcr:primaryType="nt:unstructured"
                     name="jcr:content/metadata/bbby:assetHash"
