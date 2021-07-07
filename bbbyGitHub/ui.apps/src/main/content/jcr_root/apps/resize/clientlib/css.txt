@@ -1,0 +1,1 @@
+dialog-resize-img.css

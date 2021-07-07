@@ -154,6 +154,9 @@
 	<!-- Notify Email Stuff -->
 	<filter root="/apps/notify"/>
 	
+	<!-- Resize Image Stuff -->
+    <filter root="/apps/resize"/>
+    
 	<!-- View PDF Stuff -->
 	<filter root="/apps/bbby-view-pdf"/>
 	
