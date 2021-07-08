@@ -157,6 +157,9 @@
 
         $items.each(function () {
         	var assetPath = $(this).data("foundationCollectionItemId");
+        	//var regex = /([/|.|\w|\s|-])*\.(?:jpg|jpeg|gif|png|tiff)/g;
+        	//var found = assetPath.match(regex);
+        	// ToDo: check if selected path is image path.
 			if(!assetPath.startsWith("/content/dam")){
 				showButton = false;
             }
