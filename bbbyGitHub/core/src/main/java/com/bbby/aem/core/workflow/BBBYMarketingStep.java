@@ -63,6 +63,8 @@ public class BBBYMarketingStep implements WorkflowProcess {
         	            Node metadataNode = node.getNode(CommonConstants.METADATA_NODE);
         	            String colorSpace = ServiceUtils.getColorSpace(resource);
         	            metadataNode.setProperty(CommonConstants.BBBY_COLOR_SPACE, colorSpace);
+        	            // DAM -1507 - Auto AEM Orientation - Added the orientation based on width and height
+        	            setMarketingOrientation(metadataNode);
         	            if(node.hasNode(CommonConstants.METADATA_IPTC_NODE)){
 	        	            Node iptcMetadataNode = node.getNode(CommonConstants.METADATA_IPTC_NODE);
 	        	            String creatorPhone = "";
@@ -102,6 +104,27 @@ public class BBBYMarketingStep implements WorkflowProcess {
         responceCode = callPDMService.makePDMCall(session, assetPath, updateAssetCmd);
 
         log.debug(String.format("PDM Call response for asset %1$s is %2$s", assetPath, responceCode));
+    }
+    
+    private void setMarketingOrientation(Node metadataNode) throws Exception {
+    	if(metadataNode.hasProperty("tiff:ImageLength") && metadataNode.hasProperty("tiff:ImageWidth")) {
+    	 long height = metadataNode.getProperty("tiff:ImageLength").getLong();
+		 long width = metadataNode.getProperty("tiff:ImageWidth").getLong();
+		 log.info("Height is.. : "+ height +" width is.."+width);
+		 
+		 if(height>width) {
+			 metadataNode.setProperty("bbby:orientation", "Portrait");  
+		 }
+		 else if(height<width) {
+			 metadataNode.setProperty("bbby:orientation", "Landscape"); 	 
+		 }
+		 else {
+			 metadataNode.setProperty("bbby:orientation", "Square"); 
+		 }
+    	}
+    	else {
+    		log.info("height and width property not present in metadata");
+    	}
     }
    
 }

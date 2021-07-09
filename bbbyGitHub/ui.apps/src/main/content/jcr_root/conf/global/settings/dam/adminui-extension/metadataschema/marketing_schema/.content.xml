@@ -73,6 +73,19 @@
                                         requiredCascading="default"
                                         visibilityCascading="default"/>
                                 </assetId>
+								<mkorientation
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="dam/gui/components/admin/schemafield"
+                                    disabled="{Boolean}true"
+                                    fieldLabel="*Marketing Orientation"
+                                    name="./jcr:content/metadata/bbby:orientation"
+                                    resourceType="granite/ui/components/coral/foundation/form/textfield">
+                                    <granite:data
+                                        jcr:primaryType="nt:unstructured"
+                                        metaType="text"
+                                        requiredCascading="default"
+                                        visibilityCascading="default"/>
+                                </mkorientation>
                                 <lastModifiedBy
                                     jcr:primaryType="nt:unstructured"
                                     sling:resourceType="dam/gui/components/admin/schemafield"
