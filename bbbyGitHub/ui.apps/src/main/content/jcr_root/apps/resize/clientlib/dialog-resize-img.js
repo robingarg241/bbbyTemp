@@ -143,8 +143,12 @@
 
         if(assetDetails && assetDetails.responseJSON) {
             assetDetails = assetDetails["responseJSON"]["jcr:content"]["metadata"];
-            result["originalWidth"] = assetDetails["tiff:ImageWidth"];
-            result["originalHeight"] = assetDetails["tiff:ImageLength"];
+            if(assetDetails["tiff:ImageWidth"] && assetDetails["tiff:ImageLength"]) {
+                result["originalWidth"] = assetDetails["tiff:ImageWidth"];
+                result["originalHeight"] = assetDetails["tiff:ImageLength"];
+            } else {
+                $(".form-textfield-original-width-height-alert").show();
+            }
         }
 
         return result;
@@ -157,11 +161,13 @@
 
         $items.each(function () {
         	var assetPath = $(this).data("foundationCollectionItemId");
-        	//var regex = /([/|.|\w|\s|-])*\.(?:jpg|jpeg|gif|png|tiff)/g;
-        	//var found = assetPath.match(regex);
-        	// ToDo: check if selected path is image path.
+        	var regex = /([/|.|\w|\s|-])*\.(?:[a-z]*)/g;
+        	var found = assetPath.match(regex);
+
 			if(!assetPath.startsWith("/content/dam")){
 				showButton = false;
+            } else if(assetPath.startsWith("/content/dam") && found == null){
+                showButton = false;
             }
             count++;
         });
