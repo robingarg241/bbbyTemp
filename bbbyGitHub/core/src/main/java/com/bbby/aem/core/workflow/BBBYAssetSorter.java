@@ -298,7 +298,8 @@ public class BBBYAssetSorter implements WorkflowProcess {
                         	}
                     	}
                         
-						if (metadataNode.hasProperty(CommonConstants.BBBY_PRIMARY_IMAGE)) {
+                       // This functionality is not valid for imagesets.
+						if (!metadataNode.getPath().contains("_imageset") && metadataNode.hasProperty(CommonConstants.BBBY_PRIMARY_IMAGE)) {
 							if (metadataNode.getProperty(CommonConstants.BBBY_PRIMARY_IMAGE).getString().contentEquals("yes")) {
 							// DAM:1461 - Block the imageset creation for invalid file name 
 								if (!metadataNode.hasProperty(CommonConstants.BBBY_IMAGE_SET_NAME)) {
