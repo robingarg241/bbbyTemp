@@ -62,17 +62,18 @@
                 listOrder="50"
                 metaType="listoptions"
                 name="jcr:content/metadata/bbby:orientation"
+				singleSelect="{Boolean}true"
                 text="BBBY Orientation"
                 value="true">
                 <items jcr:primaryType="nt:unstructured">
-                    <portrait
-                        jcr:primaryType="nt:unstructured"
-                        text="Portrait"
-                        value="Portrait"/>
                     <landscape
                         jcr:primaryType="nt:unstructured"
                         text="Landscape"
                         value="Landscape"/>
+					<portrait
+                        jcr:primaryType="nt:unstructured"
+                        text="Portrait"
+                        value="Portrait"/>	
 					<square
                         jcr:primaryType="nt:unstructured"
                         text="Square"
