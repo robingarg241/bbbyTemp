@@ -165,74 +165,7 @@
                                         metaType="text"
                                         requiredCascading="default"
                                         visibilityCascading="default"/>
-                                </colorSpace> 
-								<orientation
-                                    jcr:primaryType="nt:unstructured"
-                                    sling:resourceType="dam/gui/components/admin/schemafield"
-                                    disabled="{Boolean}true"
-                                    fieldLabel="Orientation"
-									fieldDescription="Landscape = 1, Portrait = 2, Rotate 180 = 3, Mirror Vertical = 4, Mirror Horizontal Rotate 270 CW = 5, Rotate 90 CW = 6, Mirror Horizontal Rotate 90 CW = 7, Rotate 270 CW = 8"
-                                    name="./jcr:content/metadata/tiff:Orientation"
-                                    resourceType="granite/ui/components/coral/foundation/form/textfield">
-                                    <granite:data
-                                        jcr:primaryType="nt:unstructured"
-                                        metaType="text"
-                                        requiredCascading="default"
-                                        visibilityCascading="default"/>
-                                </orientation>  
-								 <orientationDetail
-                                    jcr:primaryType="nt:unstructured"
-                                    sling:resourceType="dam/gui/components/admin/schemafield"
-									disabled="{Boolean}true"
-                                    emptyText=" "
-                                    fieldLabel="Orientation Detail"
-                                    name="./jcr:content/metadata/tiff:Orientation"
-                                    resourceType="granite/ui/components/coral/foundation/form/select">
-                                    <granite:data
-                                        jcr:primaryType="nt:unstructured"
-                                        choicesCascading="default"
-                                        metaType="dropdown"
-                                        requiredCascading="default"
-                                        visibilityCascading="default"/>
-                                    <items jcr:primaryType="nt:unstructured">
-                                        <nr_1
-                                            jcr:primaryType="nt:unstructured"
-                                            text="Landscape"
-                                            value="1"/>
-                                        <mh_2
-                                            jcr:primaryType="nt:unstructured"
-                                            text="Portrait"
-                                            value="2"/>
-										 <r180_3
-                                            jcr:primaryType="nt:unstructured"
-                                            text="Rotate 180"
-                                            value="3"/>
-                                        <mv_4
-                                            jcr:primaryType="nt:unstructured"
-                                            text="Mirror Vertical"
-                                            value="4"/>
-										<mhr270cw_7
-                                            jcr:primaryType="nt:unstructured"
-                                            text="Mirror Horizontal Rotate 270 CW"
-                                            value="5"/>
-                                        <r90cw_6
-                                            jcr:primaryType="nt:unstructured"
-                                            text="Rotate 90 CW"
-                                            value="6"/>	
-										<mhr90cw_7
-                                            jcr:primaryType="nt:unstructured"
-                                            text="Mirror Horizontal Rotate 90 CW"
-                                            value="7"/>	
-										<r270cw_8
-                                            jcr:primaryType="nt:unstructured"
-                                            text="Rotate 270 CW"
-                                            value="8"/>		
-											
-                                    </items>
-                                    <cascadeitems
-                                        jcr:primaryType="nt:unstructured"
-                                        sling:resourceType="dam/gui/coral/components/admin/schemaforms/formbuilder/cascadeitems"/>
-                                </orientationDetail>	
+                                </colorSpace>	
                                 <description
                                     jcr:primaryType="nt:unstructured"
                                     sling:resourceType="dam/gui/components/admin/schemafield"
