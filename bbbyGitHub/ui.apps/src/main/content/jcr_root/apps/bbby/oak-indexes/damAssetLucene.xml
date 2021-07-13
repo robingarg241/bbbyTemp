@@ -327,6 +327,10 @@
                     jcr:primaryType="nt:unstructured"
                     name="jcr:content/metadata/bbby:uploadedAssetName"
                     propertyIndex="{Boolean}true"/>	
+				<bbbyorientation
+                    jcr:primaryType="nt:unstructured"
+                    name="jcr:content/metadata/bbby:orientation"
+                    propertyIndex="{Boolean}true"/>		
 				<assetHash
                     jcr:primaryType="nt:unstructured"
                     name="jcr:content/metadata/bbby:assetHash"
