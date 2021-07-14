@@ -1,20 +1,20 @@
 (function ($, $document) {
 
-    var BUTTON_URL_NEW = "/apps/resize/content/resize-but.html",
-    	RESIZE_ACTIVATOR= "cq-damadmin-admin-actions-resize-img-activator",
+    var BUTTON_URL_NEW = "/apps/dim-calc/content/dim-calc-but.html",
+    	DIM_CAL_ACTIVATOR= "cq-damadmin-admin-actions-dimension-calculator-activator",
         SHARE_ACTIVATOR = "cq-damadmin-admin-actions-adhocassetshare-activator",
-        RESIZE_IMG_URL = "/apps/resize/resize-dialog.html",
+        DIM_CAL_URL = "/apps/dim-calc/dim-calc-dialog.html",
         CANCEL_CSS = "[data-foundation-wizard-control-action='cancel']",
-        SENDER = "experience-aem", REQUESTER = "requester", $resizeModal,
+        SENDER = "experience-aem", REQUESTER = "requester", $dimensionCalcModal,
         url = document.location.pathname;
 
     if( (url.indexOf("/assets.html") == 0 || url.indexOf("/aem/search.html") == 0) ) {
-        $document.on("foundation-selections-change", addResizeButton);
-    } else if(url.indexOf(RESIZE_IMG_URL) == 0) {
-        handleResizeDialog();
+        $document.on("foundation-selections-change", addDimCalcButton);
+    } else if(url.indexOf(DIM_CAL_URL) == 0) {
+        handleDimCalDialog();
     }
 
-    function handleResizeDialog() {
+    function handleDimCalDialog() {
         $document.on("foundation-contentloaded", fillDefaultValues);
 
         $document.on("click", CANCEL_CSS, sendCancelMessage);
@@ -61,14 +61,13 @@
         if (window.opener) {
             return window.opener;
         }
-
         return parent;
     }
 
     function closeModal(event){
         event = event.originalEvent || {};
 
-        if (_.isEmpty(event.data) || _.isEmpty($resizeModal)) {
+        if (_.isEmpty(event.data) || _.isEmpty($dimensionCalcModal)) {
             return;
         }
 
@@ -84,27 +83,10 @@
             return;
         }
 
-        var modal = $resizeModal.data('modal');
+        var modal = $dimensionCalcModal.data('modal');
         modal.hide();
         modal.$element.remove();
 
-        if(message.action == "close"){
-          //  showAlert("Email sent...", $resizeModal.mailSentMessage);
-        }
-    }
-
-    function showAlert(message, title, callback){
-        var fui = $(window).adaptTo("foundation-ui"),
-            options = [{
-                id: "ok",
-                text: "OK",
-                primary: true
-            }];
-
-        message = message || "Unknown Error";
-        title = title || "Error";
-
-        fui.prompt(title, message, "default", options, callback);
     }
 
     function fillDefaultValues() {
@@ -112,6 +94,7 @@
         var queryParams = queryParameters(),
             form = $("form")[0];
 
+        setWidgetValue(form, "[name='./img-name']", [queryParams.assetName]);
         setWidgetValue(form, "[name='./original-width']", [queryParams.originalWidth]);
         setWidgetValue(form, "[name='./original-height']", [queryParams.originalHeight]);
     }
@@ -154,7 +137,7 @@
         return result;
     }
 
-    function addResizeButton(){
+    function addDimCalcButton(){
         var showButton = true,
             $items = $(".foundation-selections-item"),
             count = 0;
@@ -172,9 +155,9 @@
             count++;
         });
 
-        //first remove the resize button and then add.
-        var $resizeActivator = $("." + RESIZE_ACTIVATOR);
-        $resizeActivator.remove();
+        //first remove the dimension Calculator button and then add.
+        var $dimCalcActivator = $("." + DIM_CAL_ACTIVATOR);
+        $dimCalcActivator.remove();
 
         if(showButton && count == 1){
         	$.ajax(BUTTON_URL_NEW).done(addButton);
@@ -188,11 +171,11 @@
             return;
         }
 
-        var $resize = $(html).css("margin-left", "20px").insertBefore($eActivator);
+        var $dimCalc = $(html).css("margin-left", "20px").insertBefore($eActivator);
 
-        $resize.click(openModal);
+        $dimCalc.click(openModal);
 
-        $("." + RESIZE_ACTIVATOR).not(':first').remove();//to remove all except one
+        $("." + DIM_CAL_ACTIVATOR).not(':first').remove();//to remove all except one
 
         $(window).off('message', closeModal).on('message', closeModal);
     }
@@ -211,17 +194,18 @@
         	var assetName = assetPath.substr(assetPath.lastIndexOf("/") + 1);
         	folderName = assetPath.substr(0, assetPath.lastIndexOf("/"));
             assetPaths.push(assetPath);
-            assetNames.push("<"+assetName+">");
+            assetNames.push(assetName);
         });
 
         var assets = assetPaths.join("\n");
+        var assetName = assetNames.join("\n");
 
-        showResizeModal(getModalIFrameUrl(assets), actionConfig.data.text);
+        showDimCalcModal(getModalIFrameUrl(assets, assetName), actionConfig.data.text);
     }
 
-    function showResizeModal(url, mailSentMessage){
+    function showDimCalcModal(url, mailSentMessage){
         var $iframe = $('<iframe>'),
-            $modal = $('<div>').addClass('eaem-resize-image-apply-modal coral-Modal');
+            $modal = $('<div>').addClass('eaem-dimension-calculator-apply-modal coral-Modal');
 
         $iframe.attr('src', url).appendTo($modal);
 
@@ -231,14 +215,14 @@
             visible: true
         });
 
-        $resizeModal = $modal;
+        $dimensionCalcModal = $modal;
 
-        $resizeModal.mailSentMessage = mailSentMessage;
+        $dimensionCalcModal.mailSentMessage = mailSentMessage;
     }
 
-    function getModalIFrameUrl(assets){
-        var url = Granite.HTTP.externalize(RESIZE_IMG_URL) + "?" + REQUESTER + "=" + SENDER;
-        url = url + "&assets=" + encodeURIComponent(assets);
+    function getModalIFrameUrl(assets, assetName){
+        var url = Granite.HTTP.externalize(DIM_CAL_URL) + "?" + REQUESTER + "=" + SENDER;
+        url = url + "&assets=" + encodeURIComponent(assets) + "&assetName=" + assetName;
         return url;
     }
 

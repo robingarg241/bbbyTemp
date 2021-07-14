@@ -4,7 +4,7 @@
     <jcr:content
         jcr:mixinTypes="[sling:VanityPath]"
         jcr:primaryType="nt:unstructured"
-        jcr:title="Resize"
+        jcr:title="Dimension Calculator"
         sling:resourceType="granite/ui/components/coral/foundation/page">
         <head jcr:primaryType="nt:unstructured">
             <favicon
@@ -16,7 +16,7 @@
             <clientlibs
                 jcr:primaryType="nt:unstructured"
                 sling:resourceType="granite/ui/components/coral/foundation/includeclientlibs"
-                categories="[coralui3,granite.ui.coral.foundation,granite.ui.shell,dam.gui.admin.coral,eaem.assets.resize.image]"/>
+                categories="[coralui3,granite.ui.coral.foundation,granite.ui.shell,dam.gui.admin.coral,eaem.assets.dim.calc]"/>
         </head>
         <body
             jcr:primaryType="nt:unstructured"
@@ -25,7 +25,7 @@
                 <content
                     jcr:primaryType="nt:unstructured"
                     sling:resourceType="granite/ui/components/coral/foundation/form"
-                    action="/bin/bbby/resize"
+                    action=""
                     foundationForm="{Boolean}true"
                     maximized="{Boolean}true"
                     method="post"
@@ -36,24 +36,30 @@
                         jcr:title="Success"
                         sling:resourceType="granite/ui/components/coral/foundation/form/responses/openprompt"
                         open="/assets.html"
-                        redirect="/apps/resize/resize-dialog.html"
-                        text="Resize Images"/>
+                        redirect="/apps/dim-calc/dim-calc-dialog.html"
+                        text="Dimension Calculator"/>
                     <items jcr:primaryType="nt:unstructured">
                         <wizard
                             jcr:primaryType="nt:unstructured"
-                            jcr:title="Resize Image"
+                            jcr:title="Dimension Calculator"
                             sling:resourceType="granite/ui/components/coral/foundation/wizard">
                             <items jcr:primaryType="nt:unstructured">
                                 <container
-                                    granite:class="eaem-resize-image-form"
+                                    granite:class="eaem-dimension-calculator-form"
                                     jcr:primaryType="nt:unstructured"
-                                    jcr:title="Resize"
+                                    jcr:title="Dimension Calculator"
                                     sling:resourceType="granite/ui/components/coral/foundation/container">
                                     <items jcr:primaryType="nt:unstructured">
                                         <actionbar
                                             jcr:primaryType="nt:unstructured"
                                             sling:resourceType="granite/ui/components/coral/foundation/container">
                                             <items jcr:primaryType="nt:unstructured">
+                                                <img-name
+                                                    jcr:primaryType="nt:unstructured"
+                                                    sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                                                    disabled="{Boolean}true"
+                                                    fieldLabel="Image Name"
+                                                    name="./img-name"/>
                                                 <original-width
                                                     jcr:primaryType="nt:unstructured"
                                                     sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
