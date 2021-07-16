@@ -103,6 +103,8 @@
 				isImagesetProcessedOvernight = true;
 			}else if(hasOpMetadataNode && !opMetadataNode.hasProperty(CommonConstants.OPMETA_PC_WF_State)){
 				isImagesetProcessedOvernight = true;
+			}else if(hasOpMetadataNode && opMetadataNode.hasProperty(CommonConstants.OPMETA_PC_WF_State) && opMetadataNode.getProperty(CommonConstants.OPMETA_PC_WF_State).getString().contentEquals("Success")){
+				isImagesetProcessedOvernight = true;
 			}
 		}
 	}
