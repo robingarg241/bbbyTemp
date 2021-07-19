@@ -144,7 +144,6 @@ public class PublishAssetorImagesetNightly implements WorkflowProcess {
 		boolean successful = true;
 		try {
 			log.info("Publish Asset : " + destination);
-			replicator.replicate(session, ReplicationActionType.DEACTIVATE, destination);
 			replicator.replicate(session, ReplicationActionType.ACTIVATE, destination);
 			log.info("Successfully publish asset : " + destination);
 		} catch (ReplicationException e) {
@@ -160,7 +159,6 @@ public class PublishAssetorImagesetNightly implements WorkflowProcess {
 		boolean successful = true;
 		try {
 			log.info("Publish Asset : " + destination);
-			replicator.replicate(session, ReplicationActionType.DEACTIVATE, destination, replicationOptions);
 			replicator.replicate(session, ReplicationActionType.ACTIVATE, destination, replicationOptions);
 			successful = true;
 			log.info("Successfully publish asset : " + destination);
