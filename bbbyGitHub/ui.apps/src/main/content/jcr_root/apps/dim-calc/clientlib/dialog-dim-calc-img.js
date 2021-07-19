@@ -28,15 +28,17 @@
     function changeHeight(){
         var originalWidth = $("input[name='./original-width']").val();
         var originalHeight = $("input[name='./original-height']").val();
-        var height = (parseInt($(this).val()) * originalHeight) / originalWidth;
-        $("input[name='./height']").val(height);
+        var thisWidth = $(this).val();
+        var height = parseInt(thisWidth) > 0 ? (parseInt(thisWidth) * originalHeight) / originalWidth : 0;
+        $("input[name='./height']").val(Math.round(height));
     }
 
     function changeWidth(){
         var originalWidth = $("input[name='./original-width']").val();
         var originalHeight = $("input[name='./original-height']").val();
-        var width = (parseInt($(this).val()) * originalWidth) / originalHeight;
-        $("input[name='./width']").val(width);
+        var thisHeight = $(this).val();
+        var width = parseInt(thisHeight) > 0 ? (parseInt(thisHeight) * originalWidth) / originalHeight : 0;
+        $("input[name='./width']").val(Math.round(width));
     }
 
     function sendMailSentMessage(){
