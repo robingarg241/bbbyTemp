@@ -5,6 +5,7 @@ import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
 import javax.jcr.Node;
 import javax.jcr.Session;
 import javax.jcr.Workspace;
@@ -38,7 +39,7 @@ public class CopyMktgToADServlet extends SlingAllMethodsServlet {
 
 	private ResourceResolver resourceResolver = null;
 
-	private static String workflowName_s7 = "/var/workflow/models/scene7";
+	private static String workflowName_s7 = "/var/workflow/models/scene7-with-publish";
 
 	@Override
 	protected void doPost(final SlingHttpServletRequest req, final SlingHttpServletResponse resp)
@@ -58,7 +59,6 @@ public class CopyMktgToADServlet extends SlingAllMethodsServlet {
 					if (templateNode.isNodeType("dam:Asset")) {
 						String dest = finalAssetNameFolderCreation(assetPath, session);
 						copyAssetToAD(assetPath, dest, session, searchId);
-
 					} else {
 						log.info("It's not dam asset ");
 					}
@@ -110,20 +110,22 @@ public class CopyMktgToADServlet extends SlingAllMethodsServlet {
 				log.info("Tags added");
 			}
 			session.save();
-			executeScene7Workflow(dest);
+			// execute scene7 with publish workflow
+			executeScene7withPublishWorkflow(dest);
+
 		} else {
 			log.info("Node already exist at.. " + dest);
 		}
 
 	}
 
-	private void executeScene7Workflow(String dest) throws Exception {
+	private void executeScene7withPublishWorkflow(String dest) throws Exception {
 		WorkflowSession workflowSession_s7 = resourceResolver.adaptTo(WorkflowSession.class);
 		WorkflowModel workflowModel_s7 = workflowSession_s7.getModel(workflowName_s7);
 		WorkflowData workflowData_s7 = workflowSession_s7.newWorkflowData("JCR_PATH", dest);
 		Map<String, Object> workflowMetadata_s7 = new HashMap<>();
 		workflowSession_s7.startWorkflow(workflowModel_s7, workflowData_s7, workflowMetadata_s7);
-
+		log.info("Scene 7 with Publish Workflow executed");
 	}
 
 }

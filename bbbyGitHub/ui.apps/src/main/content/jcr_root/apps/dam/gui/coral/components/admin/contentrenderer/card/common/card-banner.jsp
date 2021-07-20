@@ -174,13 +174,13 @@
     boolean hasValidUPCorSKU = true;
 
     //check only when METADATA_MISSING_STATUS banner is not there.
-       if(!missingMeta && (resource.getPath().contains("bbby/asset_transitions_folder"))){
-    	upcCqTagsMissingMsg = ServiceUtils.getUPCorCqTagsMissingMessage(resourceNode);
+      if(!missingMeta && (resource.getPath().contains("bbby/asset_transitions_folder") || resource.getPath().contains("bbby/approved_dam"))){
+     	upcCqTagsMissingMsg = ServiceUtils.getUPCorCqTagsMissingMessage(resourceNode);
     	if(upcCqTagsMissingMsg != null){
     		hasUpcCqTags = false;
     	}else{
-    		 if(resource.getPath().contains("bbby/asset_transitions_folder/internal") || resource.getPath().contains("bbby/asset_transitions_folder/e-comm")){
-    			 hasValidUPCorSKU = ServiceUtils.hasValidUPCorSKU(resourceNode); 
+    		 if(resource.getPath().contains("bbby/asset_transitions_folder/internal") || resource.getPath().contains("bbby/asset_transitions_folder/e-comm") || resource.getPath().contains("bbby/approved_dam")){
+    	    	 hasValidUPCorSKU = ServiceUtils.hasValidUPCorSKU(resourceNode); 
     			 if(!resource.getPath().contains("_imageset")){
     				 pdmCallSuccess = DamConstants.DAM_ASSET_STATE_PROCESSED.equals(damAssetState);  
     			 }

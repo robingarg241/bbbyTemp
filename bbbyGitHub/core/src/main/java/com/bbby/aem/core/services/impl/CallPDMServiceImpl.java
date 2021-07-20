@@ -112,9 +112,13 @@ public class CallPDMServiceImpl implements CallPDMService {
 				}
             } else if (assetPath.startsWith(this.approvedDAMFolderPath)) {
 //                PDMAPICommand updateAssetCmd = new UpdateAssetCommand(PDMAPICommand.METHOD_POST, assetNode);
-            	 if(isValidAssetName) {
-					  resCode = pdmClient.execute(pdmapiCommand);
-				  }
+            	 //DAM-1530: Block the pdm call for invalid asset in AD folder.
+            	if(!(metadataNode.hasProperty(CommonConstants.BBBY_SKU) || metadataNode.hasProperty(CommonConstants.BBBY_UPC))){
+            		errorMsg = "FAILED : UPC/SKU Missing ";
+            	}
+                if ((metadataNode.hasProperty(CommonConstants.BBBY_SKU) || metadataNode.hasProperty(CommonConstants.BBBY_UPC)) && hasAssetType(metadataNode) && isValidForPDMCall(assetNode) && hasValidUPCorSKU(metadataNode) && isProcessed && isValidAssetName) {
+                	resCode = pdmClient.execute(pdmapiCommand);
+	            }
             } else if (assetPath.startsWith(this.marketingFolderPath)) { //for marketing assets
             	if(!(metadataNode.hasProperty(CommonConstants.BBBY_SKU) || metadataNode.hasProperty(CommonConstants.BBBY_UPC))){
             		errorMsg = "FAILED : UPC/SKU Missing ";
