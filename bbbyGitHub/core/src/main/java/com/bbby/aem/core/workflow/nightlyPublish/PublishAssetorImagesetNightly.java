@@ -12,7 +12,6 @@ import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.adobe.granite.workflow.model.WorkflowModel;
 import com.adobe.granite.workflow.WorkflowException;
 import com.adobe.granite.workflow.WorkflowSession;
 import com.adobe.granite.workflow.exec.WorkItem;
@@ -105,9 +104,6 @@ public class PublishAssetorImagesetNightly implements WorkflowProcess {
 							if(repometaImage != null){
 								JcrUtil.setProperty(repometaImage, CommonConstants.PUBLISHED_TO_S7_BY_USER, publishToS7ByUser);
 							}
-							WorkflowModel model = workflowSession.getModel("/var/workflow/models/scene7_reprocess_assets");
-                            WorkflowData data = workflowSession.newWorkflowData(CommonConstants.JCR_PATH, destination);
-                            workflowSession.startWorkflow(model, data);
 						} else {
 							msg = "PUBLISH_FAILED";
 						}
