@@ -8,7 +8,7 @@
         SENDER = "experience-aem", REQUESTER = "requester", $mailModal,
         url = document.location.pathname;
 
-  
+
     if( url.indexOf("/assets.html") == 0 || url.indexOf("/aem/search.html") == 0 ){
         $document.on("foundation-selections-change", addSendMail);
     }else if(url.indexOf(SEND_MAIL_URL) == 0){
@@ -96,7 +96,7 @@
             form = $("form")[0];
 
 
-        
+
         setWidgetValue(form, "[name='./assets']", queryParams.assets);
     }
 
@@ -136,7 +136,7 @@
             }
             count++;
         });
-        
+
         //first remove the notify button and then add.
         var $notifyActivator = $("." + NOTIFY_ACTIVATOR);
         $notifyActivator.remove();
@@ -151,12 +151,19 @@
 
         if ($eActivator.length == 0) {
             return;
+        } else if($eActivator.length > 1) {
+            $eActivator.each(function (index, element) {
+                if(!$(element).hasClass("foundation-collection-action-hidden")) {
+                    $eActivator = $(element);
+                    return false;
+                }
+            });
         }
 
         var $mail = $(html).css("margin-left", "20px").insertBefore($eActivator);
 
         $mail.click(openModal);
-        
+
         $("." + NOTIFY_ACTIVATOR).not(':first').remove();//to remove all except one
 
         $(window).off('message', closeModal).on('message', closeModal);
@@ -164,7 +171,7 @@
 
     function openModal(){
         var actionConfig = ($(this)).data("foundationCollectionAction");
-        
+
         var folderName = "";
 
         var $items = $(".foundation-selections-item"),
@@ -208,7 +215,7 @@
         url = url + "&assets=" + encodeURIComponent(assets);
         return url;
     }
-    
+
     function getLoggedInUserID() {
         var currentUserId = "";
         var currentUserInfo;

@@ -171,6 +171,13 @@
 
         if ($eActivator.length == 0) {
             return;
+        } else if($eActivator.length > 1) {
+            $eActivator.each(function (index, element) {
+                if(!$(element).hasClass("foundation-collection-action-hidden")) {
+                    $eActivator = $(element);
+                    return false;
+                }
+            });
         }
 
         var $dimCalc = $(html).css("margin-left", "20px").insertBefore($eActivator);

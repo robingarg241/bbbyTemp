@@ -97,7 +97,7 @@
         setWidgetValue(form, "[name='./subject']", queryParams.subject);
 
         setWidgetValue(form, "[name='./body']", queryParams.body);
-        
+
         setWidgetValue(form, "[name='./assets']", queryParams.assets);
     }
 
@@ -137,7 +137,7 @@
             }
             count++;
         });
-        
+
         //first remove the notify button and then add.
         var $notifyActivator = $("." + NOTIFY_ACTIVATOR);
         $notifyActivator.remove();
@@ -152,12 +152,19 @@
 
         if ($eActivator.length == 0) {
             return;
+        } else if($eActivator.length > 1) {
+            $eActivator.each(function (index, element) {
+                if(!$(element).hasClass("foundation-collection-action-hidden")) {
+                    $eActivator = $(element);
+                    return false;
+                }
+            });
         }
 
         var $mail = $(html).css("margin-left", "20px").insertBefore($eActivator);
 
         $mail.click(openModal);
-        
+
         $("." + NOTIFY_ACTIVATOR).not(':first').remove();//to remove all except one
 
         $(window).off('message', closeModal).on('message', closeModal);
@@ -165,7 +172,7 @@
 
     function openModal(){
         var actionConfig = ($(this)).data("foundationCollectionAction");
-        
+
         var folderName = "";
 
         var $items = $(".foundation-selections-item"),
@@ -181,9 +188,9 @@
         });
 
         var body = "Hello,\n\nPlease see below the following folder or file activity that requires your attention. If you have an Adobe Experience Manager login, click the link(s) below to navigate to the location of activity.\n\nParent Folder : \n\t"+folderName+" \n\nSelected Assets/Folders : \n\t" + assetNames.join("\n\t");
-        
+
         body = body + "\n\nFor support or questions, please e-mail AEM_MRKT_Support@bedbath.com.\n\nThank you,\n<USER_EMAIL>\n";
-        
+
         var assets = assetPaths.join("\n");
 
         showMailModal(getModalIFrameUrl("AEM ALERT: Please Review Activity", body, assets), actionConfig.data.text);
@@ -213,7 +220,7 @@
 
         return url;
     }
-    
+
     function getLoggedInUserID() {
         var currentUserId = "";
         var currentUserInfo;
