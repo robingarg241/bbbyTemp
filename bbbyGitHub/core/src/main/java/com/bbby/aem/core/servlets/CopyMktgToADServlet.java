@@ -46,8 +46,7 @@ public class CopyMktgToADServlet extends SlingAllMethodsServlet {
 			throws ServletException, IOException {
 		log.info("Copy Mktg to AD Servlet Post method");
 		resourceResolver = req.getResourceResolver();
-		final WorkflowSession workflowSession = resourceResolver.adaptTo(WorkflowSession.class);
-		Session session = workflowSession.adaptTo(Session.class);
+		Session session = resourceResolver.adaptTo(Session.class);
 		String searchId = req.getParameter("./copy-mktg");
 		log.info("Search Identifier..." + searchId);
 		String assets = req.getParameter("./assets");
