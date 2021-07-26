@@ -26,6 +26,8 @@ import com.adobe.granite.workflow.exec.WorkflowData;
 import com.adobe.granite.workflow.model.WorkflowModel;
 import com.bbby.aem.core.util.CommonConstants;
 import com.bbby.aem.core.util.PartitionUtil;
+import com.bbby.aem.core.util.JcrPropertiesUtil;
+import com.day.cq.commons.jcr.JcrUtil;
 
 @Component(name = "Marketing AD Copy Servlet", immediate = true, service = Servlet.class, property = {
 		"sling.servlet.methods=POST", "sling.servlet.paths=/bin/bbby/copy-mktg" })
@@ -84,6 +86,8 @@ public class CopyMktgToADServlet extends SlingAllMethodsServlet {
 		destination = destination + "/" + partitions.get(0);
 		destination = destination + "/" + partitions.get(1);
 		Node destpathnode = JcrUtils.getOrCreateByPath(destination, "sling:Folder", session);
+		Node opmeta = JcrPropertiesUtil.getOperationalNode(asset, session);
+		JcrUtil.setProperty(opmeta, "isMarketingAsset", "yes");
 		session.save();
 		destination = destpathnode.getPath() + "/" + newName;
 		log.info("destination Asset: " + destination);
@@ -97,6 +101,7 @@ public class CopyMktgToADServlet extends SlingAllMethodsServlet {
 			Workspace workspace = session.getWorkspace();
 			workspace.copy(assetPath, dest);
 			session.save();
+			
 			if (session.nodeExists(dest + "/jcr:content/metadata")) {
 				Node metadataNode = session.getNode(dest + "/jcr:content/metadata");
 				log.info("Path for Metadata Node : " + metadataNode.getPath());
@@ -109,22 +114,11 @@ public class CopyMktgToADServlet extends SlingAllMethodsServlet {
 				log.info("Tags added");
 			}
 			session.save();
-			// execute scene7 with publish workflow
-			executeScene7withPublishWorkflow(dest);
 
 		} else {
 			log.info("Node already exist at.. " + dest);
 		}
 
-	}
-
-	private void executeScene7withPublishWorkflow(String dest) throws Exception {
-		WorkflowSession workflowSession_s7 = resourceResolver.adaptTo(WorkflowSession.class);
-		WorkflowModel workflowModel_s7 = workflowSession_s7.getModel(workflowName_s7);
-		WorkflowData workflowData_s7 = workflowSession_s7.newWorkflowData("JCR_PATH", dest);
-		Map<String, Object> workflowMetadata_s7 = new HashMap<>();
-		workflowSession_s7.startWorkflow(workflowModel_s7, workflowData_s7, workflowMetadata_s7);
-		log.info("Scene 7 with Publish Workflow executed");
 	}
 
 }

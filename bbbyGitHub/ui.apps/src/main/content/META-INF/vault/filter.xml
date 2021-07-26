@@ -147,9 +147,12 @@
     <filter root="/conf/global/settings/workflow/models/bbby-add-attributes-to-folders"/>
     <filter root="/var/workflow/models/bbby-add-attributes-to-folders"/>
     
-    <!-- Scene7 with Publish Workflow Stuff -->
- 	<filter root="/var/workflow/models/scene7-with-publish"/>
- 	<filter root="/conf/global/settings/workflow/models/scene7-with-publish"/>
+	
+	  <!-- Copy Mktg to AD Workflow Stuff -->
+	<filter root="/conf/global/settings/workflow/launcher/config/bbby-copy-marketing-AD-mod"/>
+	<filter root="/conf/global/settings/workflow/launcher/config/bbby-copy-marketing-AD-mod"/>
+ 	<filter root="/var/workflow/models/bbby-copy-marketing-to-approved-dam"/>
+ 	<filter root="/conf/global/settings/workflow/models/bbby-copy-marketing-to-approved-dam"/>
  
     <!-- List View Overlay Stuff -->
     <filter root="/apps/dam/gui"/>
