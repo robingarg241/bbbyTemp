@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0"
+    jcr:primaryType="cq:WorkflowLauncher"
+    condition=""
+    conditions="[jcr:content/jcr:mimeType!=video/.*,../../operationalmetadata/isMarketingAsset==yes]"
+    description="BBBY Copy Marketing To AD - Modification"
+    disabledFeatures="[]"
+    enabled="{Boolean}true"
+    eventType="{Long}16"
+    excludeList="event-user-data:changedByWorkflowProcess"
+    features="[]"
+    glob="/content/dam/bbby(?!/asset_transitions_folder/vendor/vendor_assets_holding)(/.*)(/((?!/subassets).)*/)renditions/original"
+    nodetype="nt:file"
+    runModes="author"
+    workflow="/var/workflow/models/bbby-copy-marketing-to-approved-dam"/>

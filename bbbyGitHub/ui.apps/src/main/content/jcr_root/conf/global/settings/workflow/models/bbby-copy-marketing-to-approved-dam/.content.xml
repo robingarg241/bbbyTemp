@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    jcr:primaryType="cq:Page">
+    <jcr:content
+        cq:lastModified="{Date}2021-07-26T03:20:43.961-04:00"
+        cq:lastModifiedBy="admin"
+        cq:template="/libs/cq/workflow/templates/model"
+        cq:workflowDetailsPage="/mnt/overlay/dam/gui/content/s7dam/jobmonitoring/encodingjobdetails.html${item}?item=${payload}"
+        jcr:description="Custom workflow for scene7 and Update Asset for copied assets from marketing to approved dam"
+        jcr:primaryType="cq:PageContent"
+        jcr:title="BBBY Copy Marketing to Approved DAM"
+        sling:resourceType="cq/workflow/components/pages/model">
+        <flow
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="foundation/components/parsys">
+            <process
+                jcr:created="{Date}2021-07-23T11:18:42.753+05:30"
+                jcr:createdBy="admin"
+                jcr:description="This process checks if the complete update process has to be executed. The workflow should terminate eg. the asset got restored right before to make sure that the restored content is preserved."
+                jcr:lastModified="{Date}2021-07-23T11:43:33.364+05:30"
+                jcr:lastModifiedBy="admin"
+                jcr:primaryType="nt:unstructured"
+                jcr:title="Continue updating?"
+                sling:resourceType="cq/workflow/components/model/process">
+                <metaData
+                    jcr:primaryType="nt:unstructured"
+                    PROCESS="com.day.cq.dam.core.process.GateKeeperProcess"
+                    PROCESS_AUTO_ADVANCE="true"/>
+            </process>
+            <metadataprocessorpro
+                jcr:created="{Date}2021-07-23T11:44:04.273+05:30"
+                jcr:createdBy="admin"
+                jcr:description="A process to extract and import metadata, create references and apply processing profile, if the payload of the step is an asset or part of an asset."
+                jcr:lastModified="{Date}2021-07-23T11:44:04.273+05:30"
+                jcr:lastModifiedBy="admin"
+                jcr:primaryType="nt:unstructured"
+                jcr:title="Metadata Processor"
+                sling:resourceType="dam/components/workflow/metadataprocessorprocess">
+                <metaData
+                    jcr:primaryType="nt:unstructured"
+                    PROCESS="com.day.cq.dam.core.process.MetadataProcessorProcess"
+                    PROCESS_AUTO_ADVANCE="true"/>
+            </metadataprocessorpro>
+            <process_1694584624
+                jcr:created="{Date}2021-07-23T11:44:39.263+05:30"
+                jcr:createdBy="admin"
+                jcr:description="Extracts video poster frame"
+                jcr:lastModified="{Date}2021-07-23T11:46:00.261+05:30"
+                jcr:lastModifiedBy="admin"
+                jcr:primaryType="nt:unstructured"
+                jcr:title="FFmpeg thumbnails"
+                sling:resourceType="cq/workflow/components/model/process">
+                <metaData
+                    jcr:primaryType="nt:unstructured"
+                    PROCESS="com.day.cq.dam.video.FFMpegThumbnailProcess"
+                    PROCESS_ARGS="count:4,index:2,[140:100],[48:48],[319:319]"
+                    PROCESS_AUTO_ADVANCE="true"/>
+            </process_1694584624>
+            <commandlineprocess
+                jcr:created="{Date}2021-07-23T11:47:10.671+05:30"
+                jcr:createdBy="admin"
+                jcr:description="Generate thumbnails for eps files using image magick"
+                jcr:lastModified="{Date}2021-07-23T11:49:58.625+05:30"
+                jcr:lastModifiedBy="admin"
+                jcr:primaryType="nt:unstructured"
+                jcr:title="EPS thumbnails (powered by ImageMagick)"
+                sling:resourceType="dam/components/workflow/commandlineprocess">
+                <metaData
+                    jcr:primaryType="nt:unstructured"
+                    COMMANDS="convert -define jpeg:size=319x319 ${filename} -thumbnail 319x319 cq5dam.thumbnail.319.319.png"
+                    MIME_TYPES="[image/eps,image/x-eps,application/postscript,application/eps,application/x-eps]"
+                    PROCESS="com.day.cq.dam.core.process.CommandLineProcess"
+                    PROCESS_AUTO_ADVANCE="true"
+                    THUMBNAILS="[48:48,140:100,319:319]"/>
+            </commandlineprocess>
+            <process_881157154
+                jcr:created="{Date}2021-07-23T11:50:29.271+05:30"
+                jcr:createdBy="admin"
+                jcr:description="Create web enabled video formats"
+                jcr:lastModified="{Date}2021-07-23T11:51:38.977+05:30"
+                jcr:lastModifiedBy="admin"
+                jcr:primaryType="nt:unstructured"
+                jcr:title="FFmpeg transcoding"
+                sling:resourceType="cq/workflow/components/model/process">
+                <metaData
+                    jcr:primaryType="nt:unstructured"
+                    PROCESS="com.day.cq.dam.video.FFMpegTranscodeProcess"
+                    PROCESS_ARGS="profile:firefoxhq,profile:hq,profile:flv,profile:iehq"
+                    PROCESS_AUTO_ADVANCE="true"/>
+            </process_881157154>
+            <inddmediaextractproc
+                jcr:created="{Date}2021-07-23T11:52:19.986+05:30"
+                jcr:createdBy="admin"
+                jcr:description="Indesign Media Extraction"
+                jcr:lastModified="{Date}2021-07-23T11:55:00.939+05:30"
+                jcr:lastModifiedBy="admin"
+                jcr:primaryType="nt:unstructured"
+                jcr:title="Media Extraction"
+                sling:resourceType="dam/components/workflow/inddmediaextractprocess">
+                <metaData
+                    jcr:primaryType="nt:unstructured"
+                    advanceOnTimeout="true"
+                    EXTERNAL_PROCESS="com.day.cq.dam.indd.process.INDDMediaExtractProcess"
+                    libPath="/etc/dam/indesign/scripts/cq-lib.jsx"
+                    linkPath="/Links"
+                    period="10"
+                    PROCESS_ARGS="test"
+                    PROCESS_AUTO_ADVANCE="true"
+                    scriptPaths="[/etc/dam/indesign/scripts/ThumbnailExport.jsx,/etc/dam/indesign/scripts/XHTMLExport.jsx,/etc/dam/indesign/scripts/IDMLExport.jsx,/etc/dam/indesign/scripts/JPEGPagesExport.jsx,/etc/dam/indesign/scripts/XMLExport.jsx,/etc/dam/indesign/scripts/PDFExport.jsx]"
+                    timeout="3600"/>
+            </inddmediaextractproc>
+            <inddpageextractproce
+                jcr:created="{Date}2021-07-23T11:55:25.739+05:30"
+                jcr:createdBy="admin"
+                jcr:description="InDesign Page Extraction"
+                jcr:lastModified="{Date}2021-07-23T11:56:48.954+05:30"
+                jcr:lastModifiedBy="admin"
+                jcr:primaryType="nt:unstructured"
+                jcr:title="Page Extraction"
+                sling:resourceType="dam/components/workflow/inddpageextractprocess">
+                <metaData
+                    jcr:primaryType="nt:unstructured"
+                    extractionHandler="com.day.cq.dam.indd.impl.idml.IDMLExtractionHandler"
+                    pageTitle="IDML Extraction"
+                    PROCESS="com.day.cq.dam.indd.process.INDDPageExtractProcess"
+                    PROCESS_ARGS="test"
+                    PROCESS_AUTO_ADVANCE="true"/>
+            </inddpageextractproce>
+            <createpdfpreviewproc
+                jcr:created="{Date}2021-07-23T11:57:30.890+05:30"
+                jcr:createdBy="admin"
+                jcr:description="Rasterize PDF and Adobe Illustrator documents to a preview image rendition"
+                jcr:lastModified="{Date}2021-07-23T11:58:37.286+05:30"
+                jcr:lastModifiedBy="admin"
+                jcr:primaryType="nt:unstructured"
+                jcr:title="Rasterize PDF/AI Image Preview Rendition"
+                sling:resourceType="dam/components/workflow/createpdfpreviewprocess">
+                <metaData
+                    jcr:primaryType="nt:unstructured"
+                    MAX_HEIGHT="2048"
+                    MAX_WIDTH="2048"
+                    MIME_TYPES="[application/pdf,application/postscript,application/illustrator]"
+                    PROCESS="com.day.cq.dam.core.process.CreatePdfPreviewProcess"
+                    PROCESS_AUTO_ADVANCE="true"
+                    RESOLUTION="72"/>
+            </createpdfpreviewproc>
+            <dmimageprocess
+                jcr:created="{Date}2021-07-23T11:58:59.478+05:30"
+                jcr:createdBy="admin"
+                jcr:description="Processes assets for use with Dynamic Media Image Services"
+                jcr:lastModified="{Date}2021-07-23T12:00:06.011+05:30"
+                jcr:lastModifiedBy="admin"
+                jcr:primaryType="nt:unstructured"
+                jcr:title="Dynamic Media Process Image Assets"
+                sling:resourceType="dam/components/s7imaging/dmimageprocess">
+                <metaData
+                    jcr:primaryType="nt:unstructured"
+                    CONFIGS="[140:100:false,48:48:false,319:319:false]"
+                    HEIGHT="1280"
+                    MIME_TYPE="image/jpeg"
+                    PROCESS="com.adobe.cq.dam.dm.process.workflow.DMImageProcess"
+                    PROCESS_AUTO_ADVANCE="true"
+                    QUALITY="90"
+                    WIDTH="1280"/>
+            </dmimageprocess>
+            <scene7upload
+                jcr:created="{Date}2021-07-23T12:00:34.890+05:30"
+                jcr:createdBy="admin"
+                jcr:description="Upload assets to configured remote Scene7 service for Dynamic Media delivery"
+                jcr:lastModified="{Date}2021-07-23T12:00:34.890+05:30"
+                jcr:lastModifiedBy="admin"
+                jcr:primaryType="nt:unstructured"
+                jcr:title="Scene7"
+                sling:resourceType="dam/components/scene7/scene7upload">
+                <metaData
+                    jcr:primaryType="nt:unstructured"
+                    advanceOnTimeout="true"
+                    EXTERNAL_PROCESS="com.day.cq.dam.scene7.impl.process.Scene7UploadProcess"
+                    period="30"
+                    PROCESS_AUTO_ADVANCE="true"
+                    timeout="3600"/>
+            </scene7upload>
+            <thumbnailprocess
+                jcr:created="{Date}2021-07-23T12:01:22.756+05:30"
+                jcr:createdBy="admin"
+                jcr:description="This process will create one or more thumbnails for the asset, create web enabled rendition and update folder thumbnail."
+                jcr:lastModified="{Date}2021-07-23T12:03:05.058+05:30"
+                jcr:lastModifiedBy="admin"
+                jcr:primaryType="nt:unstructured"
+                jcr:title="Process Thumbnails"
+                sling:resourceType="dam/components/workflow/thumbnailprocess">
+                <metaData
+                    jcr:primaryType="nt:unstructured"
+                    CONFIGS="[140:100:false,48:48:false,319:319:false]"
+                    HEIGHT="75"
+                    MIME_TYPE="image/jpeg"
+                    PROCESS="com.day.cq.dam.core.process.ThumbnailProcess"
+                    PROCESS_AUTO_ADVANCE="true"
+                    QUALITY="75"
+                    WIDTH="75"/>
+            </thumbnailprocess>
+            <thumbnailprocess_751560791
+                jcr:created="{Date}2021-07-23T12:03:38.354+05:30"
+                jcr:createdBy="admin"
+                jcr:description="This process will create one or more thumbnails for the asset, create web enabled rendition and update folder thumbnail."
+                jcr:lastModified="{Date}2021-07-23T12:11:40.264+05:30"
+                jcr:lastModifiedBy="admin"
+                jcr:primaryType="nt:unstructured"
+                jcr:title="300x300 jpg rendition for PDF"
+                sling:resourceType="dam/components/workflow/thumbnailprocess">
+                <metaData
+                    jcr:primaryType="nt:unstructured"
+                    HEIGHT="300"
+                    MIME_TYPE="image/jpeg"
+                    PROCESS="com.day.cq.dam.core.process.ThumbnailProcess"
+                    PROCESS_AUTO_ADVANCE="true"
+                    QUALITY="75"
+                    WIDTH="300"/>
+            </thumbnailprocess_751560791>
+            <commandlineprocess_1943005467
+                jcr:created="{Date}2021-07-23T12:12:01.635+05:30"
+                jcr:createdBy="admin"
+                jcr:description="Create JPEG (Web) Renditions using ImageMagick"
+                jcr:lastModified="{Date}2021-07-23T12:14:22.804+05:30"
+                jcr:lastModifiedBy="admin"
+                jcr:primaryType="nt:unstructured"
+                jcr:title="JPEG Renditions"
+                sling:resourceType="dam/components/workflow/commandlineprocess">
+                <metaData
+                    jcr:primaryType="nt:unstructured"
+                    COMMANDS="[convert ${filename}[0] -strip -quality 75 -interlace Plane -resize &quot;3600x>&quot; -background white -flatten cq5dam.web.3600.3600.jpeg,convert ${filename}[0] -strip -resize &quot;300x>&quot; cq5dam.web.300.300.jpeg,convert ${filename}[0] -strip -resize &quot;75x>&quot; cq5dam.web.75.75.jpeg]"
+                    MIME_TYPES="[image/png,image/jpeg,image/tiff,image/gif]"
+                    PROCESS="com.day.cq.dam.core.process.CommandLineProcess"
+                    PROCESS_AUTO_ADVANCE="true"/>
+            </commandlineprocess_1943005467>
+            <deleteimagepreviewpr
+                jcr:created="{Date}2021-07-23T12:14:42.925+05:30"
+                jcr:createdBy="admin"
+                jcr:description="Process to delete the image preview rendition"
+                jcr:lastModified="{Date}2021-07-23T12:15:13.158+05:30"
+                jcr:lastModifiedBy="admin"
+                jcr:primaryType="nt:unstructured"
+                jcr:title="Delete Image Preview Rendition"
+                sling:resourceType="dam/components/workflow/deleteimagepreviewprocess">
+                <metaData
+                    jcr:primaryType="nt:unstructured"
+                    PROCESS="com.day.cq.dam.core.process.DeleteImagePreviewProcess"
+                    PROCESS_AUTO_ADVANCE="true"/>
+            </deleteimagepreviewpr>
+            <productassetuploadpr
+                jcr:created="{Date}2021-07-23T12:16:06.527+05:30"
+                jcr:createdBy="admin"
+                jcr:description="This process will extract and upload the product assets"
+                jcr:lastModified="{Date}2021-07-23T12:16:06.527+05:30"
+                jcr:lastModifiedBy="admin"
+                jcr:primaryType="nt:unstructured"
+                jcr:title="Product Asset Upload"
+                sling:resourceType="dam/components/workflow/productassetuploadprocess">
+                <metaData
+                    jcr:primaryType="nt:unstructured"
+                    PROCESS="com.day.cq.dam.pim.impl.sourcing.upload.process.ProductAssetsUploadProcess"
+                    PROCESS_AUTO_ADVANCE="true"/>
+            </productassetuploadpr>
+            <autotagassetprocess
+                jcr:created="{Date}2021-07-23T12:16:46.042+05:30"
+                jcr:createdBy="admin"
+                jcr:description="This process will add smart tags to assets."
+                jcr:lastModified="{Date}2021-07-23T12:17:18.704+05:30"
+                jcr:lastModifiedBy="admin"
+                jcr:primaryType="nt:unstructured"
+                jcr:title="Smart Tag Assets Process"
+                sling:resourceType="dam/components/workflow/autotagassetprocess">
+                <metaData
+                    jcr:primaryType="nt:unstructured"
+                    IGNORE_ERRORS="true"
+                    PROCESS="com.day.cq.dam.similaritysearch.internal.workflow.process.AutoTagAssetProcess"
+                    PROCESS_AUTO_ADVANCE="true"/>
+            </autotagassetprocess>
+            <damupdateassetworkfl
+                jcr:created="{Date}2021-07-23T12:18:08.040+05:30"
+                jcr:createdBy="admin"
+                jcr:description="This process will send DamEvent.Type.DAM_UPDATE_ASSET_WORKFLOW_COMPLETED event when DAM update asset workflow is completed"
+                jcr:lastModified="{Date}2021-07-23T12:18:45.006+05:30"
+                jcr:lastModifiedBy="admin"
+                jcr:primaryType="nt:unstructured"
+                jcr:title="DAM Update Asset Workflow Completed"
+                sling:resourceType="dam/components/workflow/damupdateassetworkflowcompletedprocess">
+                <metaData
+                    jcr:primaryType="nt:unstructured"
+                    PROCESS="com.day.cq.dam.core.impl.process.DamUpdateAssetWorkflowCompletedProcess"
+                    PROCESS_AUTO_ADVANCE="true"/>
+            </damupdateassetworkfl>
+            <process_109942241
+                jcr:created="{Date}2021-07-26T03:20:10.624-04:00"
+                jcr:createdBy="admin"
+                jcr:lastModified="{Date}2021-07-26T03:20:32.068-04:00"
+                jcr:lastModifiedBy="admin"
+                jcr:primaryType="nt:unstructured"
+                jcr:title="Create Hash and Call to PDM"
+                sling:resourceType="cq/workflow/components/model/process">
+                <metaData
+                    jcr:primaryType="nt:unstructured"
+                    PROCESS="com.bbby.aem.core.workflow.BBBYCreateHashAndCallToPdmStep"
+                    PROCESS_AUTO_ADVANCE="true"/>
+            </process_109942241>
+            <process_2059869397
+                jcr:created="{Date}2021-07-25T05:14:59.721-04:00"
+                jcr:createdBy="admin"
+                jcr:lastModified="{Date}2021-07-25T05:49:21.016-04:00"
+                jcr:lastModifiedBy="admin"
+                jcr:primaryType="nt:unstructured"
+                jcr:title="Publish Asset"
+                sling:resourceType="cq/workflow/components/model/process">
+                <metaData
+                    jcr:primaryType="nt:unstructured"
+                    PROCESS="com.bbby.aem.core.workflow.PublishAssetMKTGCopy"
+                    PROCESS_AUTO_ADVANCE="true"/>
+            </process_2059869397>
+        </flow>
+    </jcr:content>
+</jcr:root>
