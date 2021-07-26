@@ -150,7 +150,7 @@
 	
 	  <!-- Copy Mktg to AD Workflow Stuff -->
 	<filter root="/conf/global/settings/workflow/launcher/config/bbby-copy-marketing-AD-mod"/>
-	<filter root="/conf/global/settings/workflow/launcher/config/bbby-copy-marketing-AD-mod"/>
+	<filter root="/conf/global/settings/workflow/launcher/config/bbby-copy-marketing-AD-create"/>
  	<filter root="/var/workflow/models/bbby-copy-marketing-to-approved-dam"/>
  	<filter root="/conf/global/settings/workflow/models/bbby-copy-marketing-to-approved-dam"/>
  
