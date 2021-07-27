@@ -3,9 +3,6 @@ package com.bbby.aem.core.servlets;
 import java.io.IOException;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.jcr.Node;
 import javax.jcr.Session;
 import javax.jcr.Workspace;
@@ -21,9 +18,6 @@ import org.osgi.service.component.annotations.Component;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.adobe.granite.workflow.WorkflowSession;
-import com.adobe.granite.workflow.exec.WorkflowData;
-import com.adobe.granite.workflow.model.WorkflowModel;
 import com.bbby.aem.core.util.CommonConstants;
 import com.bbby.aem.core.util.PartitionUtil;
 import com.bbby.aem.core.util.JcrPropertiesUtil;
@@ -40,8 +34,6 @@ public class CopyMktgToADServlet extends SlingAllMethodsServlet {
 	protected final Logger log = LoggerFactory.getLogger(this.getClass());
 
 	private ResourceResolver resourceResolver = null;
-
-	private static String workflowName_s7 = "/var/workflow/models/scene7-with-publish";
 
 	@Override
 	protected void doPost(final SlingHttpServletRequest req, final SlingHttpServletResponse resp)
@@ -101,7 +93,7 @@ public class CopyMktgToADServlet extends SlingAllMethodsServlet {
 			Workspace workspace = session.getWorkspace();
 			workspace.copy(assetPath, dest);
 			session.save();
-			
+
 			if (session.nodeExists(dest + "/jcr:content/metadata")) {
 				Node metadataNode = session.getNode(dest + "/jcr:content/metadata");
 				log.info("Path for Metadata Node : " + metadataNode.getPath());
@@ -112,6 +104,11 @@ public class CopyMktgToADServlet extends SlingAllMethodsServlet {
 						"bbby:shot_type/silhouette" };
 				metadataNode.setProperty(CommonConstants.CQ_TAGS, tags);
 				log.info("Tags added");
+			}
+			// remove isMarketingAsset property after copy asset
+			Node opmeta = JcrPropertiesUtil.getOperationalNode(session.getNode(dest), session);
+			if (opmeta.hasProperty("isMarketingAsset")) {
+				opmeta.getProperty("isMarketingAsset").remove();
 			}
 			session.save();
 
