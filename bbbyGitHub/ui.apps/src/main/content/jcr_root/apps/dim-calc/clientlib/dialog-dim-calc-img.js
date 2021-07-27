@@ -22,7 +22,6 @@
         $(document).on("keyup change mousewheel", "input[name='./width']", changeHeight);
         $(document).on("keyup change mousewheel", "input[name='./height']", changeWidth);
 
-        $document.submit(sendMailSentMessage);
     }
 
     function changeHeight(){
@@ -41,15 +40,6 @@
         $("input[name='./width']").val(Math.round(width));
     }
 
-    function sendMailSentMessage(){
-        var message = {
-            sender: SENDER,
-            action: "close"
-        };
-
-        getParent().postMessage(JSON.stringify(message), "*");
-    }
-
     function sendCancelMessage(){
         var message = {
             sender: SENDER,
@@ -66,7 +56,7 @@
         return parent;
     }
 
-    function closeModal(event){
+    function closeDimCalcModal(event){
         event = event.originalEvent || {};
 
         if (_.isEmpty(event.data) || _.isEmpty($dimensionCalcModal)) {
@@ -86,8 +76,10 @@
         }
 
         var modal = $dimensionCalcModal.data('modal');
-        modal.hide();
-        modal.$element.remove();
+        if(modal != undefined) {
+            modal.hide();
+            modal.$element.remove();
+        }
 
     }
 
@@ -186,7 +178,7 @@
 
         $("." + DIM_CAL_ACTIVATOR).not(':first').remove();//to remove all except one
 
-        $(window).off('message', closeModal).on('message', closeModal);
+        $(window).off('message', closeDimCalcModal).on('message', closeDimCalcModal);
     }
 
     function openModal(){
@@ -235,22 +227,4 @@
         return url;
     }
 
-    function getLoggedInUserID() {
-        var currentUserId = "";
-        var currentUserInfo;
-        var CURRENT_USER_JSON_PATH = Granite.HTTP.externalize('/libs/granite/security/currentuser.json');
-
-        var result = Granite.$.ajax({
-            type: "GET",
-            async: false,
-            url: CURRENT_USER_JSON_PATH
-        });
-
-        if (result.status === 200) {
-            currentUserInfo = JSON.parse(result.responseText);
-            currentUserId = currentUserInfo.authorizableId;
-        }
-
-        return currentUserId;
-    }
 }(jQuery, jQuery(document)));

@@ -104,13 +104,14 @@
                                                 foundation-wizard-control-action="cancel"/>
                                         </prev>
                                         <next
-                                            granite:class="foundation-wizard-control"
+                                            granite:class="dim-cal-wizard"
                                             jcr:primaryType="nt:unstructured"
                                             sling:resourceType="granite/ui/components/coral/foundation/button"
                                             text="Close"
                                             type="submit"
                                             variant="primary">
                                             <granite:data
+                                                granite:class="dim-cal-wizard-action"
                                                 jcr:primaryType="nt:unstructured"
                                                 foundation-wizard-control-action="next"/>
                                         </next>

@@ -68,8 +68,10 @@
         }
 
         var modal = $mailModal.data('modal');
-        modal.hide();
-        modal.$element.remove();
+        if(modal != undefined) {
+            modal.hide();
+            modal.$element.remove();
+        }
 
         if(message.action == "send"){
           //  showAlert("Email sent...", $mailModal.mailSentMessage);
