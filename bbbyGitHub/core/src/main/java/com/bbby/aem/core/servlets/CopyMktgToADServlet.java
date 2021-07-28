@@ -100,8 +100,11 @@ public class CopyMktgToADServlet extends SlingAllMethodsServlet {
 				metadataNode.setProperty(CommonConstants.BBBY_UPLOADED_ASSET_NAME, assetName);
 				metadataNode.setProperty(CommonConstants.BBBY_ASSET_UPDATE, "no");
 				metadataNode.setProperty("bbby:instructions", searchId);
+				if (metadataNode.hasProperty(CommonConstants.CQ_TAGS)) {
+					metadataNode.getProperty(CommonConstants.CQ_TAGS).remove();
+				}
 				String[] tags = { "bbby:asset_type/approved_dam/assets/product/images/single_product",
-						"bbby:shot_type/silhouette" };
+						"bbby:shot_type/environment" };
 				metadataNode.setProperty(CommonConstants.CQ_TAGS, tags);
 				log.info("Tags added");
 			}
