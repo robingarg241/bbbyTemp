@@ -75,7 +75,7 @@
         }
 
         if(message.action == "send"){
-          //  showAlert("Email sent...", $mailModal.mailSentMessage);
+           showAlert("Request Processed... Please search after 3 mins","Response");
         }
     }
 
