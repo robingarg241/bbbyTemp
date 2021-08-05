@@ -41,7 +41,7 @@
                     <items jcr:primaryType="nt:unstructured">
                         <wizard
                             jcr:primaryType="nt:unstructured"
-                            jcr:title="Compose"
+                            jcr:title="Copy MKTG Assets to AD"
                             sling:resourceType="granite/ui/components/coral/foundation/wizard">
                             <items jcr:primaryType="nt:unstructured">
                                 <container
