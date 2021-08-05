@@ -296,11 +296,11 @@
                 jcr:lastModified="{Date}2021-07-26T03:20:32.068-04:00"
                 jcr:lastModifiedBy="admin"
                 jcr:primaryType="nt:unstructured"
-                jcr:title="Create Hash and Call to PDM"
+                jcr:title="Create Hash and Call to PDM MKTG Copy"
                 sling:resourceType="cq/workflow/components/model/process">
                 <metaData
                     jcr:primaryType="nt:unstructured"
-                    PROCESS="com.bbby.aem.core.workflow.BBBYCreateHashAndCallToPdmStep"
+                    PROCESS="com.bbby.aem.core.workflow.BBBYCreateHashAndCallToPdmMKTGCopy"
                     PROCESS_AUTO_ADVANCE="true"/>
             </process_109942241>
             <process_2059869397

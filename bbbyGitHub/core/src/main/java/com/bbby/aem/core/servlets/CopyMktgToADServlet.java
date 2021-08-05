@@ -98,21 +98,21 @@ public class CopyMktgToADServlet extends SlingAllMethodsServlet {
 				Node metadataNode = session.getNode(dest + "/jcr:content/metadata");
 				log.info("Path for Metadata Node : " + metadataNode.getPath());
 				metadataNode.setProperty(CommonConstants.BBBY_UPLOADED_ASSET_NAME, assetName);
-				metadataNode.setProperty(CommonConstants.BBBY_ASSET_UPDATE, "no");
 				metadataNode.setProperty("bbby:instructions", searchId);
+				/*metadataNode.setProperty(CommonConstants.BBBY_ASSET_UPDATE, "no");
 				if (metadataNode.hasProperty(CommonConstants.CQ_TAGS)) {
 					metadataNode.getProperty(CommonConstants.CQ_TAGS).remove();
 				}
 				String[] tags = { "bbby:asset_type/approved_dam/assets/product/images/single_product",
 						"bbby:shot_type/environment" };
 				metadataNode.setProperty(CommonConstants.CQ_TAGS, tags);
-				log.info("Tags added");
+				log.info("Tags added");*/
 			}
 			// remove isMarketingAsset property after copy asset
-			Node opmeta = JcrPropertiesUtil.getOperationalNode(session.getNode(dest), session);
+			/*Node opmeta = JcrPropertiesUtil.getOperationalNode(session.getNode(dest), session);
 			if (opmeta.hasProperty("isMarketingAsset")) {
 				opmeta.getProperty("isMarketingAsset").remove();
-			}
+			}*/
 			session.save();
 
 		} else {

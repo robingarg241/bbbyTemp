@@ -229,11 +229,11 @@
         </node17>
         <node18
             jcr:primaryType="cq:WorkflowNode"
-            title="Create Hash and Call to PDM"
+            title="Create Hash and Call to PDM MKTG Copy"
             type="PROCESS">
             <metaData
                 jcr:primaryType="nt:unstructured"
-                PROCESS="com.bbby.aem.core.workflow.BBBYCreateHashAndCallToPdmStep"
+                PROCESS="com.bbby.aem.core.workflow.BBBYCreateHashAndCallToPdmMKTGCopy"
                 PROCESS_AUTO_ADVANCE="true"/>
         </node18>
         <node19
