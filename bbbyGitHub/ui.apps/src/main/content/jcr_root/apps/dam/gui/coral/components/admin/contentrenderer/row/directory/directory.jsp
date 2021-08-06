@@ -56,6 +56,8 @@ String relPath = "";
 String updatedBy = "";
 String photoshopDateCreated = "";
 String dcCreator = "";
+String pdmCallSent = "";
+String lastPdmCallStatus = "";
 
 if(resource.getPath().contains("e-comm")){
 	count = ServiceUtils.getChildCount(resourceResolver, resource.getPath());
@@ -81,6 +83,8 @@ if(resource.getPath().contains("e-comm")){
     <td is="coral-table-cell" value="<%= webProductRollupType %>"><%= webProductRollupType %></td>
 	<td is="coral-table-cell" value="<%= rejectionFollowup %>"><%= rejectionFollowup %></td>
 	<td is="coral-table-cell" value="<%= colorSpace %>"><%= colorSpace %></td>
+	<td is="coral-table-cell" value="<%= pdmCallSent %>"><%= pdmCallSent %></td>
+	<td is="coral-table-cell" value="<%= lastPdmCallStatus %>"><%= lastPdmCallStatus %></td>
 	<td is="coral-table-cell" value="<%= scene7FileStatus %>"><%= scene7FileStatus %></td>
     <td is="coral-table-cell" value="<%= count %>"><%= count %></td>
 	<td is="coral-table-cell" value="<%= expirationDate %>"><%= expirationDate %></td>

@@ -85,6 +85,20 @@
         columnGroup="BBBY"
         default="{Boolean}false"
         sortable="{Boolean}true"/>
+	<pdmCallSent
+        jcr:primaryType="nt:unstructured"
+        jcr:title="PDM Call Sent"
+        sling:orderBefore="language"
+        columnGroup="BBBY"
+        default="{Boolean}false"
+        sortable="{Boolean}true"/>
+   <lastPdmCallStatus
+        jcr:primaryType="nt:unstructured"
+        jcr:title="Last PDM Call Status"
+        sling:orderBefore="language"
+        columnGroup="BBBY"
+        default="{Boolean}false"
+        sortable="{Boolean}true"/>  
     <scene7FileStatus
         jcr:primaryType="nt:unstructured"
         jcr:title="Scene7 File Status"

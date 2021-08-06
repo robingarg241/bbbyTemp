@@ -39,9 +39,15 @@ Resource upcMetadataResource = resourceResolver.getResource(asset.getPath() + "/
 Node upcmetadata = upcMetadataResource != null ? upcMetadataResource.adaptTo(Node.class) : null;
 //Node upcNodes = upcMetadataNode.getNode("upc-0");
 
+Resource operationalMetadataResource = resourceResolver.getResource(asset.getPath() + "/jcr:content/operationalmetadata");
+Node operationalMetadata = operationalMetadataResource != null ? operationalMetadataResource.adaptTo(Node.class) : null;
+
 String primaryVendorName = "";
 String priorityFlag = "";
 String webProductRollupType = "";
+
+String pdmCallSent = "";
+String lastPdmCallStatus = "";
 
 Resource jcrContentResource = resource.getChild(JCR_CONTENT);
 ValueMap properties = jcrContentResource.getValueMap();
@@ -51,6 +57,11 @@ if(upcmetadata != null){
 	primaryVendorName = (upcmetadata.hasProperty("primaryVendorName")) ? upcmetadata.getProperty("primaryVendorName").getString() : "";
  	priorityFlag = (upcmetadata.hasProperty("priorityFlag")) ? upcmetadata.getProperty("priorityFlag").getString() : "";
  	webProductRollupType = (upcmetadata.hasProperty("webProductRollupType")) ? upcmetadata.getProperty("webProductRollupType").getString() : "";
+}
+
+if(operationalMetadata != null){
+	pdmCallSent = (operationalMetadata.hasProperty("pdmCallSent")) ? operationalMetadata.getProperty("pdmCallSent").getString() : "";
+ 	lastPdmCallStatus = (operationalMetadata.hasProperty("lastPdmCallStatus")) ? operationalMetadata.getProperty("lastPdmCallStatus").getString() : "";
 }
 
 String primaryUPC = asset.getMetadataValue("bbby:primaryUpc") != null ? asset.getMetadataValue("bbby:primaryUpc") : "";
@@ -224,6 +235,14 @@ final String nameDisplayOrder = i18n.get("{0} {1}", "name display order: {0} is 
 	
 	<% if(!isSnippetRequest) { %>
     <td is="coral-table-cell" value="<%= colorSpace %>"><%= colorSpace %></td>
+    <% } %>
+    
+    <% if(!isSnippetRequest) { %>
+    <td is="coral-table-cell" value="<%= pdmCallSent %>"><%= pdmCallSent %></td>
+    <% } %>
+    
+    <% if(!isSnippetRequest) { %>
+    <td is="coral-table-cell" value="<%= lastPdmCallStatus %>"><%= lastPdmCallStatus %></td>
     <% } %>
     
     <% if(!isSnippetRequest) { %>
