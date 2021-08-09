@@ -124,7 +124,7 @@ public class AssetPurgeScheduledTask implements Runnable {
 				new Object[] { path, formattedDate });
 
 		log.debug("Executing query {}", queryString);
-
+		Session session = resourceResolver.adaptTo(Session.class);
 		int count = 0;
 		Iterator<Resource> assetResources = resourceResolver.findResources(queryString, Query.JCR_SQL2);
 		while (assetResources.hasNext()) {
@@ -134,10 +134,15 @@ public class AssetPurgeScheduledTask implements Runnable {
 			resourceResolver.delete(assetResource);
 
 			count++;
+			if(count%50 == 0){
+				try{
+					session.save();
+				}catch (RepositoryException e) {
+					log.error("Repository save error while saving 50 assets at a time.", e.getLocalizedMessage());
+				}
+			}
 
 		}
-
-		Session session = resourceResolver.adaptTo(Session.class);
 		
 		try {
 			session.save();

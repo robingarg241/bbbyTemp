@@ -16,8 +16,8 @@ public @interface AssetPurgeScheduledTaskConfiguration {
     @AttributeDefinition(name = "Concurrent", description = "Schedule task concurrently", type = AttributeType.BOOLEAN)
     boolean scheduler_concurrent() default false;
 
-    @AttributeDefinition(name = "Expression", description = "Cron-job expression. Default: run every day at noon 12pm.", type = AttributeType.STRING)
-    String scheduler_expression() default "0 0 12 * * ?";
+    @AttributeDefinition(name = "Expression", description = "Cron-job expression. Default: run every day early morning at 2am.", type = AttributeType.STRING)
+    String scheduler_expression() default "0 0 2 * * ?";
     
     @AttributeDefinition(name = "Root paths (rejected)", description = "List of root folders with rejected assets", type = AttributeType.INTEGER)
     String[] pathsRejected() default {"/content/dam/bbby/asset_transitions_folder/vendor/rejected_vendor_assets", "/content/dam/bbby/asset_transitions_folder/internal/rejected_internal_assets", "/content/dam/bbby/asset_transitions_folder/e-comm/rejects_folder"};
