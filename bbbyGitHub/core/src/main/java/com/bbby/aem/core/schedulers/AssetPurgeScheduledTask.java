@@ -5,8 +5,10 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Locale;
+import java.util.Map;
 
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
@@ -17,6 +19,7 @@ import org.apache.sling.api.resource.PersistenceException;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.api.resource.ResourceResolver;
 import org.apache.sling.api.resource.ResourceResolverFactory;
+import org.apache.sling.event.jobs.JobManager;
 import org.apache.sling.settings.SlingSettingsService;
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
@@ -62,6 +65,9 @@ public class AssetPurgeScheduledTask implements Runnable {
     private String[] pathsDuplicate;
     
     @Reference
+	private JobManager jobManager;
+    
+    @Reference
     private ResourceResolverFactory resolverFactory;
     
     @Reference
@@ -79,6 +85,8 @@ public class AssetPurgeScheduledTask implements Runnable {
         this.daysTooKeepDuplicate = config.daysTooKeepDuplicate();
         this.pathsDuplicate = config.pathsDuplicate();
     }
+    
+    private boolean assetUnsuccessful = false;
 
     
     @Override
@@ -101,6 +109,9 @@ public class AssetPurgeScheduledTask implements Runnable {
         	
         	for(String path : pathsDuplicate) {
         		cleanupAssets(resourceResolver, path, daysTooKeepDuplicate);
+        	}
+        	if (assetUnsuccessful){
+        		generateUnsuccessfulReport();
         	}
         	
 		} catch (Exception e) {
@@ -138,6 +149,7 @@ public class AssetPurgeScheduledTask implements Runnable {
 				try{
 					session.save();
 				}catch (RepositoryException e) {
+					assetUnsuccessful = true;
 					log.error("Repository save error while saving 50 assets at a time.", e.getLocalizedMessage());
 				}
 			}
@@ -148,8 +160,43 @@ public class AssetPurgeScheduledTask implements Runnable {
 			session.save();
 			
 		} catch (RepositoryException e) {
-			log.error("Repository save error ", e.getLocalizedMessage());
+			assetUnsuccessful = true;
+			log.error("Repository save error at path:" +path);
 		}
 		log.info("Deleted {} assets", count);
+	}
+	
+	private void generateUnsuccessfulReport() throws WCMException {
+		log.debug("enter in generateUnsuccessfulReport()");
+		String crdate1 = ServiceUtils.getCurrentDateStr("MM-dd-yyyy");
+		
+		// mail body start
+		StringBuilder builder = new StringBuilder("<br>");
+
+		builder.append(
+				"<h2 style=\"text-align: center;\">Asset Purging task unsuccessful due to some error while saving session.</h2>");
+
+		builder.append("<br>");
+		builder.append("<br>");
+
+		builder.append("<p>Please contact your Bed Bath & Beyond Inc. representative for follow-up.</p>");
+		builder.append("<p>Thank You,<br>Bed Bath & Beyond, Inc.</p>");
+		builder.append("<br>");
+
+		sendMail(builder, crdate1);
+
+	}
+	
+	private void sendMail(StringBuilder builder, String crdate1) throws WCMException {
+		String MAIL_SUBJECT = ServiceUtils.getHostName() + ": Report On Unsuccessful purging of assets (" + crdate1 + ")";
+
+		final Map<String, Object> props = new HashMap<String, Object>();
+		log.info("Queeing the job for sending mail to vendor:dam-it-support@bedbath.com");
+
+		props.put(CommonConstants.TO, "dam-it-support@bedbath.com");
+		props.put(CommonConstants.SUBJECT, MAIL_SUBJECT);
+		props.put(CommonConstants.MESSAGE, builder.toString());
+
+		jobManager.addJob(CommonConstants.SEND_MAIL_TOPIC, props);
 	}
 }
