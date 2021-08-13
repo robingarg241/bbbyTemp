@@ -4,8 +4,6 @@
 	enabled="{Boolean}true"
 	scheduler.concurrent="{Boolean}false"
 	scheduler.expression="0 0 23 ? * FRI"
-    pathsRejected="[/content/dam/bbby/asset_transitions_folder/vendor/rejected_vendor_assets,/content/dam/bbby/asset_transitions_folder/e-comm/rejects_folder,/content/dam/bbby/asset_transitions_folder/internal/rejected_internal_assets]"
     daysTooKeepRejected="{Long}60"
-	pathsDuplicate="[/content/dam/bbby/asset_transitions_folder/vendor/duplicate_vendor_assets]"
 	daysTooKeepDuplicate="{Long}60"
 	maxCount="{Long}5000"/>

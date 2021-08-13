@@ -19,14 +19,8 @@ public @interface AssetPurgeScheduledTaskConfiguration {
     @AttributeDefinition(name = "Expression", description = "Cron-job expression. Default: run every Friday at 11pm.", type = AttributeType.STRING)
     String scheduler_expression() default "0 0 23 ? * FRI";
     
-    @AttributeDefinition(name = "Root paths (rejected)", description = "List of root folders with rejected assets", type = AttributeType.STRING)
-    String[] pathsRejected() default {"/content/dam/bbby/asset_transitions_folder/vendor/rejected_vendor_assets", "/content/dam/bbby/asset_transitions_folder/internal/rejected_internal_assets", "/content/dam/bbby/asset_transitions_folder/e-comm/rejects_folder"};
-    
     @AttributeDefinition(name = "Days to keep (rejected)", description = "Number of days rejected assets should be kept", type = AttributeType.INTEGER)
     int daysTooKeepRejected() default 60;
-    
-    @AttributeDefinition(name = "Root paths (duplicate)", description = "List of root folders with duplicate assets", type = AttributeType.STRING)
-    String[] pathsDuplicate() default {"/content/dam/bbby/asset_transitions_folder/vendor/duplicate_vendor_assets"};
     
     @AttributeDefinition(name = "Days to keep (duplicate)", description = "Number of days duplicate assets should be kept", type = AttributeType.INTEGER)
     int daysTooKeepDuplicate() default 60;

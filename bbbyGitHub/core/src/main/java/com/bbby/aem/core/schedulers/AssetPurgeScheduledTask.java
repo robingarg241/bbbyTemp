@@ -54,15 +54,9 @@ public class AssetPurgeScheduledTask implements Runnable {
     
     @Expose
     private int daysTooKeepRejected;
-
-    @Expose
-    private String[] pathsRejected;
     
     @Expose
     private int daysTooKeepDuplicate;
-
-    @Expose
-    private String[] pathsDuplicate;
     
     @Expose
 	private int maxCount;
@@ -84,9 +78,7 @@ public class AssetPurgeScheduledTask implements Runnable {
 
         this.enabled = config.enabled();
         this.daysTooKeepRejected = config.daysTooKeepRejected();
-        this.pathsRejected = config.pathsRejected();
         this.daysTooKeepDuplicate = config.daysTooKeepDuplicate();
-        this.pathsDuplicate = config.pathsDuplicate();
         this.maxCount = config.maxCount();
     }
     
@@ -94,6 +86,8 @@ public class AssetPurgeScheduledTask implements Runnable {
     private boolean assetUnsuccessfulDeletion = false;
     private String msg = "";
     private String msgUnsuccessful = "Asset Purging task unsuccessful due to some error while saving session.";
+    private String pathsRejected[] = {"/content/dam/bbby/asset_transitions_folder/vendor/rejected_vendor_assets", "/content/dam/bbby/asset_transitions_folder/internal/rejected_internal_assets", "/content/dam/bbby/asset_transitions_folder/e-comm/rejects_folder"};
+    private String pathsDuplicate[] = {"/content/dam/bbby/asset_transitions_folder/vendor/duplicate_vendor_assets"};
 
     
     @Override
@@ -125,6 +119,8 @@ public class AssetPurgeScheduledTask implements Runnable {
         		generateUnsuccessfulReport(msg);
         	}
         	msg = "";
+        	assetUnsuccessful = false;
+        	assetUnsuccessfulDeletion = false;
         	
 		} catch (Exception e) {
 			e.printStackTrace();
