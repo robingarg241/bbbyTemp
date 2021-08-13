@@ -28,7 +28,9 @@ public @interface AssetPurgeScheduledTaskConfiguration {
     @AttributeDefinition(name = "Root paths (duplicate)", description = "List of root folders with duplicate assets", type = AttributeType.STRING)
     String[] pathsDuplicate() default {"/content/dam/bbby/asset_transitions_folder/vendor/duplicate_vendor_assets"};
     
-    
     @AttributeDefinition(name = "Days to keep (duplicate)", description = "Number of days duplicate assets should be kept", type = AttributeType.INTEGER)
     int daysTooKeepDuplicate() default 60;
+    
+    @AttributeDefinition(name = "Max count", description = "Total count in a paticular root path for assets to get deleted from it should be less than max count.", type = AttributeType.INTEGER)
+	int maxCount() default 5000;
 }

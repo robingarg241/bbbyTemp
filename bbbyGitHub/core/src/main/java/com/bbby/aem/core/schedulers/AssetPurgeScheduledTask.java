@@ -64,6 +64,9 @@ public class AssetPurgeScheduledTask implements Runnable {
     @Expose
     private String[] pathsDuplicate;
     
+    @Expose
+	private int maxCount;
+    
     @Reference
 	private JobManager jobManager;
     
@@ -84,9 +87,13 @@ public class AssetPurgeScheduledTask implements Runnable {
         this.pathsRejected = config.pathsRejected();
         this.daysTooKeepDuplicate = config.daysTooKeepDuplicate();
         this.pathsDuplicate = config.pathsDuplicate();
+        this.maxCount = config.maxCount();
     }
     
     private boolean assetUnsuccessful = false;
+    private boolean assetUnsuccessfulDeletion = false;
+    private String msg = "";
+    private String msgUnsuccessful = "Asset Purging task unsuccessful due to some error while saving session.";
 
     
     @Override
@@ -110,9 +117,14 @@ public class AssetPurgeScheduledTask implements Runnable {
         	for(String path : pathsDuplicate) {
         		cleanupAssets(resourceResolver, path, daysTooKeepDuplicate);
         	}
-        	if (assetUnsuccessful){
-        		generateUnsuccessfulReport();
+        	if (assetUnsuccessful && assetUnsuccessfulDeletion){
+        		generateUnsuccessfulReport(msgUnsuccessful+'\n'+msg);
+        	}else if (assetUnsuccessful && !assetUnsuccessfulDeletion){
+        		generateUnsuccessfulReport(msgUnsuccessful);
+        	}else if(!assetUnsuccessful && assetUnsuccessfulDeletion){
+        		generateUnsuccessfulReport(msg);
         	}
+        	msg = "";
         	
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -122,11 +134,9 @@ public class AssetPurgeScheduledTask implements Runnable {
     }
     
 	private void cleanupAssets(ResourceResolver resourceResolver, String path, int daysTooKeep) throws WCMException, PersistenceException {
-		log.info("Cleaning rejected assets");
-
+		log.info("Cleaning rejected and duplicate assets");
 		LocalDateTime today = LocalDateTime.now();
 		today = today.minusDays(daysTooKeep);
-
 		ZonedDateTime todayZoned = today.atZone(ZoneId.systemDefault());
 		String formattedDate = todayZoned.format(DateTimeFormatter.ofPattern(CommonConstants.DATE_FORMATTER_FULL).withLocale(Locale.getDefault()));
 
@@ -135,38 +145,47 @@ public class AssetPurgeScheduledTask implements Runnable {
 				new Object[] { path, formattedDate });
 
 		log.debug("Executing query {}", queryString);
+
 		Session session = resourceResolver.adaptTo(Session.class);
 		int count = 0;
-		Iterator<Resource> assetResources = resourceResolver.findResources(queryString, Query.JCR_SQL2);
-		while (assetResources.hasNext()) {
-			Resource assetResource = (Resource) assetResources.next();
-
-			log.debug("Removing asset at {}", assetResource.getPath());
-			resourceResolver.delete(assetResource);
-
-			count++;
-			if(count%50 == 0){
-				try{
-					session.save();
-				}catch (RepositoryException e) {
-					assetUnsuccessful = true;
-					log.error("Repository save error while saving 50 assets at a time.", e.getLocalizedMessage());
+		int sizeAssets = 0;
+		Iterator<Resource> assetResourcesInitial = resourceResolver.findResources(queryString, Query.JCR_SQL2);
+		while (assetResourcesInitial.hasNext()) {
+			assetResourcesInitial.next();
+			sizeAssets++;
+		}
+		log.info("Total {} assets to be deleted at path: {}", sizeAssets, path);
+		if(sizeAssets<=maxCount){
+			Iterator<Resource> assetResources = resourceResolver.findResources(queryString, Query.JCR_SQL2);
+			while (assetResources.hasNext()) {
+				Resource assetResource = (Resource) assetResources.next();
+				log.debug("Removing asset at {}", assetResource.getPath());
+				resourceResolver.delete(assetResource);
+				count++;
+				if(count%50 == 0){
+					try{
+						session.save();
+					}catch (RepositoryException e) {
+						assetUnsuccessful = true;
+						log.error("Repository save error while saving 50 assets at a time.", e.getLocalizedMessage());
+					}
 				}
 			}
-
+			try {
+				session.save();
+				log.info("Deleted {} assets at path: {}", count, path);
+			} catch (RepositoryException e) {
+				assetUnsuccessful = true;
+				log.error("Repository save error at path: {}", path);
+			}
+		}else{
+			log.info("Assets cannot be deleted at path: " + path + " .Total assets size at this path is greater than max assets to be deleted.");
+			assetUnsuccessfulDeletion = true;
+			msg = msg + '\n' + "Assets size  at path: " + path + " is : " + sizeAssets + ". This size is greater than " + maxCount + ". That's why these assets cannot be deleted.";
 		}
-		
-		try {
-			session.save();
-			
-		} catch (RepositoryException e) {
-			assetUnsuccessful = true;
-			log.error("Repository save error at path:" +path);
-		}
-		log.info("Deleted {} assets", count);
 	}
 	
-	private void generateUnsuccessfulReport() throws WCMException {
+	private void generateUnsuccessfulReport(String message) throws WCMException {
 		log.debug("enter in generateUnsuccessfulReport()");
 		String crdate1 = ServiceUtils.getCurrentDateStr("MM-dd-yyyy");
 		
@@ -174,7 +193,7 @@ public class AssetPurgeScheduledTask implements Runnable {
 		StringBuilder builder = new StringBuilder("<br>");
 
 		builder.append(
-				"<h2 style=\"text-align: center;\">Asset Purging task unsuccessful due to some error while saving session.</h2>");
+				"<p>"+ message + "</p>");
 
 		builder.append("<br>");
 		builder.append("<br>");
@@ -194,6 +213,7 @@ public class AssetPurgeScheduledTask implements Runnable {
 		log.info("Queeing the job for sending mail to vendor:dam-it-support@bedbath.com");
 
 		props.put(CommonConstants.TO, "dam-it-support@bedbath.com");
+		//props.put(CommonConstants.TO, "robin.garg@idc.bedbath.com");
 		props.put(CommonConstants.SUBJECT, MAIL_SUBJECT);
 		props.put(CommonConstants.MESSAGE, builder.toString());
 
