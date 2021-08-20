@@ -229,7 +229,7 @@ public class ServiceUtils {
      * @return the user group
      */
     public static String getUserGroup(ResourceResolverFactory resolverFactory, String userName)
-    {   
+    {
         return "admin";
     }
 
@@ -242,47 +242,47 @@ public class ServiceUtils {
     public static String getUserName(SlingHttpServletRequest request)
     {
         String userId = null;
-        
+
         ResourceResolver resourceResolver = request.getResourceResolver();
         if(resourceResolver != null) {
         	Session session = resourceResolver.adaptTo(Session.class);
             userId = session.getUserID();
         }
-        
-        
+
+
         return userId != null ? userId : "admin";
 
     }
 
-   
+
     public static String getUserPagePath(String userName, String groupName, ResourceResolver resourceResolver)
     {
-    	String parentPath = CommonConstants.VENDOR_ROOT_PATH + groupName; 
-    
+    	String parentPath = CommonConstants.VENDOR_ROOT_PATH + groupName;
+
     	Session session = resourceResolver.adaptTo(Session.class);
-    	
+
     	String validNodeName = JcrUtil.createValidName(userName);
         String userNodePath = parentPath + "/" + validNodeName;
-        
+
 		try {
 
 			if (!session.nodeExists(userNodePath)) {
-				
+
 				String domain = StringUtils.substringAfter(userName, "@");
 				String bucket = StringUtils.isNotEmpty(domain) ? "_" + domain.substring(0, 1) : "_" + userName.substring(0, 1);
 
 				userNodePath = parentPath + "/" + bucket + "/" + validNodeName;
 			}
-			
-			
-			
+
+
+
 		} catch (Exception e) {
 			log.error("An exception has occured in createNode method with error: " + e.getMessage(), e);
 		}
 
     	return userNodePath;
     }
-    
+
     /**
      * This method replaces [^alphanumerics] with a special char
      * in order to produce a readable and consistent node name
@@ -335,7 +335,7 @@ public class ServiceUtils {
 
         return c;
     }
-    
+
     public static String getCurrentDateStr(String format) {
     	String date = null;
 
@@ -493,7 +493,7 @@ public class ServiceUtils {
         ResourceResolver resolver = resolverFactory.getServiceResourceResolver(authInfo);
         return resolver;
     }
-    
+
     /**
      * Checks run modes in an attempt to determine if current environment is pre-production.
      *
@@ -511,7 +511,7 @@ public class ServiceUtils {
             return true;
         }
     }
-    
+
     public static String getProjectCleanupMonthName(String monthNumber){
 
         String monthString;
@@ -566,7 +566,7 @@ public class ServiceUtils {
 
 
     }
-    
+
 	public static String getExcelVersion(String excelPath, ResourceResolverFactory resolverFactory) {
 
 		String version = "";
@@ -587,7 +587,7 @@ public class ServiceUtils {
 
 		return version;
 	}
-	
+
 	public static List<Workflow> listRunningWorkflowonPayload(String assetPath, boolean excludeSystemWorkflows,
 			ResourceResolver resourceResolver) {
 		List<Workflow> workflows =  null;
@@ -599,19 +599,19 @@ public class ServiceUtils {
 		}
 		return workflows;
 	}
-	
+
 	public static boolean isInWorkflow(String assetPath, boolean excludeSystemWorkflows,
 			ResourceResolver resourceResolver) {
 		PayloadMap payloadMap = resourceResolver.adaptTo(PayloadMap.class);
 		return payloadMap.isInWorkflow(assetPath, excludeSystemWorkflows);
 	}
-	
+
 	public static Map<String, Asset> listReferences(Node node, ResourceResolver resourceResolver) {
 		AssetReferenceSearch search = new AssetReferenceSearch(node, DAM_ROOT, resourceResolver);
 		Map<String, Asset> result = search.search();
 		return result;
 	}
-	
+
 	public static ArrayList<String> getMembersOfImageset(Session session, String rootPath) {
 		ArrayList<String> memberList = new ArrayList<String>();
 		try {
@@ -629,7 +629,7 @@ public class ServiceUtils {
 		}
 		return memberList;
 	}
-	
+
 	public static long getAssetsCountInChildDirectory(ResourceResolver resourceResolver, String rootPath) {
 		int count = 0;
 		try {
@@ -644,11 +644,11 @@ public class ServiceUtils {
 				result.next();
 				index++;
 			}
-			
+
 			Instant finish = Instant.now();
 			long timeElapsed = Duration.between(start, finish).toMillis(); // in_millis
 			log.debug("Total Time to fetch Asset count : " + timeElapsed + " MilliSecond or "+ TimeUnit.MILLISECONDS.toSeconds(timeElapsed) + " Second");
-			
+
 			//NodeIterator ni = result.getNodes();
 			return index;
 		} catch (Exception e) {
@@ -656,7 +656,7 @@ public class ServiceUtils {
 		}
 		return count;
 	}
-	
+
 	public static long getChildDirectoryCount(ResourceResolver resourceResolver, String rootPath) {
 		int count = 0;
 		try {
@@ -681,7 +681,7 @@ public class ServiceUtils {
 		}
 		return count;
 	}
-	
+
 	public static String getChildCount(ResourceResolver resourceResolver, String rootPath) {
 		String count = "";
 
@@ -711,7 +711,7 @@ public class ServiceUtils {
 		count = count + ", " + directoryCount + " D";
 		return count;
 	}
-	
+
 	public static boolean startsWithTag(Node node, String tagValue) throws ValueFormatException, IllegalStateException, RepositoryException {
     	log.debug("entering startsWithTag() method");
     	Node meta = node.getNode(CommonConstants.METADATA_NODE);
@@ -722,11 +722,11 @@ public class ServiceUtils {
     		return false;
     	}
     	Property prop = meta.getProperty(CommonConstants.CQ_TAGS);
-    	
+
     	if(prop == null) return false;
-    	
+
         Value[] values = prop.getValues();
-        
+
         if (values!=null){
 	        for (Value val : values) {
 	          String tag = val.getString();
@@ -737,7 +737,7 @@ public class ServiceUtils {
         }
         return false;
     }
-	
+
 	public static boolean isRejectedAsset(Node metadataNode) throws RepositoryException {
 		boolean isRejectedAsset = false;
 		if (metadataNode.hasProperty(CommonConstants.BBBY_REJECTION_REASON)) {
@@ -748,7 +748,7 @@ public class ServiceUtils {
 		}
 		return isRejectedAsset;
 	}
-	
+
 	public static boolean checkReferences(Resource resource, Session session) throws Exception {
 		log.debug("entering checkReferences() method");
 		boolean hasRefereces = false;
@@ -771,7 +771,7 @@ public class ServiceUtils {
 			hasAllReferenceAssets = checkAllReferenceAssets(nodes, session);
 			log.info("hasAllReferenceAssets() method returns: " + hasAllReferenceAssets);
 		}
-		
+
 		//DAM-1324 : Reference missing banner changes and PC wf changes
 		String damScene7FileStatusValue = getMetadataValue(resource, CommonConstants.DAM_SCENE_7_FILE_STATUS, "");
 		if (hasRefereces && hasAllReferenceAssets && StringUtils.isNotBlank(damScene7FileStatusValue)){
@@ -782,7 +782,7 @@ public class ServiceUtils {
 		}
 		return hasFinalRefereces;
 	}
-	
+
 	public static boolean checkAllReferenceAssets(List<Node> nodes ,Session session) throws Exception {
 		log.info("Inside checkAllReferenceAssets() method.");
 		boolean hasAllReferenceAssets = true;
@@ -809,7 +809,7 @@ public class ServiceUtils {
 		}
 		return hasAllReferenceAssets;
 	}
-	
+
 	public static List<Node> listAssetsOfImageset(Resource resource, Session session) throws Exception {
 		log.debug("entering listAssetsOfImageset() method");
 		@SuppressWarnings("deprecation")
@@ -824,7 +824,7 @@ public class ServiceUtils {
 		}
 		return assetList;
 	}
-	
+
 	public static Object getBooleanValue(String propValue) {
         if (StringUtils.equalsIgnoreCase("Yes", propValue))
             return true;
@@ -848,7 +848,7 @@ public class ServiceUtils {
         }
         return tagValue;
     }
-	
+
     /**
      *Method to extract property of an resource
      */
@@ -864,7 +864,7 @@ public class ServiceUtils {
         }
         return value;
     }
-	
+
 	public static boolean isTagPresentMutipleTimes(String tagName, Node metadataNode) throws RepositoryException {
 		ArrayList<String> tagValueList = new ArrayList<String>();
 		boolean isTagPresentMutipleTimes = false;
@@ -883,7 +883,7 @@ public class ServiceUtils {
 		}
 		return isTagPresentMutipleTimes;
 	}
-	
+
     //DAM-112 : Folder Level Mandatory Metadata and also use for call to PDM from VAH folder
 	public static String getUPCorCqTagsMissingMessage(Node resNode) {
 		String value = null;
@@ -897,10 +897,10 @@ public class ServiceUtils {
 		try {
 			//Node resNode = resource.adaptTo(Node.class);
 			Node metadataNode = resNode.getNode(CommonConstants.METADATA_NODE);
-			
+
 			//String upcValue = getMetadataValue(resource, CommonConstants.BBBY_UPC, null);
 			//String skuValue = getMetadataValue(resource, CommonConstants.BBBY_SKU, null);
-			
+
 			String upcValue = (metadataNode.hasProperty(CommonConstants.BBBY_UPC)) ? metadataNode.getProperty(CommonConstants.BBBY_UPC).getString() : null;
 			String skuValue = (metadataNode.hasProperty(CommonConstants.BBBY_SKU)) ? metadataNode.getProperty(CommonConstants.BBBY_SKU).getString() : null;
 			if(resNode.getPath().contains("/content/dam/marketing")){
@@ -925,7 +925,7 @@ public class ServiceUtils {
 				isAssetTypePresentMutiple = isTagPresentMutipleTimes(CommonConstants.BBBY_ASSET_TYPE, metadataNode);
 				isShotTypePresentMutiple = isTagPresentMutipleTimes(CommonConstants.BBBY_SHOT_TYPE, metadataNode);
 			}
-			
+
 			if (!hasUPC && !hasSKU && !hasAssetType && !hasShotType) {
 				value = "UPC/SKU & Asset/Shot Type Missing ...";
 			} else if (!hasUPC && !hasSKU && !hasAssetType) {
@@ -947,14 +947,14 @@ public class ServiceUtils {
 				}
 			} else if(isShotTypePresentMutiple){
 				value = "Multiple Shot Type ...";
-			} 
+			}
 
 		} catch (Exception e) {
 			log.debug("Error in getUPCorCqTagsMissingMessage() method " + e);
 		}
 		return value;
 	}
-	
+
     public static String getHostName() {
         String hostname = null;
         try {
@@ -964,7 +964,7 @@ public class ServiceUtils {
         }
         return hostname;
     }
-    
+
     public static String getColorSpace(Resource assetResource) {
     	BufferedImage image = null;
         String colorSpace = "";
@@ -983,7 +983,7 @@ public class ServiceUtils {
         }
         return colorSpace;
     }
-    
+
     public static String getAssetType(Node metadataNode) throws RepositoryException {
         String assetType = null;
         if (metadataNode.hasProperty(CommonConstants.CQ_TAGS)) {
@@ -998,7 +998,7 @@ public class ServiceUtils {
         }
         return assetType;
     }
-    
+
 	public static boolean checkForDupsForMarketing(String fileName, String path, ResourceResolverFactory resolverFactory) throws Exception {
 		boolean dupCheck = false;
 		ResourceResolver resourceResolver = getResourceResolver(resolverFactory, "writeservice");
@@ -1020,7 +1020,7 @@ public class ServiceUtils {
 		}
 		return dupCheck;
 	}
-	
+
 	public static List<Node> getImagesetMembers(ImageSet imageSet, Session session) throws Exception {
 		log.info("entering listAssetsOfImageset() method");
 		List<Node> assetList = new ArrayList<Node>();
@@ -1045,7 +1045,7 @@ public class ServiceUtils {
 		assetList.addAll(assetAlt);
 		return assetList;
 	}
-	
+
 	public static String getDestPath(Session session, Node node) throws Exception {
 		log.info("Get Dest Path : " + node.getPath());
 		String destination = null;
@@ -1064,7 +1064,7 @@ public class ServiceUtils {
 		}
 		return destination;
 	}
-	
+
 	public static ArrayList<String> getChildCQPageName(ResourceResolverFactory resolverFactory, String rootPath) {
 		ArrayList<String> assets = new ArrayList<String>();
 		try {
@@ -1077,13 +1077,13 @@ public class ServiceUtils {
 				Node node = batchResource.adaptTo(Node.class);
 				assets.add(node.getName());
 			}
-			
+
 		} catch (Exception e) {
 			log.debug("Error, could not find: " + rootPath + " : " + e.getMessage());
 		}
 		return assets;
 	}
-	
+
 	public static boolean hasValidUPCorSKU(Node assetNode) throws RepositoryException {
 		Node metadataNode = assetNode.getNode(CommonConstants.METADATA_NODE);
 	        boolean hasValidUPCorSKU = true;
@@ -1095,12 +1095,12 @@ public class ServiceUtils {
 						if (!StringUtils.isNumeric(upcList[i].trim()) || upcList[i].trim().length() > 15 ) {
 							hasValidUPCorSKU = false;
 							log.info("Not Valid for PDM Call due to UPC length : "+upcList[i].length());
-							
+
 						}
 					}
 				}
 	        }
-	        
+
 	        if (metadataNode.hasProperty(CommonConstants.BBBY_SKU)){
 	        	String skuValue = (metadataNode.hasProperty(CommonConstants.BBBY_SKU)) ? metadataNode.getProperty(CommonConstants.BBBY_SKU).getString() : null;
 				if (skuValue != null && !skuValue.equals("")) {
@@ -1109,60 +1109,105 @@ public class ServiceUtils {
 						if (!StringUtils.isNumeric(skuList[i].trim()) || skuList[i].trim().length() > 12) {
 							hasValidUPCorSKU = false;
 							log.info("Not Valid for PDM Call due to SKU length : "+skuList[i].length());
-							
+
 						}
 					}
 				}
 	        }
 	        return hasValidUPCorSKU;
 	    }
-	
+
+    public static boolean isImagesetExist( Session session, Node metadataNode) throws RepositoryException {
+        Instant start = Instant.now();
+        boolean isImageSetExists = false;
+        String upcValue = null;
+        String skuValue = null;
+        String upcProp = "/jcr:content/upcmetadata/*/primaryUPC";
+        String skuProp = "/jcr:content/upcmetadata/*/sku";
+        if (metadataNode.hasProperty(CommonConstants.BBBY_UPC) ) {
+            upcValue = metadataNode.getProperty(CommonConstants.BBBY_UPC).getString();
+        }
+        if (metadataNode.hasProperty(CommonConstants.BBBY_SKU)){
+            skuValue = metadataNode.getProperty(CommonConstants.BBBY_SKU).getString();
+        }
+
+        if(StringUtils.isNotEmpty(upcValue) ) {
+            isImageSetExists = getImageSetFromSingleProduct(upcProp,upcValue, session);
+        } else if(StringUtils.isNotEmpty(skuValue)) {
+            isImageSetExists = getImageSetFromSingleProduct(skuProp,skuValue, session);
+        } else {
+            log.debug("UPC/SKU is blank or not exist ");
+        }
+        Instant end = Instant.now();
+        log.info("Time taken for node" + metadataNode.getPath() + " is " + Duration.between(start, end).toMillis() + "(milli sec).");
+        return isImageSetExists;
+    }
+
+    public static boolean getImageSetFromSingleProduct(String propName, String propVal, Session session) {
+        boolean isImageSetExists = false;
+        String rootPath = "/content/dam/bbby/approved_dam/assets/product/images/single_product";
+        try {
+            String q = "SELECT * FROM [dam:Asset] AS s WHERE ISDESCENDANTNODE([" + rootPath
+                + "]) and (s.[" + propName + "] = '" + propVal + "' and s.[/jcr:content/metadata/bbby:primaryImage]='yes')";
+            Query query = session.getWorkspace().getQueryManager().createQuery(q, Query.JCR_SQL2);
+            QueryResult result = query.execute();
+            NodeIterator ni = result.getNodes();
+
+            if (ni.getSize() > 0) {
+                isImageSetExists = true;
+            }
+        } catch (Exception e) {
+            log.debug("Error while checking Imageset for UPC or SKU :: " + e.getMessage());
+        }
+        return isImageSetExists;
+    }
+
 	//To check weather string is numeric or not
-	public static boolean isNumeric(String str) { 
+	public static boolean isNumeric(String str) {
 		boolean isValidNum = false;
 		if (str == null) {
-			return isValidNum; 
+			return isValidNum;
 		}
 		else{
-		  try {  
-			if(str.contains("d")|| str.contains("f") || str.contains("D") || str.contains("F")){ 
+		  try {
+			if(str.contains("d")|| str.contains("f") || str.contains("D") || str.contains("F")){
 				return isValidNum;
 			}
 			else{
-		    Double.parseDouble(str); 
+		    Double.parseDouble(str);
 		    isValidNum = true;
 			}
-		  } catch(NumberFormatException e){  
-		    return isValidNum;  
-		  }  
+		  } catch(NumberFormatException e){
+		    return isValidNum;
+		  }
 		  return isValidNum;
 		}
 	}
-	
+
     public static boolean isNullOrEmpty(String str) {
         if(str != null && !str.trim().isEmpty())
             return false;
         return true;
     }
-    
+
     public static double calculatePercentage(double obtained, double total) {
         return obtained * 100 / total;
     }
-    
+
     public static double calculateValueByPercentage(double obtained, double percentage) {
         return obtained * percentage / 100;
     }
-    
+
     public static String replaceLast(String text, String searchString, String replacement) {
-        int pos = text.lastIndexOf(searchString); 
-        if (pos > -1) { 
-           return text.substring(0, pos) 
+        int pos = text.lastIndexOf(searchString);
+        if (pos > -1) {
+           return text.substring(0, pos)
             + replacement
-            + text.substring(pos + searchString.length(), text.length()); 
-        } else 
+            + text.substring(pos + searchString.length(), text.length());
+        } else
            return text;
     }
-    
+
     // check filename has no special char and space
     public static boolean validFileName(String assetName) {
     	String name = null;
@@ -1180,7 +1225,7 @@ public class ServiceUtils {
     	}
         return true;
     }
-    
+
 	public static boolean moveImagesetNightly(String value) {
 		boolean isImageset = false;
 		if ("moveImageset".equalsIgnoreCase(value)) {
@@ -1188,7 +1233,7 @@ public class ServiceUtils {
 		}
 		return isImageset;
 	}
-	
+
 	public static boolean isCollectionResource(ResourceResolverFactory resolverFactory, String resourcePath) {
 		boolean isCollectionResource = false;
 		try (ResourceResolver resourceResolver = getResourceResolver(resolverFactory, "writeservice")) {
@@ -1201,7 +1246,7 @@ public class ServiceUtils {
 		}
 		return isCollectionResource;
 	}
-	
+
 	public static boolean isMarketingUser(ResourceResolverFactory resolverFactory, String userId) {
 		boolean isMarketingUser = true;
 		//Todo:
@@ -1214,13 +1259,13 @@ public class ServiceUtils {
 		          Group group=(Group)groups.next();
 		          log.info("group.getID().."+group.getID());
 		          log.info("group.getPrincipal().getName().."+group.getPrincipal().getName());
-		        } 
+		        }
 			} catch (Exception e) {
 				log.error("Exception in ServiceUtils.isMarketingUser method ", e);
 			}
 		return isMarketingUser;
 	}
-	
+
 	public static String buildFilePageName(String filename) {
         String filePageName = filename;
         try {

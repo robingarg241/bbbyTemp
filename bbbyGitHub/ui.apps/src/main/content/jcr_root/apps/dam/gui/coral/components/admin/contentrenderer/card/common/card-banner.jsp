@@ -61,31 +61,32 @@
     String damAssetState = null;
 	String resourcePath = resource.getPath();
 	String encodedResourcePath = xssAPI.encodeForHTMLAttr(resourcePath);
-	
+
     boolean enabledS7config = false;
     final Features featureManager = sling.getService(Features.class);
-    if (featureManager.getFeature(EntitlementConstants.ASSETS_SCENE7_FEATURE_FLAG_PID)!=null && 
+    if (featureManager.getFeature(EntitlementConstants.ASSETS_SCENE7_FEATURE_FLAG_PID)!=null &&
             featureManager.isEnabled(EntitlementConstants.ASSETS_SCENE7_FEATURE_FLAG_PID)) {
     	enabledS7config = true;
     }
-	
+
     boolean isVideo = false;
     boolean isImage = false;
 
 	boolean hasRefereces = true;
     boolean hasValidFileName = true;
+    boolean isImageSetExists = false;
 
 	//DAM-1067 : Show banner or prevent image/imageset movement to retoucher folder when scene7 sync is not completed
 	if(resource.getPath().contains("e-comm") && S7SetHelper.isS7Set(resource)){
         Session session = resourceResolver.adaptTo(Session.class);
         hasRefereces = ServiceUtils.checkReferences(resource, session);
 	}
-    
+
 	//DAM-1461 : Extend banner check to alert file names with spaces for internally ingested assets
 	if(resource.getPath().contains("bbby/asset_transitions_folder") || resource.getPath().contains("bbby/approved_dam")){
 		 hasValidFileName = ServiceUtils.validFileName(resource.getName());
-	}	
-	
+	}
+
 	//DAM-1361: Adding a banner on Imageset to indicate that the imageset is to be processed overnight.
 	boolean isImagesetProcessedOvernight = false;
 	if(resource.getPath().contains("e-comm") && resource.getPath().contains("_imageset") && S7SetHelper.isS7Set(resource)){
@@ -108,7 +109,13 @@
 			}
 		}
 	}
-	
+    // DAM-1594:
+    if(resource.getPath().contains("e-comm") && !resource.getPath().contains("_imageset")) {
+        Session session = resourceResolver.adaptTo(Session.class);
+        Node metadataNode = resourceNode.getNode(CommonConstants.METADATA_NODE);
+        isImageSetExists = ServiceUtils.isImagesetExist(session, metadataNode);
+    }
+
     String type = resource.adaptTo(Asset.class).getMimeType();
     if(type==null || type.isEmpty()) {
         type = request.getAttribute(MIMETYPE) != null ? (String) request.getAttribute(MIMETYPE) : "unknown";
@@ -166,7 +173,7 @@
     ResourceResolver resolver = slingRequest.getResourceResolver();
     MetadataEditorHelper meh = sling.getService(MetadataEditorHelper.class);
     boolean missingMeta = !hasValidMetadata(resource, meh);
-    
+
     //DAM-112 : Folder Level Mandatory Metadata
     boolean hasUpcCqTags = true;
     String upcCqTagsMissingMsg = null;
@@ -180,9 +187,9 @@
     		hasUpcCqTags = false;
     	}else{
     		 if(resource.getPath().contains("bbby/asset_transitions_folder/internal") || resource.getPath().contains("bbby/asset_transitions_folder/e-comm") || resource.getPath().contains("bbby/approved_dam")){
-    	    	 hasValidUPCorSKU = ServiceUtils.hasValidUPCorSKU(resourceNode); 
+    	    	 hasValidUPCorSKU = ServiceUtils.hasValidUPCorSKU(resourceNode);
     			 if(!resource.getPath().contains("_imageset")){
-    				 pdmCallSuccess = DamConstants.DAM_ASSET_STATE_PROCESSED.equals(damAssetState);  
+    				 pdmCallSuccess = DamConstants.DAM_ASSET_STATE_PROCESSED.equals(damAssetState);
     			 }
 	         }
     	}
@@ -220,7 +227,7 @@
             if (!enabledS7config ){
                 isAssetValid = false;
             }
-            else{ 
+            else{
                 // for DMS7 runmode, check if video has dam:s7damType equals to Asset
                 ResourceResolver configResolver = null;
                 try {
@@ -259,10 +266,10 @@
 	boolean hasDiv = false;
     Integer progress = 0;
 	boolean hasAlert = true;
-	
+
     String CONST_STATUS_FINISHED    = "Finished";
     int idx;
-    AttrBuilder attrNone3DAlert = null; 
+    AttrBuilder attrNone3DAlert = null;
     AttrBuilder attrNewTag = null;
     String contentNewTag = xssAPI.encodeForHTML(i18n.get("New"));
     AttrBuilder attrAlert = new AttrBuilder(request, xssAPI);
@@ -272,15 +279,15 @@
     String contentAttrLicensedTag = xssAPI.encodeForHTML(i18n.get("Licensed"));
     boolean isStockAsset = request.getAttribute(IS_STOCK_ASSET) != null ? (boolean) request.getAttribute(IS_STOCK_ASSET) : false;
     boolean isStockAssetLicensed = request.getAttribute(IS_STOCK_ASSET_LICENSED) != null ? (boolean) request.getAttribute(IS_STOCK_ASSET_LICENSED) : false;
-    
+
 	boolean isFolder = resource.isResourceType("nt:folder") || resource.isResourceType("sling:Folder") || resource.isResourceType("sling:OrderedFolder");
-    
+
 	if(is3DMimeType || OP3DinProgress) {
 		// ToDo: Unify 3D card with standard DAM
 		if (!StringUtils.isEmpty(operation) && !S73DConstants.S73D_NO_OP.equals(operation)) {
         	progress = (progressProps != null) ? progressProps.get("Progress", Integer.class) : 0;
     	}
-	
+
         String alertParams = (progressProps != null) ? progressProps.get("Style", String.class).substring(6).replaceAll("\"", "") : "";
     	boolean isMissingDependencies = request.getAttribute(IS_MISSING_DEPENDENCIES) != null ? (boolean) request.getAttribute(IS_MISSING_DEPENDENCIES) : false;
 
@@ -350,6 +357,9 @@
         	variant = "error";
         } else if(isImagesetProcessedOvernight) {
         	alertContent = i18n.get("Nightly WF Scheduled Overnight");
+        } else if(isImageSetExists) {
+            alertContent = i18n.get("Imageset exist in AD");
+            variant = "warning";
         } else if(!isAssetValid) {
 	        // unused ??? String CONST_LABEL_ERROR = i18n.get("Encoding process failed");
 	        alertContent = formatErrorStatus(i18n, status);
@@ -366,7 +376,7 @@
             attrStockLicensedTag = new AttrBuilder(request, xssAPI);
             attrStockLicensedTag.add("color", "blue");
             attrStockLicensedTag.add("class", "u-coral-pullRight");
-        	hasAlert = false;            
+        	hasAlert = false;
         } else {
         	hasAlert = false;
         }
@@ -378,11 +388,11 @@
 	if(hasDiv) {
 		attrAlert.add("style", alertStyle);
 		attrAlertContent.add("class","coral-Alert-title");
-		
+
 		attrDiv = new AttrBuilder(request, xssAPI);
 		attrDiv.add("class","text-ellipsis v3D-Banner");
 		attrDiv.add("data-path", encodedResourcePath);
-		
+
 		attrSpan = new AttrBuilder(request, xssAPI);
 		attrDiv.add("class","v3d-ProgressBanner-progress");
 		attrDiv.add("style", "width: " + progress + "%");
@@ -392,7 +402,7 @@
     if (METADATA_MISSING_STATUS.equals(bannerContent)) {
         bannerContent = METADATA_MISSING_STATUS.toUpperCase();
     }
-    
+
 	Object viewSettings = request.getAttribute(VIEW_SETTINGS);
 	if (viewSettings != null) {
         String cardName = ((JSONObject)request.getAttribute(VIEW_SETTINGS)).getString(VIEW_SETTINGS_PN_NAME);
@@ -406,15 +416,15 @@
 	%>
 
 <coral-card-info <%= attrNone3DAlert != null ? attrNone3DAlert.build() : "" %>>
-			
+
 	<% if(attrNewTag != null) { %>
         <coral-tag <%= attrNewTag.build()%>> <%= contentNewTag%></coral-tag>
     <% } if(attrStockLicensedTag != null) { %>
-        <coral-tag <%= attrStockLicensedTag.build()%>> 
+        <coral-tag <%= attrStockLicensedTag.build()%>>
             <coral-icon icon="checkCircle" size="XS"></coral-icon>
             <span><%= contentAttrLicensedTag%></span>
         </coral-tag>
-	<% }    
+	<% }
 	if(hasAlert) { %>
 		<coral-alert <%= attrAlert.build()%>>
 		<% if(hasDiv) { %>
