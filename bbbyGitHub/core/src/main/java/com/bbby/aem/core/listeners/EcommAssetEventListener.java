@@ -28,6 +28,9 @@ import org.apache.sling.api.resource.LoginException;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.api.resource.ResourceResolver;
 import org.apache.sling.api.resource.ResourceResolverFactory;
+import com.day.cq.replication.ReplicationActionType;
+import com.day.cq.replication.ReplicationException;
+import com.day.cq.replication.Replicator;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 import org.osgi.service.event.Event;
@@ -68,12 +71,17 @@ public class EcommAssetEventListener implements EventHandler {
     
     private final String ECOMM_FOLDER = "/content/dam/bbby/asset_transitions_folder/e-comm";
     private final String RETOUCHER_FOLDER = "retoucher";
+    private final String PUBLISH_COMPLETE = "PublishComplete";
     private long timeout = 3000;
+    
     @Reference
     private WorkflowService wfService;
     
     @Reference
     private ResourceResolverFactory resolverFactory;
+    
+	@Reference
+	private Replicator replicator;
     
 	public void handleEvent(final Event event) {
 		log.trace("Resource event: {} at: {}", event.getTopic(), event.getProperty(SlingConstants.PROPERTY_PATH));
@@ -101,7 +109,11 @@ public class EcommAssetEventListener implements EventHandler {
 				}
 
 				try {
-					startWorkflow(path);
+					
+					boolean isPublished = isPublished(path);
+					if (!isPublished) {
+						startWorkflow(path);
+					}
 
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -205,4 +217,45 @@ public class EcommAssetEventListener implements EventHandler {
             log.error("Failed to start workflow", e);
         }
     }
+    
+	private boolean unPublishAsset(Session session, String destination) throws WorkflowException {
+		log.info("entering unPublishAsset() method");
+		boolean successful = true;
+		try {
+			log.info("Unpublish Asset : " + destination);
+			replicator.replicate(session, ReplicationActionType.DEACTIVATE, destination);
+			log.info("Successfully Unpublish asset : " + destination);
+		} catch (ReplicationException e) {
+			log.error("Unable to Unpublish the asset: " + e);
+			successful = false;
+		}
+		return successful;
+	}
+	
+	private boolean isPublished(String payload) {
+		boolean isPublished = false;
+		try (ResourceResolver resourceResolver = ServiceUtils.getResourceResolver(resolverFactory, "workflow-service")) {
+
+			Resource image1r = resourceResolver.resolve(payload);
+			Node node = image1r.adaptTo(Node.class);
+			if (!node.hasNode(CommonConstants.METADATA_NODE)) {
+				return isPublished;
+			}
+
+			Node meta = node.getNode(CommonConstants.METADATA_NODE);
+			if (meta.hasProperty(CommonConstants.DAM_SCENE_7_FILE_STATUS) && PUBLISH_COMPLETE.equalsIgnoreCase(
+					meta.getProperty(CommonConstants.DAM_SCENE_7_FILE_STATUS).getValue().getString())) {
+				log.info("Already published : path {}", payload);
+				isPublished = true;
+			}
+			
+			if (isPublished) {
+				Session session = resourceResolver.adaptTo(Session.class);
+				unPublishAsset(session, payload);
+			}
+		} catch (Exception e) {
+			log.error("Failed to check isPublished", e);
+		}
+		return isPublished;
+	}
 }
