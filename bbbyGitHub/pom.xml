@@ -19,7 +19,7 @@
     <groupId>com.bbby.aem</groupId>
     <artifactId>bbby-com</artifactId>
     <packaging>pom</packaging>
-    <version>8.3.0</version>
+    <version>8.4.0</version>
     <description>bbby</description>
 
     <modules>
