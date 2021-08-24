@@ -23,7 +23,7 @@
     <parent>
         <groupId>com.bbby.aem</groupId>
         <artifactId>bbby-com</artifactId>
-        <version>8.4.0</version>
+        <version>9.0.0</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
@@ -280,7 +280,7 @@
         <dependency>
             <groupId>com.bbby.aem</groupId>
             <artifactId>bbby-com.core</artifactId>
-            <version>8.4.0</version>
+            <version>9.0.0</version>
         </dependency>
         <!-- HERO: This is deployed in ui.apps package -->
         <dependency>
