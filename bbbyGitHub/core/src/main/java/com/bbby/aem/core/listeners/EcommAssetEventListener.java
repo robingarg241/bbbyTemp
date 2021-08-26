@@ -28,9 +28,6 @@ import org.apache.sling.api.resource.LoginException;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.api.resource.ResourceResolver;
 import org.apache.sling.api.resource.ResourceResolverFactory;
-import com.day.cq.replication.ReplicationActionType;
-import com.day.cq.replication.ReplicationException;
-import com.day.cq.replication.Replicator;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 import org.osgi.service.event.Event;
@@ -45,6 +42,9 @@ import com.bbby.aem.core.util.ServiceUtils;
 import com.day.cq.commons.jcr.JcrUtil;
 import com.day.cq.dam.api.DamEvent;
 import com.day.cq.dam.commons.util.S7SetHelper;
+import com.day.cq.replication.ReplicationActionType;
+import com.day.cq.replication.ReplicationException;
+import com.day.cq.replication.Replicator;
 import com.day.cq.workflow.WorkflowException;
 import com.day.cq.workflow.WorkflowService;
 import com.day.cq.workflow.WorkflowSession;
@@ -68,6 +68,7 @@ public class EcommAssetEventListener implements EventHandler {
     private final Logger log = LoggerFactory.getLogger(getClass());
 
     private final String WORKFLOW_MODEL = "/var/workflow/models/bbby-s7-batch-upload";
+    private final String DEACTIVATED_WORKFLOW_MODEL = "/var/workflow/models/bbby-deactivated-page-asset";
     
     private final String ECOMM_FOLDER = "/content/dam/bbby/asset_transitions_folder/e-comm";
     private final String RETOUCHER_FOLDER = "retoucher";
@@ -235,7 +236,7 @@ public class EcommAssetEventListener implements EventHandler {
 	private boolean isPublished(String payload) {
 		boolean isPublished = false;
 		try (ResourceResolver resourceResolver = ServiceUtils.getResourceResolver(resolverFactory, "workflow-service")) {
-
+			Session session = resourceResolver.adaptTo(Session.class);
 			Resource image1r = resourceResolver.resolve(payload);
 			Node node = image1r.adaptTo(Node.class);
 			if (!node.hasNode(CommonConstants.METADATA_NODE)) {
@@ -250,8 +251,16 @@ public class EcommAssetEventListener implements EventHandler {
 			}
 			
 			if (isPublished) {
-				Session session = resourceResolver.adaptTo(Session.class);
-				unPublishAsset(session, payload);
+				//unPublishAsset(session, payload);
+	            WorkflowSession wfSession = wfService.getWorkflowSession(session);
+
+	            WorkflowModel model = wfSession.getModel(DEACTIVATED_WORKFLOW_MODEL);
+	            WorkflowData data = wfSession.newWorkflowData(CommonConstants.JCR_PATH, payload);
+	            Workflow workflow = wfSession.startWorkflow(model, data);
+	            
+	            if(workflow != null) {
+	                log.info("Successfully started unpublish workflow {}", workflow.getId());
+	            }
 			}
 		} catch (Exception e) {
 			log.error("Failed to check isPublished", e);
