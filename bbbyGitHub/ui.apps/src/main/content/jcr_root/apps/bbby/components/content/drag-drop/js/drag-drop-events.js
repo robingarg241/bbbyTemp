@@ -202,6 +202,19 @@ export function addDragDropEventListerners(){
         event.preventDefault();
         event.stopPropagation();
         validateFileSequence();
+        $(this).hide();
+        $("#submit-fasttrack").show();
+    });
+
+    $("#submit-fasttrack").on("click", function (event) {
+        debugger;
+        event.preventDefault();
+        event.stopPropagation();
+
+        document.getElementById('cancel-all').parentNode.style.display = 'block';
+        $('input#uploadList').val(JSON.stringify(mdVerifiedList));
+        myDropzone.processQueue();
+
     });
 
     $("#submit-all").on("click", function (event) {

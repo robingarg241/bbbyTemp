@@ -46,13 +46,13 @@ let fileSequence = 0;
 export function onSending(file, xhr, formData) {
 	  addUploadingStatus(file);
 	  console.log("sending " + file.name);
-	  
+
 	  let totalFilesCount = myDropzone.getAcceptedFiles().length;
 
 	  let validFilesCount = myDropzone.getAcceptedFiles().filter(item => {
 	    return !item.metadataErrorMessage;
 	  }).length;
-	  
+
 	  if (uploadType === "single") {
 	    var batchId = $("input#singleBatchId").val(),
 	      requestedBy = $("input#singleRequestedBy").val(),
@@ -128,7 +128,7 @@ export function onSending(file, xhr, formData) {
 	    formData.append("batchUuid", batchUUID);
 	    formData.append("fileOrder", fileSequence++);
 	    formData.append("uploadRejectedList", JSON.stringify(uploadRejectedItemsList));
-	    
+
 	    console.log("fileSequence : "+fileSequence);
 	    // DAM-309 : Send submission confirmation email to vendors from vendor
 		// portal
@@ -137,19 +137,19 @@ export function onSending(file, xhr, formData) {
 	    }
 	    formData.append("totalFilesCount", totalFilesCount + myDropzone.getRejectedFiles().length);
 	    console.log("totalFilesCount : "+totalFilesCount);
-		
+
 		let invalidMetadataFiles = myDropzone.getAcceptedFiles().filter(item => {
 		   return item.metadataErrorMessage;
 		});
-		
+
 		var inValidFilesArray = [];
 		let invalidFiles = [...myDropzone.getRejectedFiles(), ...invalidMetadataFiles];
 		invalidFiles.forEach((item, index) => {
 		  inValidFilesArray.push(item.name);
 		});
-		
+
 		formData.append("invalidFiles", inValidFilesArray);
-		
+
 		var acceptedFilesArray = [];
 		let acceptedFiles = myDropzone.getAcceptedFiles().filter(item => {
 		    return !item.metadataErrorMessage;
@@ -157,7 +157,7 @@ export function onSending(file, xhr, formData) {
 		acceptedFiles.forEach((item, index) => {
 			acceptedFilesArray.push(item.name);
 		});
-		
+
 		formData.append("acceptedFiles", acceptedFilesArray);
 
 	    formData.append("batchUpload", true);
@@ -502,11 +502,11 @@ export function onSuccess(file, response) {
   }
 
   addSuccessStatus(file);
-
+debugger;
   if (!areUploadsDone()) {
     myDropzone.processQueue();
   } else {
-    if (validateDZForm()) {
+    if ((uploadType === 'fasttrack') || (uploadType !== 'fasttrack' && validateDZForm()) {
       // Show success message
       let totalFilesCount =
         myDropzone.getAcceptedFiles().length +
