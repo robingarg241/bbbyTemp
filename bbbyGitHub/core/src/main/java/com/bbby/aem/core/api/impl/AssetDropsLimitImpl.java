@@ -19,19 +19,20 @@ public class AssetDropsLimitImpl implements AssetDropsLimit {
 
 	private boolean enableConfig;
 	private int restrictedNumberOfImages;
-	
+
     /**
      * The resolver factory.
      */
     @Reference
     private ResourceResolverFactory resolverFactory;
-    
+
     String excelPath = "/content/dam/bedbath/vendor-portal/BBB_Metadata_Template_Final_v1.0.xlsx";
+    String fastTrackExcelPath = "/content/dam/bedbath/vendor-portal/BBB_Metadata_Template_Final_v1.0.xlsx";
 
 	@Activate
 	protected void activate(AssetDropsLimitConfiguration config) {
 		this.enableConfig = config.enableConfig();
-		
+
 		if(this.enableConfig){
 			this.restrictedNumberOfImages = config.restrictedNumberOfImages();
 		}else{
@@ -55,4 +56,9 @@ public class AssetDropsLimitImpl implements AssetDropsLimit {
 	public String getExcelVersion() {
 		return ServiceUtils.getExcelVersion(excelPath, resolverFactory);
 	}
+
+    @Override
+    public String getFasttrackExcelVersion() {
+        return ServiceUtils.getExcelVersion(fastTrackExcelPath, resolverFactory);
+    }
 }

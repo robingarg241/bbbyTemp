@@ -59,14 +59,25 @@
                                         sling:resourceType="granite/ui/components/coral/foundation/form/fieldset">
                                         <items jcr:primaryType="nt:unstructured">
                                             <type
-                                                cq:showOnCreate="{Boolean}true"
                                                 jcr:primaryType="nt:unstructured"
-                                                sling:resourceType="granite/ui/components/coral/foundation/form/checkbox"
+                                                sling:resourceType="granite/ui/components/foundation/form/select"
+                                                fieldLabel="Excel Metadata Asset Uploader"
                                                 name="./uploadType"
-                                                renderReadOnly="{Boolean}true"
-                                                text="Excel Metadata Asset Uploader"
-                                                uncheckedValue="single"
-                                                value="multi">
+                                                renderReadOnly="true">
+                                                <items jcr:primaryType="nt:unstructured">
+                                                    <single
+                                                        jcr:primaryType="nt:unstructured"
+                                                        text="Single"
+                                                        value="single"/>
+                                                    <multi
+                                                        jcr:primaryType="nt:unstructured"
+                                                        text="Multi"
+                                                        value="multi"/>
+                                                    <fasttrack
+                                                        jcr:primaryType="nt:unstructured"
+                                                        text="Fasttrack"
+                                                        value="fasttrack"/>
+                                                </items>
                                             </type>
                                         </items>
                                     </uploadtype>

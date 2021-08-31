@@ -28,6 +28,12 @@ export function showValidateButton(){
     if(uploadType === 'multi'){
         $('#validate-all').show();
         $('#validate-all').addClass('submit-ready');
+    } else if (uploadType === 'fasttrack') {
+        $('#validate-QC').show();
+        $('#upload-batch').show();
+        $('#validate-sequence').hide();
+        $('#show-sequence').hide();
+        $('#validate-QC').addClass('submit-ready');
     }
 }
 
@@ -35,6 +41,11 @@ export function hideSubmitButton(){
     if(uploadType === 'multi'){
         $('#submit-all').hide();
         $('#submit-all').removeClass('submit-ready');
+    } else if (uploadType === 'fasttrack') {
+        // Todo : check which button to hide at what condition
+        $('#validate-sequence').hide();
+        $('#show-sequence').hide();
+        $('#validate-QC').show();
     }
 }
 
@@ -356,7 +367,7 @@ export function resultForm() {
         element.classList.add('readonly');
         element.readOnly = true;
     });
-    
+
     $('#validate-all').hide();
     $('#submit-all').hide();
     $('#submit-single').hide();
@@ -385,7 +396,7 @@ export function removeDuplicate(files, currentFile){
         for (
           _i = 0, _len = files.length;
           _i < _len;
-          _i++ 
+          _i++
         ) {
           if (files[_i].name === currentFile.name) {
             myDropzone.removeFile(currentFile);
@@ -531,7 +542,7 @@ export function setFileTypeThumbnail(file){
         setInvalidFile(file);
       } else {
 	    fileTypeSpan.innerText = "JPG";
-        createThumbnail(file, fileTypeThumb);	
+        createThumbnail(file, fileTypeThumb);
 	  }
       } else if (fileType.toLowerCase() === "image/png") {
         fileTypeSpan.innerText = "PNG";
@@ -617,7 +628,7 @@ function updateActiveItemsList(){
     let message = `${addedFilesCount} ${fileStr}`;
 
     $(".file-count").html(message);
-    
+
 }
 
 //DAM-374 : Add validation on the Vendor portal to limit asset drop #

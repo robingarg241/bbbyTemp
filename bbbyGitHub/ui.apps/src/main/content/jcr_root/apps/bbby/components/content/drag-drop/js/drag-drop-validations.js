@@ -21,8 +21,10 @@ export function validateDZForm(event, submitClicked = false) {
 
     if(uploadType === 'single') {
         return validateSingleForm(event,submitClicked);
-    } else {
+    } else if (uploadType === 'multi'){
         return validateMultiForm(event,submitClicked);
+    } else if (uploadType === 'fasttrack') {
+        return validateFastTrackForm(event,submitClicked);
     }
 }
 
@@ -38,13 +40,13 @@ function validateSingleForm(event,submitClicked){
 
     let inputFields = document.querySelectorAll('input.required.single,select.required.single,#singleEmail,input[name="asset-update"]:checked');
     let inputFieldsError = false;
-    
+
   //DAM-374 : Add validation on the Vendor portal to limit asset drop #
 	let validateCount = document.getElementById('vendorAssetDropLimit').value;
 	if ( listCount > validateCount ) {
         inputFieldsError = true;
     }
-	
+
     for (let i = 0; i < inputFields.length; i++) {
         let input = inputFields[i];
 
@@ -122,13 +124,13 @@ function validateMultiForm(event,submitClicked){
 
     let inputFields = document.querySelectorAll('input.required.multi,input[name="email"]');
     let inputFieldsError = false;
-    
+
     //DAM-374 : Add validation on the Vendor portal to limit asset drop #
 	let validateCount = document.getElementById('vendorAssetDropLimit').value;
 	if ( listCount > validateCount ) {
         inputFieldsError = true;
     }
-    
+
     for (let i = 0; i < inputFields.length; i++) {
         let input = inputFields[i];
 
@@ -151,6 +153,48 @@ function validateMultiForm(event,submitClicked){
     }
 
     let button = document.getElementById('validate-all');
+    button.classList.toggle('submit-ready', !invalidFiles && !inputFieldsError);
+
+    return !invalidFiles && !inputFieldsError && !analyzing;
+}
+
+function validateFastTrackForm(event,submitClicked){
+    listCount = document.querySelectorAll('.dropzone .dz-image-preview').length;
+    let invalidFiles = document.querySelectorAll('.dropzone .dz-preview').length === 0;
+
+    var analyzing = getAnalyzeCount() - 3;
+
+    let inputFields = document.querySelectorAll('input.required.multi,input[name="email"]');
+    let inputFieldsError = false;
+
+    //DAM-374 : Add validation on the Vendor portal to limit asset drop #
+	let validateCount = document.getElementById('vendorAssetDropLimit').value;
+	if ( listCount > validateCount ) {
+        inputFieldsError = true;
+    }
+
+    for (let i = 0; i < inputFields.length; i++) {
+        let input = inputFields[i];
+
+        if ( input.type ==='email' ) {
+            if ( input.value !== '' && !validateEmail(input.value) ) {
+
+                inputFieldsError = true;
+
+                if (submitClicked || input.classList.contains('error')) {
+                    input.classList.toggle('error', (input.value === ''|| !isXlsFile(input.value) ) );
+                }
+            }
+        } else if ( input.value === '' || !isXlsFile(input.value) ) {
+            inputFieldsError = true;
+
+            if (submitClicked || input.classList.contains('error')) {
+                input.classList.toggle('error', (input.value === ''|| !isXlsFile(input.value) ) );
+            }
+        }
+    }
+
+    let button = document.getElementById('validate-QC');
     button.classList.toggle('submit-ready', !invalidFiles && !inputFieldsError);
 
     return !invalidFiles && !inputFieldsError && !analyzing;
@@ -379,6 +423,102 @@ function validateAssets(xls) {
    }
 }
 
+function validateFasttrackAssets(xls) {
+
+    console.log("validate Fastrack assets");
+    console.log($('input#uploadList').val());
+
+    // var uploadList = JSON.parse($('input#uploadList').val());
+
+    let uploadList = [...myDropzone.getAcceptedFiles(), ...myDropzone.getRejectedFiles()];
+
+    mdVerifiedList = [];
+    succesItems = 0;
+    var duplicatedList = [];
+    uploadList.forEach((uploadItem) => {
+
+        var fileMD = xls.filter(function(item){
+          return (item.Filename.trim() === uploadItem.name.trim());
+        });
+        console.log(fileMD);
+        if(fileMD[0]) {
+            if (isValidateFields( fileMD[0], uploadItem)  ) {
+
+                var parentDiv = $('span').filter(function(){ return $(this).text() == uploadItem.name; }).closest('.dz-preview');
+                var span = parentDiv.find('span[data-dz-metadata]');
+
+                if(parentDiv.find('.dz-metadata .tooltip_container div').length) {
+                parentDiv.find('.dz-metadata .tooltip_container')[0].classList.remove('error');
+                parentDiv.find('.dz-metadata .tooltip_container div')[0].classList.remove('error');
+
+                parentDiv.find('.dz-metadata .tooltip_container div')[0].removeAttribute("hidden");
+                parentDiv.find('.dz-metadata .tooltip_container div')[0].classList.add('check');
+                }
+                parentDiv[0].classList.remove('dimensions-no-use');
+
+                if(!uploadItem.fileErrorMessage){
+                    parentDiv[0].classList.remove("dz-error");
+                }
+
+                // Delete metadataErrorMessage on correct validation
+                delete uploadItem.metadataErrorMessage;
+                updateFileCounts();
+                mdVerifiedList.push(uploadItem);
+                succesItems ++;
+
+            } else {
+
+                var parentDiv = $('span').filter(function(){ return $(this).text() == uploadItem.name; }).closest('.dz-preview');
+                var span = parentDiv.find('span[data-dz-metadata]');
+                if(parentDiv.find('.dz-metadata .tooltip_container div').length) {
+                parentDiv.find('.dz-metadata .tooltip_container div')[0].classList.remove('check');
+
+                parentDiv.find('.dz-metadata .tooltip_container div')[0].removeAttribute("hidden");
+                parentDiv.find('.dz-metadata .tooltip_container div')[0].classList.add('error');
+                parentDiv.find('.dz-metadata .tooltip_container')[0].classList.add('error');
+                }
+                parentDiv[0].classList.add('dimensions-no-use');
+                console.log("metadata error");
+                console.log(uploadItem);
+             // update uploadList
+
+
+            }
+        } else {
+
+            //var parentDiv = $("span:contains('"+uploadItem.fileName+"')").closest('.dz-preview');
+            var parentDiv = $('span').filter(function(){ return $(this).text() == uploadItem.name; }).closest('.dz-preview');
+            var span = parentDiv.find('span[data-dz-metadata]');
+
+            if(parentDiv.find('.dz-metadata .tooltip_container div').length) {
+            parentDiv.find('.dz-metadata .tooltip_container div')[0].classList.remove('check');
+
+            parentDiv.find('.dz-metadata .tooltip_container div')[0].removeAttribute("hidden");
+            parentDiv.find('.dz-metadata .tooltip_container div')[0].classList.add('error');
+            parentDiv.find('.dz-metadata .tooltip_container')[0].classList.add('error');
+            }
+
+            parentDiv[0].classList.add('dimensions-no-use');
+
+            console.log("metadata error");
+            console.log(uploadItem);
+
+            uploadItem.metadataErrorMessage = "Unmatched filename.";
+            updateFileCounts();
+        }
+   });
+
+    //$('input#uploadList').val(JSON.stringify(mdVerifiedList));
+    console.log($('input#uploadList').val());
+   if (succesItems >= 1) {
+        showFileSequence();
+   }
+}
+
+export function validateFileSequence() {
+
+}
+
 function isValidateFields(file, uploadFileItem) {
 
     var fileName = file['Filename'];
@@ -388,13 +528,13 @@ function isValidateFields(file, uploadFileItem) {
     var containsReasonUpdate = false;
     var isReasonUpdateRequired = false;
     var isFileNameValid = true;
-    
+
     if(sequence){
 	    if(isNaN(sequence)){
 	    	file['Sequence'] = '';
 	    }
     }
-    
+
     if(assetUpdate){
         if(assetUpdate.toLowerCase() === 'yes'){
             isReasonUpdateRequired = true;
@@ -416,7 +556,7 @@ function isValidateFields(file, uploadFileItem) {
     var isShotTypeRequired = false;
     var isUPCNumeric = true;
     var isValidUPCLength = true;
-    
+
     var isValidShotType = true;
     var isValidAssetType = true;
 
@@ -429,11 +569,11 @@ function isValidateFields(file, uploadFileItem) {
         }else if(assetType.toLowerCase() !== 'product images'){
             isShotTypeRequired = false;
         }
-        
+
         isValidAssetType = validateAssetType(assetType.toLowerCase());
         console.log("validate isValidAssetType : " + isValidAssetType);
     }
-    
+
     if(shotType){
     	isValidShotType = validateShotType(shotType.toLowerCase());
     	console.log("validate isValidShotType : " + isValidShotType);
@@ -453,14 +593,14 @@ function isValidateFields(file, uploadFileItem) {
     	updateMetadataErrorMessage(uploadFileItem, "Asset Type Metadata is inValid. ");
         updateFileCounts();
     }
-    
+
     if(shotType){
     	if(!isValidShotType){
 	    	updateMetadataErrorMessage(uploadFileItem, "Shot Type Metadata is inValid. ");
 	        updateFileCounts();
     	}
     }
-    
+
     if(isReasonUpdateRequired) {
         if(!containsReasonUpdate){
             updateMetadataErrorMessage(uploadFileItem, "Reason for Update Metadata is missing. ");
@@ -476,12 +616,12 @@ function isValidateFields(file, uploadFileItem) {
     	console.log("UPC Metadata is present. "+ upc);
     	//DAM-518 : If it is NOT numeric, we reject the file and validation should fail on portal itself.
     	var res;
-    	
+
     	//DAM-1097 : When UPC column in metadata spreadsheet have scientific expressions values "**E+**" or incorrect format values, Validate button in Multi asset upload not showing any error or nothing happens.
     	if(!isNaN(upc)){
     		upc = upc.toString();
     	}
-    	
+
     	if(upc.indexOf(';') > -1){
     		res = upc.split(";");
 		}else{
@@ -509,7 +649,7 @@ function isValidateFields(file, uploadFileItem) {
             updateFileCounts();
     	}
     }
-    
+
     if(isShotTypeRequired)  {
         if(!containsShotType){
             updateMetadataErrorMessage(uploadFileItem, "Shot Type Metadata is missing. ");
@@ -529,7 +669,7 @@ function validateAssetType(assetType) {
 function validateShotType(shotType) {
 	console.log("validate shotType : " + shotType);
 	var shotTypes = ["silhouette", "collection", "construction", "dimensions", "electronic display", "environment", "hardware or installation", "in use", "logo", "nutritional information",
-	                 "orientation - back view", "orientation - interior view", "orientation - left degree angle", "orientation - left side", "orientation - overhead", "orientation - right degree angle", 
+	                 "orientation - back view", "orientation - interior view", "orientation - left degree angle", "orientation - left side", "orientation - overhead", "orientation - right degree angle",
 	                 "orientation - right side", "orientation - under side", "power source", "product in packaging", "scale", "surface detail"];
 	return shotTypes.includes(shotType);
 }
@@ -663,6 +803,122 @@ function validateAll(event){
         }
 }
 
+function validateQC(event){
+    event.preventDefault();
+    event.stopPropagation();
+    //Reference the FileUpload element.
+    var fileUpload = $("#excelFile")[0];
+    //Validate whether File is valid Excel file.
+    var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.xls|.xlsx)$/;
+    var excelVersion = document.getElementById('excelVersion').value;
+    var cellAddress = 'C29';//cell address where version is mentioned in ExcelSheet.
+    if (regex.test(fileUpload.value.toLowerCase())) {
+        if (typeof (FileReader) != "undefined") {
+            var reader = new FileReader();
+            //For Browsers other than IE.
+            if (reader.readAsBinaryString) {
+                reader.onload = function (e) {
+
+                    var workbook = XLSX.read(e.target.result, {type: 'binary'});
+
+                    var sheet_name = workbook.SheetNames[1];
+                    var sheet_name1 = workbook.SheetNames[0];
+                    //Convert the cell value to Json
+                    var roa = XLSX.utils.sheet_to_json(workbook.Sheets[sheet_name]);
+                    if (roa.length > 0) {
+                        let worksheet = workbook.Sheets[sheet_name1];
+                        var cell = 0;
+                        if(worksheet[cellAddress]){
+                            cell = worksheet[cellAddress].v;
+                        }
+                        if (excelVersion == cell) {
+                            $(".file-info").removeClass("error");
+                            $(".col-bbb-button").find("span").remove();
+                            validateFasttrackAssets(roa);
+                        } else {
+                            $(".file-info").addClass("error");
+                            $(".col-bbb-button").find("span").remove();
+                            $(".col-bbb-button").append("<span style='color: red;'>Template uploaded is old version, please download the latest template and upload.</span>");
+                            alert("Template uploaded is old version, please download the latest template and upload.");
+                        }
+                    } else {
+                        alert("Please ensure the Metadata sheet is populated and re upload.");
+                    }
+                };
+                reader.readAsBinaryString(fileUpload.files[0]);
+            } else {
+                //For IE Browser.
+                reader.onload = function (e) {
+                    // Pre-process file before reading
+                    // https://github.com/SheetJS/js-xlsx/wiki/Reading-XLSX-from-FileReader.readAsArrayBuffer()
+                    var data = "";
+                    var bytes = new Uint8Array(e.target.result);
+                    for (var i = 0; i < bytes.byteLength; i++) {
+                        data += String.fromCharCode(bytes[i]);
+                    }
+                    var workbook = XLSX.read(data, { type: 'binary' });
+                    var sheet_name = workbook.SheetNames[1];
+                    var sheet_name1 = workbook.SheetNames[0];
+                    var roa = XLSX.utils.sheet_to_json(workbook.Sheets[sheet_name]);
+                    if (roa.length > 0) {
+                        let worksheet = workbook.Sheets[sheet_name1];
+                        var cell = 0;
+                        if(worksheet[cellAddress]){
+                            cell = worksheet[cellAddress].v;
+                        }
+                        if (excelVersion == cell) {
+                            $(".file-info").removeClass("error");
+                            $(".col-bbb-button").find("span").remove();
+                            validateFasttrackAssets(roa);
+                        } else {
+                            $(".file-info").addClass("error");
+                            $(".col-bbb-button").find("span").remove();
+                            $(".col-bbb-button").append("<span style='color: red;'>Template uploaded is old version, please download the latest template and upload.</span>");
+                            alert("Template uploaded is old version, please download the latest template and upload.");
+                        }
+                    } else {
+                        alert("Please ensure the Metadata sheet is populated and re upload.");
+                    }
+                };
+                reader.readAsArrayBuffer(fileUpload.files[0]);
+            }
+        } else {
+            alert("This browser does not support HTML5.");
+        }
+    } else {
+        alert("Please upload a valid Excel file.");
+    }
+
+    if($(".file-info").hasClass("error")) {
+        showFileSequence();
+    } else {
+        console.log("file has errors");
+    }
+}
+
+function showFileSequence () {
+    if (document.createElement("template").content) {
+        $("#validate-QC").hide();
+        $("#validate-sequence").show();
+        $("#upload-batch").hide();
+        $(".dz-sequence-preview").remove();
+        // for or while loop for multiple sequences
+        populateFileSequence();
+        $("#show-sequence").show();
+    } else {
+      console.log("Your browser does not supports template!");
+    }
+}
+
+function populateFileSequence() {
+
+    var previewImagesetTempContent = document.querySelector('#dzImagesetTemplate').content;
+    var imgThumbnail = previewImagesetTempContent.querySelector('img');
+    var fileName = previewImagesetTempContent.querySelector('.dz-filename span');
+    fileName.textContent = 'filename.png';
+    var clone = document.importNode(previewImagesetTempContent, true);
+    document.querySelector(".checkSequenceZone").appendChild(clone);
+}
 export function validations(){
 
     $("input[type=email]").on('blur input', function() {
@@ -685,7 +941,7 @@ export function validations(){
     });
 
     $("#validate-all").on("click", validateAll);
-
+    $("#validate-QC").on("click", validateQC);
 
 
     // add validateDZForm to change/input events

@@ -147,7 +147,7 @@ $dropzoneMargin: 10px;
 
 
 
-.dropzone {
+.dropzone, .checkSequenceZone {
 
   $image-size: 120px;
 
@@ -972,7 +972,7 @@ $dropzoneMargin: 10px;
             }
         }
         button[type="submit"],
-        .validate-all,
+        .validate-all, .validate-qc,
         .btn-bbb {
             background: #dadada;
             color: $black;
@@ -1002,6 +1002,13 @@ $dropzoneMargin: 10px;
                 pointer-events: all;
                 border: 2px solid #003bde !important;
             }
+        }
+        .validate-sequence {
+            background: #003bde;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
         }
     }
     @media (max-width: 1199px) {

@@ -658,7 +658,7 @@ $dzTableRemoveWidth: 5%;
     }
 }
 
-#upload-batch {
+#upload-batch, #show-sequence {
     align-self: center;
     display: flex;
     justify-content: center;
@@ -669,11 +669,21 @@ $dzTableRemoveWidth: 5%;
         margin-bottom: 30px;
         min-height: 0;
     }
-    &.dropzone {
+    &.dropzone, &.checkSequenceZone {
         background-color: $white;
         height: 50%;
         overflow: auto;
         width: 50%;
+    }
+    &.checkSequenceZone {
+        width: 90%;
+        .active-items {
+            display: block;
+        }
+        .column-titles {
+            -ms-grid-columns: 1fr 2fr 1fr 1fr 1fr 70px;
+            grid-template-columns: 1fr 2fr 1fr 1fr 1fr 70px;
+        }
     }
     .active-items {
         display: none;

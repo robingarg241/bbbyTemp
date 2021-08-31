@@ -1,7 +1,7 @@
 import 'tooltipster';
 import "../polyfill.forEach";
 import '../polyfill.object.assign';
-import {validateDZForm, checkfile, invalidList, showValidateButton, hideSubmitButton, myDropzone, mdVerifiedList} from './internals';
+import {validateDZForm, checkfile, invalidList, showValidateButton, hideSubmitButton, myDropzone, mdVerifiedList, validateFileSequence} from './internals';
 
 function addDragFileHereIndicator() {
     $(".dropzone").addClass("dropzone-drag-here");
@@ -35,7 +35,7 @@ function onMouseLeave(event) {
 }
 
 export function addDragDropEventListerners(){
-    
+
     $(".dropzone").on("drop", onDrop).on("dragenter", onDragEnter );
 
     $("body").on("dragenter", onDragEnter )
@@ -92,7 +92,7 @@ export function addDragDropEventListerners(){
             list = $modal.find('.error-list'),
             length = Object.keys(invalidList).length;
 
-        
+
         let rejectedFiles = myDropzone.getRejectedFiles();
         let invalidMetadataFiles = myDropzone.getAcceptedFiles().filter((item)=>{return item.metadataErrorMessage});
 
@@ -196,6 +196,12 @@ export function addDragDropEventListerners(){
      //   document.getElementById('cancel-all').parentNode.style.display  = 'none';
      //   document.getElementById("submit-all").disabled = true;
         myDropzone.removeAllFiles(true);
+    });
+
+    $("#validate-sequence").on("click", function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        validateFileSequence();
     });
 
     $("#submit-all").on("click", function (event) {

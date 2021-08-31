@@ -1,11 +1,11 @@
 <span class="edit-start container" data-sly-test="${wcmmode.edit || wcmmode.preview || wcmmode.design}">&nbsp;${resource.name} <i class="fa fa-long-arrow-down" aria-hidden="true"></i></span>
 
 <template data-sly-template.renderDragDrop>
-    
-    <section id="vpUpload" 
+
+    <section id="vpUpload"
              data-sly-use.model="com.bbby.aem.core.models.component.DragDrop"
              style=" ${wcmmode.disabled? '' : 'height: 1300px;' @ context='styleString' }">
-             
+
         <div class="form-bbb-fields" id="upload">
             <div class="upload-result upload-progress hidden" id="uploadProgress">
                 <div class="progress-title">Uploading files</div>
@@ -15,12 +15,11 @@
             </div>
             <div class="upload-result success-bar hidden" id="uploadSuccess"></div>
 
-            <sly data-sly-test.multiType="${pageProperties.uploadType == 'multi'}"/>
-			<sly data-sly-use.assetDropsLimit="com.bbby.aem.core.api.AssetDropsLimit" />
-			
+            <sly data-sly-use.assetDropsLimit="com.bbby.aem.core.api.AssetDropsLimit" ></sly>
+
             <input type="hidden" name="uploadTypeForm" id="uploadTypeForm" value="${pageProperties.uploadType}">
 
-            <div id="single" class="tabcontent" data-sly-test="${!multiType}">
+            <div id="single" class="tabcontent" data-sly-test="${pageProperties.uploadType == 'single'}">
                 <form style="width:100%" enctype="multipart/form-data" method="POST" id="dzFormSingle"
                       class="aem-GridColumn aem-GridColumn--default--12 aem-GridColumn--offset--default--0 ">
                     <div class="container">
@@ -210,7 +209,7 @@
                 </form>
             </div>
 
-            <div id="multi" class="tabcontent"  data-sly-test="${multiType}" >
+            <div id="multi" class="tabcontent"  data-sly-test="${pageProperties.uploadType == 'multi'}" >
                 <form style="width:100%" enctype="multipart/form-data" method="POST" id="dzForm"
                       class="aem-GridColumn aem-GridColumn--default--12 aem-GridColumn--offset--default--0 ">
                     <div class="container">
@@ -219,6 +218,54 @@
                                 <div class="upload-details">
                                 	<input type="hidden" name="vendorAssetDropLimit" id="vendorAssetDropLimit" value = "${assetDropsLimit.assetDropsLimit}">
                                     <input type="hidden" name="excelVersion" id="excelVersion" value = "${assetDropsLimit.excelVersion}">
+                                    <div class="row">
+                                        <h2 class="bbb-title">${model.title}</h2>
+                                    </div>
+                                    <div class="row">
+                                        <h3>Batch-Level Metadata</h3>
+                                    </div>
+                                    <div class="row">
+                                        <input placeholder="Batch ID" name="batch-id" id="batchId" type="text">
+                                        <div class="input-success" id="successBatchId"></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-bbb-left">
+                                            <input placeholder="Vendor Email Address" name="email" id="email" type="email">
+                                            <div class="input-success" id="successEmail"></div>
+                                        </div>
+                                        <div class="col-bbb-right">
+                                            <input placeholder="Requested By" name="requested-by" id="requestedBy" type="text">
+                                            <div class="input-success" id="successRequestedBy"></div>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" name="uploadList" id="uploadList">
+                                    <div class="row ">
+                                        <input type="file"  name="excel-file" id="excelFile"
+                                               accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+                                        <div class="col-bbb-button">
+                                            <input placeholder="Excel Metadata File" class="file-info required multi"
+                                                   name="metadata-file" id="metadataFile" type="text" >
+                                            <div class="input-success" id="successMetadataFile"></div>
+                                            <div style="font-size: 70%;font-weight: bold;">(Please make sure you download the latest version of the metadata file by clicking on the "Excel Metadata Template" link at the bottom before you begin submitting assets.)</div>
+                                        </div>
+                                        <button class="browse-btn">Upload Metadata File</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div id="fasttrack" class="tabcontent"  data-sly-test="${pageProperties.uploadType == 'fasttrack'}" >
+                <form style="width:100%" enctype="multipart/form-data" method="POST" id="dzFormFasttrack"
+                      class="aem-GridColumn aem-GridColumn--default--12 aem-GridColumn--offset--default--0 ">
+                    <div class="container">
+                        <div class="row upload-container">
+                            <div class="col-9 col-md-9 offset-md-1 inner-col">
+                                <div class="upload-details">
+                                	<input type="hidden" name="vendorAssetDropLimit" id="vendorAssetDropLimit" value = "${assetDropsLimit.assetDropsLimit}">
+                                    <input type="hidden" name="excelVersion" id="excelVersion" value = "${assetDropsLimit.fasttrackExcelVersion}">
                                     <div class="row">
                                         <h2 class="bbb-title">${model.title}</h2>
                                     </div>
@@ -278,7 +325,7 @@
                                     <div class="dpi" style="-ms-grid-column: 4;">DPI/Aspect-Ratio</div>
                                     <div class="dimensions" style="-ms-grid-column: 5;">Dimensions</div>
                                     <div class="color" style="-ms-grid-column: 6;">Color Space</div>
-                                    <div data-sly-test="${multiType}" class="metadata" style="-ms-grid-column: 7;">
+                                    <div data-sly-test="${pageProperties.uploadType == 'multi'}" class="metadata" style="-ms-grid-column: 7;">
                                         Metadata
                                     </div>
                                     <div class="delete" style="-ms-grid-column: 8;">Delete</div>
@@ -288,6 +335,26 @@
                             <div class="drop-more" id="drop-more-indicator">
                                 <img class="drop-more-icon" src="/etc/designs/bbby/images/plus.png" >Drag and drop files here to upload
                             </div>
+                        </div>
+                        <div style="display:none;" class="checkSequenceZone dz-started" id="show-sequence" data-sly-test="${pageProperties.uploadType == 'fasttrack'}">
+                            <div class="active-items">
+                                <div class="meta-row">
+                                    <div>
+                                        <span class="file-count"></span>
+                                        <div class="dropzone-invalid"></div>
+                                    </div>
+                                </div>
+                                <div class="column-titles">
+                                    <div class="thumbnail" style="-ms-grid-column: 1;">Thumbnail</div>
+                                    <div class="filename" style="-ms-grid-column: 2;">Primary Image</div>
+                                    <div class="type" style="-ms-grid-column: 3;">Alt Images</div>
+                                    <div class="dpi" style="-ms-grid-column: 4;">Sequence Number</div>
+                                    <div class="dimensions" style="-ms-grid-column: 5;">Status</div>
+                                    <div class="delete" style="-ms-grid-column: 8;">Delete</div>
+                                </div>
+                                <hr>
+                            </div>
+                            <div class="file-sequence"></div>
                         </div>
                     </div>
                     <hr class="hr-margin-actions">
@@ -301,9 +368,12 @@
                                         </p>
         							</sly>
                                     <p style="-ms-grid-column: 3; -ms-grid-row: 1;"><a href id="cancel-all">Cancel</a></p>
-                                    <button style="-ms-grid-column: 4; -ms-grid-row: 1;" id="validate-all" class="validate-all" data-sly-test="${multiType}">Validate</button>
-                                    <button style="-ms-grid-column: 4; -ms-grid-row: 1; display: none;" id="submit-all" type="submit">Submit Batch</button>
-                                    <button style="-ms-grid-column: 4; -ms-grid-row: 1;" id="submit-single" type="submit" class="submit-ready" data-sly-test="${!multiType}">Submit</button>
+                                    <button style="-ms-grid-column: 4; -ms-grid-row: 1;" id="validate-all" class="validate-all" data-sly-test="${pageProperties.uploadType == 'multi'}">Validate</button>
+                                    <button style="-ms-grid-column: 4; -ms-grid-row: 1; display: none;" id="submit-all" type="submit" data-sly-test="${pageProperties.uploadType == 'multi'}">Submit Batch</button>
+                                    <button style="-ms-grid-column: 4; -ms-grid-row: 1;" id="validate-QC" class="validate-qc" data-sly-test="${pageProperties.uploadType == 'fasttrack'}">Validate QC</button>
+                                    <button style="-ms-grid-column: 4; -ms-grid-row: 1; display: none;" id="validate-sequence" class="validate-sequence" data-sly-test="${pageProperties.uploadType == 'fasttrack'}">Validate Sequence</button>
+                                    <button style="-ms-grid-column: 4; -ms-grid-row: 1; display: none;" id="submit-fasttrack" type="submit" data-sly-test="${pageProperties.uploadType == 'fasttrack'}">Submit Fasttrack Batch</button>
+                                    <button style="-ms-grid-column: 4; -ms-grid-row: 1;" id="submit-single" type="submit" class="submit-ready" data-sly-test="${pageProperties.uploadType == 'single'}">Submit</button>
                                     <button style="-ms-grid-column: 4; -ms-grid-row: 1; display: none;" id="close-win" class="btn-bbb close-win">Close Window</button>
                                 </div>
                             </div>
@@ -464,7 +534,7 @@
                         <span class="tooltiptext"></span>
                     </div>
                 </div>
-                <div style="-ms-grid-column: 7;" class="dz-metadata" data-sly-test="${multiType}">
+                <div style="-ms-grid-column: 7;" class="dz-metadata" data-sly-test="${pageProperties.uploadType == 'multi'}">
                     <span data-dz-metadata></span>
                     <div class="tooltip_container">
                         <div class="icon" hidden></div>
@@ -481,6 +551,50 @@
                 <div style="-ms-grid-column: 8;" class="dz-remove-custom" data-dz-remove></div>
             </div>
         </div>
+        <template id="dzImagesetTemplate">
+            <div class="dz-sequence-preview dz-image-preview grid-fields">
+                <div style="-ms-grid-column: 1;"><img id="imagesetthumbnail" data-dz-thumbnail/></div>
+                <div style="-ms-grid-column: 2;" class="dz-details">
+                    <div class="dz-filename"><span data-dz-name></span>
+                        <div class="tooltip_container">
+                            <div class="icon" hidden></div>
+                            <span class="tooltiptext"></span>
+                        </div>
+                    </div>
+                </div>
+                <div style="-ms-grid-column: 3;" class="dz-type">
+                    <span data-dz-file-type></span>
+                    <div class="tooltip_container">
+                        <div class="icon" hidden></div>
+                        <span class="tooltiptext"></span>
+                    </div>
+                </div>
+                <div style="-ms-grid-column: 4;" class="dz-dpi">
+                    <span class="analyze" data-dz-dpi>Analyzing...</span>
+                    <div class="tooltip_container">
+                        <div class="icon" hidden></div>
+                        <span class="tooltiptext"></span>
+                    </div>
+                </div>
+                <div style="-ms-grid-column: 5;" class="dz-dimensions">
+                    <span class="analyze" data-dz-dimensions>Analyzing...</span>
+                    <div class="tooltip_container">
+                        <div class="icon" hidden></div>
+                        <span class="tooltiptext"></span>
+                    </div>
+                </div>
+                <div style="-ms-grid-column: 6;" class="dz-color">
+                    <span class="analyze" data-dz-color>Analyzing...</span>
+                    <div class="tooltip_container">
+                        <div class="icon" hidden></div>
+                        <span class="tooltiptext"></span>
+                    </div>
+                </div>
+                <div class="dz-success-mark"><span>✔</span></div>
+                <div class="dz-error-mark"><span>✘</span></div>
+                <div style="-ms-grid-column: 8;" class="dz-remove-custom" data-dz-remove></div>
+            </div>
+        </template>
 
         <div class="error-popup hidden" id="errorPopup">
             <div class="error-popup_inner">
