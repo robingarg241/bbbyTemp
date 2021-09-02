@@ -276,6 +276,9 @@ public final class CommonConstants
     public static final String CQ_TAGS = "cq:tags";
     public static final String BBBY_DUMMY_SKU = "bbby:dummySku";
     
+    public static final String BBBY_FAST_TRACK_ASSET = "assetSubmittedByFastTrack";
+    public static final String BBBY_SHARED_ASSET = "isSharedAsset";
+    
     //Asset Type and Shot Type for Marketing Assets
     public static final String MARKETING_ASSET_TYPE_LABEL = "marketing:assetType";
     public static final String MARKETING_ASSET_TYPE = "marketing:asset_type";
