@@ -502,11 +502,10 @@ export function onSuccess(file, response) {
   }
 
   addSuccessStatus(file);
-debugger;
   if (!areUploadsDone()) {
     myDropzone.processQueue();
   } else {
-    if ((uploadType === 'fasttrack') || (uploadType !== 'fasttrack' && validateDZForm()) {
+    if ((uploadType === 'fasttrack') || (uploadType !== 'fasttrack' && validateDZForm())) {
       // Show success message
       let totalFilesCount =
         myDropzone.getAcceptedFiles().length +

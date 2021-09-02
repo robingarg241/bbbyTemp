@@ -266,6 +266,7 @@
                                 <div class="upload-details">
                                 	<input type="hidden" name="vendorAssetDropLimit" id="vendorAssetDropLimit" value = "${assetDropsLimit.assetDropsLimit}">
                                     <input type="hidden" name="excelVersion" id="excelVersion" value = "${assetDropsLimit.fasttrackExcelVersion}">
+                                    <input type="hidden" name="uploadType" id="excelVersion" value = "${assetDropsLimit.fasttrackExcelVersion}">
                                     <div class="row">
                                         <h2 class="bbb-title">${model.title}</h2>
                                     </div>
@@ -498,7 +499,7 @@
         <div id="dzTemplate">
             <div class="dz-preview dz-image-preview grid-fields">
                 <div style="-ms-grid-column: 1;"><img id="thumbnail" data-dz-thumbnail/></div>
-                <div style="-ms-grid-column: 2;" class="dz-details">
+                <div style="-ms-grid-column: 2;" class="dz-primary-image">
                 	<div class="dz-filename"><span data-dz-name></span>
 	                	<div class="tooltip_container">
 	                        <div class="icon" hidden></div>
@@ -506,14 +507,14 @@
 	                    </div>
                     </div>
                 </div>
-                <div style="-ms-grid-column: 3;" class="dz-type">
+                <div style="-ms-grid-column: 3;" class="dz-alt-image">
                     <span data-dz-file-type></span>
                     <div class="tooltip_container">
                         <div class="icon" hidden></div>
                         <span class="tooltiptext"></span>
                     </div>
                 </div>
-                <div style="-ms-grid-column: 4;" class="dz-dpi">
+                <div style="-ms-grid-column: 4;" class="dz-sequence-number">
                     <span class="analyze" data-dz-dpi>Analyzing...</span>
                     <div class="tooltip_container">
                         <div class="icon" hidden></div>
@@ -554,7 +555,7 @@
         <template id="dzImagesetTemplate">
             <div class="dz-sequence-preview dz-image-preview grid-fields">
                 <div style="-ms-grid-column: 1;"><img id="imagesetthumbnail" data-dz-thumbnail/></div>
-                <div style="-ms-grid-column: 2;" class="dz-details">
+                <div style="-ms-grid-column: 2;" class="dz-primary-image">
                     <div class="dz-filename"><span data-dz-name></span>
                         <div class="tooltip_container">
                             <div class="icon" hidden></div>
@@ -562,29 +563,15 @@
                         </div>
                     </div>
                 </div>
-                <div style="-ms-grid-column: 3;" class="dz-type">
-                    <span data-dz-file-type></span>
+                <div style="-ms-grid-column: 3;" class="dz-alt-images">
+                    <span data-dz-alt-images>Analyzing...</span>
                     <div class="tooltip_container">
                         <div class="icon" hidden></div>
                         <span class="tooltiptext"></span>
                     </div>
                 </div>
-                <div style="-ms-grid-column: 4;" class="dz-dpi">
-                    <span class="analyze" data-dz-dpi>Analyzing...</span>
-                    <div class="tooltip_container">
-                        <div class="icon" hidden></div>
-                        <span class="tooltiptext"></span>
-                    </div>
-                </div>
-                <div style="-ms-grid-column: 5;" class="dz-dimensions">
-                    <span class="analyze" data-dz-dimensions>Analyzing...</span>
-                    <div class="tooltip_container">
-                        <div class="icon" hidden></div>
-                        <span class="tooltiptext"></span>
-                    </div>
-                </div>
-                <div style="-ms-grid-column: 6;" class="dz-color">
-                    <span class="analyze" data-dz-color>Analyzing...</span>
+                <div style="-ms-grid-column: 4;" class="dz-sequence-number">
+                    <span class="analyze" data-dz-sequence-number>Analyzing...</span>
                     <div class="tooltip_container">
                         <div class="icon" hidden></div>
                         <span class="tooltiptext"></span>
@@ -592,7 +579,7 @@
                 </div>
                 <div class="dz-success-mark"><span>✔</span></div>
                 <div class="dz-error-mark"><span>✘</span></div>
-                <div style="-ms-grid-column: 8;" class="dz-remove-custom" data-dz-remove></div>
+                <div style="-ms-grid-column: 7;" class="dz-remove-custom" data-dz-remove></div>
             </div>
         </template>
 

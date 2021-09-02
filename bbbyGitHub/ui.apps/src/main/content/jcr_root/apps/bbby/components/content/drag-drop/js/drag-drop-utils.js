@@ -370,6 +370,7 @@ export function resultForm() {
 
     $('#validate-all').hide();
     $('#submit-all').hide();
+    $('#submit-fasttrack').hide();
     $('#submit-single').hide();
     $('#close-win').hide();
     $('#cancel-all').hide();
@@ -615,6 +616,7 @@ export function setFileTypeThumbnail(file){
 }
 
 export function updateFileCounts(){
+
     updateActiveItemsList();
     updateInvalidList();
   //DAM-374 : Add validation on the Vendor portal to limit asset drop #

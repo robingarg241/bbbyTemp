@@ -516,6 +516,7 @@ function validateFasttrackAssets(xls) {
 }
 
 export function validateFileSequence() {
+
     $("#submit-fasttrack").addClass('submit-ready');
 }
 

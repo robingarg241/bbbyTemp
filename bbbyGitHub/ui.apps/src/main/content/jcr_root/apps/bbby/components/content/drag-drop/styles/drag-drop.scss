@@ -940,6 +940,9 @@ $dropzoneMargin: 10px;
         display: -ms-grid !important;
         grid-template-columns: 1fr 2fr 1fr 1fr 1fr 1fr 1fr 70px;
         -ms-grid-columns: 1fr 2fr 1fr 1fr 1fr 1fr 1fr 70px;
+        &.dz-sequence-preview {
+            grid-template-columns: 1fr 2fr 1fr 1fr 1fr 70px;
+        }
     }
 
     .dropzone-container {

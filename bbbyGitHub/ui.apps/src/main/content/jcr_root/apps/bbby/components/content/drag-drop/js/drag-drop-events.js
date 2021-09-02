@@ -203,11 +203,12 @@ export function addDragDropEventListerners(){
         event.stopPropagation();
         validateFileSequence();
         $(this).hide();
-        $("#submit-fasttrack").show();
+        $("#submit-fasttrack").addClass('submit-ready').show();
+
     });
 
     $("#submit-fasttrack").on("click", function (event) {
-        debugger;
+
         event.preventDefault();
         event.stopPropagation();
 

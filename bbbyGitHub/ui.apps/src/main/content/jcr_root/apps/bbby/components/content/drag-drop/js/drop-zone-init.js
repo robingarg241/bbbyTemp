@@ -7,7 +7,7 @@ export let invalidList = {};
 export let uploadType = "single";
 
 export function init() {
-    
+
     batchUUID = generateUuid();
     myDropzone = this;
     uploadType = $('#uploadTypeForm').val();
@@ -15,8 +15,10 @@ export function init() {
     this.autoDiscover = false;
     //document.getElementById("submit-all").disabled = true;
     // First change the button to actually tell Dropzone to process the queue.
+    if(uploadType === 'fasttrack') {
+        myDropzone.options.url = "/bin/bedbath/vendor-portal/upload-fasttrack";
+    }
 
-    
 
     this.on("sending", onSending);
 
