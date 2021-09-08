@@ -333,6 +333,8 @@ public class BBBYAssetSorter implements WorkflowProcess {
                 		if(operationalmeta!=null){
                 			isFastTrackScreenAsset = (operationalmeta.hasProperty(CommonConstants.BBBY_FAST_TRACK_ASSET)) ? operationalmeta.getProperty(CommonConstants.BBBY_FAST_TRACK_ASSET).getString() : "No";  //This attribute is used for determining whether the asset comes from fast track screen or not.
                 		}
+                		String assetUpdate = JcrUtils.getStringProperty(bbbyAssetMetadataNode, CommonConstants.BBBY_ASSET_UPDATE, "");
+                        
                 		
                 		Node upcMetadataNode = node.getNode(CommonConstants.PDM_METADATA_NODE);
                 		
@@ -420,7 +422,7 @@ public class BBBYAssetSorter implements WorkflowProcess {
                 		if (vendorAsset) {
                             moveVendorAsset(node, session, departmentNumber, containsUPC, containsSKU, 
                             		containsAssociatedCollectionId, collectionId, containsAssociatedWebProductId, webProductId, 
-                            		isBBBYWebOfferedFlag, isBABYWebOfferedFlag, isCAWebOfferedFlag, isFastTrackScreenAsset, isFastTrackPhoto);
+                            		isBBBYWebOfferedFlag, isBABYWebOfferedFlag, isCAWebOfferedFlag, isFastTrackScreenAsset, isFastTrackPhoto, assetUpdate);
                         } else {
                             moveInternalAsset(node, session, departmentNumber, containsUPC, containsSKU,
                             		containsAssociatedCollectionId, collectionId, 
@@ -486,7 +488,7 @@ public class BBBYAssetSorter implements WorkflowProcess {
     private void moveVendorAsset(Node assetJCRNode, Session session, String departmentNumber,
                                  boolean containsUPC, boolean containsSKU, boolean containsassociatedCollectionID, String collectionId,
                                  boolean containsWebProductID, String productId, boolean isBBBYWebOfferedFlag, boolean isBABYWebOfferedFlag, boolean isCAWebOfferedFlag,
-                                 String isFastTrackScreenAsset, boolean isFastTrackPhoto)
+                                 String isFastTrackScreenAsset, boolean isFastTrackPhoto, String assetUpdate)
                                  throws ValueFormatException, RepositoryException, com.day.cq.workflow.WorkflowException {
         ASSET_TYPE assetType = getAssetType(assetJCRNode);
         boolean contains_WebProductID_OR_CollectionID = containsWebProductID || containsassociatedCollectionID;
@@ -500,7 +502,7 @@ public class BBBYAssetSorter implements WorkflowProcess {
                 	log.warn("Unable to move PRODUCT_IMAGE, Both WebProductID and CollectionID have a null value, at least one of them should have value to move the asset " + assetJCRNode.getPath());
 //                    moveAssetToNotAssigned(session, assetJCRNode);
                 } else if (containsUPC && isWebOfferedFlag) {
-                	if(isFastTrackScreenAsset.equalsIgnoreCase("yes") && isFastTrackPhoto){
+                	if(isFastTrackScreenAsset.equalsIgnoreCase("yes") && isFastTrackPhoto && !assetUpdate.equalsIgnoreCase("yes")){
                 		moveAssetToFastTrack(session, departmentNumber, assetJCRNode, containsassociatedCollectionID,
                         		collectionId, productId);
                 	}else if(!assetJCRNode.getName().toLowerCase().contains(".pdf")){
@@ -1060,7 +1062,6 @@ public class BBBYAssetSorter implements WorkflowProcess {
     		String file = p.getFileName().toString();
             Node metadataNode = node.getNode(CommonConstants.METADATA_NODE);
             Node targetNode = null;
-            String assetUpdate = JcrUtils.getStringProperty(metadataNode, CommonConstants.BBBY_ASSET_UPDATE, "");
             String batchId = (metadataNode.hasProperty("bbby:batchID")) ? metadataNode.getProperty("bbby:batchID").getString() : ""; 
     		//String sequenceNumber = (metadataNode.hasProperty(CommonConstants.BBBY_SEQUENCE)) ? metadataNode.getProperty(CommonConstants.BBBY_SEQUENCE).getString() : ""; 
     		
@@ -1071,9 +1072,9 @@ public class BBBYAssetSorter implements WorkflowProcess {
     		}
     		
             if (containsCollection)
-                targetNode = createTargetNodeFastTrack(assetUpdate, departmentNumber, collectionId, session, isSharedAsset, batchId);
+                targetNode = createTargetNodeFastTrack(departmentNumber, collectionId, session, isSharedAsset, batchId);
             else
-                targetNode = createTargetNodeFastTrack(assetUpdate, departmentNumber, webProductId, session, isSharedAsset, batchId);
+                targetNode = createTargetNodeFastTrack(departmentNumber, webProductId, session, isSharedAsset, batchId);
           //Save the session to confirm that folders created successfully.
             session.save();
     		String destination = targetNode.getPath() + "/" + file;
@@ -1085,24 +1086,14 @@ public class BBBYAssetSorter implements WorkflowProcess {
     	}
     }
     
-	private Node createTargetNodeFastTrack(String assetUpdate, String departmentNumber, String id, Session session, String isSharedAsset, String batchId) throws RepositoryException {
-    	
+	private Node createTargetNodeFastTrack(String departmentNumber, String id, Session session, String isSharedAsset, String batchId) throws RepositoryException {
         Node targetNode = null;
-        if (assetUpdate.equalsIgnoreCase("yes")){
-        	if(isSharedAsset.equalsIgnoreCase("yes")){
-        		targetNode = JcrUtil.createPath(this.ecommFolder + "/fasttrack/" + batchId + "/shared", "sling:Folder", session);
-        	}else{
-        		targetNode = JcrUtil.createPath(this.ecommFolder + "/fasttrack/" + departmentNumber + "/update/" + id, "sling:Folder", session);
-        	}
-        }
-        else if (assetUpdate.equalsIgnoreCase("no")){
-        	if(isSharedAsset.equalsIgnoreCase("yes")){
-        		targetNode = JcrUtil.createPath(this.ecommFolder + "/fasttrack/" + batchId + "/shared", "sling:Folder", session);
-        	}else{
-        		targetNode = JcrUtil.createPath(this.ecommFolder + "/fasttrack/" + departmentNumber + "/new/" + id, "sling:Folder", session);
-        	}
-        }
+    	if(isSharedAsset.equalsIgnoreCase("yes")){
+    		targetNode = JcrUtil.createPath(this.ecommFolder + "/fasttrack/shared/" + batchId , "sling:Folder", session);
+    	}else{
+    		targetNode = JcrUtil.createPath(this.ecommFolder + "/fasttrack/" + departmentNumber + "/" + id, "sling:Folder", session);
+    	}
         return targetNode;
     }
-
+	
 }
