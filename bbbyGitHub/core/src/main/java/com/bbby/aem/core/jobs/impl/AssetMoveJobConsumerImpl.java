@@ -28,24 +28,24 @@ import java.util.Calendar;
  * More info https://sling.apache.org/documentation/bundles/apache-sling-eventing-and-job-handling.html
  *
  * @author vpokotylo
- * 
+ *
  */
 @Component(immediate = true, service = JobConsumer.class,
     property = {"job.topics=" + CommonConstants.ASSET_MOVE_TOPIC})
 public class AssetMoveJobConsumerImpl implements JobConsumer {
 
     private static final Logger log = LoggerFactory.getLogger(AssetMoveJobConsumerImpl.class);
-    
+
     protected static final String DEFAULT_FOLDER_TYPE = "sling:Folder";
-    
+
     public static final SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
-    
+
     @Reference
     private ResourceResolverFactory resourceFactory;
 
     @Reference
     private AssetService assetService;
-    
+
     @Override
 	public JobResult process(final Job job) {
 
@@ -60,18 +60,18 @@ public class AssetMoveJobConsumerImpl implements JobConsumer {
 			}
 
 			Resource assetWrapper = moveAsset(assetPath, resourceResolver);
-			
-			
+
+
 			if(assetWrapper != null) {
 				Session session = resourceResolver.adaptTo(Session.class);
-				
+
 				log.debug("Replicating {}", assetWrapper.getPath());
 				assetService.replicate(session, assetWrapper.getPath());
-				
+
 				Resource batch = assetWrapper.getParent();
-				
+
 				log.debug("Batch node {}", batch);
-				
+
 				if(batch != null) {
 					log.debug("Replicating Batch node {}", assetWrapper.getPath());
 					assetService.replicate(session, batch.getPath());
@@ -81,7 +81,7 @@ public class AssetMoveJobConsumerImpl implements JobConsumer {
 			//  commit changes...
 			if(resourceResolver.hasChanges())
 				resourceResolver.commit();
-			
+
 		} catch (LoginException e) {
 			log.error("Error obtaining resource resolver job consumer");
 			return JobConsumer.JobResult.CANCEL;
@@ -99,54 +99,54 @@ public class AssetMoveJobConsumerImpl implements JobConsumer {
      * @param resourceResolver
      */
     private Resource moveAsset(String assetPath, ResourceResolver resourceResolver ) {
-        
+
     	Resource assetWrapper = null;
-    	
+
     	try {
 
             String projectTitle = "";
             String holdingBasePath = "/content/dam/bbby/asset_transitions_folder/vendor/vendor_assets_holding";
- 
+
             Session session = resourceResolver.adaptTo(Session.class);
             AssetManager assetManager = resourceResolver.adaptTo(AssetManager.class);
-            
-            
+
+
             Resource asset = resourceResolver.getResource(assetPath);
             Node assetJcrContentNode = session.getNode(assetPath + "/" + JcrConstants.JCR_CONTENT);
-            
+
             // need to reset these. reverse replication agents sets them when the node is created
             JcrUtil.setProperty(assetJcrContentNode, ReplicationStatus.NODE_PROPERTY_LAST_REPLICATED, null);
             JcrUtil.setProperty(assetJcrContentNode, ReplicationStatus.NODE_PROPERTY_LAST_REPLICATED_BY, null);
             JcrUtil.setProperty(assetJcrContentNode, ReplicationStatus.NODE_PROPERTY_LAST_REPLICATION_ACTION, null);
 
-            
+
             if(asset == null || !asset.getResourceType().equals("dam:Asset")) {
             	log.warn("Move Assets invoked incorrectly on {}", assetPath);
             	return null;
             }
-            
+
             // ms18rs09_terno_altajpg
             // - jcr:content
             // --- MS18RS09_TERNO_ALT_A.jpg
-            
+
             Resource assetWrapperJcrContent = asset.getParent();
-            
+
             if( assetWrapperJcrContent != null) {
             	assetWrapper = assetWrapperJcrContent.getParent();
             }
-            
+
             if(assetWrapper == null) {
             	log.warn("Asset wrapper node missing for {}", assetPath);
             	return null;
             }
-            
-            
+
+
             Node assetWrapperContentNode = assetWrapperJcrContent.adaptTo(Node.class);
-            
+
 			if (assetWrapperContentNode.hasProperty("moveAsset")) {
 
 				Node assetNode = asset.adaptTo(Node.class);
-				
+
 				// this is a date-based folder under asset holding
 				String targetHoldingPath = getOrCreateTargetPath(session, assetNode, holdingBasePath);
 
@@ -160,24 +160,30 @@ public class AssetMoveJobConsumerImpl implements JobConsumer {
                 String targetPath = targetHoldingPath + "/" + projectTitle + "/" + fileName;
 
 				String sourcePath = asset.getPath();
-				
+
 				assetManager.copyAsset(sourcePath, targetPath);
 
 //				session.save();
-				
+
 				assetManager.removeAsset(sourcePath);
 
 				assetWrapperContentNode.setProperty("completed", true);
-				
+
             	//DAM-320 : populated reporting metadata attribute "Vendors Assets Holding Entry Date".
                 Node repometa = JcrUtil.createPath(targetPath + "/" + CommonConstants.REL_ASSET_REPORTING_METADATA, JcrConstants.NT_UNSTRUCTURED, session);
                 if (repometa != null) {
     				JcrUtil.setProperty(repometa, CommonConstants.VAH_ENTRY_DATE, ServiceUtils.getCurrentDateStr(CommonConstants.DATE_FORMAT));
     			}
-				
-				log.debug("Uploaded asset {} moved to -> {}. Vendor filename is {}, batch ID is {} ", sourcePath, targetPath,
+
+                Node operationalmeta = JcrUtil.createPath(targetPath + "/" + CommonConstants.OPERATIONAL_METADATA_NODE, JcrConstants.NT_UNSTRUCTURED, session);
+                if (operationalmeta != null) {
+                    String isFasttrackAsset = assetJcrContentNode.hasProperty( CommonConstants.BBBY_FAST_TRACK_ASSET) ? assetJcrContentNode.getProperty( CommonConstants.BBBY_FAST_TRACK_ASSET).getString() : "No";
+                    JcrUtil.setProperty(operationalmeta, CommonConstants.BBBY_FAST_TRACK_ASSET, isFasttrackAsset);
+                }
+
+                log.debug("Uploaded asset {} moved to -> {}. Vendor filename is {}, batch ID is {} ", sourcePath, targetPath,
                     fileName, projectTitle);
-				
+
 				session.refresh(true);
 //				session.save();
 
@@ -188,10 +194,10 @@ public class AssetMoveJobConsumerImpl implements JobConsumer {
         } catch (Exception e) {
             log.error("An exception has occured in moveAsset method with error: " + e.getMessage(), e);
         }
-    	
+
     	return assetWrapper;
     }
-    
+
     /**
      * @param folderPath
      * @param r
@@ -221,9 +227,9 @@ public class AssetMoveJobConsumerImpl implements JobConsumer {
      * @return
      */
     private String getOrCreateTargetPath(Session session, Node node, String rootTarget) {
-    	
+
     	String targetPath = null;
-    	
+
 		try {
 			Calendar createdDate = node.getProperty(JcrConstants.JCR_CREATED).getDate();
 
@@ -236,9 +242,9 @@ public class AssetMoveJobConsumerImpl implements JobConsumer {
 //				session.save();
 			}
 
-			
+
 			targetPath = datePath;
-			
+
 		} catch (Exception e) {
 
 			String message = e.getMessage();
@@ -247,18 +253,18 @@ public class AssetMoveJobConsumerImpl implements JobConsumer {
 			e.printStackTrace();
 
 		}
-        
+
         return targetPath;
     }
-    
-    
-    
+
+
+
     private String buildFileName(String projectTitle, String path) {
         String fileName = "";
 
         try {
             fileName = StringUtils.substringAfterLast(path, "/");
-            
+
         } catch (Exception e) {
             log.error("An error has occured in extractFileName: " + e.getMessage(), e);
         }

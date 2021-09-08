@@ -30,7 +30,6 @@ import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 import javax.servlet.Servlet;
-import javax.servlet.ServletException;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.rmi.ServerException;
@@ -38,11 +37,10 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-
 /**
- * FileUploadServlet.
+ * FileUploadServlet with fasttrack flow.
  *
- * @author
+ * @author Manisha
  */
 @Component(
 		service = Servlet.class,
@@ -95,10 +93,8 @@ public class FileUploadFastTrackServlet extends SlingAllMethodsServlet {
     @Override
     protected void doGet(SlingHttpServletRequest request, SlingHttpServletResponse response) throws ServerException,
         IOException {
-
         doPost(request, response);
     }
-
 
     /**
      * Processing for the upload form submit
@@ -109,7 +105,7 @@ public class FileUploadFastTrackServlet extends SlingAllMethodsServlet {
      * @throws IOException     Signals that an I/O exception has occurred.
      */
     @Override
-    protected void doPost(SlingHttpServletRequest request, SlingHttpServletResponse response) {
+    protected void doPost(SlingHttpServletRequest request, SlingHttpServletResponse response) throws ServerException, IOException {
 
         try( ResourceResolver resourceResolver = ServiceUtils.getResourceResolver(resolverFactory, "writeservice")) {
 
@@ -117,7 +113,7 @@ public class FileUploadFastTrackServlet extends SlingAllMethodsServlet {
         	String userName = ServiceUtils.getUserName(request);
             UploadRequest uploadRequest = createUploadRequest(request);
 
-            if(uploadRequest.hasUploadRejectedItem()) {
+            if(null != uploadRequest && uploadRequest.hasUploadRejectedItem()) {
             	log.debug("Unable to save rejected file " + uploadRequest.getUploadRejectedItem().getFileName()+" uploaded by " + userName);
 
             	//DAM-309 : Send submission confirmation email to vendors from vendor portal
@@ -132,7 +128,7 @@ public class FileUploadFastTrackServlet extends SlingAllMethodsServlet {
                 }
             }
 
-            if(!uploadRequest.hasUploadItem()) {
+            if(null != uploadRequest && !uploadRequest.hasUploadItem()) {
             	response.getWriter().write("SUCCESS");
             	return;
             }
@@ -172,7 +168,6 @@ public class FileUploadFastTrackServlet extends SlingAllMethodsServlet {
         }
     }
 
-
     private String createStructure(UploadRequest bean, SlingHttpServletRequest request, Session session, ResourceResolver resourceResolver) {
 
     	String wrapperPath = null;
@@ -190,7 +185,7 @@ public class FileUploadFastTrackServlet extends SlingAllMethodsServlet {
             }
 
             /* create a wrapper under /content/vendor/ */
-            createNode(CommonConstants.VENDOR_ROOT_PATH, groupNamePage, pageManager, session);
+            createNode(groupNamePage, pageManager, session);
 
             /* create user name wrapper under /content/vendor/admin */
             String userNodePath = getOrCreateUserNode(CommonConstants.VENDOR_ROOT_PATH + groupNamePage + CommonConstants.FORWARD_SLASH, userName, pageManager, session);
@@ -205,21 +200,8 @@ public class FileUploadFastTrackServlet extends SlingAllMethodsServlet {
         return wrapperPath;
     }
 
-
     /**
      * Creates or retrieves the root node for the upload batch
-     *
-     * @param userGroupFolder
-     * @param userNameFolder
-     * @param assetFolderName
-     * @param batchId
-     * @param uploadRequest
-     * @param uploadListJsonarray
-     * @param pageManager
-     * @param session
-     * @param resourceResolver
-     * @return
-     * @throws RepositoryException
      */
     private String getOrCreateBatchNode(String userNodePath, String batchUuid,
                                     String batchId,
@@ -228,7 +210,6 @@ public class FileUploadFastTrackServlet extends SlingAllMethodsServlet {
                                     ResourceResolver resourceResolver, SlingHttpServletRequest request) throws RepositoryException{
 
         //String userFolderPath = CommonConstants.VENDOR_ROOT_PATH + userGroupFolder + "/" + userNameFolder;
-
 
         String batchPath = userNodePath + "/" + batchUuid;
         String batchContentResourcePath = batchPath
@@ -267,7 +248,7 @@ public class FileUploadFastTrackServlet extends SlingAllMethodsServlet {
                 if (batchContentResource.hasNode(CommonConstants.DATA)) {
                     assetFolderContentNode = batchContentResource.getNode(CommonConstants.DATA);
                 } else {
-                    log.debug("JCR Data content is null, so we have to create manually", "JCR Data content");
+                    log.debug("JCR Data content is null, so we have to create manually, JCR Data content");
 
                     assetFolderContentNode = batchContentResource.addNode(CommonConstants.DATA);
 //                    ServiceUtils.saveSession(session);
@@ -284,16 +265,13 @@ public class FileUploadFastTrackServlet extends SlingAllMethodsServlet {
                 setNodeProperty(batchContentResource,"totalFilesCount", uploadRequest.getTotalFilesCount());
                 setNodeProperty(batchContentResource,"invalidFiles", uploadRequest.getInvalidFiles());
                 setNodeProperty(batchContentResource,"acceptedFiles", uploadRequest.getAcceptedFiles());
+                setNodeProperty(batchContentResource, CommonConstants.BBBY_FAST_TRACK_ASSET, "Yes");
                 if(uploadRequest.getTotalFilesCount() > 0 && fileCount > 0){
                 	setNodeProperty(batchContentResource,"invalidFilesCount", uploadRequest.getTotalFilesCount() - fileCount);
                 }
             }
-//            ServiceUtils.saveSession(session);
-//            ServiceUtils.commitChanges(resourceResolver);
 
-            if(batchPage != null) {
-            	log.info("Vendor Upload Batch {} created. File Count expected is {} ", batchPage.getPath(),  fileCount );
-            }
+            log.info("Vendor Upload Batch {} created. File Count expected is {} ", batchPage.getPath(),  fileCount );
 
         } catch (Exception e) {
             log.error("An exception has occured in method createUploadPage with error: " + e.getMessage(), e);
@@ -315,21 +293,16 @@ public class FileUploadFastTrackServlet extends SlingAllMethodsServlet {
         return projectTitle;
     }
 
-
-    /**
-     * @param parentFolder
-     * @param nodeName
-     * @param pageManager
-     * @param session
-     */
-    private void createNode(String parentFolder, String nodeName, PageManager pageManager, Session session) {
+    private void createNode(String nodeName, PageManager pageManager, Session session) {
         try {
             String validNodeName = JcrUtil.createValidName(nodeName);
-            if (!session.nodeExists(parentFolder + validNodeName)) {
-                Page page = pageManager.create(parentFolder, validNodeName, TEMPLATE_CONTENT, validNodeName);
+            if (!session.nodeExists(CommonConstants.VENDOR_ROOT_PATH + validNodeName)) {
+                Page page = pageManager.create(CommonConstants.VENDOR_ROOT_PATH, validNodeName, TEMPLATE_CONTENT, validNodeName);
                 Node pageContainer = page.getContentResource().adaptTo(Node.class);
-                pageContainer.setProperty("cq:distribute", true);
-                pageContainer.setProperty("cq:lastModified", Calendar.getInstance());
+                if(null != pageContainer) {
+                    pageContainer.setProperty("cq:distribute", true);
+                    pageContainer.setProperty("cq:lastModified", Calendar.getInstance());
+                }
             }
 //            session.save();
         } catch (Exception e) {
@@ -338,10 +311,10 @@ public class FileUploadFastTrackServlet extends SlingAllMethodsServlet {
     }
 
     /**
-     * @param parentFolder
-     * @param nodeName
-     * @param pageManager
-     * @param session
+     * @param parentFolder  path of parent Folder
+     * @param userName userName
+     * @param pageManager PageManager
+     * @param session session used to create Node
      */
     private String getOrCreateUserNode(String parentFolder, String userName, PageManager pageManager, Session session) {
 
@@ -353,7 +326,7 @@ public class FileUploadFastTrackServlet extends SlingAllMethodsServlet {
             if (!session.nodeExists(userNodePath)) {
 
                 String domain = StringUtils.substringAfter(userName, "@");
-            	String bucket = StringUtils.isNotEmpty(domain) ? "_" + domain.substring(0, 1) : "_" + userName.substring(0, 1);
+            	String bucket = StringUtils.isNotEmpty(domain) ? "_" + domain.charAt(0) : "_" + userName.charAt(0);
 
             	String bucketPath =  parentFolder + bucket;
 
@@ -362,8 +335,10 @@ public class FileUploadFastTrackServlet extends SlingAllMethodsServlet {
 
             		Page bucketPage = pageManager.create(parentFolder, bucket, TEMPLATE_CONTENT, bucket);
                     Node pageBucketContainer = bucketPage.getContentResource().adaptTo(Node.class);
-                    pageBucketContainer.setProperty("cq:distribute", true);
-                    pageBucketContainer.setProperty("cq:lastModified", Calendar.getInstance());
+                    if(pageBucketContainer != null) {
+                        pageBucketContainer.setProperty("cq:distribute", true);
+                        pageBucketContainer.setProperty("cq:lastModified", Calendar.getInstance());
+                    }
             	}
 
             	userNodePath =  bucketPath + "/" + validNodeName;
@@ -372,8 +347,10 @@ public class FileUploadFastTrackServlet extends SlingAllMethodsServlet {
 
             		Page page = pageManager.create(bucketPath, validNodeName, TEMPLATE_CONTENT, validNodeName);
                     Node pageContainer = page.getContentResource().adaptTo(Node.class);
-                    pageContainer.setProperty("cq:distribute", true);
-                    pageContainer.setProperty("cq:lastModified", Calendar.getInstance());
+                    if(null != pageContainer) {
+                        pageContainer.setProperty("cq:distribute", true);
+                        pageContainer.setProperty("cq:lastModified", Calendar.getInstance());
+                    }
             	}
 
 //                session.save();
@@ -387,15 +364,13 @@ public class FileUploadFastTrackServlet extends SlingAllMethodsServlet {
 		return userNodePath;
     }
 
-
-
     /**
      * Sets the bean.
      *
      * @param request the request
      * @return the bean
      */
-    private UploadRequest createUploadRequest(SlingHttpServletRequest request) throws IOException, ServletException {
+    private UploadRequest createUploadRequest(SlingHttpServletRequest request) throws IOException {
 
     		if (!ServletFileUpload.isMultipartContent(request)) {
     	      return null;
@@ -463,8 +438,6 @@ public class FileUploadFastTrackServlet extends SlingAllMethodsServlet {
         return uploadRequest;
     }
 
-
-
     private void setNodeProperty(Node node, String key, String value) throws RepositoryException {
         if(null == node || null == key || null == value) {
             return;
@@ -478,7 +451,6 @@ public class FileUploadFastTrackServlet extends SlingAllMethodsServlet {
                 + " for property key: " + key + " with value: " + value + " with error: " + e.getMessage(), e);
         }
     }
-
 
     private void setNodeProperty(Node node, String key, Calendar value) throws RepositoryException {
         if(null == node || null == key || null == value) {
@@ -673,7 +645,7 @@ public class FileUploadFastTrackServlet extends SlingAllMethodsServlet {
 		builder.append("<p>Thank You,<br>Digital Assets Team <br>Bed Bath & Beyond</p>");
 		builder.append("<br>");
 
-		final Map<String, Object> props = new HashMap<String, Object>();
+		final Map<String, Object> props = new HashMap<>();
     	log.info("Queeing the job for sndind mail to vendor " + userName);
 
 		props.put(CommonConstants.TO, userName);
@@ -686,7 +658,7 @@ public class FileUploadFastTrackServlet extends SlingAllMethodsServlet {
 
 	}
 
-	private void singleSubmissionMailToVendor(SlingHttpServletRequest request) throws RepositoryException {
+	private void singleSubmissionMailToVendor(SlingHttpServletRequest request) {
 		StringBuilder builder = new StringBuilder("<br>");
 		String userName = ServiceUtils.getUserName(request);
 
@@ -806,7 +778,7 @@ public class FileUploadFastTrackServlet extends SlingAllMethodsServlet {
 		builder.append("<p>Thank You,<br>Digital Assets Team <br>Bed Bath & Beyond</p>");
 		builder.append("<br>");
 
-		final Map<String, Object> props = new HashMap<String, Object>();
+		final Map<String, Object> props = new HashMap<>();
     	log.info("Queeing the job for sndind mail to vendor " + userName);
 
 		props.put(CommonConstants.TO, userName);
@@ -822,19 +794,15 @@ public class FileUploadFastTrackServlet extends SlingAllMethodsServlet {
 	// Separated the accepted files, those are not uploaded to the server due to any network issue.
 	private HashMap<String, String> getAcceptedRejectedFiles(ArrayList<String> cqPageNameList, String acceptedFiles) {
 		String[] fileNames = acceptedFiles.split(",");
-		ArrayList<String> acepetedFileNames = new ArrayList<String>();
-		ArrayList<String> rejectedFileNames = new ArrayList<String>();
+		ArrayList<String> acepetedFileNames = new ArrayList<>();
+		ArrayList<String> rejectedFileNames = new ArrayList<>();
 
-		Set<String> cqPageNameSet = new TreeSet<String>(String.CASE_INSENSITIVE_ORDER);
+		Set<String> cqPageNameSet = new TreeSet<>(String.CASE_INSENSITIVE_ORDER);
 		for (String str : cqPageNameList) {
 			cqPageNameSet.add(str.trim());
 		}
 
 		for (String filename : fileNames) {
-			/*String changeFilename = StringUtils.replace(StringUtils.trim(filename), "\u00A0", "");
-			changeFilename = StringUtils.replace(changeFilename, " ", "");// remove_spaces
-			changeFilename = ServiceUtils.replaceLast(changeFilename, ".", "");// remove_dot
-			changeFilename = JcrUtil.createValidName(changeFilename);*/
 			String changeFilename = ServiceUtils.buildFilePageName(filename);
 			if (cqPageNameSet.contains(changeFilename)) {
 				acepetedFileNames.add(filename);
@@ -843,11 +811,11 @@ public class FileUploadFastTrackServlet extends SlingAllMethodsServlet {
 			}
 		}
 
-		HashMap<String, String> map = new HashMap<String, String>();
-		if (acepetedFileNames != null && acepetedFileNames.size() > 0) {
+		HashMap<String, String> map = new HashMap<>();
+		if (acepetedFileNames.size() > 0) {
 			map.put("accept", String.join(" | ", acepetedFileNames));
 		}
-		if (rejectedFileNames != null && rejectedFileNames.size() > 0) {
+		if (rejectedFileNames.size() > 0) {
 			map.put("reject", String.join(" | ", rejectedFileNames));
 		}
 		return map;
@@ -868,14 +836,13 @@ public class FileUploadFastTrackServlet extends SlingAllMethodsServlet {
 				acceptedFiles = acceptedFiles.replaceAll(",", " | ");
 			}
 
-			String failedFiles = null;
 			if (fileCount > 0 && cqPageNameList.size() != fileCount && acceptedFiles1 != null
 					&& acceptedFiles1.length() > 0) {
 				int failFilesCount = fileCount - cqPageNameList.size();
 				fileCount = cqPageNameList.size();
 				HashMap<String, String> map = getAcceptedRejectedFiles(cqPageNameList, acceptedFiles1);
 				acceptedFiles = map.get("accept");
-				failedFiles = map.get("reject");
+				String failedFiles = map.get("reject");
 
 				String batchContentResourcePath = batchNodePath + CommonConstants.FORWARD_SLASH
 						+ CommonConstants.JCR_CONTENT;
