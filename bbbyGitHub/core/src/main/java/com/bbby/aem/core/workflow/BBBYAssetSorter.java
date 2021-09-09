@@ -503,8 +503,15 @@ public class BBBYAssetSorter implements WorkflowProcess {
 //                    moveAssetToNotAssigned(session, assetJCRNode);
                 } else if (containsUPC && isWebOfferedFlag) {
                 	if(isFastTrackScreenAsset.equalsIgnoreCase("yes") && isFastTrackPhoto && !assetUpdate.equalsIgnoreCase("yes")){
-                		moveAssetToFastTrack(session, departmentNumber, assetJCRNode, containsassociatedCollectionID,
-                        		collectionId, productId);
+                		Node metadataNodeFastTrack = assetJCRNode.getNode(CommonConstants.METADATA_NODE);
+                		boolean isImageSetExists = false;
+                		isImageSetExists = ServiceUtils.isImagesetExist(session, metadataNodeFastTrack);
+                		if(!isImageSetExists){
+                			moveAssetToFastTrack(session, assetJCRNode);
+                		}else if(!assetJCRNode.getName().toLowerCase().contains(".pdf")){
+                    		moveAssetToEcomm(session, departmentNumber, assetJCRNode, containsassociatedCollectionID,
+                            		collectionId, productId);
+                    	}
                 	}else if(!assetJCRNode.getName().toLowerCase().contains(".pdf")){
                 		moveAssetToEcomm(session, departmentNumber, assetJCRNode, containsassociatedCollectionID,
                         		collectionId, productId);
@@ -1047,8 +1054,7 @@ public class BBBYAssetSorter implements WorkflowProcess {
 
     }
     
-    private void moveAssetToFastTrack(Session session, String departmentNumber, Node node, 
-    		boolean containsCollection, String collectionId, String webProductId) {
+    private void moveAssetToFastTrack(Session session, Node node){
     	log.debug("entering moveAssetToFastTrack() method");
     	try {
     		
@@ -1071,10 +1077,7 @@ public class BBBYAssetSorter implements WorkflowProcess {
     			isSharedAsset = (operationalmeta.hasProperty(CommonConstants.BBBY_SHARED_ASSET)) ? operationalmeta.getProperty(CommonConstants.BBBY_SHARED_ASSET).getString() : "No";  //This attribute is used for determining whether the asset is shared or not.
     		}
     		
-            if (containsCollection)
-                targetNode = createTargetNodeFastTrack(departmentNumber, collectionId, session, isSharedAsset, batchId);
-            else
-                targetNode = createTargetNodeFastTrack(departmentNumber, webProductId, session, isSharedAsset, batchId);
+            targetNode = createTargetNodeFastTrack(session, isSharedAsset, batchId);
           //Save the session to confirm that folders created successfully.
             session.save();
     		String destination = targetNode.getPath() + "/" + file;
@@ -1086,12 +1089,12 @@ public class BBBYAssetSorter implements WorkflowProcess {
     	}
     }
     
-	private Node createTargetNodeFastTrack(String departmentNumber, String id, Session session, String isSharedAsset, String batchId) throws RepositoryException {
+	private Node createTargetNodeFastTrack(Session session, String isSharedAsset, String batchId) throws RepositoryException {
         Node targetNode = null;
     	if(isSharedAsset.equalsIgnoreCase("yes")){
     		targetNode = JcrUtil.createPath(this.ecommFolder + "/fasttrack/shared/" + batchId , "sling:Folder", session);
     	}else{
-    		targetNode = JcrUtil.createPath(this.ecommFolder + "/fasttrack/" + departmentNumber + "/" + id, "sling:Folder", session);
+    		targetNode = JcrUtil.createPath(this.ecommFolder + "/fasttrack/nonshared" + batchId, "sling:Folder", session);
     	}
         return targetNode;
     }
