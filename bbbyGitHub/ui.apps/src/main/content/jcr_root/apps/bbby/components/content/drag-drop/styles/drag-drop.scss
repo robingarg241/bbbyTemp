@@ -941,7 +941,24 @@ $dropzoneMargin: 10px;
         grid-template-columns: 1fr 2fr 1fr 1fr 1fr 1fr 1fr 70px;
         -ms-grid-columns: 1fr 2fr 1fr 1fr 1fr 1fr 1fr 70px;
         &.dz-sequence-preview {
-            grid-template-columns: 1fr 2fr 1fr 1fr 1fr 70px;
+            grid-template-columns: 1fr 2fr 2fr 1fr 1fr 1px;
+            border-bottom: 0.5px solid #8d8d8d;
+            padding: 10px 0;
+            .dz-alt-filename, .dz-alt-seq-no {
+                display: block;
+            }
+            &.noPrimaryKey {
+                background-color: #ffeeef;
+            }
+            &.dz-error {
+                background-color: #ffeeef;
+                .dz-error-message {
+                    display: block;
+                }
+            }
+            .dz-error-message {
+                display: none;
+            }
         }
     }
 

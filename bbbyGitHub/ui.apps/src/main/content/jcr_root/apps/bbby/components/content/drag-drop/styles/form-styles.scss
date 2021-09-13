@@ -681,8 +681,8 @@ $dzTableRemoveWidth: 5%;
             display: block;
         }
         .column-titles {
-            -ms-grid-columns: 1fr 2fr 1fr 1fr 1fr 70px;
-            grid-template-columns: 1fr 2fr 1fr 1fr 1fr 70px;
+            -ms-grid-columns: 1fr 2fr 2fr 1fr 1fr 1fr;
+            grid-template-columns: 1fr 2fr 2fr 1fr 1fr 1fr;
         }
     }
     .active-items {

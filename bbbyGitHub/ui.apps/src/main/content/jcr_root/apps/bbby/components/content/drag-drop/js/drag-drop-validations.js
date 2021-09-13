@@ -5,6 +5,9 @@ export let listCount = 0;
 export let succesItems = 0;
 export let mdVerifiedList = [];
 
+let validxls = [];
+let sequenceGroups = {};
+
 function getAnalyzeCount() {
     var i = 0;
     var analyzeList = $(".analyze");
@@ -435,6 +438,8 @@ function validateFasttrackAssets(xls) {
     mdVerifiedList = [];
     succesItems = 0;
     var duplicatedList = [];
+    var count = 0;
+    validxls = [];
     uploadList.forEach((uploadItem) => {
 
         var fileMD = xls.filter(function(item){
@@ -443,7 +448,7 @@ function validateFasttrackAssets(xls) {
         console.log(fileMD);
         if(fileMD[0]) {
             if (isValidateFields( fileMD[0], uploadItem)  ) {
-
+                validxls[count++] = fileMD[0];
                 var parentDiv = $('span').filter(function(){ return $(this).text() == uploadItem.name; }).closest('.dz-preview');
                 var span = parentDiv.find('span[data-dz-metadata]');
 
@@ -904,22 +909,95 @@ function showFileSequence () {
         $("#upload-batch").hide();
         $(".dz-sequence-preview").remove();
         // for or while loop for multiple sequences
-        populateFileSequence();
+        generateSequence();
+
         $("#show-sequence").show();
     } else {
       console.log("Your browser does not supports template!");
     }
 }
 
-function populateFileSequence() {
+function generateSequence() {
+
+    sequenceGroups = validxls.reduce((r, a) => {
+     r[a.UPC] = [...r[a.UPC] || [], a];
+     return r;
+    }, {});
+
+    for (var key in sequenceGroups) {
+        if (sequenceGroups.hasOwnProperty(key)) {
+            sequenceGroups[key] = [...sequenceGroups[key]].sort((a, b) => a.Sequence - b.Sequence);
+            populateFileSequence(sequenceGroups[key]);
+        }
+    };
+    console.log("Groups", sequenceGroups);
+    validateSequence();
+}
+
+function populateFileSequence(group) {
 
     var previewImagesetTempContent = document.querySelector('#dzImagesetTemplate').content;
-    var imgThumbnail = previewImagesetTempContent.querySelector('img');
-    var fileName = previewImagesetTempContent.querySelector('.dz-filename span');
-    fileName.textContent = 'filename.png';
     var clone = document.importNode(previewImagesetTempContent, true);
+    var dzSequence = clone.querySelector('.dz-sequence-preview');
+    var imgThumbnail = clone.querySelector('img');
+    var fileName = clone.querySelector('.dz-filename span');
+    var altFilename = clone.querySelector('.dz-alt-filenames span');
+    var seqNo = clone.querySelector('.dz-sequence-number span');
+    var isPrimaryKeyPresent = false;
+    group.forEach(function(values, index) {
+        if(index === 0) {
+            dzSequence.className = dzSequence.className + " " + values.UPC;
+            var upc = clone.querySelector('.dz-upc span');
+            upc.textContent = values.UPC;
+        }
+        if(values.Sequence == 1) {
+            fileName.textContent = values.Filename;
+            isPrimaryKeyPresent = true;
+        } else {
+            altFilename.innerHTML = altFilename.innerHTML + "<span class='dz-alt-filename'>" + values.Filename + "</span>";
+        }
+        seqNo.innerHTML = seqNo.innerHTML + "<span class='dz-alt-seq-no'>" + values.Sequence + "</span>";
+    });
+    if(!isPrimaryKeyPresent) {
+        dzSequence.className = dzSequence.className + " noPrimaryKey";
+    }
     document.querySelector(".checkSequenceZone").appendChild(clone);
 }
+
+function validateSequence() {
+
+    for (var key in sequenceGroups) {
+        var errorMessage = "";
+        if (sequenceGroups.hasOwnProperty(key)) {
+            var seq = sequenceGroups[key];
+            var sumOfSequence = 0;
+            var size =  seq.length;
+            var n = seq[size-1].Sequence; // where n is the largest number in the sequence
+            console.log("n : " , n);
+            var sumOf1toN = n*(n+1)/2 ;
+            console.log("sumOf1toN : " , sumOf1toN);
+            var isPrimaryKeyPresent = false;
+            seq.forEach(function(values) {
+                sumOfSequence = sumOfSequence + values.Sequence;
+                if(values.Sequence == 1) {
+                    isPrimaryKeyPresent = true;
+                }
+            });
+            if(!isPrimaryKeyPresent) {
+                errorMessage = errorMessage + "Primary Image is Missing.<br/>"
+            }
+            var misssingSeq = sumOf1toN - sumOfSequence;
+            if(isPrimaryKeyPresent && misssingSeq != 0) {
+                errorMessage = errorMessage + "Sequence is Missing.<br/> ";
+            }
+            // put all error message
+            if(errorMessage != "") {
+                $(".dz-sequence-preview." + key).addClass("dz-error").find(".dz-error-mark .dz-error-message small").html(errorMessage);
+            }
+        }
+    }
+}
+
 export function validations(){
 
     $("input[type=email]").on('blur input', function() {

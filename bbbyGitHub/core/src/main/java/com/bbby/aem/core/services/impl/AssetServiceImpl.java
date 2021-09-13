@@ -88,16 +88,16 @@ public class AssetServiceImpl implements AssetService {
     private final String VENDOR_TAG = "bbby:asset_source/vendor";
 
     private static final String REL_ASSET_UPCMETADATA = "jcr:content/upcmetadata";
-    
+
     protected static final String DEFAULT_FOLDER_TYPE = "sling:Folder";
-    
+
     public static final AgentFilter REV_AGENT_FILTER = new AgentFilter()
     {
       public boolean isIncluded(Agent agent) {
         return agent.getConfiguration().isTriggeredOnDistribute();
       }
     };
-    
+
     public static final AgentFilter REPLICATE_AGENT_FILTER = new AgentFilter()
     {
       public boolean isIncluded(Agent agent) {
@@ -105,10 +105,10 @@ public class AssetServiceImpl implements AssetService {
                   || "binary-less".equals(agent.getConfiguration().getSerializationType()))
               // is not reverse replication agent
               && !agent.getConfiguration().usedForReverseReplication()
-              && !agent.getConfiguration().isSpecific();        
+              && !agent.getConfiguration().isSpecific();
       }
     };
-    
+
     /**
      * The resolver factory.
      */
@@ -117,19 +117,19 @@ public class AssetServiceImpl implements AssetService {
 
     @Reference
     protected Replicator replicator;
-    
+
     @Reference
     private SlingSettingsService slingSettingsService;
-    
+
     @Reference
     private MimeTypeService mimeTypeService;
-    
+
     private Map<String, String>  assetTypes = new HashMap<String, String>();
-    
+
     private Map<String, String>  shotTypes = new HashMap<String, String>();
-    
+
     //private ResourceResolver resourceResolver;
-    
+
     @Activate
     protected void activate(AssetServiceConfig config) throws LoginException {
     	log.info("In activate method");
@@ -140,12 +140,12 @@ public class AssetServiceImpl implements AssetService {
         	if(assetTypes.size() == 0){
         		log.info("assetTypes map is Empty");
         	}
-        	
+
         	TagManager tagManager = resourceResolver.adaptTo(TagManager.class);
         	log.info("TagManager : " + tagManager);
         	Tag shotTypeTag = tagManager.resolve(CommonConstants.BBBY_SHOT_TYPE);
         	log.info("shotTypeTag : " + shotTypeTag);
-        	
+
         	if(shotTypeTag != null) {
         		Iterator<Tag> iter = shotTypeTag.listChildren();
            	 	iter.forEachRemaining( tag -> {
@@ -161,11 +161,11 @@ public class AssetServiceImpl implements AssetService {
             log.error("Error in creating Asset :: {}" + e.getMessage(), e);
             e.printStackTrace();
     	}
-    	
+
     }
-    
-    
-    
+
+
+
     /* (non-Javadoc)
      * @see com.bbby.aem.core.services.AssetService#saveAssets(org.apache.sling.api.SlingHttpServletRequest, org.apache.sling.api.SlingHttpServletResponse, com.bbby.aem.core.models.data.UploadRequest, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.io.InputStream, com.bbby.aem.core.models.data.DropzoneUploadRequest)
      */
@@ -173,8 +173,8 @@ public class AssetServiceImpl implements AssetService {
                            UploadRequest uploadRequest, String groupName, String userName, String currentDate, String batchNode,
                            InputStream assetInputStream) {
         try {
-            
-            
+
+
             PageManager pageManager = resolver.adaptTo(PageManager.class);
             Session session = resolver.adaptTo(Session.class);
             JSONArray uploadListJsonarray = new JSONArray(request.getParameter(CommonConstants.UPLOAD_LIST));
@@ -184,7 +184,7 @@ public class AssetServiceImpl implements AssetService {
             if (reqParams.containsKey("file")) {
                 RequestParameter reqParam = reqParams.get("file")[0];
                 String filename = reqParam.getFileName();
-                
+
                 log.info("Saving uploaded file ... " + filename);
                 String filePageName = ServiceUtils.buildFilePageName(filename);
                 String filePagePath = batchNode + CommonConstants.FORWARD_SLASH + filePageName;
@@ -194,27 +194,27 @@ public class AssetServiceImpl implements AssetService {
                 if (!session.nodeExists(filePagePath)) {
                     Page assetWrapperPage = pageManager.create(batchNode, filePageName, template, filePageName);
                     Node assetWrapperPageContainer = assetWrapperPage.getContentResource().adaptTo(Node.class);
-                    
+
                     setHistoryRequiredMetadata(assetWrapperPageContainer, uploadRequest, reqParam.getSize());
                     setAssetWrapperPageMetadata(assetWrapperPageContainer, filename);
 
 //                    session.save();
-                    
+
                     Asset asset = saveAssetToDam(resolver, session, groupName, userName, assetInputStream,
                         filePagePath, filename, uploadListJsonarray, uploadRequest, reqParam.getSize(), currentDate);
-                    
+
                     reverseReplicate(session, assetWrapperPageContainer.getPath());
-                    
+
                     if(asset != null) {
                     	reverseReplicate(session, asset.getPath());
                     }
-                    
+
                 }
             }
-            
-            
+
+
         } catch(AgentNotFoundException ae) {
-        
+
         	log.error("Reverse Replication agent not found", ae.getLocalizedMessage());
         }
         catch (Exception e) {
@@ -248,43 +248,43 @@ public class AssetServiceImpl implements AssetService {
         return true;
     }
 
-    
+
     /* (non-Javadoc)
      * @see com.bbby.aem.core.services.AssetService#reverseReplicate(javax.jcr.Session, java.lang.String)
      */
     @Override
     public void reverseReplicate(Session session, String path) throws ReplicationException {
-    
+
     	if (slingSettingsService.getRunModes().contains("author")) {
             log.warn("Attempt to run reverse replication from author environment");
             return;
         }
-    	
+
     	ReplicationOptions opts = new ReplicationOptions();
         opts.setFilter(REV_AGENT_FILTER);
         opts.setSynchronous(true);
         opts.setSuppressVersions(true);
         opts.setSuppressStatusUpdate(true);
         log.debug("Reverse replicating {}", path);
-        
+
         replicator.replicate(session, ReplicationActionType.ACTIVATE, path, opts);
     }
-    
+
     /* (non-Javadoc)
      * @see com.bbby.aem.core.services.AssetService#reverseReplicate(javax.jcr.Session, java.lang.String)
      */
     @Override
     public void replicate(Session session, String path) throws ReplicationException {
-    	
+
     	ReplicationOptions opts = new ReplicationOptions();
         opts.setFilter(REPLICATE_AGENT_FILTER);
         opts.setSuppressVersions(true);
         opts.setSuppressStatusUpdate(true);
-        
+
         log.debug("Replicating {}", path);
         replicator.replicate(session, ReplicationActionType.ACTIVATE, path, opts);
     }
-    
+
     private void setAssetWrapperPageMetadata(Node assetWrapperPageContainer, String filename) {
         try {
             //assetWrapperPageContainer.setProperty("cq:distribute", true);
@@ -301,6 +301,9 @@ public class AssetServiceImpl implements AssetService {
                 Node batchWrapper = assetWrapper.getParent();
                 Node batchJcrContent = batchWrapper.getNode(CommonConstants.JCR_CONTENT);
 
+                if(batchJcrContent.hasProperty(CommonConstants.BBBY_FAST_TRACK_ASSET)) {
+                    assetWrapperPageContainer.setProperty(CommonConstants.BBBY_FAST_TRACK_ASSET, batchJcrContent.getProperty(CommonConstants.BBBY_FAST_TRACK_ASSET).getString());
+                }
                 Node assetJcrContentData;
                 if (assetWrapperPageContainer.hasNode(CommonConstants.DATA)) {
                     assetJcrContentData = assetWrapperPageContainer.getNode(CommonConstants.DATA);
@@ -343,7 +346,7 @@ public class AssetServiceImpl implements AssetService {
             if (fromNode.hasProperty(CommonConstants.BRAND_NAME)) {
                 toNode.setProperty(CommonConstants.BRAND_NAME, fromNode.getProperty(CommonConstants.BRAND_NAME).getString());
         	}
-            
+
             if(fromNode.hasProperty(CommonConstants.NOTES)) {
                 toNode.setProperty(CommonConstants.NOTES, fromNode.getProperty(CommonConstants.NOTES).getString());
             }
@@ -355,7 +358,7 @@ public class AssetServiceImpl implements AssetService {
 
     /* this function applies metadata that is required for the history page to function properly */
     private void setHistoryRequiredMetadata(Node assetWrapperPageContainer, UploadRequest uploadRequest, long filesize) {
-        
+
     	try {
             UploadItem currentItem = uploadRequest.getUploadItem();
             assetWrapperPageContainer.setProperty(CommonConstants.BBBY_WIDTH, currentItem.getWidth());
@@ -371,25 +374,25 @@ public class AssetServiceImpl implements AssetService {
 
     private Asset saveAssetToDam(ResourceResolver resourceResolver, Session session, String groupName, String userName, InputStream inputStream,
                                 String filePagePath, String fileName, JSONArray uploadListJsonarray, UploadRequest uploadRequest, long fileSize, String currentDate) {
-        
-    	
+
+
     	Asset asset = null;
-    	
+
     	try {
-            
+
             AssetManager assetManager = resourceResolver.adaptTo(AssetManager.class);
 
             String assetLocation = filePagePath + CommonConstants.FORWARD_SLASH + CommonConstants.JCR_CONTENT + CommonConstants.FORWARD_SLASH + stripSpecialChars(fileName);
 
             if (null != inputStream) {
-            	
+
             	String mimeType = mimeTypeService.getMimeType(fileName);
-            	
+
                 asset = assetManager.createAsset(assetLocation, inputStream, mimeType, true);
-                
+
 
                 applyAssetMetadata(resourceResolver, asset, uploadRequest, userName, currentDate);
-                
+
                 log.info("Uploaded asset {} saved. Vendor filename is {} ", assetLocation, fileName);
             }
         } catch (Exception e) {
@@ -401,27 +404,25 @@ public class AssetServiceImpl implements AssetService {
 
     /**
      * @param resourceResolver
-     * @param obj
-     * @param metadataNode
+     * @param asset
      * @param uploadRequest
-     * @param fileName
      * @param userName
      * @param currentDate
      */
     private void applyAssetMetadata(ResourceResolver resourceResolver, Asset asset, UploadRequest uploadRequest, String userName, String currentDate) {
-        
+
     	try {
-        	
+
     		Node assetNode = (Node) asset.adaptTo(Node.class);
-    		
+
             Node metadataNode = assetNode.getNode("jcr:content/metadata");
             metadataNode.setProperty("bbby:batchID", uploadRequest.getBatchId());
             metadataNode.setProperty("bbby:vendorPortalID", userName+"--"+currentDate);
             metadataNode.setProperty("bbby:requestedBy", uploadRequest.getRequestedBy());
-            
+
             String fileName = uploadRequest.getUploadItem().getFileName();
             MetadataRow metadataRow = uploadRequest.getMetadata(fileName);
-            
+
 			if (metadataRow == null) {
 				// DAM: 1401 - Vendor assets coming into AEM without asset metadata
 				log.info("metdatRow is null so removing space/junk from filename");
@@ -432,36 +433,36 @@ public class AssetServiceImpl implements AssetService {
 					return;
 				}
 			}
-            
+
             if(metadataRow.getUpc() != null){
             	log.info("Primary UPC is " + metadataRow.getUpc() + " for " + fileName + ".");
             }else{
             	log.info("Primary UPC is null for " + fileName + ".");
             }
-            
+
             metadataNode.setProperty(CommonConstants.BBBY_CONTENT_OPS_REVIEW, "no");
             metadataNode.setProperty(CommonConstants.BBBY_UPC, metadataRow.getUpc());
             metadataNode.setProperty(CommonConstants.BBBY_UPLOADED_ASSET_NAME, fileName);
-            
+
             if(StringUtils.isNotEmpty(metadataRow.getAdditionalUPC())) {
             	metadataNode.setProperty(CommonConstants.BBBY_ADDITIONAL_UPC, metadataRow.getAdditionalUPC());
             }
-            
-            metadataNode.setProperty(CommonConstants.BBBY_ASSET_UPDATE, metadataRow.isAssetUpdate() ? "yes" : "no");     
-            
-             
+
+            metadataNode.setProperty(CommonConstants.BBBY_ASSET_UPDATE, metadataRow.isAssetUpdate() ? "yes" : "no");
+
+
             if(StringUtils.isNotEmpty(metadataRow.getReasonForUpdate())) {
-            	metadataNode.setProperty("bbby:reasonForAssetUpdate", metadataRow.getReasonForUpdate().toLowerCase());     
+            	metadataNode.setProperty("bbby:reasonForAssetUpdate", metadataRow.getReasonForUpdate().toLowerCase());
             }
-            
+
             metadataNode.setProperty("bbby:srtProvided", metadataRow.isSrtProvided() ? "yes" : "no");
             metadataNode.setProperty("bbby:bbbyToCreateSRT", metadataRow.isBbbyToCreateSRT() ? "yes" : "no");
-            
+
             metadataNode.setProperty(CommonConstants.BBBY_SEQUENCE, metadataRow.getSequence());
             metadataNode.setProperty("bbby:vendorEmail", uploadRequest.getEmail());
             log.debug("File upload Vendor Email " + uploadRequest.getEmail()!=null?uploadRequest.getEmail():"");
             metadataNode.setProperty("bbby:jobID", ServiceUtils.getVendorPortalProjectTitle(uploadRequest.getBatchId(), currentDate));
-            
+
             // Assign tags
             Set<String> tags = new HashSet<String>();
             if(metadataRow.getAssetType() != null && assetTypes.containsKey(metadataRow.getAssetType().toLowerCase())) {
@@ -472,7 +473,7 @@ public class AssetServiceImpl implements AssetService {
             }else{
             	log.error("Asset Type is missing for " + fileName + ". Asset Type entered is " + metadataRow.getAssetType());
             }
-            
+
             //DAM-947 : Add restriction in vendor portal to not provide shot type for Collaterals, Videos
             if(metadataRow.getAssetType() != null && "Product Images".equalsIgnoreCase(metadataRow.getAssetType())){
 	            if(metadataRow.getShotType() != null && metadataRow.getShotType() != "" && shotTypes.containsKey(metadataRow.getShotType().toLowerCase())) {
@@ -488,7 +489,7 @@ public class AssetServiceImpl implements AssetService {
             	log.error("Shot Type is not populated for " + fileName + ". Asset Type entered is not Product Images");
             }
             tags.add(VENDOR_TAG);
-            
+
             metadataNode.setProperty(CommonConstants.CQ_TAGS, tags.toArray(new String[0]));
 
 //            assetNode.getSession().save();
@@ -536,13 +537,13 @@ public class AssetServiceImpl implements AssetService {
 		Session session = resourceResolver.adaptTo(Session.class);
 
 		log.debug("Update from PDM: " + pdmAsset);
-		
+
 		if(pdmAsset == null || StringUtils.isEmpty(pdmAsset.getUuid())) {
 			return;
 		}
-		        
+
         try {
-        	
+
             Asset originalAsset = DamUtil.getAssetFromID(resourceResolver, pdmAsset.getUuid());
 
             if(originalAsset == null) {
@@ -556,24 +557,24 @@ public class AssetServiceImpl implements AssetService {
            // Node originalAssetJcrContentNode = session.getNode(assetPath + "/" + JcrConstants.JCR_CONTENT);
           //  Resource originalAssetJcrContentResource = resourceResolver.getResource(originalAssetJcrContentNode.getPath());
           //  ValueMap vmOriginalAssetJcrContent = originalAssetJcrContentResource.adaptTo(ModifiableValueMap.class);
-            
+
             Resource upcMetadataResource = resourceResolver.getResource(assetPath + "/" + REL_ASSET_UPCMETADATA);
             if(upcMetadataResource != null) {
             	resourceResolver.delete(upcMetadataResource);
             }
-            
-            
+
+
             Node upcMetadataNode = JcrUtil.createPath(assetPath + "/" + REL_ASSET_UPCMETADATA, JcrConstants.NT_UNSTRUCTURED, resourceResolver.adaptTo(Session.class));
-            
+
             //resourceResolver.refresh();
-            
+
             List<Sku> skus = pdmAsset.getPdmMetadata().getSkus();
             boolean isBBBYWebOfferedFlag = false;
             boolean isBABYWebOfferedFlag = false;
             boolean isCAWebOfferedFlag = false;
             boolean containsAssociatedCollectionId = false;
             boolean containsAssociatedWebProductId = false;
-            
+
             for(int i=0; i < skus.size(); i++) {
             	int containsCollections = 0;
             	int containsWebProductId = 0;
@@ -581,7 +582,7 @@ public class AssetServiceImpl implements AssetService {
             	Node upcNode = JcrUtil.createPath(assetPath + "/" + REL_ASSET_UPCMETADATA + "/" + "upc-" + i, JcrConstants.NT_UNSTRUCTURED, resourceResolver.adaptTo(Session.class));
             	Resource upcNodeResource = resourceResolver.getResource(upcNode.getPath());
             	setMetadata(upcNodeResource, sku);
-            	
+
             	//This logic has been applied to check whether any of these flags is true and associatedCollectionId/webProductId is there for avoiding "bbby Sorting hat" workflow launcher in case none of them is true.
             	String bbbyWebOfferedFlag = sku.getBbbyWebOfferedFlag();
     			String babyWebOfferedFlag = sku.getBabyWebOfferedFlag();
@@ -607,12 +608,12 @@ public class AssetServiceImpl implements AssetService {
                 if (containsWebProductId != 0) {
                 	containsAssociatedWebProductId = true;
                 }
-                
+
             }
             boolean isWebOfferedFlag = isBBBYWebOfferedFlag || isBABYWebOfferedFlag || isCAWebOfferedFlag;
-            boolean hasAssociatedId = containsAssociatedCollectionId || containsAssociatedWebProductId; 
-            
-            
+            boolean hasAssociatedId = containsAssociatedCollectionId || containsAssociatedWebProductId;
+
+
             /*if(pdmAsset.getBbbyAssetMetadata()!=null && pdmAsset.getBbbyAssetMetadata().getAssetsPDMData()!=null){
 	            List<SkuBbbyAssetMetadata> skusBbby = pdmAsset.getBbbyAssetMetadata().getAssetsPDMData();
 	            SkuBbbyAssetMetadata skuBbbyAssetMetadata = skusBbby.get(0);
@@ -620,30 +621,30 @@ public class AssetServiceImpl implements AssetService {
 	            JcrUtil.setProperty(bbbyAssetMetadataNode, CommonConstants.BBBY_DEPARTMENT_NAME, skuBbbyAssetMetadata.getDepartmentName());
 	            JcrUtil.setProperty(bbbyAssetMetadataNode, CommonConstants.BBBY_DEPARTMENT_NUMBER, skuBbbyAssetMetadata.getDepartmentNumber());
             }*/
-            
+
             Node bbbyAssetMetadataNode = session.getNode(assetPath + "/" + JcrConstants.JCR_CONTENT + "/metadata");
             Resource bbbyAssetMetadataResource = resourceResolver.getResource(bbbyAssetMetadataNode.getPath());
             ValueMap vmBbbyAssetMetadata = bbbyAssetMetadataResource.adaptTo(ModifiableValueMap.class);
-            
+
             Node opmeta = JcrPropertiesUtil.getOperationalNode(session.getNode(assetPath), session);
             Resource opmetaResource = resourceResolver.getResource(opmeta.getPath());
             ValueMap vmOpmeta = opmetaResource.adaptTo(ModifiableValueMap.class);
             vmOpmeta.put(CommonConstants.OPMETA_PDM_WEB_OFFERED_FLAGS, isWebOfferedFlag);
             vmOpmeta.put(CommonConstants.OPMETA_HAS_PDM_ASSOCIATED_ID, hasAssociatedId);
             vmOpmeta.put(CommonConstants.OPMETA_PDM_CALL_RECEIVED, ServiceUtils.getCurrentDateStr(CommonConstants.DATE_FORMAT));
-            
+
 			if (pdmAsset.getBbbyAssetMetadata() != null) {
 				if (pdmAsset.getBbbyAssetMetadata().getParentDepartmentName() != null)
 					vmBbbyAssetMetadata.put(CommonConstants.BBBY_DEPARTMENT_NAME, pdmAsset.getBbbyAssetMetadata().getParentDepartmentName());
 				if (pdmAsset.getBbbyAssetMetadata().getParentDepartmentNumber() != null)
 					vmBbbyAssetMetadata.put(CommonConstants.BBBY_DEPARTMENT_NUMBER,	pdmAsset.getBbbyAssetMetadata().getParentDepartmentNumber());
 			}
-            
+
      //       vmOriginalAssetJcrContent.put(JcrConstants.JCR_LASTMODIFIED, new Date());
-            
+
             //DAM-904 : modified the UPCMetadate node to trigger BBBY sorting hat only once.
             JcrUtil.setProperty(upcMetadataNode, CommonConstants.LAST_PDM_METADATA_UPDATE, new Date().toString());
-            
+
             if (resourceResolver.hasChanges()) {
             	resourceResolver.commit();
             }
@@ -652,12 +653,12 @@ public class AssetServiceImpl implements AssetService {
         } catch (RepositoryException e) {
             log.error("Could not create a new version of the asset", e);
             throw new PersistenceException(e.getMessage());
-        } 
+        }
 	}
-	
+
 	/**
 	 * Sets UPC metadata on the asset node
-	 * 
+	 *
 	 * @param upcNode
 	 * @param sku
 	 * @return
@@ -736,16 +737,16 @@ public class AssetServiceImpl implements AssetService {
 		}
 		return vm;
 	}
-	
+
 	/**
 	 * Converts comma-separated list to an array to store as multi-value property in JCR
-	 * 
+	 *
 	 * @param value
 	 * @return
 	 */
 	private String[] convertToMulti(final String value) {
         String[] result;
-        
+
         result = Arrays.stream(value.split(";"))
     			.filter(Objects::nonNull)
     			.toArray(String[]::new);
