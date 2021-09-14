@@ -1279,4 +1279,20 @@ public class ServiceUtils {
         }
         return filePageName;
     }
+	
+	public static List<Resource> getResourcesInDirectory(ResourceResolver resourceResolver, String rootPath) {
+		// Create an empty list
+		List<Resource> list = new ArrayList<>();
+		try {
+			String q = "SELECT * FROM [dam:Asset] AS s WHERE ISCHILDNODE([" + rootPath + "])";
+			Iterator<Resource> result = resourceResolver.findResources(q, Query.JCR_SQL2);
+
+			// Add each element of iterator to the List
+			result.forEachRemaining(list::add);
+
+		} catch (Exception e) {
+			log.debug("Error, could not find: " + rootPath + " : " + e.getMessage());
+		}
+		return list;
+	}
 }
