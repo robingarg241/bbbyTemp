@@ -17,6 +17,8 @@ public final class CommonConstants
 	
 	public static final String SEND_MAIL_TOPIC = "com/bbby/jobs/send-mail";
 	
+	public static final String FAST_TRACK_ASSET_PROCESS_TOPIC = "com/bbby/jobs/fast-track";
+	
     /** The Constant DATA. */
     public static final String DATA = "data";
 
@@ -70,6 +72,8 @@ public final class CommonConstants
     public static final String FILE_ORDER = "fileOrder";
     
     public static final String JCR_PATH = "JCR_PATH";
+    
+    public static final String ROOTPATH = "rootPath";
 
 
     /** The Constant DISPLAY_LIVE_DATE. */

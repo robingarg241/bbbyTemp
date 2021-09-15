@@ -1,8 +1,10 @@
 package com.bbby.aem.core.schedulers;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
@@ -125,31 +127,18 @@ public class FastTrackImagesetCreationTask implements Runnable {
 			}
 		}
 		
-		for (int i = 0; i < batchDirectoriesList.size(); i++){
-			try{
-				startWorkflow(batchDirectoriesList.get(i), WORKFLOW_MODEL);
+		for (int i = 0; i < batchDirectoriesList.size(); i++) {
+			try {
+				final Map<String, Object> props = new HashMap<String, Object>();
+				log.info("Queeing the job for creating Imageset for Fast track images ");
+
+				props.put(CommonConstants.ROOTPATH, batchDirectoriesList.get(i));
+
+				jobManager.addJob(CommonConstants.FAST_TRACK_ASSET_PROCESS_TOPIC, props);
 			} catch (Exception e) {
 				log.error("Exception processing fast track imagesets {}", e.getLocalizedMessage());
 			}
 		}
 	}
-	
-	private void startWorkflow(String payload, String WORKFLOW_MODEL) throws RepositoryException, LoginException, WorkflowException {
-
-        try(ResourceResolver resourceResolver = ServiceUtils.getResourceResolver(resolverFactory, "workflow-service")) {
-
-        	Session session = resourceResolver.adaptTo(Session.class);
-            WorkflowSession wfSession = wfService.getWorkflowSession(session);
-            WorkflowModel model = wfSession.getModel(WORKFLOW_MODEL);
-            WorkflowData data = wfSession.newWorkflowData(CommonConstants.JCR_PATH, payload);
-            Workflow workflow = wfSession.startWorkflow(model, data);
-            if(workflow != null) {
-                log.info("Successfully started workflow {}", workflow.getId());
-            }
-        } catch (Exception e) {
-            log.error("Failed to start workflow", e);
-            throw new WorkflowException(e.getMessage(), e);
-        }
-    }
 
 }
