@@ -16,7 +16,7 @@
         jcr:title="Upload Fasttrack"
         jcr:uuid="ff3e1092-4548-4a3e-a96a-65e2a211d90d"
         sling:resourceType="bbby/components/structure/page"
-        pageTitle="Fasttrack Asset Uploader"
+        pageTitle="Fast-Track Asset Uploader"
         robotsOptions="default"
         uploadType="fasttrack">
         <root
@@ -30,7 +30,7 @@
                 jcr:primaryType="nt:unstructured"
                 sling:resourceType="bbby/components/content/drag-drop"
                 helpPageLink="/content/bedbath/vendor-portal/help.html"
-                title="Fasttrack Asset Upload">
+                title="Fast-Track Asset Upload">
                 <cta jcr:primaryType="nt:unstructured">
                     <item0
                         jcr:primaryType="nt:unstructured"

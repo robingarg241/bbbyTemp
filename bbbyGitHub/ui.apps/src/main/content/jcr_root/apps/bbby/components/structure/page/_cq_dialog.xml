@@ -75,7 +75,7 @@
                                                         value="multi"/>
                                                     <fasttrack
                                                         jcr:primaryType="nt:unstructured"
-                                                        text="Fasttrack"
+                                                        text="Fast-Track"
                                                         value="fasttrack"/>
                                                 </items>
                                             </type>

@@ -428,11 +428,6 @@ function validateAssets(xls) {
 
 function validateFasttrackAssets(xls) {
 
-    console.log("validate Fastrack assets");
-    console.log($('input#uploadList').val());
-
-    // var uploadList = JSON.parse($('input#uploadList').val());
-
     let uploadList = [...myDropzone.getAcceptedFiles(), ...myDropzone.getRejectedFiles()];
 
     mdVerifiedList = [];
@@ -445,7 +440,6 @@ function validateFasttrackAssets(xls) {
         var fileMD = xls.filter(function(item){
           return (item.Filename.trim() === uploadItem.name.trim());
         });
-        console.log(fileMD);
         if(fileMD[0]) {
             if (isValidateFields( fileMD[0], uploadItem)  ) {
                 validxls[count++] = fileMD[0];
@@ -485,12 +479,8 @@ function validateFasttrackAssets(xls) {
                 parentDiv[0].classList.add('dimensions-no-use');
                 console.log("metadata error");
                 console.log(uploadItem);
-             // update uploadList
-
-
             }
         } else {
-
             //var parentDiv = $("span:contains('"+uploadItem.fileName+"')").closest('.dz-preview');
             var parentDiv = $('span').filter(function(){ return $(this).text() == uploadItem.name; }).closest('.dz-preview');
             var span = parentDiv.find('span[data-dz-metadata]');
@@ -512,17 +502,9 @@ function validateFasttrackAssets(xls) {
             updateFileCounts();
         }
    });
-
-    //$('input#uploadList').val(JSON.stringify(mdVerifiedList));
-    console.log($('input#uploadList').val());
-   if (succesItems >= 1) {
+   if (succesItems >= 1 && uploadList.length == succesItems) {
         showFileSequence();
    }
-}
-
-export function validateFileSequence() {
-
-    $("#submit-fasttrack").addClass('submit-ready');
 }
 
 function isValidateFields(file, uploadFileItem) {
@@ -613,7 +595,6 @@ function isValidateFields(file, uploadFileItem) {
             updateFileCounts();
         }
     }
-    console.log("validating UPC : ");
     if(!upc) {
     	console.log("UPC Metadata is missing. ");
         updateMetadataErrorMessage(uploadFileItem, "UPC Metadata is missing. ");
@@ -894,23 +875,16 @@ function validateQC(event){
     } else {
         alert("Please upload a valid Excel file.");
     }
-
-    if($(".file-info").hasClass("error")) {
-        showFileSequence();
-    } else {
-        console.log("file has errors");
-    }
 }
 
 function showFileSequence () {
     if (document.createElement("template").content) {
         $("#validate-QC").hide();
-        $("#validate-sequence").show();
+        $("#validate-sequence").addClass("submit-ready").show();
         $("#upload-batch").hide();
         $(".dz-sequence-preview").remove();
         // for or while loop for multiple sequences
         generateSequence();
-
         $("#show-sequence").show();
     } else {
       console.log("Your browser does not supports template!");
@@ -918,20 +892,21 @@ function showFileSequence () {
 }
 
 function generateSequence() {
-
     sequenceGroups = validxls.reduce((r, a) => {
      r[a.UPC] = [...r[a.UPC] || [], a];
      return r;
     }, {});
-
+    var groupSize = 0;
     for (var key in sequenceGroups) {
         if (sequenceGroups.hasOwnProperty(key)) {
             sequenceGroups[key] = [...sequenceGroups[key]].sort((a, b) => a.Sequence - b.Sequence);
             populateFileSequence(sequenceGroups[key]);
+            groupSize++;
         }
     };
-    console.log("Groups", sequenceGroups);
-    validateSequence();
+    if(groupSize > 0) {
+        $(".sequence-count").html(groupSize + " Sequence");
+    }
 }
 
 function populateFileSequence(group) {
@@ -941,7 +916,7 @@ function populateFileSequence(group) {
     var dzSequence = clone.querySelector('.dz-sequence-preview');
     var imgThumbnail = clone.querySelector('img');
     var fileName = clone.querySelector('.dz-filename span');
-    var altFilename = clone.querySelector('.dz-alt-filenames span');
+
     var seqNo = clone.querySelector('.dz-sequence-number span');
     var isPrimaryKeyPresent = false;
     group.forEach(function(values, index) {
@@ -951,10 +926,10 @@ function populateFileSequence(group) {
             upc.textContent = values.UPC;
         }
         if(values.Sequence == 1) {
-            fileName.textContent = values.Filename;
+            fileName.innerHTML = fileName.innerHTML + "<span class='dz-primary-img'>" + values.Filename + "</span>"
             isPrimaryKeyPresent = true;
         } else {
-            altFilename.innerHTML = altFilename.innerHTML + "<span class='dz-alt-filename'>" + values.Filename + "</span>";
+            fileName.innerHTML = fileName.innerHTML + "<span class='dz-alt-filename'>" + values.Filename + "</span>";
         }
         seqNo.innerHTML = seqNo.innerHTML + "<span class='dz-alt-seq-no'>" + values.Sequence + "</span>";
     });
@@ -964,8 +939,9 @@ function populateFileSequence(group) {
     document.querySelector(".checkSequenceZone").appendChild(clone);
 }
 
-function validateSequence() {
-
+export function validateFileSequence() {
+    var validSeq = true;
+    var noOfInvalidSequences = 0;
     for (var key in sequenceGroups) {
         var errorMessage = "";
         if (sequenceGroups.hasOwnProperty(key)) {
@@ -973,29 +949,45 @@ function validateSequence() {
             var sumOfSequence = 0;
             var size =  seq.length;
             var n = seq[size-1].Sequence; // where n is the largest number in the sequence
-            console.log("n : " , n);
-            var sumOf1toN = n*(n+1)/2 ;
-            console.log("sumOf1toN : " , sumOf1toN);
+
+            var sumOf1toN = n*(n+1)/2 ;;
             var isPrimaryKeyPresent = false;
-            seq.forEach(function(values) {
+            var isDuplicatePresent = false;
+            seq.forEach(function(values, index) {
                 sumOfSequence = sumOfSequence + values.Sequence;
                 if(values.Sequence == 1) {
                     isPrimaryKeyPresent = true;
                 }
+                if(index + 1 != size && (values.Sequence == seq[index+1].Sequence)) {
+                    isDuplicatePresent = true;
+                }
             });
-            if(!isPrimaryKeyPresent) {
-                errorMessage = errorMessage + "Primary Image is Missing.<br/>"
-            }
             var misssingSeq = sumOf1toN - sumOfSequence;
-            if(isPrimaryKeyPresent && misssingSeq != 0) {
+            if(!isPrimaryKeyPresent) {
+                errorMessage = errorMessage + "Primary Image is Missing.<br/>";
+                validSeq = false;
+            } else if(isDuplicatePresent) {
+                errorMessage = errorMessage + "Duplicate Sequence Number.<br/>";
+                validSeq = false;
+            } else if( misssingSeq != 0) {
                 errorMessage = errorMessage + "Sequence is Missing.<br/> ";
+                validSeq = false;
             }
             // put all error message
             if(errorMessage != "") {
-                $(".dz-sequence-preview." + key).addClass("dz-error").find(".dz-error-mark .dz-error-message small").html(errorMessage);
+                $(".dz-sequence-preview." + key).find(".dz-status .tooltip_container").addClass("alert");
+                $(".dz-sequence-preview." + key).find(".dz-status .icon").addClass("alert");
+                $(".dz-sequence-preview." + key).addClass("dz-error").find(".dz-status .tooltiptext").html(errorMessage);
+                noOfInvalidSequences++;
+            } else {
+                $(".dz-sequence-preview." + key).find(".dz-status .icon").addClass("check");
             }
         }
     }
+    if(noOfInvalidSequences > 0) {
+        $(".sequence-invalid").html(noOfInvalidSequences + " sequences are invalid. Please recheck excel file and upload again.")
+    }
+    return validSeq;
 }
 
 export function validations(){

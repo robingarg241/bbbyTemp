@@ -100,7 +100,7 @@ body,
 
 $dropzoneMargin: 10px;
 
-.dropzone-invalid {
+.dropzone-invalid, .sequence-invalid {
     border-left: 1px solid $black;
     color: $error;
     display: inline-block;
@@ -144,11 +144,7 @@ $dropzoneMargin: 10px;
         }
     }
 }
-
-
-
-.dropzone, .checkSequenceZone {
-
+.dropzone {
   $image-size: 120px;
 
   $image-border-radius: 20px;
@@ -540,7 +536,103 @@ $dropzoneMargin: 10px;
         cursor:pointer;
     }
 }
-
+.checkSequenceZone {
+    $image-size: 120px;
+    $image-border-radius: 20px;
+    height: 100vh;
+    min-height: 150px;
+    border: 2px dashed rgba(0, 0, 0, 0.3);
+    padding: 20px 20px;
+    margin: 0 $dropzoneMargin 0 0;
+    &.dz-started {
+        .dz-message {
+          display: none;
+          text-align: center;
+          margin: 2em 0;
+        }
+    }
+    &.dz-drag-hover {
+      border-style: solid;
+      .dz-message {
+        opacity: 0.5;
+      }
+    }
+    .dz-sequence-preview {
+        position: relative;
+        &:hover {
+            // Making sure that always the hovered preview element is on top
+            z-index: 1000;
+            .dz-details {
+                opacity: 1;
+            }
+        }
+        &.dz-image-preview {
+            background: white;
+            .dz-details {
+                @include prefix((transition: opacity 0.2s linear));
+            }
+            .tooltip_container {
+                position: relative;
+                display: inline-block;
+                &.alert:hover,
+                &.error:hover {
+                    .tooltiptext{
+                        visibility: visible;
+                    }
+                }
+                .icon{
+                    background-size: cover !important;
+                    width: 16px;
+                    height: 16px;
+                    margin-left: 4px;
+                    &.check {
+                        background: url('/etc/designs/bbby/icons/metadata_check.png');
+                    }
+                    &.error {
+                        background: url('/etc/designs/bbby/icons/metadata_error.png');
+                    }
+                    &.alert {
+                        background: url('/etc/designs/bbby/icons/icon-alert-4.png');
+                    }
+                }
+                .tooltiptext {
+                    position: absolute;
+                    visibility: hidden;
+                    width: 280px;
+                    background: white;
+                    left: -130px;
+                    top: 30px;
+                    padding: 20px;
+                    border: 2px solid #4e97e5;
+                    font-weight: 300;
+                    font-family: 'brandon', sans-serif;
+                    font-size: small;
+                }
+            }
+        }
+        &.dz-error {
+            cursor: not-allowed;
+            opacity: .5;
+            user-select: none;
+            .dz-remove,
+            .dz-remove-custom {
+                cursor: inherit !important;
+            }
+        }
+        &:hover .dz-details {
+            opacity: 1;
+        }
+        &.dz-error {
+            .dz-error-message {
+                display: block;
+            }
+            &:hover .dz-error-message {
+                opacity: 1;
+                pointer-events: auto;
+            }
+        }
+    }
+}
 .dropzone-drag-here {
     border: 5px dashed blue !important;
     opacity: 1;
@@ -941,10 +1033,10 @@ $dropzoneMargin: 10px;
         grid-template-columns: 1fr 2fr 1fr 1fr 1fr 1fr 1fr 70px;
         -ms-grid-columns: 1fr 2fr 1fr 1fr 1fr 1fr 1fr 70px;
         &.dz-sequence-preview {
-            grid-template-columns: 1fr 2fr 2fr 1fr 1fr 1px;
+            grid-template-columns: 1fr 2fr 1fr 1fr 1px;
             border-bottom: 0.5px solid #8d8d8d;
             padding: 10px 0;
-            .dz-alt-filename, .dz-alt-seq-no {
+            .dz-primary-img, .dz-alt-filename, .dz-alt-seq-no {
                 display: block;
             }
             &.noPrimaryKey {
@@ -952,11 +1044,13 @@ $dropzoneMargin: 10px;
             }
             &.dz-error {
                 background-color: #ffeeef;
+                cursor: pointer;
+                opacity: 1;
                 .dz-error-message {
                     display: block;
                 }
             }
-            .dz-error-message {
+            .dz-error-message, .dz-success-mark, .dz-error-mark {
                 display: none;
             }
         }
@@ -992,7 +1086,7 @@ $dropzoneMargin: 10px;
             }
         }
         button[type="submit"],
-        .validate-all, .validate-qc,
+        .validate-all, .validate-qc, .validate-sequence,
         .btn-bbb {
             background: #dadada;
             color: $black;
@@ -1022,13 +1116,6 @@ $dropzoneMargin: 10px;
                 pointer-events: all;
                 border: 2px solid #003bde !important;
             }
-        }
-        .validate-sequence {
-            background: #003bde;
-            color: #fff;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
         }
     }
     @media (max-width: 1199px) {

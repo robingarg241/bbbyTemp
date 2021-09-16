@@ -201,10 +201,13 @@ export function addDragDropEventListerners(){
     $("#validate-sequence").on("click", function (event) {
         event.preventDefault();
         event.stopPropagation();
-        validateFileSequence();
-        $(this).hide();
-        $("#submit-fasttrack").addClass('submit-ready').show();
 
+        if(validateFileSequence()) {
+            $(this).hide();
+            $("#submit-fasttrack").addClass('submit-ready').show();
+        } else {
+            $(this).removeClass('submit-ready');
+        }
     });
 
     $("#submit-fasttrack").on("click", function (event) {
