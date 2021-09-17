@@ -6,6 +6,7 @@ public class UploadItem {
     private int width;
     private int height;
     private String colorSpace;
+    private String sharedAsset;
 
     public String getUuid() {
         return uuid;
@@ -45,5 +46,13 @@ public class UploadItem {
 
     public void setColorSpace(String colorSpace) {
         this.colorSpace = colorSpace;
+    }
+
+    public String getSharedAsset() {
+        return sharedAsset;
+    }
+
+    public void setSharedAsset(String sharedAsset) {
+        this.sharedAsset = sharedAsset;
     }
 }

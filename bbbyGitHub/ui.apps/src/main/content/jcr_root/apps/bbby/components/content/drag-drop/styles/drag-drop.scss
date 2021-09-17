@@ -1039,6 +1039,16 @@ $dropzoneMargin: 10px;
             .dz-primary-img, .dz-alt-filename, .dz-alt-seq-no {
                 display: block;
             }
+            .dz-primary-img.icon-p:after {
+                content: "P";
+                position: relative;
+                bottom: 6px;
+                left: 6px;
+                border: 0.5px solid;
+                border-radius: 50%;
+                padding: 0px 3px;
+                font-size: 9px;
+            }
             &.noPrimaryKey {
                 background-color: #ffeeef;
             }

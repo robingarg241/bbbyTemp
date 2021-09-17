@@ -365,7 +365,7 @@ public class AssetServiceImpl implements AssetService {
             assetWrapperPageContainer.setProperty(CommonConstants.BBBY_HEIGHT, currentItem.getHeight());
             assetWrapperPageContainer.setProperty(CommonConstants.BBBY_SIZE, filesize);
             assetWrapperPageContainer.setProperty(CommonConstants.BBBY_COLOR_SPACE, currentItem.getColorSpace());
-
+            assetWrapperPageContainer.setProperty(CommonConstants.BBBY_SHARED_ASSET, currentItem.getSharedAsset());
 
         } catch (Exception e) {
             log.error("An exception has occured in setHistoryRequiredMetadata method with error: " + e.getMessage(), e);

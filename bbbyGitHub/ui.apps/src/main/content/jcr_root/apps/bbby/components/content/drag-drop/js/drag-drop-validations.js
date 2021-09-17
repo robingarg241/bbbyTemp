@@ -458,7 +458,9 @@ function validateFasttrackAssets(xls) {
                 if(!uploadItem.fileErrorMessage){
                     parentDiv[0].classList.remove("dz-error");
                 }
-
+                if(fileMD[0].SharedAsset) {
+                    uploadItem.uploadAssetItem.sharedAsset = fileMD[0].SharedAsset.trim();
+                }
                 // Delete metadataErrorMessage on correct validation
                 delete uploadItem.metadataErrorMessage;
                 updateFileCounts();
@@ -883,6 +885,8 @@ function showFileSequence () {
         $("#validate-sequence").addClass("submit-ready").show();
         $("#upload-batch").hide();
         $(".dz-sequence-preview").remove();
+        $(".sequence-count").html("");
+        $(".sequence-invalid").html("");
         // for or while loop for multiple sequences
         generateSequence();
         $("#show-sequence").show();
@@ -921,12 +925,12 @@ function populateFileSequence(group) {
     var isPrimaryKeyPresent = false;
     group.forEach(function(values, index) {
         if(index === 0) {
-            dzSequence.className = dzSequence.className + " " + values.UPC;
+            dzSequence.className = dzSequence.className + " " + values.UPC.replace(",", "-");
             var upc = clone.querySelector('.dz-upc span');
             upc.textContent = values.UPC;
         }
         if(values.Sequence == 1) {
-            fileName.innerHTML = fileName.innerHTML + "<span class='dz-primary-img'>" + values.Filename + "</span>"
+            fileName.innerHTML = fileName.innerHTML + "<span class='dz-primary-img icon-p'>" + values.Filename + "</span>"
             isPrimaryKeyPresent = true;
         } else {
             fileName.innerHTML = fileName.innerHTML + "<span class='dz-alt-filename'>" + values.Filename + "</span>";
@@ -974,13 +978,14 @@ export function validateFileSequence() {
                 validSeq = false;
             }
             // put all error message
+            var keyClass = key.replace(",", "-");
             if(errorMessage != "") {
-                $(".dz-sequence-preview." + key).find(".dz-status .tooltip_container").addClass("alert");
-                $(".dz-sequence-preview." + key).find(".dz-status .icon").addClass("alert");
-                $(".dz-sequence-preview." + key).addClass("dz-error").find(".dz-status .tooltiptext").html(errorMessage);
+                $(".dz-sequence-preview." + keyClass).find(".dz-status .tooltip_container").addClass("alert");
+                $(".dz-sequence-preview." + keyClass).find(".dz-status .icon").addClass("alert");
+                $(".dz-sequence-preview." + keyClass).addClass("dz-error").find(".dz-status .tooltiptext").html(errorMessage);
                 noOfInvalidSequences++;
             } else {
-                $(".dz-sequence-preview." + key).find(".dz-status .icon").addClass("check");
+                $(".dz-sequence-preview." + keyClass).find(".dz-status .icon").addClass("check");
             }
         }
     }
