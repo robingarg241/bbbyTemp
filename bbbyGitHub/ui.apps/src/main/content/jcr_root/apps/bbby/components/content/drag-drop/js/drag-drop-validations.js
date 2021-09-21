@@ -923,21 +923,29 @@ function populateFileSequence(group) {
 
     var seqNo = clone.querySelector('.dz-sequence-number span');
     var isPrimaryKeyPresent = false;
+    var isSharedAsset = false;
     group.forEach(function(values, index) {
         if(index === 0) {
             dzSequence.className = dzSequence.className + " " + values.UPC.replace(",", "-");
             var upc = clone.querySelector('.dz-upc span');
             upc.textContent = values.UPC;
         }
-        if(values.Sequence == 1) {
-            fileName.innerHTML = fileName.innerHTML + "<span class='dz-primary-img icon-p'>" + values.Filename + "</span>"
-            isPrimaryKeyPresent = true;
+        if(values.SharedAsset.trim().toLowerCase() == 'no') {
+            if(values.Sequence == 1) {
+                fileName.innerHTML = fileName.innerHTML + "<span class='dz-primary-img icon-p'>" + values.Filename + "</span>"
+                isPrimaryKeyPresent = true;
+            } else {
+                fileName.innerHTML = fileName.innerHTML + "<span class='dz-alt-filename'>" + values.Filename + "</span>";
+            }
         } else {
             fileName.innerHTML = fileName.innerHTML + "<span class='dz-alt-filename'>" + values.Filename + "</span>";
+            isSharedAsset = true;
         }
         seqNo.innerHTML = seqNo.innerHTML + "<span class='dz-alt-seq-no'>" + values.Sequence + "</span>";
     });
-    if(!isPrimaryKeyPresent) {
+    if(isSharedAsset) {
+        dzSequence.className = dzSequence.className + " sharedAsset";
+    } else if(!isPrimaryKeyPresent) {
         dzSequence.className = dzSequence.className + " noPrimaryKey";
     }
     document.querySelector(".checkSequenceZone").appendChild(clone);
@@ -957,23 +965,30 @@ export function validateFileSequence() {
             var sumOf1toN = n*(n+1)/2 ;;
             var isPrimaryKeyPresent = false;
             var isDuplicatePresent = false;
+            var isSharedAsset = false;
             seq.forEach(function(values, index) {
                 sumOfSequence = sumOfSequence + values.Sequence;
-                if(values.Sequence == 1) {
-                    isPrimaryKeyPresent = true;
-                }
-                if(index + 1 != size && (values.Sequence == seq[index+1].Sequence)) {
-                    isDuplicatePresent = true;
+                if(values.SharedAsset.trim().toLowerCase() == 'no') {
+                    if(values.Sequence == 1) {
+                        isPrimaryKeyPresent = true;
+                    }
+                    if(index + 1 != size && (values.Sequence == seq[index+1].Sequence)) {
+                        isDuplicatePresent = true;
+                    }
+                } else {
+                    isSharedAsset = true;
                 }
             });
-            var misssingSeq = sumOf1toN - sumOfSequence;
-            if(!isPrimaryKeyPresent) {
+            var missingSeq = sumOf1toN - sumOfSequence;
+            if(isSharedAsset) {
+                // Skip sequence validation.
+            } else if(!isPrimaryKeyPresent) {
                 errorMessage = errorMessage + "Primary Image is Missing.<br/>";
                 validSeq = false;
             } else if(isDuplicatePresent) {
                 errorMessage = errorMessage + "Duplicate Sequence Number.<br/>";
                 validSeq = false;
-            } else if( misssingSeq != 0) {
+            } else if( missingSeq != 0) {
                 errorMessage = errorMessage + "Sequence is Missing.<br/> ";
                 validSeq = false;
             }

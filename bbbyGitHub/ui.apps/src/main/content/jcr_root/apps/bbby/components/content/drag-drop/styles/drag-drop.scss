@@ -1052,6 +1052,9 @@ $dropzoneMargin: 10px;
             &.noPrimaryKey {
                 background-color: #ffeeef;
             }
+            &.sharedAsset {
+                background-color: #d9d8d8;
+            }
             &.dz-error {
                 background-color: #ffeeef;
                 cursor: pointer;
