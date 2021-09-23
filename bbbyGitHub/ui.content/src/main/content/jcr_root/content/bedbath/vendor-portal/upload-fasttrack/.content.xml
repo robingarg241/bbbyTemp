@@ -39,7 +39,7 @@
                         title="Reference Documentation"/>
                     <item1
                         jcr:primaryType="nt:unstructured"
-                        link="/content/dam/bedbath/vendor-portal/BBB_Metadata_Template_Final_v1.0.xlsx"
+                        link="/content/dam/bedbath/vendor-portal/BBB_Metadata_Template_Fasttrack_Final_v1.0.xlsx"
                         newTab="true"
                         title="Excel Metadata Template"/>
                 </cta>

@@ -937,18 +937,23 @@ function populateFileSequence(group) {
             } else {
                 fileName.innerHTML = fileName.innerHTML + "<span class='dz-alt-filename'>" + values.Filename + "</span>";
             }
+            seqNo.innerHTML = seqNo.innerHTML + "<span class='dz-alt-seq-no'>" + values.Sequence + "</span>";
         } else {
             fileName.innerHTML = fileName.innerHTML + "<span class='dz-alt-filename'>" + values.Filename + "</span>";
+            seqNo.innerHTML = seqNo.innerHTML + "<span class='dz-alt-seq-no'>N/A</span>";
             isSharedAsset = true;
         }
-        seqNo.innerHTML = seqNo.innerHTML + "<span class='dz-alt-seq-no'>" + values.Sequence + "</span>";
+
     });
     if(isSharedAsset) {
         dzSequence.className = dzSequence.className + " sharedAsset";
+        document.querySelector(".sharedAssets").appendChild(clone);
     } else if(!isPrimaryKeyPresent) {
         dzSequence.className = dzSequence.className + " noPrimaryKey";
+        document.querySelector(".non-sharedAssets").appendChild(clone);
+    } else {
+        document.querySelector(".non-sharedAssets").appendChild(clone);
     }
-    document.querySelector(".checkSequenceZone").appendChild(clone);
 }
 
 export function validateFileSequence() {

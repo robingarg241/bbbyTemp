@@ -27,7 +27,7 @@ public class AssetDropsLimitImpl implements AssetDropsLimit {
     private ResourceResolverFactory resolverFactory;
 
     String excelPath = "/content/dam/bedbath/vendor-portal/BBB_Metadata_Template_Final_v1.0.xlsx";
-    String fastTrackExcelPath = "/content/dam/bedbath/vendor-portal/BBB_Metadata_Template_Final_v1.0.xlsx";
+    String fastTrackExcelPath = "/content/dam/bedbath/vendor-portal/BBB_Metadata_Template_Fasttrack_Final_v1.0.xlsx";
 
 	@Activate
 	protected void activate(AssetDropsLimitConfiguration config) {
