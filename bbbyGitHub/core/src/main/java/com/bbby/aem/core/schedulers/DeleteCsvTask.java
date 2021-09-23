@@ -29,7 +29,7 @@ import com.google.gson.annotations.Expose;
  *
  */
 @Component(service = Runnable.class)
-@Designate(ocd = DailyReportVAHAppDamScheduledTaskConfiguration.class)
+@Designate(ocd = DeleteCsvTaskConfiguration.class)
 public class DeleteCsvTask implements Runnable {
 
 	private final static Logger log = LoggerFactory.getLogger(DeleteCsvTask.class);
@@ -50,7 +50,7 @@ public class DeleteCsvTask implements Runnable {
 	private ResourceResolver resourceResolver;
 
 	@Activate
-	protected void activate(DailyReportVAHAppDamScheduledTaskConfiguration config) throws LoginException {
+	protected void activate(DeleteCsvTaskConfiguration config) throws LoginException {
 
 		this.enabled = config.enabled();
 

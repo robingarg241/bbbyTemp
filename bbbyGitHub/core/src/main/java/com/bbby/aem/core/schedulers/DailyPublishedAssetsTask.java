@@ -2,6 +2,7 @@ package com.bbby.aem.core.schedulers;
 
 import java.io.File;
 import java.io.FileWriter;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -42,13 +43,16 @@ import com.google.gson.annotations.Expose;
 @Component(
     service = Runnable.class
 )
-@Designate(ocd = DailyReportVAHAppDamScheduledTaskConfiguration.class)
+@Designate(ocd = DailyPublishedAssetsTaskConfiguration.class)
 public class DailyPublishedAssetsTask implements Runnable {
 
 	private final Logger log = LoggerFactory.getLogger(DailyPublishedAssetsTask.class);
     
     @Expose
     private boolean enabled;
+    
+    @Expose
+    private int daysTooKeep;
 
     @Reference
     private ResourceResolverFactory resolverFactory;
@@ -65,8 +69,9 @@ public class DailyPublishedAssetsTask implements Runnable {
     private ResourceResolver resourceResolver;
     
     @Activate
-    protected void activate(DailyReportVAHAppDamScheduledTaskConfiguration config) throws LoginException {
+    protected void activate(DailyPublishedAssetsTaskConfiguration config) throws LoginException {
         this.enabled = config.enabled();
+        this.daysTooKeep = config.daysTooKeep();
         resourceResolver = ServiceUtils.getResourceResolver(resolverFactory, "writeservice");
     }
 
@@ -98,11 +103,19 @@ public class DailyPublishedAssetsTask implements Runnable {
 		File file = new File("csv_reports/Approved_DAM");
 		file.mkdirs();
 		String filename = "csv_reports/Approved_DAM/dam_not_publish_" + crdate1 + ".csv";
+		
+		LocalDateTime currentDate = LocalDateTime.now();
+		// DAM:1561 - Added the milliseconds to date if its 000.
+		if(!currentDate.toString().contains(".")) {
+			String correctDate = currentDate.toString()+".001";
+			currentDate = LocalDateTime.parse(correctDate);
+			log.info("Date after adding ms.."+currentDate);
+		}
 		try {
 			FileWriter writer = new FileWriter(filename);
 			CSVUtils.writeLine(writer, getHeaderList());
 
-			String queryString = "SELECT * FROM [dam:Asset] AS N WHERE ISDESCENDANTNODE(N,\"/content/dam/bbby/approved_dam\") AND (N.[jcr:created] > CAST('2020-09-01T00:00:00.000-04:00' AS DATE)) AND (N.[jcr:content/metadata/dam:scene7FileStatus] <> \"PublishComplete\")";
+			String queryString = "SELECT * FROM [dam:Asset] AS N WHERE ISDESCENDANTNODE(N,\"/content/dam/bbby/approved_dam\") AND (N.[jcr:created] > CAST('" + currentDate.minusDays(daysTooKeep) +"' AS DATE)) AND (N.[jcr:content/metadata/dam:scene7FileStatus] <> \"PublishComplete\")";
 			log.info("Executing query {}", queryString);
 			Iterator<Resource> batchNodes = resourceResolver.findResources(queryString, Query.JCR_SQL2);
 			List<String> propertyList = null;
@@ -113,7 +126,7 @@ public class DailyPublishedAssetsTask implements Runnable {
 				try {
 					String createddate = node.getProperty("jcr:created").getString();
 					Node meta = node.getNode(CommonConstants.METADATA_NODE);
-					log.info("pathm...." + meta.getPath());
+					log.info("Metadata path...." + meta.getPath());
 					String damstat = meta.getProperty("dam:scene7FileStatus").getString();
 					String exdate = "";
 					String entdate = "";
@@ -131,7 +144,7 @@ public class DailyPublishedAssetsTask implements Runnable {
 
 					if (node.hasNode(CommonConstants.REPORTING_METADATA_NODE)) {
 						Node repo = node.getNode(CommonConstants.REPORTING_METADATA_NODE);
-						log.info("node path" + repo.getPath());
+						log.info("Repo node: " + repo.getPath());
 						if (repo.hasProperty(CommonConstants.ECOMM_ENTRY_DATE)) {
 							entdate = repo.getProperty(CommonConstants.ECOMM_ENTRY_DATE).getString();
 

@@ -35,13 +35,14 @@ import com.bbby.aem.core.util.ServiceUtils;
 import com.day.cq.commons.Externalizer;
 import com.day.cq.wcm.api.WCMException;
 import com.google.gson.annotations.Expose;
+import com.google.common.collect.Iterators;
 
 /**
  * VAH Assets Report for No UPC or No Shot_Type Or No Asset_Type Tag
  *
  */
 @Component(service = Runnable.class)
-@Designate(ocd = DailyReportVAHAppDamScheduledTaskConfiguration.class)
+@Designate(ocd = VAHReportTaskConfiguration.class)
 public class VAHReportTask implements Runnable {
 
 	private final Logger log = LoggerFactory.getLogger(VAHReportTask.class);
@@ -64,7 +65,7 @@ public class VAHReportTask implements Runnable {
 	private ResourceResolver resourceResolver;
 
 	@Activate
-	protected void activate(DailyReportVAHAppDamScheduledTaskConfiguration config) throws LoginException {
+	protected void activate(VAHReportTaskConfiguration config) throws LoginException {
 		this.enabled = config.enabled();
 		resourceResolver = ServiceUtils.getResourceResolver(resolverFactory, "writeservice");
 	}
@@ -123,16 +124,20 @@ public class VAHReportTask implements Runnable {
 				int noShotTypeCount = 0;
 				int noAssetAndShotTypeCount = 0;
 				int noMetadataCount = 0;
+				int nodeCount = 0;
 				Iterator<Resource> batchNodes = executeQuery(currentDate.minusDays(i), currentDate.minusDays(i - 1));
 				List<String> propertyList = null;
 				StringBuilder tagval = null;
 				while (batchNodes.hasNext()) {
+					nodeCount++;
 					propertyList = new ArrayList<String>();
 					tagval = new StringBuilder();
 					Resource batchResource = (Resource) batchNodes.next();
 					Node node = batchResource.adaptTo(Node.class);
+					log.info("Asset Node Path...." + node.getPath());
 					try {
 						String createdDate = node.getProperty("jcr:created").getString();
+						log.info("created date is..." + createdDate);
 						Node metadataNode = node.getNode(CommonConstants.METADATA_NODE);
 						log.info("Metadata Node Path...." + metadataNode.getPath());
 						String assetupc = ServiceUtils.getMetadataValue(batchResource, CommonConstants.BBBY_UPC, null);
@@ -196,7 +201,7 @@ public class VAHReportTask implements Runnable {
 					}
 
 				}
-		
+				log.info("node count is..." + nodeCount);
 				upcaaray.add(Integer.toString(blankUpcCount));
 				noassetarray.add(Integer.toString(noAssetTypeCount));
 				noshotarray.add(Integer.toString(noShotTypeCount));
@@ -276,7 +281,13 @@ public class VAHReportTask implements Runnable {
 		String queryString = "SELECT * FROM [dam:Asset] AS N WHERE ISDESCENDANTNODE(N,\"/content/dam/bbby/asset_transitions_folder/vendor/vendor_assets_holding\") AND N.[jcr:created] >= CAST('"
 				+ fromDate + "' AS DATE) AND N.[jcr:created] <= CAST('" + toDate + "' AS DATE)";
 		log.info("Executing query..." + queryString);
+		if(resourceResolver==null) {
+		log.info("resourceResolver is Null");
+		}
 		batchNodes = resourceResolver.findResources(queryString, Query.JCR_SQL2);
+		Iterator<Resource> batchNodes1 = resourceResolver.findResources(queryString, Query.JCR_SQL2);
+		log.info("Query Executed successfully.");
+		log.info("number of results = "+Iterators.size(batchNodes1));
 		if(batchNodes==null) {
 		log.info("Query results are Null");
 		}
