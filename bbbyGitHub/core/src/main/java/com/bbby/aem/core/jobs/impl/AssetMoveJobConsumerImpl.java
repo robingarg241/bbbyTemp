@@ -182,7 +182,7 @@ public class AssetMoveJobConsumerImpl implements JobConsumer {
     				JcrUtil.setProperty(repometa, CommonConstants.VAH_ENTRY_DATE, ServiceUtils.getCurrentDateStr(CommonConstants.DATE_FORMAT));
     			}
 
-                Node operationalmeta = JcrUtil.createPath(targetPath + "/" + CommonConstants.OPERATIONAL_METADATA_NODE, JcrConstants.NT_UNSTRUCTURED, session);
+                Node operationalmeta = JcrUtil.createPath(targetPath + "/" + CommonConstants.REL_ASSET_OPERATIONAL_METADATA, JcrConstants.NT_UNSTRUCTURED, session);
                 if (operationalmeta != null) {
                     String isFasttrackAsset = assetJcrContentNode.hasProperty( CommonConstants.BBBY_FAST_TRACK_ASSET) ? assetJcrContentNode.getProperty( CommonConstants.BBBY_FAST_TRACK_ASSET).getString() : "No";
                     JcrUtil.setProperty(operationalmeta, CommonConstants.BBBY_FAST_TRACK_ASSET, isFasttrackAsset);
