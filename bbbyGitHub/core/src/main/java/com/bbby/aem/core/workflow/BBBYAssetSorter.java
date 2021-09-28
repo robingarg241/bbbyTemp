@@ -1093,7 +1093,7 @@ public class BBBYAssetSorter implements WorkflowProcess {
     	if(isSharedAsset.equalsIgnoreCase("yes")){
     		targetNode = JcrUtil.createPath(this.ecommFolder + "/fasttrack/shared/" + fastTrackBatchDate , "sling:Folder", session);
     	}else{
-    		targetNode = JcrUtil.createPath(this.ecommFolder + "/fasttrack/nonshared" + fastTrackBatchDate, "sling:Folder", session);
+    		targetNode = JcrUtil.createPath(this.ecommFolder + "/fasttrack/nonshared/" + fastTrackBatchDate, "sling:Folder", session);
     	}
         return targetNode;
     }

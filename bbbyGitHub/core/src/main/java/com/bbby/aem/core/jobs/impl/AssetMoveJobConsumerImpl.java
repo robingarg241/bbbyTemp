@@ -120,7 +120,6 @@ public class AssetMoveJobConsumerImpl implements JobConsumer {
             JcrUtil.setProperty(assetJcrContentNode, ReplicationStatus.NODE_PROPERTY_LAST_REPLICATED_BY, null);
             JcrUtil.setProperty(assetJcrContentNode, ReplicationStatus.NODE_PROPERTY_LAST_REPLICATION_ACTION, null);
 
-
             if(asset == null || !asset.getResourceType().equals("dam:Asset")) {
             	log.warn("Move Assets invoked incorrectly on {}", assetPath);
             	return null;
@@ -143,7 +142,6 @@ public class AssetMoveJobConsumerImpl implements JobConsumer {
 
 
             Node assetWrapperContentNode = assetWrapperJcrContent.adaptTo(Node.class);
-
 			if (assetWrapperContentNode.hasProperty("moveAsset")) {
 
 				Node assetNode = asset.adaptTo(Node.class);
@@ -169,10 +167,13 @@ public class AssetMoveJobConsumerImpl implements JobConsumer {
 				assetManager.removeAsset(sourcePath);
 
 				assetWrapperContentNode.setProperty("completed", true);
+				
+				String isFasttrackAsset = assetWrapperContentNode.hasProperty( CommonConstants.BBBY_FAST_TRACK_ASSET) ? assetWrapperContentNode.getProperty( CommonConstants.BBBY_FAST_TRACK_ASSET).getString() : "No";
+	            String isSharedAsset = assetWrapperContentNode.hasProperty( CommonConstants.BBBY_SHARED_ASSET) ? assetWrapperContentNode.getProperty( CommonConstants.BBBY_SHARED_ASSET).getString() : "no";
                 String fastTrackBatchDateStr = null;
 				if(assetWrapperContentNode.hasProperty(CommonConstants.JCR_CREATED)) {
                     Date fastTrackBatchDate = assetWrapperContentNode.getProperty(CommonConstants.JCR_CREATED).getDate().getTime();
-                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyy-MM-dd-hh-mm");
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd-hh-mm");
                     fastTrackBatchDateStr = dateFormat.format(fastTrackBatchDate);
                 }
 
@@ -181,12 +182,10 @@ public class AssetMoveJobConsumerImpl implements JobConsumer {
                 if (repometa != null) {
     				JcrUtil.setProperty(repometa, CommonConstants.VAH_ENTRY_DATE, ServiceUtils.getCurrentDateStr(CommonConstants.DATE_FORMAT));
     			}
-
+                
                 Node operationalmeta = JcrUtil.createPath(targetPath + "/" + CommonConstants.REL_ASSET_OPERATIONAL_METADATA, JcrConstants.NT_UNSTRUCTURED, session);
                 if (operationalmeta != null) {
-                    String isFasttrackAsset = assetJcrContentNode.hasProperty( CommonConstants.BBBY_FAST_TRACK_ASSET) ? assetJcrContentNode.getProperty( CommonConstants.BBBY_FAST_TRACK_ASSET).getString() : "No";
                     JcrUtil.setProperty(operationalmeta, CommonConstants.BBBY_FAST_TRACK_ASSET, isFasttrackAsset);
-                    String isSharedAsset = assetJcrContentNode.hasProperty( CommonConstants.BBBY_SHARED_ASSET) ? assetJcrContentNode.getProperty( CommonConstants.BBBY_SHARED_ASSET).getString() : "no";
                     JcrUtil.setProperty(operationalmeta, CommonConstants.BBBY_SHARED_ASSET, isSharedAsset);
                     if(fastTrackBatchDateStr != null) {
                         JcrUtil.setProperty(operationalmeta, CommonConstants.FAST_TRACK_BATCH_DATE, fastTrackBatchDateStr);
