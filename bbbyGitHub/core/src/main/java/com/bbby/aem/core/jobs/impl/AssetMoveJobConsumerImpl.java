@@ -168,6 +168,12 @@ public class AssetMoveJobConsumerImpl implements JobConsumer {
 				assetManager.removeAsset(sourcePath);
 
 				assetWrapperContentNode.setProperty("completed", true);
+                String fastTrackBatchDateStr = null;
+				if(assetWrapperContentNode.hasProperty(CommonConstants.JCR_CREATED)) {
+                    Date fastTrackBatchDate = assetWrapperContentNode.getProperty(CommonConstants.JCR_CREATED).getDate().getTime();
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyy-MM-dd-hh-mm");
+                    fastTrackBatchDateStr = dateFormat.format(fastTrackBatchDate);
+                }
 
             	//DAM-320 : populated reporting metadata attribute "Vendors Assets Holding Entry Date".
                 Node repometa = JcrUtil.createPath(targetPath + "/" + CommonConstants.REL_ASSET_REPORTING_METADATA, JcrConstants.NT_UNSTRUCTURED, session);
@@ -179,6 +185,11 @@ public class AssetMoveJobConsumerImpl implements JobConsumer {
                 if (operationalmeta != null) {
                     String isFasttrackAsset = assetJcrContentNode.hasProperty( CommonConstants.BBBY_FAST_TRACK_ASSET) ? assetJcrContentNode.getProperty( CommonConstants.BBBY_FAST_TRACK_ASSET).getString() : "No";
                     JcrUtil.setProperty(operationalmeta, CommonConstants.BBBY_FAST_TRACK_ASSET, isFasttrackAsset);
+                    String isSharedAsset = assetJcrContentNode.hasProperty( CommonConstants.BBBY_SHARED_ASSET) ? assetJcrContentNode.getProperty( CommonConstants.BBBY_SHARED_ASSET).getString() : "no";
+                    JcrUtil.setProperty(operationalmeta, CommonConstants.BBBY_SHARED_ASSET, isSharedAsset);
+                    if(fastTrackBatchDateStr != null) {
+                        JcrUtil.setProperty(operationalmeta, "fastTrackBatchDate", fastTrackBatchDateStr);
+                    }
                 }
 
                 log.debug("Uploaded asset {} moved to -> {}. Vendor filename is {}, batch ID is {} ", sourcePath, targetPath,
