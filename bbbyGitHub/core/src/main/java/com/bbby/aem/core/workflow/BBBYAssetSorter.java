@@ -1066,18 +1066,17 @@ public class BBBYAssetSorter implements WorkflowProcess {
     		String origin = node.getPath();
     		Path p = Paths.get(origin);
     		String file = p.getFileName().toString();
-            Node metadataNode = node.getNode(CommonConstants.METADATA_NODE);
             Node targetNode = null;
-            String batchId = (metadataNode.hasProperty("bbby:batchID")) ? metadataNode.getProperty("bbby:batchID").getString() : ""; 
-    		//String sequenceNumber = (metadataNode.hasProperty(CommonConstants.BBBY_SEQUENCE)) ? metadataNode.getProperty(CommonConstants.BBBY_SEQUENCE).getString() : ""; 
-    		
+            
     		String isSharedAsset = "No";
+    		String fastTrackBatchDate = "";
     		Node operationalmeta = JcrPropertiesUtil.getOperationalNode(node, session);
     		if(operationalmeta!=null){
     			isSharedAsset = (operationalmeta.hasProperty(CommonConstants.BBBY_SHARED_ASSET)) ? operationalmeta.getProperty(CommonConstants.BBBY_SHARED_ASSET).getString() : "No";  //This attribute is used for determining whether the asset is shared or not.
+    			fastTrackBatchDate = (operationalmeta.hasProperty(CommonConstants.FAST_TRACK_BATCH_DATE)) ? operationalmeta.getProperty(CommonConstants.FAST_TRACK_BATCH_DATE).getString() : ""; 
     		}
     		
-            targetNode = createTargetNodeFastTrack(session, isSharedAsset, batchId);
+            targetNode = createTargetNodeFastTrack(session, isSharedAsset, fastTrackBatchDate);
           //Save the session to confirm that folders created successfully.
             session.save();
     		String destination = targetNode.getPath() + "/" + file;
@@ -1089,12 +1088,12 @@ public class BBBYAssetSorter implements WorkflowProcess {
     	}
     }
     
-	private Node createTargetNodeFastTrack(Session session, String isSharedAsset, String batchId) throws RepositoryException {
+	private Node createTargetNodeFastTrack(Session session, String isSharedAsset, String fastTrackBatchDate) throws RepositoryException {
         Node targetNode = null;
     	if(isSharedAsset.equalsIgnoreCase("yes")){
-    		targetNode = JcrUtil.createPath(this.ecommFolder + "/fasttrack/shared/" + batchId , "sling:Folder", session);
+    		targetNode = JcrUtil.createPath(this.ecommFolder + "/fasttrack/shared/" + fastTrackBatchDate , "sling:Folder", session);
     	}else{
-    		targetNode = JcrUtil.createPath(this.ecommFolder + "/fasttrack/nonshared" + batchId, "sling:Folder", session);
+    		targetNode = JcrUtil.createPath(this.ecommFolder + "/fasttrack/nonshared" + fastTrackBatchDate, "sling:Folder", session);
     	}
         return targetNode;
     }

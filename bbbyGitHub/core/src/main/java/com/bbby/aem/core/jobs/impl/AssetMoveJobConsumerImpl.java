@@ -22,6 +22,7 @@ import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 /**
  * Job consumer that downloads images to DAM and links them to product asset node.
@@ -188,7 +189,7 @@ public class AssetMoveJobConsumerImpl implements JobConsumer {
                     String isSharedAsset = assetJcrContentNode.hasProperty( CommonConstants.BBBY_SHARED_ASSET) ? assetJcrContentNode.getProperty( CommonConstants.BBBY_SHARED_ASSET).getString() : "no";
                     JcrUtil.setProperty(operationalmeta, CommonConstants.BBBY_SHARED_ASSET, isSharedAsset);
                     if(fastTrackBatchDateStr != null) {
-                        JcrUtil.setProperty(operationalmeta, "fastTrackBatchDate", fastTrackBatchDateStr);
+                        JcrUtil.setProperty(operationalmeta, CommonConstants.FAST_TRACK_BATCH_DATE, fastTrackBatchDateStr);
                     }
                 }
 

@@ -282,6 +282,7 @@ public final class CommonConstants
     
     public static final String BBBY_FAST_TRACK_ASSET = "assetSubmittedByFastTrack";
     public static final String BBBY_SHARED_ASSET = "isSharedAsset";
+    public static final String FAST_TRACK_BATCH_DATE = "fastTrackBatchDate";
     
     //Asset Type and Shot Type for Marketing Assets
     public static final String MARKETING_ASSET_TYPE_LABEL = "marketing:assetType";
