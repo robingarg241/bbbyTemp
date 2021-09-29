@@ -32,9 +32,9 @@ import com.day.cq.dam.commons.util.S7SetHelper;
  * @author Karan
  *
  */
-@Component(service = WorkflowProcess.class, property = { "process.label=Nightly Publish Validate Asset",
+@Component(service = WorkflowProcess.class, property = { "process.label=Fast Track Validate Asset",
 		"Constants.SERVICE_VENDOR=BBBY",
-		"Constants.SERVICE_DESCRIPTION=Validate Imageset/Image is exist or not and not from Approve DAM Folder" })
+		"Constants.SERVICE_DESCRIPTION=Fast Track Validate Imageset/Image is exist or not and not from Approve DAM Folder" })
 public class ValidateAssetFastTrack implements WorkflowProcess {
 
 	protected final Logger log = LoggerFactory.getLogger(this.getClass());

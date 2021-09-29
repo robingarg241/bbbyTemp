@@ -34,9 +34,9 @@ import com.day.cq.replication.Replicator;
  * @author Karan
  *
  */
-@Component(service = WorkflowProcess.class, property = { "process.label= Nightly Publish Assets",
+@Component(service = WorkflowProcess.class, property = { "process.label= Fast Track Publish Assets",
 		"Constants.SERVICE_VENDOR=BBBY",
-		"Constants.SERVICE_DESCRIPTION=BBBY APPROVE AND PUBLISH, Publish Imageset/Image" })
+		"Constants.SERVICE_DESCRIPTION=Fast Track Publish Imageset/Image" })
 public class PublishImageImagesetFastTrack implements WorkflowProcess {
 
 	@Reference

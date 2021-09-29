@@ -29,9 +29,9 @@ import com.day.cq.dam.commons.util.S7SetHelper;
  * @author Karan
  *
  */
-@Component(service = WorkflowProcess.class, property = { "process.label=Nightly Publish Create Folder",
+@Component(service = WorkflowProcess.class, property = { "process.label=Fast Track Create Folder",
 		"Constants.SERVICE_VENDOR=BBBY",
-		"Constants.SERVICE_DESCRIPTION=BBBY APPROVE AND PUBLISH, Created destination folder" })
+		"Constants.SERVICE_DESCRIPTION= Fast Track Created destination folder" })
 public class CreateFolderForImageFastTrack implements WorkflowProcess {
 
 	protected final Logger log = LoggerFactory.getLogger(this.getClass());

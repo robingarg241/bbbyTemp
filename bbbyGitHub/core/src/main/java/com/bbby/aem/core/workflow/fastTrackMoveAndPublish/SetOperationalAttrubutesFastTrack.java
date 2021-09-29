@@ -25,9 +25,9 @@ import com.day.cq.commons.jcr.JcrUtil;
  * @author Karan
  *
  */
-@Component(service = WorkflowProcess.class, property = { "process.label=Nightly Publish Set Operational Attributes",
+@Component(service = WorkflowProcess.class, property = { "process.label=Fast Track Set Operational Attributes",
 		"Constants.SERVICE_VENDOR=BBBY",
-		"Constants.SERVICE_DESCRIPTION=BBBY APPROVE AND PUBLISH, Set Operational Attributes" })
+		"Constants.SERVICE_DESCRIPTION=Fast Track Set Operational Attributes" })
 public class SetOperationalAttrubutesFastTrack implements WorkflowProcess {
 
 	protected final Logger log = LoggerFactory.getLogger(this.getClass());

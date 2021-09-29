@@ -35,9 +35,9 @@ import com.day.cq.dam.commons.util.S7SetHelper;
  * @author Karan
  *
  */
-@Component(service = WorkflowProcess.class, property = { "process.label=Nightly Publish Call to PDM",
+@Component(service = WorkflowProcess.class, property = { "process.label=Fast Track Call to PDM",
 		"Constants.SERVICE_VENDOR=BBBY",
-		"Constants.SERVICE_DESCRIPTION=BBBY APPROVE AND PUBLISH, Call to PDM" })
+		"Constants.SERVICE_DESCRIPTION=Fast Track Call to PDM" })
 public class CallToPDMFastTrack implements WorkflowProcess {
 
 	protected final Logger log = LoggerFactory.getLogger(this.getClass());
