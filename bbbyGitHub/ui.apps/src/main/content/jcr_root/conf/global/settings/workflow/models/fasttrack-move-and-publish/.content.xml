@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    jcr:primaryType="cq:Page">
+    <jcr:content
+        cq:designPath="/libs/settings/wcm/designs/default"
+        cq:lastModified="{Date}2021-03-12T15:40:04.752+05:30"
+        cq:lastModifiedBy="admin"
+        cq:template="/libs/cq/workflow/templates/model"
+        jcr:primaryType="cq:PageContent"
+        jcr:title="*Fast Track Move and Publish"
+        sling:resourceType="cq/workflow/components/pages/model">
+        <flow
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="foundation/components/parsys">
+            <process
+                jcr:created="{Date}2021-03-12T15:11:10.895+05:30"
+                jcr:createdBy="admin"
+                jcr:lastModified="{Date}2021-03-12T15:12:23.000+05:30"
+                jcr:lastModifiedBy="admin"
+                jcr:primaryType="nt:unstructured"
+                jcr:title="Validate Asset"
+                sling:resourceType="cq/workflow/components/model/process">
+                <metaData
+                    jcr:primaryType="nt:unstructured"
+                    PROCESS="com.bbby.aem.core.workflow.fastTrackMoveAndPublish.ValidateAssetFastTrack"
+                    PROCESS_AUTO_ADVANCE="true"/>
+            </process>
+            <or
+                jcr:created="{Date}2021-03-12T15:12:55.572+05:30"
+                jcr:createdBy="admin"
+                jcr:lastModified="{Date}2021-03-12T15:17:36.629+05:30"
+                jcr:lastModifiedBy="admin"
+                jcr:primaryType="nt:unstructured"
+                jcr:title="Check Existence"
+                sling:resourceType="cq/workflow/components/model/or"
+                branches="2"
+                orSplit="true"
+                script1="function check(){&#xd;&#xa;&#x9;log.info(&quot;executing check existence branch 1 script now...&quot; + workflowData.getMetaDataMap().get(&quot;isExist&quot;));&#xd;&#xa;&#x9;if (workflowData.getMetaDataMap().get(&quot;isExist&quot;) == &quot;true&quot;) {&#xd;&#xa;        return true;&#xd;&#xa;    }&#xd;&#xa;    return false; &#xd;&#xa;}"
+                script2="function check(){&#xd;&#xa;   log.info(&quot;executing check existence branch 2 script now...&quot;);&#xd;&#xa;   return true;&#xd;&#xa;}">
+                <_x0031_
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="cq/flow/components/parsys">
+                    <or
+                        jcr:created="{Date}2021-03-12T15:13:09.679+05:30"
+                        jcr:createdBy="admin"
+                        jcr:lastModified="{Date}2021-03-12T15:18:51.921+05:30"
+                        jcr:lastModifiedBy="admin"
+                        jcr:primaryType="nt:unstructured"
+                        jcr:title="Check References"
+                        sling:resourceType="cq/workflow/components/model/or"
+                        branches="2"
+                        orSplit="true"
+                        script1="function check(){&#xd;&#xa;&#x9;log.info(&quot;executing check reference branch 1 script now...&quot; + workflowData.getMetaDataMap().get(&quot;checkReferenceStep&quot;));&#xd;&#xa;&#x9;if (workflowData.getMetaDataMap().get(&quot;checkReferenceStep&quot;) == &quot;false&quot;) {&#xd;&#xa;        return true;&#xd;&#xa;    }&#xd;&#xa;    return false; &#xd;&#xa;}"
+                        script2="function check(){&#xd;&#xa;&#x9;log.info(&quot;executing check reference branch 2 script now...&quot; + workflowData.getMetaDataMap().get(&quot;checkReferenceStep&quot;));&#xd;&#xa;&#x9;if (workflowData.getMetaDataMap().get(&quot;checkReferenceStep&quot;) == &quot;true&quot;) {&#xd;&#xa;        return true;&#xd;&#xa;    }&#xd;&#xa;    return false; &#xd;&#xa;}">
+                        <_x0031_
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="cq/flow/components/parsys">
+                            <process
+                                jcr:created="{Date}2021-03-12T15:13:32.650+05:30"
+                                jcr:createdBy="admin"
+                                jcr:lastModified="{Date}2021-03-12T15:19:44.348+05:30"
+                                jcr:lastModifiedBy="admin"
+                                jcr:primaryType="nt:unstructured"
+                                jcr:title="Set Operational Attribute"
+                                sling:resourceType="cq/workflow/components/model/process">
+                                <metaData
+                                    jcr:primaryType="nt:unstructured"
+                                    PROCESS="com.bbby.aem.core.workflow.fastTrackMoveAndPublish.SetOperationalAttrubutesFastTrack"
+                                    PROCESS_AUTO_ADVANCE="true"/>
+                            </process>
+                        </_x0031_>
+                        <_x0032_
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="cq/flow/components/parsys">
+                            <process
+                                jcr:created="{Date}2021-03-12T15:13:35.444+05:30"
+                                jcr:createdBy="admin"
+                                jcr:lastModified="{Date}2021-03-12T15:39:55.286+05:30"
+                                jcr:lastModifiedBy="admin"
+                                jcr:primaryType="nt:unstructured"
+                                jcr:title="Create Destination Folder"
+                                sling:resourceType="cq/workflow/components/model/process">
+                                <metaData
+                                    jcr:primaryType="nt:unstructured"
+                                    PROCESS="com.bbby.aem.core.workflow.fastTrackMoveAndPublish.CreateFolderForImageFastTrack"
+                                    PROCESS_AUTO_ADVANCE="true"/>
+                            </process>
+                            <process_1674621705_c_1938046758
+                                jcr:created="{Date}2021-03-12T15:13:38.640+05:30"
+                                jcr:createdBy="admin"
+                                jcr:lastModified="{Date}2021-03-12T15:40:04.747+05:30"
+                                jcr:lastModifiedBy="admin"
+                                jcr:primaryType="nt:unstructured"
+                                jcr:title="Move Asset/Imageset"
+                                sling:resourceType="cq/workflow/components/model/process">
+                                <metaData
+                                    jcr:primaryType="nt:unstructured"
+                                    PROCESS="com.bbby.aem.core.workflow.fastTrackMoveAndPublish.MoveImageOrImagesetFastTrack"
+                                    PROCESS_AUTO_ADVANCE="true"/>
+                            </process_1674621705_c_1938046758>
+                            <process_1674621705
+                                jcr:created="{Date}2021-03-12T15:13:38.640+05:30"
+                                jcr:createdBy="admin"
+                                jcr:lastModified="{Date}2021-03-12T15:38:32.592+05:30"
+                                jcr:lastModifiedBy="admin"
+                                jcr:primaryType="nt:unstructured"
+                                jcr:title="Publish Asset/Imageset"
+                                sling:resourceType="cq/workflow/components/model/process">
+                                <metaData
+                                    jcr:primaryType="nt:unstructured"
+                                    PROCESS="com.bbby.aem.core.workflow.fastTrackMoveAndPublish.PublishImageImagesetFastTrack"
+                                    PROCESS_AUTO_ADVANCE="true"/>
+                            </process_1674621705>
+                            <process_1674621705_c
+                                jcr:created="{Date}2021-03-12T15:13:38.640+05:30"
+                                jcr:createdBy="admin"
+                                jcr:lastModified="{Date}2021-03-12T15:39:10.448+05:30"
+                                jcr:lastModifiedBy="admin"
+                                jcr:primaryType="nt:unstructured"
+                                jcr:title="Call To PDM"
+                                sling:resourceType="cq/workflow/components/model/process">
+                                <metaData
+                                    jcr:primaryType="nt:unstructured"
+                                    PROCESS="com.bbby.aem.core.workflow.fastTrackMoveAndPublish.CallToPDMFastTrack"
+                                    PROCESS_AUTO_ADVANCE="true"/>
+                            </process_1674621705_c>
+                        </_x0032_>
+                    </or>
+                </_x0031_>
+                <_x0032_
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="cq/flow/components/parsys">
+                    <noopprocess
+                        jcr:created="{Date}2021-03-12T15:13:57.603+05:30"
+                        jcr:createdBy="admin"
+                        jcr:description="A no operation process"
+                        jcr:lastModified="{Date}2021-03-12T15:13:57.603+05:30"
+                        jcr:lastModifiedBy="admin"
+                        jcr:primaryType="nt:unstructured"
+                        jcr:title="No Operation"
+                        sling:resourceType="cq/workflow/components/workflow/noopprocess">
+                        <metaData
+                            jcr:primaryType="nt:unstructured"
+                            PROCESS="/libs/workflow/scripts/noop.ecma"
+                            PROCESS_AUTO_ADVANCE="true"/>
+                    </noopprocess>
+                </_x0032_>
+            </or>
+        </flow>
+    </jcr:content>
+</jcr:root>
