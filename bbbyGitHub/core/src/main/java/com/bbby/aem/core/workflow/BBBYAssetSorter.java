@@ -1091,9 +1091,9 @@ public class BBBYAssetSorter implements WorkflowProcess {
 	private Node createTargetNodeFastTrack(Session session, String isSharedAsset, String fastTrackBatchDate) throws RepositoryException {
         Node targetNode = null;
     	if(isSharedAsset.equalsIgnoreCase("yes")){
-    		targetNode = JcrUtil.createPath(this.ecommFolder + "/fasttrack/shared/" + fastTrackBatchDate , "sling:Folder", session);
+    		targetNode = JcrUtil.createPath(this.ecommFolder + "/fasttrack/" + fastTrackBatchDate + "/shared" , "sling:Folder", session);
     	}else{
-    		targetNode = JcrUtil.createPath(this.ecommFolder + "/fasttrack/nonshared/" + fastTrackBatchDate, "sling:Folder", session);
+    		targetNode = JcrUtil.createPath(this.ecommFolder + "/fasttrack/" + fastTrackBatchDate + "/nonshared", "sling:Folder", session);
     	}
         return targetNode;
     }

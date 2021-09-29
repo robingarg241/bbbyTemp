@@ -69,8 +69,10 @@ public class ProcessFastTrackAssetsJobConsumerImpl implements JobConsumer {
 			Map<String, List<Resource>> sharedAssetMap = new HashMap<String, List<Resource>>();
 
 			Map<String, TreeMap<Integer, Resource>> upcMapwithSequenceMap = new HashMap<String, TreeMap<Integer, Resource>>();
+			
+			String nonSharedPath = rootPath+"/nonshared" ;
 
-			List<Resource> resources = ServiceUtils.getResourcesInDirectory(resourceResolver, rootPath);
+			List<Resource> resources = ServiceUtils.getResourcesInDirectory(resourceResolver, nonSharedPath);
 
 			for (Resource resource : resources) {
 				String upc = ServiceUtils.getMetadataValue(resource, CommonConstants.BBBY_UPC, null);

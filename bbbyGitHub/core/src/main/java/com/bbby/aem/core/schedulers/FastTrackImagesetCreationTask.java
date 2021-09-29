@@ -108,7 +108,7 @@ public class FastTrackImagesetCreationTask implements Runnable {
 	private void createFastTrackImagesets() throws WCMException {
 		log.debug("Inside createFastTrackImagesets() method.");
 
-		String queryString = "SELECT * FROM [sling:Folder] AS N WHERE ISDESCENDANTNODE(N,\"/content/dam/bbby/asset_transitions_folder/e-comm/fasttrack/nonshared\") ";
+		String queryString = "SELECT * FROM [sling:Folder] AS N WHERE ISDESCENDANTNODE(N,\"/content/dam/bbby/asset_transitions_folder/e-comm/fasttrack\") ";
 
 		log.debug("Executing query {}", queryString);
 		
