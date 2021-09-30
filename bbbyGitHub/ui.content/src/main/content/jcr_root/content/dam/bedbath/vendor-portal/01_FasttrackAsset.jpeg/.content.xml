@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:exif="http://ns.adobe.com/exif/1.0/" xmlns:photoshop="http://ns.adobe.com/photoshop/1.0/" xmlns:tiff="http://ns.adobe.com/tiff/1.0/" xmlns:xmp="http://ns.adobe.com/xap/1.0/" xmlns:xmpMM="http://ns.adobe.com/xap/1.0/mm/" xmlns:stEvt="http://ns.adobe.com/xap/1.0/sType/ResourceEvent#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:bbby="http://www.bbby.com" xmlns:dam="http://www.day.com/dam/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:mix="http://www.jcp.org/jcr/mix/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    jcr:mixinTypes="[mix:referenceable]"
+    jcr:primaryType="dam:Asset"
+    jcr:uuid="25a0ea65-5dd5-41b7-b1e0-de71f277682d">
+    <jcr:content
+        dam:assetState="processed"
+        dam:relativePath="bedbath/vendor-portal/01_FasttrackAsset.jpeg"
+        jcr:lastModified="{Date}2021-09-30T11:48:19.183-04:00"
+        jcr:lastModifiedBy="admin"
+        jcr:primaryType="dam:AssetContent">
+        <metadata
+            bbby:colorSpace="RGB"
+            bbby:contentOpsReview="no"
+            dam:Bitsperpixel="{Long}24"
+            dam:extracted="{Date}2021-09-30T11:48:16.542-04:00"
+            dam:Fileformat="JPEG"
+            dam:MIMEtype="image/jpeg"
+            dam:Numberofimages="{Long}1"
+            dam:Numberoftextualcomments="{Long}0"
+            dam:Physicalheightindpi="{Long}72"
+            dam:Physicalheightininches="{Decimal}25.0"
+            dam:Physicalwidthindpi="{Long}72"
+            dam:Physicalwidthininches="{Decimal}25.0"
+            dam:Progressive="no"
+            dam:sha1="13c341d4f7691e0432e0f56bb61be6c1e9120f92"
+            dam:size="{Long}289556"
+            dc:format="image/jpeg"
+            dc:modified="{Date}2019-09-03T17:29:04.671-04:00"
+            exif:ColorSpace="{Long}1"
+            exif:PixelXDimension="{Long}1800"
+            exif:PixelYDimension="{Long}1800"
+            jcr:mixinTypes="[cq:Taggable]"
+            jcr:primaryType="nt:unstructured"
+            photoshop:ColorMode="{Long}3"
+            photoshop:ICCProfile="sRGB IEC61966-2.1"
+            tiff:ImageLength="{Long}1800"
+            tiff:ImageWidth="{Long}1800"
+            tiff:Orientation="{Long}1"
+            tiff:ResolutionUnit="{Long}2"
+            tiff:XResolution="72/1"
+            tiff:YResolution="72/1"
+            xmp:CreateDate="{Date}2019-09-03T09:49:40.000-04:00"
+            xmp:CreatorTool="Adobe Photoshop CC 2019 (Macintosh)"
+            xmp:MetadataDate="{Date}2019-09-03T09:50:26.000-04:00"
+            xmp:ModifyDate="{Date}2019-09-03T09:50:26.000-04:00"
+            xmpMM:DocumentID="adobe:docid:photoshop:457a7eac-b85e-ad48-b0db-f0bf144913a5"
+            xmpMM:InstanceID="xmp.iid:7e2ad387-23fe-4ec7-8d1d-4b92f45aa8bf"
+            xmpMM:OriginalDocumentID="xmp.did:3f3777f7-f66a-4861-b22f-93fcada51c56">
+            <xmpMM:History
+                jcr:primaryType="nt:unstructured"
+                xmpArraySize="{Long}3"
+                xmpArrayType="rdf:Seq"
+                xmpNodeType="xmpArray">
+                <_x0031_
+                    jcr:primaryType="nt:unstructured"
+                    stEvt:action="created"
+                    stEvt:instanceID="xmp.iid:3f3777f7-f66a-4861-b22f-93fcada51c56"
+                    stEvt:softwareAgent="Adobe Photoshop CC 2019 (Macintosh)"
+                    stEvt:when="{Date}2019-09-03T09:49:40.000-04:00"
+                    xmpNodeType="xmpStruct"/>
+                <_x0032_
+                    jcr:primaryType="nt:unstructured"
+                    stEvt:action="converted"
+                    stEvt:parameters="from application/vnd.adobe.photoshop to image/jpeg"
+                    xmpNodeType="xmpStruct"/>
+                <_x0033_
+                    jcr:primaryType="nt:unstructured"
+                    stEvt:action="saved"
+                    stEvt:changed="/"
+                    stEvt:instanceID="xmp.iid:7e2ad387-23fe-4ec7-8d1d-4b92f45aa8bf"
+                    stEvt:softwareAgent="Adobe Photoshop CC 2019 (Macintosh)"
+                    stEvt:when="{Date}2019-09-03T09:50:26.000-04:00"
+                    xmpNodeType="xmpStruct"/>
+            </xmpMM:History>
+        </metadata>
+        <related jcr:primaryType="nt:unstructured"/>
+    </jcr:content>
+</jcr:root>

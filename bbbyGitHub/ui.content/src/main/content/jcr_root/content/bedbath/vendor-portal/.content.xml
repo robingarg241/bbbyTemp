@@ -114,7 +114,7 @@
                         sling:resourceType="bbby/components/content/text-image-two-column"
                         backgroundColor="bg-transparent"
                         backgroundHorizontalSpacing="_none_"
-                        fileReference="/content/dam/bedbath/vendor-portal/01_Fast-TrackAsset.jpg"
+                        fileReference="/content/dam/bedbath/vendor-portal/01_FasttrackAsset.jpeg"
                         textImage2ColumnRendition="imageRight"
                         textIsRich="true"
                         title="Fast-Track Asset Uploader">
