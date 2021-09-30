@@ -458,7 +458,7 @@ function validateFasttrackAssets(xls) {
                 if(!uploadItem.fileErrorMessage){
                     parentDiv[0].classList.remove("dz-error");
                 }
-                if(fileMD[0].SharedAsset) {
+                if(fileMD[0].SharedAsset && uploadItem.uploadAssetItem) {
                     uploadItem.uploadAssetItem.sharedAsset = fileMD[0].SharedAsset.trim();
                 }
                 // Delete metadataErrorMessage on correct validation
