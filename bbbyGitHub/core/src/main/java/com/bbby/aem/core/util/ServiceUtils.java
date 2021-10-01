@@ -859,7 +859,7 @@ public class ServiceUtils {
                 Resource metadataResource = contentResource.getChild(DamConstants.METADATA_FOLDER);
                 if (metadataResource != null) {
                 	ValueMap props = metadataResource.getValueMap();
-                	value = props.get(prop, defaultValue);
+                	value = String.valueOf(props.get(prop, defaultValue));
                 }
         }
         return value;

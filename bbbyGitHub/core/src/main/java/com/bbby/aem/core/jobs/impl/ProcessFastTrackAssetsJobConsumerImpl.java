@@ -53,11 +53,12 @@ public class ProcessFastTrackAssetsJobConsumerImpl implements JobConsumer {
 	@Override
 	public JobResult process(final Job job) {
 
-		log.debug("Starting a job " + job.getTopic());
+		log.info("Starting a job " + job.getTopic());
 		try (ResourceResolver resourceResolver = ServiceUtils.getResourceResolver(resourceFactory, "writeservice")) {
 
 			session = resourceResolver.adaptTo(Session.class);
 			String rootPath = (String) job.getProperty(CommonConstants.ROOTPATH);
+			log.info("Path of the root folder is: " + rootPath);
 
 			if (StringUtils.isEmpty(rootPath)) {
 				log.warn("Empty rootPath");
@@ -94,11 +95,11 @@ public class ProcessFastTrackAssetsJobConsumerImpl implements JobConsumer {
 						upcMap.get(upc).add(resource);
 					}
 
-					sharedAssetMap.put(upc, getSharedResourcesInDirectory(resourceResolver, SHARED_ASSET_PATH, upc));
+					//sharedAssetMap.put(upc, getSharedResourcesInDirectory(resourceResolver, SHARED_ASSET_PATH, upc));
 				}
 			}
 
-			log.debug("Total number of set present in batch : " + upcMap.size());
+			log.info("Total number of set present in batch : " + upcMap.size());
 
 			createImageset(upcMap, upcMapwithSequenceMap, sharedAssetMap);
 
@@ -189,7 +190,7 @@ public class ProcessFastTrackAssetsJobConsumerImpl implements JobConsumer {
 	}
 
 	private ArrayList<String> getImagesetTags(Node node) throws WorkflowException {
-		log.debug("entering getImagesetTags() method");
+		log.info("entering getImagesetTags() method");
 		ArrayList<String> tagList = new ArrayList<String>();
 
 		// We always want to move the image set to this directory. It overwrites

@@ -50,8 +50,6 @@ public class FastTrackImagesetCreationTask implements Runnable {
 
     private final Logger log = LoggerFactory.getLogger(getClass());
     
-    private final String WORKFLOW_MODEL = "/var/workflow/models/bbby-fast-track-";
-    
     @Expose
     private boolean enabled;
 
@@ -108,9 +106,9 @@ public class FastTrackImagesetCreationTask implements Runnable {
 	private void createFastTrackImagesets() throws WCMException {
 		log.debug("Inside createFastTrackImagesets() method.");
 
-		String queryString = "SELECT * FROM [sling:Folder] AS N WHERE ISDESCENDANTNODE(N,\"/content/dam/bbby/asset_transitions_folder/e-comm/fasttrack\") ";
+		String queryString = "SELECT * FROM [sling:Folder] AS N WHERE ISCHILDNODE(N,\"/content/dam/bbby/asset_transitions_folder/e-comm/fasttrack\") ";
 
-		log.debug("Executing query {}", queryString);
+		log.info("Executing query {}", queryString);
 		
 		Iterator<Resource> batchDirectories = resourceResolver.findResources(queryString, Query.JCR_SQL2);
 		
@@ -119,7 +117,7 @@ public class FastTrackImagesetCreationTask implements Runnable {
 		while (batchDirectories.hasNext()) {
 			Resource batchResource = (Resource) batchDirectories.next();
 			Node directory = batchResource.adaptTo(Node.class);
-			log.debug("Adding Directory to the list {}", directory);
+			log.info("Adding Directory to the list {}", directory);
 			try {
 				batchDirectoriesList.add(directory.getPath());
 			} catch (Exception e) {
