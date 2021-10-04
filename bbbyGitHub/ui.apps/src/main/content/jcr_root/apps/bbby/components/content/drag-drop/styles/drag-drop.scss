@@ -1039,6 +1039,9 @@ $dropzoneMargin: 10px;
             .dz-primary-img, .dz-alt-filename, .dz-alt-seq-no {
                 display: block;
             }
+            .dz-seq-parts {
+                padding: 0 6px;
+            }
             .dz-primary-img.icon-p:after {
                 content: "P";
                 position: relative;

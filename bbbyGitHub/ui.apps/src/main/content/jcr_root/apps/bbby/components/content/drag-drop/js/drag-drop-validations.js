@@ -504,8 +504,11 @@ function validateFasttrackAssets(xls) {
             updateFileCounts();
         }
    });
-   if (succesItems >= 1 && uploadList.length == succesItems) {
+   var $errorImages = $(".dz-preview.dz-error");
+   if (succesItems >= 1 && $errorImages.length == 0 && uploadList.length == succesItems) {
         showFileSequence();
+   } else {
+        $(".validate-qc").removeClass("submit-ready");
    }
 }
 
