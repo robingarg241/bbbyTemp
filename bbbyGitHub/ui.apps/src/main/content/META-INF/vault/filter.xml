@@ -78,6 +78,7 @@
     <filter root="/var/workflow/models/bbby-approve-and-publish--beta-"/>
     <filter root="/var/workflow/models/bbby-approve-and-publish-nightly-"/>
 	<filter root="/var/workflow/models/fasttrack-move-and-publish"/>
+	
 
     <!--Workflow Launcher Config-->
     <filter root="/conf/global/settings/workflow/launcher/config/call-to-pdm"/>
@@ -155,6 +156,12 @@
 	<filter root="/conf/global/settings/workflow/launcher/config/bbby-copy-marketing-AD-create"/>
  	<filter root="/var/workflow/models/bbby-copy-marketing-to-approved-dam"/>
  	<filter root="/conf/global/settings/workflow/models/bbby-copy-marketing-to-approved-dam"/>
+ 	
+ 	 <!-- BBBY Set Last Mod Date Workflow Stuff -->
+ 	 <filter root="/conf/global/settings/workflow/launcher/config/1260525695"/>
+ 	 <filter root="/var/workflow/models/bbby-set-last-modified"/>
+ 	 <filter root="/conf/global/settings/workflow/models/bbby-set-last-modified"/>
+ 	 
  
     <!-- List View Overlay Stuff -->
     <filter root="/apps/dam/gui"/>
