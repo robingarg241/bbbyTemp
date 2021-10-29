@@ -4,6 +4,6 @@
 	enabled="{Boolean}true"
 	scheduler.concurrent="{Boolean}false"
 	scheduler.expression="0 0 23 ? * FRI"
-    daysTooKeepRejected="{Long}60"
-	daysTooKeepDuplicate="{Long}60"
+    daysTooKeepRejected="{Long}180"
+	daysTooKeepDuplicate="{Long}180"
 	maxCount="{Long}5000"/>

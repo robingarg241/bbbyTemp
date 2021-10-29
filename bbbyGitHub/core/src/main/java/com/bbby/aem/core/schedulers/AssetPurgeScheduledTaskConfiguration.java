@@ -20,10 +20,10 @@ public @interface AssetPurgeScheduledTaskConfiguration {
     String scheduler_expression() default "0 0 23 ? * FRI";
     
     @AttributeDefinition(name = "Days to keep (rejected)", description = "Number of days rejected assets should be kept", type = AttributeType.INTEGER)
-    int daysTooKeepRejected() default 60;
+    int daysTooKeepRejected() default 180;
     
     @AttributeDefinition(name = "Days to keep (duplicate)", description = "Number of days duplicate assets should be kept", type = AttributeType.INTEGER)
-    int daysTooKeepDuplicate() default 60;
+    int daysTooKeepDuplicate() default 180;
     
     @AttributeDefinition(name = "Max count", description = "Total count in a paticular root path for assets to get deleted from it should be less than max count.", type = AttributeType.INTEGER)
 	int maxCount() default 5000;
